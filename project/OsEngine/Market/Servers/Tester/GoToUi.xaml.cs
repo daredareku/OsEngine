@@ -3,9 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
-using OsEngine.Language;
 
 namespace OsEngine.Market.Servers.Tester
 {
@@ -16,8 +16,8 @@ namespace OsEngine.Market.Servers.Tester
     {
         public bool IsChange;
 
-        public DateTime TimeStart; 
-        
+        public DateTime TimeStart;
+
         public DateTime TimeEnd;
 
         public DateTime TimeGoTo;
@@ -39,7 +39,7 @@ namespace OsEngine.Market.Servers.Tester
             TimeGoTo = timeEnd;
             CalendarSelectData.SelectedDate = TimeStart;
 
-            if(timeNow != DateTime.MinValue)
+            if (timeNow != DateTime.MinValue)
             {
                 CalendarSelectData.SelectedDate = timeNow;
             }
@@ -66,7 +66,7 @@ namespace OsEngine.Market.Servers.Tester
 
         private void CalendarSelectData_CalendarOpened(object sender, RoutedEventArgs e)
         {
-            if(CalendarSelectData.SelectedDate == null)
+            if (CalendarSelectData.SelectedDate == null)
             {
                 return;
             }
@@ -102,7 +102,7 @@ namespace OsEngine.Market.Servers.Tester
 
         private void DateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(_sliderIsChanging)
+            if (_sliderIsChanging)
             {
                 return;
             }

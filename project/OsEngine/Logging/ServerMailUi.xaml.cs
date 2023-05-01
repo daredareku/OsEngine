@@ -3,8 +3,8 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Windows;
 using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.Logging
 {
@@ -14,7 +14,7 @@ namespace OsEngine.Logging
     /// </summary>
     public partial class ServerMailDeliveryUi
     {
-         public ServerMailDeliveryUi() // constructor / конструктор
+        public ServerMailDeliveryUi() // constructor / конструктор
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);

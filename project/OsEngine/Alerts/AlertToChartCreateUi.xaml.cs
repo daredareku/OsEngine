@@ -3,14 +3,14 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
-using OsEngine.Entity;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Alerts
@@ -28,7 +28,7 @@ namespace OsEngine.Alerts
         /// </summary>
         /// <param name="alert">alert for editing, if null will be created new/алерт для редактирования, если null будет создан новый</param>
         /// <param name="keeper">alert storage/хранилище алертов</param>
-        public AlertToChartCreateUi(AlertToChart alert, AlertMaster keeper) 
+        public AlertToChartCreateUi(AlertToChart alert, AlertMaster keeper)
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);
@@ -65,10 +65,10 @@ namespace OsEngine.Alerts
             System.Drawing.Color color = System.Drawing.Color.DodgerBlue;
 
             ButtonColorLabel.Background =
-                new SolidColorBrush(Color.FromArgb(color.A, color.R,color.G, color.B));
+                new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
 
             ButtonColorLine.Background =
-                new SolidColorBrush(Color.FromArgb(color.A, color.R,color.G, color.B));
+                new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
 
             CheckBoxWindow.IsChecked = false;
             TextBoxAlertMessage.Text = OsLocalization.Alerts.Message2;
@@ -109,7 +109,7 @@ namespace OsEngine.Alerts
                 NeadToSave = true;
                 ComboBoxSlippageType.SelectedItem = alert.SlippageType;
             }
-            
+
             CheckBoxOnOff.Click += CheckBoxOnOff_Click;
             CheckBoxMusicAlert.Click += CheckBoxOnOff_Click;
             CheckBoxWindow.Click += CheckBoxOnOff_Click;
@@ -335,11 +335,11 @@ namespace OsEngine.Alerts
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ComboBoxType.Text == ChartAlertType.Line.ToString() ||
-                _waitOne|| 
-                _waitTwo|| 
+                _waitOne ||
+                _waitTwo ||
                 _arrayCandles == null)
             {
-                 return;
+                return;
             }
 
             SetReadyLineAlert(_arrayCandles);
@@ -526,7 +526,7 @@ namespace OsEngine.Alerts
         /// save alert
         /// сохранить Алерт
         /// </summary>
-        private void SaveAlert() 
+        private void SaveAlert()
         {
 
             if (MyAlert == null)
@@ -561,15 +561,15 @@ namespace OsEngine.Alerts
                 return;
             }
 
-            
+
             MyAlert.IsMusicOn = CheckBoxMusicAlert.IsChecked.Value;
             MyAlert.IsOn = CheckBoxOnOff.IsChecked.Value;
             MyAlert.IsMessageOn = CheckBoxWindow.IsChecked.Value;
 
             MyAlert.Label = TextBoxLabelAlert.Text;
-          //  MyAlert.ColorLabel = HostColorLabel.Child.BackColor;
+            //  MyAlert.ColorLabel = HostColorLabel.Child.BackColor;
 
-           // MyAlert.ColorLine = HostColorLine.Child.BackColor;
+            // MyAlert.ColorLine = HostColorLine.Child.BackColor;
             MyAlert.BorderWidth = Convert.ToInt32(ComboBoxFatLine.SelectedItem);
 
             MyAlert.Message = TextBoxAlertMessage.Text;
@@ -585,10 +585,10 @@ namespace OsEngine.Alerts
             MyAlert.NumberClosePosition = Convert.ToInt32(TextBoxClosePosition.Text);
             Enum.TryParse(ComboBoxOrderType.Text, true, out MyAlert.OrderPriceType);
 
-            Enum.TryParse(ComboBoxMusicType.Text,out MyAlert.Music);
+            Enum.TryParse(ComboBoxMusicType.Text, out MyAlert.Music);
 
 
-            System.Windows.Media.Color  labelColor = ((SolidColorBrush)ButtonColorLabel.Background).Color;
+            System.Windows.Media.Color labelColor = ((SolidColorBrush)ButtonColorLabel.Background).Color;
             MyAlert.ColorLabel = System.Drawing.Color.FromArgb(labelColor.A, labelColor.R, labelColor.G, labelColor.B);
 
             System.Windows.Media.Color lineColor = ((SolidColorBrush)ButtonColorLine.Background).Color;
@@ -655,7 +655,7 @@ namespace OsEngine.Alerts
 
             if (ComboBoxType.Text == ChartAlertType.FibonacciChannel.ToString())
             {
-               return GetChanalLines(candles);
+                return GetChanalLines(candles);
             }
 
             return null;
@@ -746,7 +746,7 @@ namespace OsEngine.Alerts
             ChartAlertLine treeLine = AlertLineCreate(firstValueToAllLine, threeLineValue, firstNumberToAllLine,
             secondNumberToAllLine, candles);
 
-            ChartAlertLine[] alertLines = {oneLine, twoLine, treeLine};
+            ChartAlertLine[] alertLines = { oneLine, twoLine, treeLine };
 
             return alertLines;
 
@@ -891,7 +891,7 @@ namespace OsEngine.Alerts
 
             ChartAlertLine[] alertLines = new ChartAlertLine[10];
 
-            alertLines[0] =  oneLine;
+            alertLines[0] = oneLine;
             alertLines[1] = l023Line;
             alertLines[2] = l038Line;
             alertLines[3] = l050Line;
@@ -976,8 +976,8 @@ namespace OsEngine.Alerts
             // 6 calculate real position of alert. In hours.
             // 6 рассчитываем реальное положение алерта. В часах.
 
-            if (secondHourCandle <0 ||
-                firstHourCandle <0)
+            if (secondHourCandle < 0 ||
+                firstHourCandle < 0)
             {
                 return null;
             }
@@ -1108,7 +1108,7 @@ namespace OsEngine.Alerts
                 _waitTwo = false;
             }
 
-          
+
         }
 
     }

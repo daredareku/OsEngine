@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows;
-using Newtonsoft.Json.Linq;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 
 namespace OsEngine.Market.Servers.MOEX
 {
-    public class MoexDataServer: AServer
+    public class MoexDataServer : AServer
     {
         public MoexDataServer()
         {
@@ -22,7 +22,7 @@ namespace OsEngine.Market.Servers.MOEX
         }
     }
 
-    public class MoexDataServerRealization:IServerRealization
+    public class MoexDataServerRealization : IServerRealization
     {
         public MoexDataServerRealization()
         {
@@ -45,17 +45,17 @@ namespace OsEngine.Market.Servers.MOEX
 
         public void Connect()
         {
-           string result = GetRequest("http://iss.moex.com/iss/engines/");
+            string result = GetRequest("http://iss.moex.com/iss/engines/");
 
-           if (result == null)
-           {
-               ServerStatus = ServerConnectStatus.Disconnect;
-           }
-           else
-           {
-               ServerStatus = ServerConnectStatus.Connect;
-               ConnectEvent?.Invoke();
-           }
+            if (result == null)
+            {
+                ServerStatus = ServerConnectStatus.Disconnect;
+            }
+            else
+            {
+                ServerStatus = ServerConnectStatus.Connect;
+                ConnectEvent?.Invoke();
+            }
         }
 
         #region NotUsedChleny
@@ -71,7 +71,7 @@ namespace OsEngine.Market.Servers.MOEX
             portfolio.ValueCurrent = 1;
             portfolio.Number = "Moex fake portfolio";
 
-            PortfolioEvent?.Invoke(new List<Portfolio>() {portfolio});
+            PortfolioEvent?.Invoke(new List<Portfolio>() { portfolio });
         }
 
         public void SendOrder(Order order)
@@ -756,7 +756,7 @@ namespace OsEngine.Market.Servers.MOEX
         }
 
         public event Action<List<Security>> SecurityEvent;
-       
+
         public event Action<Trade> NewTradesEvent;
         public event Action ConnectEvent;
         public event Action DisconnectEvent;

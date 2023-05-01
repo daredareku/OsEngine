@@ -4,17 +4,16 @@
 */
 
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows;
-using System.Windows.Input;
-using OsEngine.Language;
-using MessageBox = System.Windows.MessageBox;
 using System.Windows.Forms;
+using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Market.Connectors
 {
@@ -223,9 +222,9 @@ namespace OsEngine.Market.Connectors
 
             List<IServer> serversAll = ServerMaster.GetServers();
 
-            for(int i = 0; serversAll != null && i < serversAll.Count;i++)
+            for (int i = 0; serversAll != null && i < serversAll.Count; i++)
             {
-                if(serversAll[i] == null)
+                if (serversAll[i] == null)
                 {
                     continue;
                 }
@@ -580,7 +579,7 @@ namespace OsEngine.Market.Connectors
         /// </summary>
         void server_SecuritiesCharngeEvent(List<Security> securities)
         {
-            if(_connectorBot == null)
+            if (_connectorBot == null)
             {
                 return;
             }
@@ -905,8 +904,8 @@ namespace OsEngine.Market.Connectors
                 ComboBoxTimeFrame.SelectedItem = TimeFrame.Min1;
             }
 
-            if (ComboBoxTimeFrame.SelectedItem == null 
-                && ComboBoxTimeFrame.Items != null 
+            if (ComboBoxTimeFrame.SelectedItem == null
+                && ComboBoxTimeFrame.Items != null
                 && ComboBoxTimeFrame.Items.Count != 0)
             {
                 ComboBoxTimeFrame.SelectedItem = ComboBoxTimeFrame.Items[0];
@@ -917,7 +916,7 @@ namespace OsEngine.Market.Connectors
 
         private void LoadSecurityOnBox()
         {
-           try
+            try
             {
                 _gridSecurities.Rows.Clear();
 
@@ -935,21 +934,21 @@ namespace OsEngine.Market.Connectors
 
                 List<Security> securities = server.Securities;
 
-                if(securities == null ||
+                if (securities == null ||
                     securities.Count == 0)
                 {
                     return;
                 }
 
-                if(ComboBoxClass.SelectedItem != null)
+                if (ComboBoxClass.SelectedItem != null)
                 {
                     string classSec = ComboBoxClass.SelectedItem.ToString();
 
                     List<Security> securitiesOfMyClass = new List<Security>();
 
-                    for(int i = 0;i < securities.Count;i++)
+                    for (int i = 0; i < securities.Count; i++)
                     {
-                        if(securities[i].NameClass == classSec)
+                        if (securities[i].NameClass == classSec)
                         {
                             securitiesOfMyClass.Add(securities[i]);
                         }
@@ -957,7 +956,7 @@ namespace OsEngine.Market.Connectors
 
                     securities = securitiesOfMyClass;
                 }
-                
+
                 UpdateGridSec(securities);
 
                 UpdateSearchResults();
@@ -1039,7 +1038,7 @@ namespace OsEngine.Market.Connectors
 
             int rowInd = e.RowIndex;
 
-            if(columnInd != 4)
+            if (columnInd != 4)
             {
                 return;
             }
@@ -1049,7 +1048,7 @@ namespace OsEngine.Market.Connectors
 
                 DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)_gridSecurities.Rows[i].Cells[4];
 
-                if(checkBox.Value == null)
+                if (checkBox.Value == null)
                 {
                     continue;
                 }
@@ -1074,7 +1073,7 @@ namespace OsEngine.Market.Connectors
 
             _gridSecurities.ClearSelection();
 
-            if(securities == null 
+            if (securities == null
                 || securities.Count == 0)
             {
                 return;
@@ -1085,7 +1084,7 @@ namespace OsEngine.Market.Connectors
             string selectedName = _connectorBot.SecurityName;
             string selectedClass = _connectorBot.SecurityClass;
 
-            if(string.IsNullOrEmpty(selectedClass) &&
+            if (string.IsNullOrEmpty(selectedClass) &&
                 _connectorBot.Security != null)
             {
                 selectedClass = _connectorBot.Security.NameClass;
@@ -1138,12 +1137,12 @@ namespace OsEngine.Market.Connectors
         {
             string security = "";
 
-            for(int i = 0; i < _gridSecurities.Rows.Count;i++)
+            for (int i = 0; i < _gridSecurities.Rows.Count; i++)
             {
 
                 DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)_gridSecurities.Rows[i].Cells[4];
 
-                if(checkBox.Value == null)
+                if (checkBox.Value == null)
                 {
                     continue;
                 }
@@ -1238,7 +1237,7 @@ namespace OsEngine.Market.Connectors
 
         private void UpdateSearchPanel()
         {
-            if(_searchResults.Count == 0)
+            if (_searchResults.Count == 0)
             {
                 ButtonRightInSearchResults.Visibility = Visibility.Hidden;
                 ButtonLeftInSearchResults.Visibility = Visibility.Hidden;
@@ -1289,7 +1288,7 @@ namespace OsEngine.Market.Connectors
                 LabelCurrentResultShow.Content = (indexRow).ToString();
             }
 
-            int realInd = _searchResults[indexRow-1];
+            int realInd = _searchResults[indexRow - 1];
 
             _gridSecurities.Rows[realInd].Selected = true;
             _gridSecurities.FirstDisplayedScrollingRowIndex = realInd;
@@ -1301,7 +1300,7 @@ namespace OsEngine.Market.Connectors
 
             int maxRowIndex = Convert.ToInt32(LabelCountResultsShow.Content);
 
-            if(indexRow >= maxRowIndex)
+            if (indexRow >= maxRowIndex)
             {
                 indexRow = 0;
                 LabelCurrentResultShow.Content = 1.ToString();
@@ -1332,7 +1331,7 @@ namespace OsEngine.Market.Connectors
 
                 if (string.IsNullOrEmpty(security))
                 {
-                    return; 
+                    return;
                 }
 
                 Enum.TryParse(ComboBoxTypeServer.Text, true, out _connectorBot.ServerType);
@@ -1344,7 +1343,7 @@ namespace OsEngine.Market.Connectors
                     _connectorBot.EmulatorIsOn = CheckBoxIsEmulator.IsChecked.Value;
                 }
 
-                
+
 
                 TimeFrame timeFrame;
                 Enum.TryParse(ComboBoxTimeFrame.Text, out timeFrame);

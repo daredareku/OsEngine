@@ -3,14 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.OsData;
 
 namespace OsEngine.Market.Servers
 {
@@ -371,7 +370,7 @@ namespace OsEngine.Market.Servers
 
             if (AllCandlesInFile == null
                 || AllCandlesInFile.Count == 0)
-            { 
+            {
                 // первая прогрузка свечками
                 AllCandlesInFile = new List<Candle>();
 
@@ -380,21 +379,21 @@ namespace OsEngine.Market.Servers
                     AllCandlesInFile.Add(candles[i]);
                 }
             }
-            else if(_lastCandleCount == candles.Count &&
-                candles[candles.Count-1].TimeStart == _lastCandleTime)
-            { 
+            else if (_lastCandleCount == candles.Count &&
+                candles[candles.Count - 1].TimeStart == _lastCandleTime)
+            {
                 // обновилась последняя свеча
                 AllCandlesInFile[AllCandlesInFile.Count - 1] = candles[candles.Count - 1];
             }
-            else if(candles.Count > 1 
+            else if (candles.Count > 1
                 && _lastCandleCount + 1 == candles.Count
                 && candles[candles.Count - 2].TimeStart == _lastCandleTime)
-            { 
+            {
                 // добавилась одна свечка
                 AllCandlesInFile.Add(candles[candles.Count - 1]);
             }
             else
-            { 
+            {
                 // добавилось не ясное кол-во свечей
                 AllCandlesInFile = AllCandlesInFile.Merge(candles);
             }

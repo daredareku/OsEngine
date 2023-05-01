@@ -3,10 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Market;
 
 namespace OsEngine.Logging
 {
@@ -16,8 +15,8 @@ namespace OsEngine.Logging
     /// </summary>
     public class MessageSender
     {
- // distribution settings
- // настройки рассылки
+        // distribution settings
+        // настройки рассылки
 
         public bool WebhookSendOn;
 
@@ -75,7 +74,7 @@ namespace OsEngine.Logging
         /// download
         /// загрузить
         /// </summary>
-        private void Load() 
+        private void Load()
         {
             if (!File.Exists(@"Engine\" + _name + @"MessageSender.txt"))
             {
@@ -86,7 +85,7 @@ namespace OsEngine.Logging
                 using (StreamReader reader = new StreamReader(@"Engine\" + _name + @"MessageSender.txt"))
                 {
 
-                    MailSendOn =  Convert.ToBoolean(reader.ReadLine());
+                    MailSendOn = Convert.ToBoolean(reader.ReadLine());
 
                     MailSystemSendOn = Convert.ToBoolean(reader.ReadLine());
                     MailSignalSendOn = Convert.ToBoolean(reader.ReadLine());
@@ -127,7 +126,7 @@ namespace OsEngine.Logging
         /// save
         /// сохранить
         /// </summary>
-        public void Save() 
+        public void Save()
         {
             try
             {
@@ -172,7 +171,7 @@ namespace OsEngine.Logging
         /// delete
         /// удалить
         /// </summary>
-        public void Delete() 
+        public void Delete()
         {
             if (File.Exists(@"Engine\" + _name + @"MessageSender.txt"))
             {

@@ -3,6 +3,17 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using Microsoft.Win32;
+using OsEngine.Alerts;
+using OsEngine.Language;
+using OsEngine.Layout;
+using OsEngine.Market;
+using OsEngine.OsConverter;
+using OsEngine.OsData;
+using OsEngine.OsMiner;
+using OsEngine.OsOptimizer;
+using OsEngine.OsTrader.Gui;
+using OsEngine.PrimeSettings;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,17 +23,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Microsoft.Win32;
-using OsEngine.Alerts;
-using OsEngine.Language;
-using OsEngine.Market;
-using OsEngine.OsConverter;
-using OsEngine.OsData;
-using OsEngine.OsMiner;
-using OsEngine.OsOptimizer;
-using OsEngine.OsTrader.Gui;
-using OsEngine.PrimeSettings;
-using OsEngine.Layout;
 
 namespace OsEngine
 {

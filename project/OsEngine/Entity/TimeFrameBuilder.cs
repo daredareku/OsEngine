@@ -29,7 +29,7 @@ namespace OsEngine.Entity
             _rencoPunktsToCloseCandleInRencoType = 100;
             _deltaPeriods = 1000;
 
-            if(startProgram != StartProgram.IsOsOptimizer)
+            if (startProgram != StartProgram.IsOsOptimizer)
             {
                 Load();
                 _canSave = true;
@@ -156,7 +156,7 @@ namespace OsEngine.Entity
         {
             get
             {
-                if(_lastSpecification != null &&
+                if (_lastSpecification != null &&
                     _neadToRebuildSpecification == false)
                 {
                     return _lastSpecification;

@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic  for EfficiencyRatioUi.xaml
     /// Логика взаимодействия для EfficiencyRatioUi.xaml
     /// </summary>
-    public partial class EfficiencyRatioUi 
+    public partial class EfficiencyRatioUi
     {
         /// <summary>
         /// indicator
@@ -77,7 +77,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             _eR.ColorBase = HostColorBase.Child.BackColor;
-            _eR.Lenght= Convert.ToInt32(TextBoxLenght.Text);
+            _eR.Lenght = Convert.ToInt32(TextBoxLenght.Text);
             _eR.PaintOn = CheckBoxPaintOnOff.IsChecked.Value;
 
             _eR.Save();

@@ -3,6 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,9 +13,6 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 
 namespace OsEngine.Market.Servers.InteractiveBrokers
 {

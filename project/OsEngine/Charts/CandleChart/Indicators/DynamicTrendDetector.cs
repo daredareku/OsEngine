@@ -3,13 +3,13 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -133,7 +133,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// длинна периода для рассчёта индикатора
         /// </summary>
         public int Lenght { get; set; }
-        
+
         /// <summary>
         /// atr channel multiplier
         /// множитель для построения канала
@@ -256,12 +256,12 @@ namespace OsEngine.Charts.CandleChart.Indicators
         {
             if (Values != null && Values.Count > 0)
                 Values.Clear();
-            
+
             if (_myCandles == null)
             {
                 return;
             }
-            
+
 
             ProcessAll(_myCandles);
 
@@ -318,7 +318,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             if (Values == null)
             {
                 Values = new List<decimal>();
@@ -340,7 +340,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             Values = new List<decimal>();
 
             for (int i = 0; i < candles.Count; i++)
@@ -359,7 +359,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             Values[Values.Count - 1] = GetValue(candles, candles.Count - 1);
         }
 
@@ -374,7 +374,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="candles">candles/свечи</param>
         /// <param name="index">index/индекс</param>
         /// <returns>index value/значение индикатора по индексу</returns>
-        private decimal GetValue(List<Candle> candles,int index)
+        private decimal GetValue(List<Candle> candles, int index)
         {
             if (index <= 2)
             {
@@ -390,7 +390,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             decimal currentTrendClose = Values[Math.Max(0, index - 1)];
 
             decimal previousCandleClose = candles[Math.Max(0, index - 1)].Close;
-            
+
             if (index >= 1)
             {
                 if (currentTrendClose < currentCandleClose)
@@ -400,14 +400,16 @@ namespace OsEngine.Charts.CandleChart.Indicators
                         Period = 0;
                     }
                     currentSide = Side.Buy;
-                } else if (currentTrendClose >= currentCandleClose)
+                }
+                else if (currentTrendClose >= currentCandleClose)
                 {
                     if (currentSide != Side.Sell)
                     {
                         Period = 0;
                     }
                     currentSide = Side.Sell;
-                } else
+                }
+                else
                 {
                     currentSide = Side.None;
                     Period = 0;
@@ -430,7 +432,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 if (currentSide != Side.None)
                 {
-                    startIdx = Math.Max(0, index - Period-1);
+                    startIdx = Math.Max(0, index - Period - 1);
                     numItems = Math.Max(1, Period - 1);
                     subList = candles.GetRange(startIdx, numItems);
                     highs = subList.Select(o => o.High).ToList();
@@ -441,19 +443,22 @@ namespace OsEngine.Charts.CandleChart.Indicators
                         highest = highs.Max();
 
                         value = highest * coeffUp;
-                    } else
+                    }
+                    else
                     {
                         lowest = lows.Min();
                         value = lowest * coeffDown;
                     }
                     return value;
-                } else
+                }
+                else
                 {
                     return currentTrendClose;
                 }
-            } else
+            }
+            else
             {
-                startIdx = Math.Max(0, index - Lenght -1);
+                startIdx = Math.Max(0, index - Lenght - 1);
                 numItems = Math.Max(1, Lenght - 1);
                 subList = candles.GetRange(startIdx, numItems);
                 highs = subList.Select(o => o.High).ToList();

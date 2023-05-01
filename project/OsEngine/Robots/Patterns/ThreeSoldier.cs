@@ -3,13 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.Patterns
 {

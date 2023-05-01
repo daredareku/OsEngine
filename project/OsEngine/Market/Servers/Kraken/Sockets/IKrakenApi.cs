@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Kraken.WebSockets.Events;
+using Kraken.WebSockets.Messages;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Kraken.WebSockets.Messages;
-using System.Diagnostics.Contracts;
-using Kraken.WebSockets.Events;
 
 
 namespace Kraken.WebSockets

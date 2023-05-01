@@ -1,16 +1,14 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows;
-using Newtonsoft.Json.Linq;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 
 namespace OsEngine.Market.Servers.MFD
 {
@@ -169,7 +167,7 @@ namespace OsEngine.Market.Servers.MFD
             {
                 string line = classes[i];
 
-                line = line.Split('=')[line.Split('=').Length-1];
+                line = line.Split('=')[line.Split('=').Length - 1];
                 line = line.Split('<')[0];
                 line = line.Replace("\"", "");
 
@@ -247,7 +245,7 @@ namespace OsEngine.Market.Servers.MFD
             }
 
             res.RemoveAt(0);
-            res.RemoveAt(res.Count-1);
+            res.RemoveAt(res.Count - 1);
 
             return res;
         }
@@ -288,7 +286,7 @@ namespace OsEngine.Market.Servers.MFD
                     minutes = "6";
                 }
 
-                List<Candle> candles = GetCandles(security, startTime, endTime,  minutes);
+                List<Candle> candles = GetCandles(security, startTime, endTime, minutes);
                 return candles;
             }
         }
@@ -304,13 +302,13 @@ namespace OsEngine.Market.Servers.MFD
 
             string fileName = "tempFile" + ".txt";
 
-            string requestStr = "http://mfd.ru/export/handler.ashx/;" + fileName; 
+            string requestStr = "http://mfd.ru/export/handler.ashx/;" + fileName;
 
             requestStr += "?TickerGroup=" + security.NameClass.Split('#')[1];
             requestStr += "&Tickers=" + security.NameId.Split('#')[1];
-            requestStr += "&Alias=false&Period="+ minutesCount;
+            requestStr += "&Alias=false&Period=" + minutesCount;
             requestStr += "&timeframeValue =" + minutesCount;
-            requestStr += "&timeframeDatePart=day&StartDate=" + startTime.Date.ToString("dd/MM/yyyy").Replace("/",".");
+            requestStr += "&timeframeDatePart=day&StartDate=" + startTime.Date.ToString("dd/MM/yyyy").Replace("/", ".");
             requestStr += "&EndDate=" + endTime.Date.ToString("dd/MM/yyyy").Replace("/", ".");
             requestStr += "&SaveFormat=0&SaveMode=1&FileName=" + fileName;
             requestStr += "&FieldSeparator=%253b&DecimalSeparator=.&DateFormat=yyyyMMdd&TimeFormat=HHmmss&DateFormatCustom=&TimeFormatCustom=&AddHeader=true&RecordFormat=0&Fill=false";
@@ -343,7 +341,7 @@ namespace OsEngine.Market.Servers.MFD
 
             List<Candle> result = new List<Candle>();
 
-            for (int i = 1;i < lines.Length;i++)
+            for (int i = 1; i < lines.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(lines[i]))
                 {
@@ -360,7 +358,7 @@ namespace OsEngine.Market.Servers.MFD
                 int minute = Convert.ToInt32(line[3].Substring(2, 2));
                 int second = Convert.ToInt32(line[3].Substring(4, 2));
 
-                DateTime  timeStart = new DateTime(year, month, day, hour, minute, second);
+                DateTime timeStart = new DateTime(year, month, day, hour, minute, second);
 
                 Candle candle = new Candle();
                 candle.Open = line[4].ToDecimal();
@@ -504,57 +502,57 @@ namespace OsEngine.Market.Servers.MFD
             string fileName = @"Data\Temp\tmpData" + ".txt";
 
 
-           if (File.Exists(fileName))
-           {
-               File.Delete(fileName);
-           }
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
 
-           WebClient wb = new WebClient();
-           bool _tickLoaded = false;
+            WebClient wb = new WebClient();
+            bool _tickLoaded = false;
 
             try
-           {
-               
-               wb.DownloadFileAsync(new Uri(url, UriKind.Absolute), fileName);
-               wb.DownloadFileCompleted += delegate(object sender, AsyncCompletedEventArgs args)
-               {
-                   _tickLoaded = true;
-               };
-               
-           }
-           catch (Exception)
-           {
-               wb.Dispose();
-               return null;
-           }
+            {
 
-           while (true)
-           {
-               Thread.Sleep(1000);
-               if (_tickLoaded)
-               {
-                   break;
-               }
-           }
-           wb.Dispose();
+                wb.DownloadFileAsync(new Uri(url, UriKind.Absolute), fileName);
+                wb.DownloadFileCompleted += delegate (object sender, AsyncCompletedEventArgs args)
+                {
+                    _tickLoaded = true;
+                };
 
-           if (!File.Exists(fileName))
-           { // file is not uploaded / файл не загружен
-               return null;
-           }
+            }
+            catch (Exception)
+            {
+                wb.Dispose();
+                return null;
+            }
 
-           StringBuilder builder = new StringBuilder();
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (_tickLoaded)
+                {
+                    break;
+                }
+            }
+            wb.Dispose();
+
+            if (!File.Exists(fileName))
+            { // file is not uploaded / файл не загружен
+                return null;
+            }
+
+            StringBuilder builder = new StringBuilder();
 
             StreamReader reader = new StreamReader(fileName);
 
-           while (!reader.EndOfStream)
-           {
-               builder.Append(reader.ReadLine() + "\n");
-           }
+            while (!reader.EndOfStream)
+            {
+                builder.Append(reader.ReadLine() + "\n");
+            }
 
-           reader.Close();
+            reader.Close();
 
-           return builder.ToString();
+            return builder.ToString();
         }
 
         public event Action<List<Security>> SecurityEvent;

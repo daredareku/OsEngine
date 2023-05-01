@@ -3,12 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.ColorKeeper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.Integration;
-using OsEngine.Charts.ColorKeeper;
 using Color = System.Drawing.Color;
 
 namespace OsEngine.OsOptimizer.OptEntity
@@ -30,7 +30,7 @@ namespace OsEngine.OsOptimizer.OptEntity
 
         private static Chart CreateChart()
         {
-            
+
             Chart _chart = null;
 
             try
@@ -42,7 +42,7 @@ namespace OsEngine.OsOptimizer.OptEntity
                 _chart.ChartAreas.Clear();
                 _chart.BackColor = _colorKeeper.ColorBackChart;
                 _chart.SuppressExceptions = true;
-                
+
                 ChartArea prime = new ChartArea("Prime")
                 {
                     CursorX = { AxisType = AxisType.Secondary, IsUserSelectionEnabled = false, IsUserEnabled = true, IntervalType = DateTimeIntervalType.Auto, Interval = 0.00001 },
@@ -51,7 +51,7 @@ namespace OsEngine.OsOptimizer.OptEntity
                     BorderWidth = 2,
                     BackColor = _colorKeeper.ColorBackChart,
                     BorderColor = _colorKeeper.ColorBackSecond,
-                    
+
                 };
 
                 prime.AxisY.TitleAlignment = StringAlignment.Near;
@@ -76,7 +76,7 @@ namespace OsEngine.OsOptimizer.OptEntity
                 series.ChartArea = "Prime";
                 series.ShadowOffset = 2;
                 series.YValuesPerPoint = 2;
-              
+
                 _chart.Series.Add(series);
 
             }

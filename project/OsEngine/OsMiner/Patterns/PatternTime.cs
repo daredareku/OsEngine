@@ -3,12 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using OsEngine.Charts.CandleChart.Indicators;
 using OsEngine.Entity;
 using OsEngine.Indicators;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.OsMiner.Patterns
 {
@@ -22,8 +20,8 @@ namespace OsEngine.OsMiner.Patterns
         {
             Type = PatternType.Time;
 
-            StartTime = new DateTime(1,1,1,9,0,0);
-            EndTime= new DateTime(1,1,1,20,0,0);
+            StartTime = new DateTime(1, 1, 1, 9, 0, 0);
+            EndTime = new DateTime(1, 1, 1, 20, 0, 0);
             Weigth = 1;
         }
 
@@ -67,7 +65,7 @@ namespace OsEngine.OsMiner.Patterns
         public bool ThisIsIt(List<Candle> candles, List<IIndicator> indicators, int numberPattern)
         {
             if (candles[numberPattern].TimeStart.Hour > StartTime.Hour &&
-                candles[numberPattern].TimeStart.Hour < EndTime.Hour) 
+                candles[numberPattern].TimeStart.Hour < EndTime.Hour)
             {
                 return true;
             }

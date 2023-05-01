@@ -3,13 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Drawing;
-using System.Windows.Forms;
 using OsEngine.Language;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+using System.Windows.Forms;
 
 
 namespace OsEngine.Entity
@@ -359,7 +356,7 @@ namespace OsEngine.Entity
                 return;
             }
 
-            if(ActionDeleteIsAccepted() == false)
+            if (ActionDeleteIsAccepted() == false)
             {
                 return;
             }
@@ -400,7 +397,7 @@ namespace OsEngine.Entity
 
         private void CheckOpenOrdersTimeButtonClick(List<Order> orders, DataGridView grid)
         {
-            if(orders == null ||
+            if (orders == null ||
                 orders.Count == 0)
             {
                 return;
@@ -415,7 +412,7 @@ namespace OsEngine.Entity
 
             if (tabColumn == 2)
             {
-                if(tabRow >= orders.Count)
+                if (tabRow >= orders.Count)
                 {
                     return;
                 }
@@ -435,7 +432,7 @@ namespace OsEngine.Entity
                 DateTimeSelectionDialog dialog = new DateTimeSelectionDialog(time);
                 dialog.ShowDialog();
 
-                if(dialog.IsSaved)
+                if (dialog.IsSaved)
                 {
                     myOrder.TimeCallBack = dialog.Time;
                     myOrder.TimeCreate = dialog.Time;
@@ -569,7 +566,7 @@ namespace OsEngine.Entity
                 return;
             }
 
-            if(trades == null ||
+            if (trades == null ||
                 trades.Count == 0)
             {
                 return;
@@ -619,7 +616,7 @@ namespace OsEngine.Entity
             {
                 for (int i = 0; i < ordersOpen.Count; i++)
                 {
-                    if(ordersOpen[i].MyTrades == null ||
+                    if (ordersOpen[i].MyTrades == null ||
                         ordersOpen[i].MyTrades.Count == 0)
                     {
                         continue;
@@ -660,13 +657,13 @@ namespace OsEngine.Entity
                 List<Order> ordersOpen = _position.OpenOrders;
                 List<Order> ordersClose = _position.CloseOrders;
 
-                if(ordersOpen != null && ordersOpen.Count != 0)
+                if (ordersOpen != null && ordersOpen.Count != 0)
                 {
                     List<MenuItem> itemsOrdersOpen = new List<MenuItem>();
-                    for(int i = 0;i < ordersOpen.Count;i++)
+                    for (int i = 0; i < ordersOpen.Count; i++)
                     {
-                        itemsOrdersOpen.Add(new MenuItem { Text = "Num " +  ordersOpen[i].NumberUser});
-                        itemsOrdersOpen[itemsOrdersOpen.Count-1].Click += MyTradeAddInOpenOrders_Click;
+                        itemsOrdersOpen.Add(new MenuItem { Text = "Num " + ordersOpen[i].NumberUser });
+                        itemsOrdersOpen[itemsOrdersOpen.Count - 1].Click += MyTradeAddInOpenOrders_Click;
                     }
 
                     items.Add(new MenuItem(OsLocalization.Entity.OrderContextMenuItem3,
@@ -687,7 +684,7 @@ namespace OsEngine.Entity
                 }
 
                 items.Add(new MenuItem { Text = OsLocalization.Entity.OrderContextMenuItem5 });
-                items[items.Count-1].Click += MyTradeDelete_Click;
+                items[items.Count - 1].Click += MyTradeDelete_Click;
 
                 ContextMenu menu = new ContextMenu(items.ToArray());
 
@@ -726,7 +723,7 @@ namespace OsEngine.Entity
 
         void MyTradeAddInCloseOrders_Click(object sender, EventArgs e)
         {
-            if(_position.CloseOrders == null ||
+            if (_position.CloseOrders == null ||
                 _position.CloseOrders.Count == 0)
             {
                 return;
@@ -736,7 +733,7 @@ namespace OsEngine.Entity
             int ordNum = Convert.ToInt32(str);
             Order myOrd = _position.CloseOrders.Find(o => o.NumberUser == ordNum);
 
-            if(myOrd == null)
+            if (myOrd == null)
             {
                 return;
             }
@@ -775,7 +772,7 @@ namespace OsEngine.Entity
                 return;
             }
 
-            if(number >= _tradesGrid.Rows.Count)
+            if (number >= _tradesGrid.Rows.Count)
             {
                 return;
             }
@@ -792,9 +789,9 @@ namespace OsEngine.Entity
 
             bool isInArray = false;
 
-            for(int i = 0; openOrders != null && i < openOrders.Count;i++)
+            for (int i = 0; openOrders != null && i < openOrders.Count; i++)
             {
-                if(isInArray == true)
+                if (isInArray == true)
                 {
                     break;
                 }
@@ -805,7 +802,7 @@ namespace OsEngine.Entity
                 {
                     MyTrade curTrade = curOrd.MyTrades[i2];
 
-                    if(curTrade.NumberTrade == strNum)
+                    if (curTrade.NumberTrade == strNum)
                     {
                         curOrd.MyTrades.RemoveAt(i2);
                         isInArray = true;
@@ -890,7 +887,7 @@ namespace OsEngine.Entity
             List<Order> openOrders = _position.OpenOrders;
             List<Order> closeOrders = _position.CloseOrders;
 
-            if(_mainPosGrid.Rows[0].Cells[4].Value == null)
+            if (_mainPosGrid.Rows[0].Cells[4].Value == null)
             {
                 return;
             }
@@ -904,7 +901,7 @@ namespace OsEngine.Entity
 
                 List<MyTrade> trades = openOrders[i].MyTrades;
 
-                for(int i2 =0;trades != null && i2 < trades.Count;i2++)
+                for (int i2 = 0; trades != null && i2 < trades.Count; i2++)
                 {
                     trades[i2].SecurityNameCode = securityName;
                 }
@@ -926,7 +923,7 @@ namespace OsEngine.Entity
 
         private void SaveChangesButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if(ActionSaveIsAccepted() == false)
+            if (ActionSaveIsAccepted() == false)
             {
                 return;
             }
@@ -979,11 +976,11 @@ namespace OsEngine.Entity
 
             DataGridViewRow nRow = _mainPosGrid.Rows[0];
 
-            if(nRow.Cells[4].Value != null)
+            if (nRow.Cells[4].Value != null)
             {
                 position.SecurityName = nRow.Cells[4].Value.ToString();
             }
-            
+
             Enum.TryParse(nRow.Cells[5].Value.ToString(), out position.Direction);
 
             PositionStateType newState;
@@ -999,17 +996,17 @@ namespace OsEngine.Entity
                 position.StopOrderPrice = nRow.Cells[14].Value.ToString().ToDecimal();
                 position.ProfitOrderRedLine = nRow.Cells[15].Value.ToString().ToDecimal();
                 position.ProfitOrderPrice = nRow.Cells[16].Value.ToString().ToDecimal();
-                if(nRow.Cells[17].Value != null)
+                if (nRow.Cells[17].Value != null)
                 {
                     position.SignalTypeOpen = nRow.Cells[17].Value.ToString().RemoveExcessFromSecurityName();
                 }
-                
-                if(nRow.Cells[18].Value != null)
+
+                if (nRow.Cells[18].Value != null)
                 {
                     position.SignalTypeClose = nRow.Cells[18].Value.ToString().RemoveExcessFromSecurityName();
                 }
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 MessageBox.Show(error.ToString());
             }
@@ -1019,11 +1016,11 @@ namespace OsEngine.Entity
         {
             List<MyTrade> allTrades = new List<MyTrade>();
 
-            for(int i = 0; _position.OpenOrders != null && i < _position.OpenOrders.Count;i++)
+            for (int i = 0; _position.OpenOrders != null && i < _position.OpenOrders.Count; i++)
             {
                 List<MyTrade> trades = _position.OpenOrders[i].MyTrades;
 
-                if(trades == null || trades.Count == 0)
+                if (trades == null || trades.Count == 0)
                 {
                     continue;
                 }
@@ -1043,7 +1040,7 @@ namespace OsEngine.Entity
                 allTrades.AddRange(trades);
             }
 
-            for(int i = 0;i < allTrades.Count;i++)
+            for (int i = 0; i < allTrades.Count; i++)
             {
                 SaveMyTradeState(allTrades[i]);
             }
@@ -1053,11 +1050,11 @@ namespace OsEngine.Entity
         {
             DataGridViewRowCollection rows = _tradesGrid.Rows;
 
-            for(int i = 0;i < rows.Count;i++)
+            for (int i = 0; i < rows.Count; i++)
             {
                 string num = rows[i].Cells[0].Value.ToString();
 
-                if(trade.NumberTrade == num)
+                if (trade.NumberTrade == num)
                 {
                     trade.Price = rows[i].Cells[4].Value.ToString().ToDecimal();
                     trade.Volume = rows[i].Cells[5].Value.ToString().ToDecimal();

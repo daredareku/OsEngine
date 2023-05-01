@@ -18,7 +18,7 @@ namespace OsEngine.Robots.Engines
 
         public override void ShowIndividualSettingsDialog()
         {
-            
+
         }
     }
 }

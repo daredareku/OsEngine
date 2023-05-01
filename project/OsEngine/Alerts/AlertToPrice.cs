@@ -3,16 +3,16 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Properties;
 using System.Windows.Forms;
 
 namespace OsEngine.Alerts
 {
-    public class AlertToPrice: IIAlert
+    public class AlertToPrice : IIAlert
     {
         public AlertToPrice(string name)
         {
@@ -77,7 +77,7 @@ namespace OsEngine.Alerts
                     Enum.TryParse(reader.ReadLine(), true, out TypeActivation);
                     PriceActivation = reader.ReadLine().ToDecimal();
                     Enum.TryParse(reader.ReadLine(), true, out SlippageType);
-                    
+
                     reader.Close();
                 }
             }

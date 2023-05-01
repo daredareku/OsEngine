@@ -28,7 +28,7 @@ namespace Kraken.WebSockets.Messages
         /// The lot volume.
         /// </value>
         public decimal LotVolume { get; private set; }
-        
+
         /// <summary>
         /// Creates from j array.
         /// </summary>

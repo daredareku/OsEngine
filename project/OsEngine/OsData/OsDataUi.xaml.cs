@@ -4,8 +4,8 @@
 */
 
 using OsEngine.Entity;
-using System.Windows;
 using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.OsData
 {
@@ -27,7 +27,7 @@ namespace OsEngine.OsData
 
             OsDataMaster master = new OsDataMaster();
 
-            _osDataMaster = new OsDataMasterPainter(master, 
+            _osDataMaster = new OsDataMasterPainter(master,
                 ChartHostPanel, HostLog, HostSource,
                 HostSet, RectChart, GreedChartPanel,
                 LabelSetNameValue, LabelTimeStartValue, LabelTimeEndValue, ProgressBarLoadProgress);

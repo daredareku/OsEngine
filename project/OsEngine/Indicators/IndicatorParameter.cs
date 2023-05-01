@@ -511,7 +511,7 @@ namespace OsEngine.Indicators
             _name = name;
             _valueString = value;
             _valueStringDefault = value;
-            _setStringValues = new List<string>(){value};
+            _setStringValues = new List<string>() { value };
             _type = IndicatorParameterType.String;
         }
 

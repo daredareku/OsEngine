@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
+using OsEngine.Market.Servers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OsEngine.Language;
-using OsEngine.Market.Servers;
 
 namespace OsEngine.Entity
 {
@@ -86,7 +86,7 @@ namespace OsEngine.Entity
         /// <param name="securities">securities/бумаги</param>
         private void PaintSecurities(List<Security> securities)
         {
-            if(securities == null)
+            if (securities == null)
             {
                 return;
             }

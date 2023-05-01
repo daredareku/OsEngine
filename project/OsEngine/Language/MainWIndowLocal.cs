@@ -9,27 +9,27 @@ namespace OsEngine.Language
     {
 
         public string Title => OsLocalization.ConvertToLocString(
-            "Eng:Main_"+
+            "Eng:Main_" +
             "Ru:Главное меню_");
 
         public string BlockDataLabel => OsLocalization.ConvertToLocString(
-            "Eng:Work with data_"+
+            "Eng:Work with data_" +
             "Ru:Данные_");
 
         public string BlockTestingLabel => OsLocalization.ConvertToLocString(
-            "Eng:Testing_"+
+            "Eng:Testing_" +
             "Ru:Тестирование");
 
         public string BlockTradingLabel => OsLocalization.ConvertToLocString(
-            "Eng:Trading_"+
+            "Eng:Trading_" +
             "Ru:Торговля");
 
         public string OsDataName => OsLocalization.ConvertToLocString(
-            "Eng:Data_"+
+            "Eng:Data_" +
             "Ru:Дата");
 
         public string OsConverter => OsLocalization.ConvertToLocString(
-            "Eng:Converter_"+
+            "Eng:Converter_" +
             "Ru:Конвертер");
 
         public string OsCandleConverter => OsLocalization.ConvertToLocString(
@@ -37,7 +37,7 @@ namespace OsEngine.Language
             "Ru:Конвертер свечей");
 
         public string OsTesterName => OsLocalization.ConvertToLocString(
-            "Eng:Tester_"+
+            "Eng:Tester_" +
             "Ru:Тестер");
 
         public string OsTesterLightName => OsLocalization.ConvertToLocString(
@@ -45,15 +45,15 @@ namespace OsEngine.Language
             "Ru:Тестер. Light");
 
         public string OsOptimizerName => OsLocalization.ConvertToLocString(
-            "Eng:Optimizer_"+
+            "Eng:Optimizer_" +
             "Ru:Оптимизатор");
 
         public string OsMinerName => OsLocalization.ConvertToLocString(
-            "Eng:Miner_"+
+            "Eng:Miner_" +
             "Ru:Майнер");
 
         public string OsBotStationName => OsLocalization.ConvertToLocString(
-            "Eng:Bot Station_"+
+            "Eng:Bot Station_" +
             "Ru:Роботы");
 
         public string OsBotStationLightName => OsLocalization.ConvertToLocString(

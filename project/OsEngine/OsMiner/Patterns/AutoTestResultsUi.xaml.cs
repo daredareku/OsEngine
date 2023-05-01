@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OsEngine.Language;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Language;
 
 namespace OsEngine.OsMiner.Patterns
 {
@@ -31,7 +31,7 @@ namespace OsEngine.OsMiner.Patterns
             this.Focus();
         }
 
-        public event Action<TestResult> UserClickOnNewPattern; 
+        public event Action<TestResult> UserClickOnNewPattern;
 
         private DataGridView _grid;
 

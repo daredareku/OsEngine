@@ -3,18 +3,17 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.BitMex.BitMexEntity;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.BitMex
 {
@@ -33,7 +32,7 @@ namespace OsEngine.Market.Servers.BitMex
             CreateParameterPassword(OsLocalization.Market.ServerParamSecretKey, "");
             CreateParameterBoolean("IsDemo", false);
         }
-        
+
         public List<Candle> GetBitMexCandleHistory(string nameSec, TimeSpan tf)
         {
             return ((BitMexServerRealization)ServerRealization).GetBitMexCandleHistory(nameSec, tf);
@@ -303,7 +302,7 @@ namespace OsEngine.Market.Servers.BitMex
         public List<Candle> GetCandleDataToSecurity(Security security, TimeFrameBuilder timeFrameBuilder,
             DateTime startTime, DateTime endTime, DateTime actualTime)
         {
-           return GetCandles(security.Name, timeFrameBuilder,startTime);
+            return GetCandles(security.Name, timeFrameBuilder, startTime);
         }
 
         /// <summary>
@@ -340,9 +339,9 @@ namespace OsEngine.Market.Servers.BitMex
 
                     _candles = null;
 
-                    while  (actualTime > timeStart)
+                    while (actualTime > timeStart)
                     {
-                        
+
                         actualTime = TimeZoneInfo.ConvertTimeToUtc(actualTime);
 
                         string end = actualTime.ToString("yyyy-MM-dd HH:mm");
@@ -363,7 +362,7 @@ namespace OsEngine.Market.Servers.BitMex
                             List<BitMexCandle> bmcandles =
                                 JsonConvert.DeserializeAnonymousType(res, new List<BitMexCandle>());
                             bmcandles.Reverse();
-                            allbmcandles.InsertRange(0,bmcandles);
+                            allbmcandles.InsertRange(0, bmcandles);
 
                             actualTime = Convert.ToDateTime(bmcandles[0].timestamp)
                                 .Subtract(TimeSpan.FromMinutes(shift));
@@ -393,7 +392,7 @@ namespace OsEngine.Market.Servers.BitMex
 
                         _candles.Add(newCandle);
                     }
-                   // _candles.Reverse();
+                    // _candles.Reverse();
                     return _candles;
                 }
             }
@@ -413,7 +412,7 @@ namespace OsEngine.Market.Servers.BitMex
             List<Trade> lastTrades = new List<Trade>();
 
             lastDate = endTime;
-           
+
 
             while (lastDate > startTime)
             {
@@ -445,7 +444,7 @@ namespace OsEngine.Market.Servers.BitMex
 
                 lastDate = trades[0].Time;
 
-                lastTrades.InsertRange(0,trades);
+                lastTrades.InsertRange(0, trades);
 
                 Thread.Sleep(3000);
             }
@@ -459,7 +458,7 @@ namespace OsEngine.Market.Servers.BitMex
             {
                 lock (_lockerStarter)
                 {
-                    _client_SendLogMessage("LOAD BLOCK: "+endTime.ToString(), LogMessageType.System);
+                    _client_SendLogMessage("LOAD BLOCK: " + endTime.ToString(), LogMessageType.System);
                     List<Trade> trades = new List<Trade>();
 
                     Dictionary<string, string> param = new Dictionary<string, string>();
@@ -538,8 +537,8 @@ namespace OsEngine.Market.Servers.BitMex
             _client.GetSecurities();
         }
 
-// data subscription
-// Подпись на данные
+        // data subscription
+        // Подпись на данные
 
         /// <summary>
         /// downloading candle master
@@ -658,7 +657,7 @@ namespace OsEngine.Market.Servers.BitMex
         /// <param name="tf"></param>
         /// <param name="shift"></param>
         /// <returns></returns>
-        private List<Candle> GetCandlesTf(string security, string tf, int shift, int a=1)
+        private List<Candle> GetCandlesTf(string security, string tf, int shift, int a = 1)
         {
             try
             {
@@ -674,14 +673,14 @@ namespace OsEngine.Market.Servers.BitMex
                     int countLoad = ((ServerParameterInt)(ServerParameters.Find(x => x.Name == OsLocalization.Market.ServerParam6))).Value;
                     int countForLoad = 1;
                     if (countLoad > (shift == 60 ? 300 : 480) / a)
-                        countForLoad =(int)Math.Ceiling((decimal)(countLoad /(shift == 60 ?(300 / a) : (480/ shift / a))));
+                        countForLoad = (int)Math.Ceiling((decimal)(countLoad / (shift == 60 ? (300 / a) : (480 / shift / a))));
 
                     for (int i = 0; i < countForLoad; i++)
                     {
                         Thread.Sleep(500);
                         if (i == 0)
                         {//Для часового фрейма добавил очистку от минут.
-                            endTime =shift==60? DateTime.UtcNow.AddMinutes(-DateTime.UtcNow.Minute).Add(TimeSpan.FromMinutes(shift)) : DateTime.UtcNow.Add(TimeSpan.FromMinutes(shift));
+                            endTime = shift == 60 ? DateTime.UtcNow.AddMinutes(-DateTime.UtcNow.Minute).Add(TimeSpan.FromMinutes(shift)) : DateTime.UtcNow.Add(TimeSpan.FromMinutes(shift));
                             startTime = shift == 60 ? endTime.Subtract(TimeSpan.FromHours(300)) : endTime.Subtract(TimeSpan.FromMinutes(480));
                         }
                         else
@@ -807,10 +806,10 @@ namespace OsEngine.Market.Servers.BitMex
         {
             List<Candle> candles1M;
             int a;
-            if (tf> 60)
+            if (tf > 60)
             {
                 a = tf / 60;
-                candles1M = GetCandlesTf(security, "1h", 60,a);
+                candles1M = GetCandlesTf(security, "1h", 60, a);
             }
             else if (tf >= 10)
             {
@@ -973,7 +972,7 @@ namespace OsEngine.Market.Servers.BitMex
                         newPos.ValueCurrent =
                                 pos.data[i].currentQty.ToDecimal();
                     }
-                    
+
 
                     needPortfolio.SetNewPosition(newPos);
                 }
@@ -1005,7 +1004,7 @@ namespace OsEngine.Market.Servers.BitMex
 
                 lock (_quoteLock)
                 {
-                    
+
 
                     if (quotes.action == "partial")
                     {
@@ -1082,7 +1081,7 @@ namespace OsEngine.Market.Servers.BitMex
                                 }
                                 else
                                 {
-                                    if (quotes.data[i].price == null || 
+                                    if (quotes.data[i].price == null ||
                                         quotes.data[i].price == "0")
                                     {
                                         continue;
@@ -1130,7 +1129,7 @@ namespace OsEngine.Market.Servers.BitMex
                             }
                             else // (quotes.data[i].side == "Buy")
                             {
-                                if (quotes.data[i].price == null || 
+                                if (quotes.data[i].price == null ||
                                     quotes.data[i].price == "0")
                                 {
                                     continue;
@@ -1208,7 +1207,7 @@ namespace OsEngine.Market.Servers.BitMex
 
                     for (int i = 0; i < quotes.data.Count; i++)
                     {
-                        if (quotes.data[i].price == null || 
+                        if (quotes.data[i].price == null ||
                             quotes.data[i].price == "0")
                         {
                             continue;
@@ -1374,7 +1373,7 @@ namespace OsEngine.Market.Servers.BitMex
                 {
                     for (int i = 0; i < order.data.Count; i++)
                     {
-                        if(order.data[i].lastQty == null ||
+                        if (order.data[i].lastQty == null ||
                             order.data[i].lastQty == 0)
                         {
                             continue;
@@ -1514,7 +1513,7 @@ namespace OsEngine.Market.Servers.BitMex
 
                             if (order.TypeOrder == OrderPriceType.Market)
                             {
-                                param["ordType"] =  "Market";
+                                param["ordType"] = "Market";
                             }
                             else
                             {
@@ -1870,7 +1869,7 @@ namespace OsEngine.Market.Servers.BitMex
                             if (needOrder == null)
                             {
                                 needOrder = new Order();
-                                
+
                                 needOrder.NumberUser = Convert.ToInt32(myOrder.data[i].clOrdID);
                                 needOrder.NumberMarket = myOrder.data[i].orderID;
                                 needOrder.SecurityNameCode = myOrder.data[i].symbol;
@@ -1950,7 +1949,7 @@ namespace OsEngine.Market.Servers.BitMex
                                         needOrder.VolumeExecute = myOrder.data[i].cumQty.ToDecimal();
                                     }
 
-                                 }
+                                }
 
                                 if (myOrder.data[i].ordStatus == "Filled")
                                 {

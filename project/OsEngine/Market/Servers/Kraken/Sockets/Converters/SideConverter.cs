@@ -5,7 +5,7 @@ namespace Kraken.WebSockets.Converters
 {
     internal sealed class SideConverter : JsonConverter
     {
-        public override bool CanConvert(Type objectType) 
+        public override bool CanConvert(Type objectType)
             => objectType == typeof(Side) || objectType == typeof(Side?);
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

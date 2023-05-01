@@ -24,7 +24,7 @@ namespace Kraken.WebSockets.Messages
         /// Initializes a new instance of the <see cref="Unsubscribe"/> class.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
-        public Unsubscribe(int channelId) 
+        public Unsubscribe(int channelId)
             : base(EventName)
         {
             ChannelId = channelId;

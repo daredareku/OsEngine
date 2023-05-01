@@ -3,9 +3,9 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace OsEngine.Charts.CandleChart.Indicators
@@ -16,8 +16,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// </summary>
     public partial class AccumulationDistributionUi
     { /// <summary>
-        /// Indicator/индикатор
-        /// </summary>
+      /// Indicator/индикатор
+      /// </summary>
         private AccumulationDistribution _ad;
 
         /// <summary>

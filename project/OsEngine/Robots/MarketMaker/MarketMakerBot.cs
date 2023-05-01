@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.CandleChart.Elements;
+using OsEngine.Entity;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OsEngine.Charts.CandleChart.Elements;
-using OsEngine.Entity;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.MarketMaker
 {
@@ -239,7 +238,7 @@ namespace OsEngine.Robots.MarketMaker
         {
             if (_lineElements == null ||
                 _lines.Count != _lineElements.Count)
-            { 
+            {
                 _lineElements = new List<LineHorisontal>();
 
                 for (int i = 0; i < _lines.Count; i++)
@@ -249,7 +248,7 @@ namespace OsEngine.Robots.MarketMaker
                 }
             }
             else
-            { 
+            {
                 for (int i = 0; i < _lineElements.Count; i++)
                 {
                     if (_lineElements[i].Value != _lines[i])
@@ -302,13 +301,13 @@ namespace OsEngine.Robots.MarketMaker
             {
                 if (lastPrice < _lines[i] &&
                     nowPrice > _lines[i])
-                { 
+                {
                     totalDeal -= Volume;
                 }
 
                 if (lastPrice > _lines[i] &&
                     nowPrice < _lines[i])
-                { 
+                {
                     totalDeal += Volume;
                 }
             }
@@ -322,7 +321,7 @@ namespace OsEngine.Robots.MarketMaker
             // 2 заходим в нужную сторону
 
             if (totalDeal > 0)
-            { 
+            {
                 List<Position> positionsShort = _tab.PositionOpenShort;
 
                 if (positionsShort != null && positionsShort.Count != 0)
@@ -343,7 +342,7 @@ namespace OsEngine.Robots.MarketMaker
 
                     if (positionsLong != null && positionsLong.Count != 0)
                     {
-                        if(totalDeal - positionsLong[0].OpenVolume <= 0)
+                        if (totalDeal - positionsLong[0].OpenVolume <= 0)
                         {
                             return;
                         }

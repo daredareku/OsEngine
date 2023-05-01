@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers
 {
@@ -22,10 +22,10 @@ namespace OsEngine.Market.Servers
         /// взять тип сервера. 
         /// </summary>
         /// <returns></returns>
-        ServerType ServerType { get;}
+        ServerType ServerType { get; }
 
-//service
-//сервис
+        //service
+        //сервис
 
         /// <summary>
         /// show settings
@@ -33,8 +33,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         void ShowDialog();
 
-// connect/disconnect
-// подключение/отключение
+        // connect/disconnect
+        // подключение/отключение
         /// <summary>
         /// start server. Connect to the trading system
         /// запустить сервер. Подключиться к торговой системе
@@ -47,8 +47,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         void StopServer();
 
-// connect status
-// статус соединения
+        // connect status
+        // статус соединения
         /// <summary>
         /// take server status
         /// взять статус сервера
@@ -61,8 +61,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<string> ConnectStatusChangeEvent;
 
-// server time
-// время сервера
+        // server time
+        // время сервера
         /// <summary>
         /// server time
         /// время сервера
@@ -87,7 +87,7 @@ namespace OsEngine.Market.Servers
         /// take all portfolios
         /// взять все портфели
         /// </summary>
-        List<Portfolio> Portfolios { get;}
+        List<Portfolio> Portfolios { get; }
 
         /// <summary>
         /// take portfolio by number
@@ -101,8 +101,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<List<Portfolio>> PortfoliosChangeEvent;
 
-// securities
-// инструменты
+        // securities
+        // инструменты
         /// <summary>
         /// take securities
         /// взять инструменты
@@ -113,7 +113,7 @@ namespace OsEngine.Market.Servers
         /// take the security by the short name
         /// взять инструмент по короткому имени инструмента
         /// </summary>
-        Security GetSecurityForName(string securityName,string securityClass);
+        Security GetSecurityForName(string securityName, string securityClass);
 
         /// <summary>
         /// securities changed
@@ -121,8 +121,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<List<Security>> SecuritiesChangeEvent;
 
-// data subscribetion
-// Подпись на данные
+        // data subscribetion
+        // Подпись на данные
 
         /// <summary>
         /// start downloading security
@@ -146,8 +146,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action NeadToReconnectEvent;
 
-// request data downloading
-// Запрос данных на выкачивание
+        // request data downloading
+        // Запрос данных на выкачивание
 
         /// <summary>
         /// start data downloading on the instrument
@@ -163,8 +163,8 @@ namespace OsEngine.Market.Servers
         List<Trade> GetTickDataToSecurity(string securityName, string securityClass, DateTime startTime, DateTime endTime, DateTime actualTime,
             bool neadToUpdete);
 
-// candles
-// свечи
+        // candles
+        // свечи
 
         /// <summary>
         /// new candles
@@ -172,8 +172,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<CandleSeries> NewCandleIncomeEvent;
 
-// depths
-// стакан
+        // depths
+        // стакан
         /// <summary>
         /// best bid / ask by instrument changed
         /// изменился лучший бид / аск по инструменту
@@ -182,8 +182,8 @@ namespace OsEngine.Market.Servers
 
         event Action<MarketDepth> NewMarketDepthEvent;
 
-// ticks
-// тики
+        // ticks
+        // тики
         /// <summary>
         /// take all trades on the instrument that have in the system
         /// взять все сделки по инстурументу имеющиеся в системе
@@ -204,8 +204,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<List<Trade>> NewTradeEvent;
 
-// my new trade
-// новая моя сделка
+        // my new trade
+        // новая моя сделка
 
         /// <summary>
         /// take my trades
@@ -219,8 +219,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<MyTrade> NewMyTradeEvent;
 
-// work with orders
-// работа с ордерами
+        // work with orders
+        // работа с ордерами
 
         /// <summary>
         /// send order to execute in the trading system
@@ -248,8 +248,8 @@ namespace OsEngine.Market.Servers
         /// </summary>
         event Action<Order> NewOrderIncomeEvent;
 
-// log messages
-// сообщения для лога
+        // log messages
+        // сообщения для лога
 
         event Action<string, LogMessageType> LogMessageEvent;
 

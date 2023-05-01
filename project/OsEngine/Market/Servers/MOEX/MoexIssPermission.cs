@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OsEngine.Market.Servers.MOEX
+﻿namespace OsEngine.Market.Servers.MOEX
 {
-    public class MoexIssPermission: IServerPermission
+    public class MoexIssPermission : IServerPermission
     {
         public ServerType ServerType
         {

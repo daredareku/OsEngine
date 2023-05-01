@@ -1,8 +1,8 @@
 ﻿using OsEngine.Entity;
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using OsEngine.Language;
 
 namespace OsEngine.OsConverter
 {
@@ -41,13 +41,13 @@ namespace OsEngine.OsConverter
         {
             decimal devider = 1;
 
-            if(ComboBoxTimeFrameInitial.SelectedItem.ToString() == TimeFrame.Min5.ToString())
+            if (ComboBoxTimeFrameInitial.SelectedItem.ToString() == TimeFrame.Min5.ToString())
             {
                 devider = 5;
             }
 
             List<Candle> candles = _candleConverter.ReadSourceFile();
-            List<Candle> mergedCandles = _candleConverter.Merge(candles, 
+            List<Candle> mergedCandles = _candleConverter.Merge(candles,
                 Convert.ToInt32(_candleConverter.ResultCandleTimeFrame / (double)devider));
 
             _candleConverter.WriteExitFile(mergedCandles);

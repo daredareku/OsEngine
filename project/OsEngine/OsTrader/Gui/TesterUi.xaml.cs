@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Globalization;
-using System.Windows;
 using OsEngine.Charts.CandleChart;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
 using OsEngine.Layout;
+using OsEngine.Market;
+using System;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Gui
 {
@@ -21,13 +20,13 @@ namespace OsEngine.OsTrader.Gui
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);
             ServerMaster.SetHostTable(HostPositionOnBoard, HostOrdersOnBoard);
-            ServerMaster.CreateServer(ServerType.Tester,false);
+            ServerMaster.CreateServer(ServerType.Tester, false);
             ServerMaster.GetServers();
 
             _strategyKeeper = new OsTraderMaster(GridChart,
                 ChartHostPanel, HostGlass, HostOpenPosition, HostClosePosition, HostAllPosition,
                 HostBotLog, HostBotLogPrime, RectChart, HostAllert, TabControlBotsName, TabControlBotTab, TextBoxPrice,
-                GridChartControlPanel,StartProgram.IsTester);
+                GridChartControlPanel, StartProgram.IsTester);
             LocationChanged += TesterUi_LocationChanged;
             LabelOsa.Content = "V_" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
@@ -116,7 +115,7 @@ namespace OsEngine.OsTrader.Gui
         private OsTraderMaster _strategyKeeper;
 
 
-// buttons with talking names / кнопки с говорящими названиями
+        // buttons with talking names / кнопки с говорящими названиями
 
         private void buttonBuyFast_Click_1(object sender, RoutedEventArgs e)
         {
@@ -155,7 +154,7 @@ namespace OsEngine.OsTrader.Gui
 
         private void ButtonBuyLimit_Click(object sender, RoutedEventArgs e)
         {
-           decimal volume;
+            decimal volume;
             try
             {
                 volume = TextBoxVolumeFast.Text.ToDecimal();
@@ -175,16 +174,16 @@ namespace OsEngine.OsTrader.Gui
             catch (Exception)
             {
                 MessageBox.Show(OsLocalization.Trader.Label50);
-                  return;
+                return;
             }
-            
+
             if (price == 0)
             {
                 MessageBox.Show(OsLocalization.Trader.Label50);
                 return;
             }
 
-            _strategyKeeper.BotBuyLimit(volume,price);
+            _strategyKeeper.BotBuyLimit(volume, price);
         }
 
         private void ButtonSellLimit_Click(object sender, RoutedEventArgs e)

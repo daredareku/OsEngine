@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using OsEngine.Entity;
 
 namespace OsEngine.Indicators
 {
@@ -28,13 +28,13 @@ namespace OsEngine.Indicators
         /// indicator colors
         /// цвета индикатора
         /// </summary>
-        List<Color> Colors { get;}
+        List<Color> Colors { get; }
 
         /// <summary>
         /// all values in one array
         /// все значения в одном массиве
         /// </summary>
-        List<List<decimal>> ValuesToChart { get;}
+        List<List<decimal>> ValuesToChart { get; }
 
         /// <summary>
         /// whether indicator can be removed from chart. This is necessary so that robots can't be removed /можно ли удалить индикатор с графика. Это нужно для того чтобы у роботов нельзя было удалить 

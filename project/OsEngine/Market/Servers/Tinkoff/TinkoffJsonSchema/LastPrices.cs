@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 {
 
     public class LastPricesResponse
     {
-       public List<LastPrice> lastPrices;
+        public List<LastPrice> lastPrices;
     }
 
     public class LastPrice

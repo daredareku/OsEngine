@@ -3,16 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using OsEngine.Entity;
 using OsEngine.Language;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace OsEngine.OsData

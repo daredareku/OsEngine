@@ -15,7 +15,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
         public int ExitPort { get; set; }
 
         string[] _permittedIp;
-       
+
         string _permittedToken;
 
         private string PermittedToken
@@ -85,7 +85,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
                         tcpClient.Close();
                         continue;
                     }
-                    
+
                     AdminPanelClient clientObject = new AdminPanelClient(tcpClient, this);
                     clientObject.Token = PermittedToken;
 
@@ -122,14 +122,14 @@ namespace OsEngine.OsTrader.AdminPanelApi
 
         protected internal void HandleClientMessage(string message)
         {
-            
+
         }
 
         protected internal void Disconnect()
         {
             Send("close");
             _tcpListener.Stop();
-            
+
             for (int i = 0; i < _clients.Count; i++)
             {
                 _clients[i].Close();

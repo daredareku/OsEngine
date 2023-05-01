@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using OsEngine.Charts.CandleChart.Elements;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 using System.Drawing;
-using OsEngine.Charts.CandleChart.Elements;
 
 
 namespace OsEngine.Robots.TechSapmles
@@ -85,7 +85,7 @@ namespace OsEngine.Robots.TechSapmles
             }
         }
 
-// обработчики для кнопок
+        // обработчики для кнопок
 
         private void _buttonAddPointOnPrimeArea_UserClickOnButtonEvent()
         {
@@ -96,7 +96,7 @@ namespace OsEngine.Robots.TechSapmles
 
             List<Candle> candles = _tab.CandlesFinishedOnly;
 
-            if(candles.Count == 0 ||
+            if (candles.Count == 0 ||
                 candles.Count < 10)
             {// если свечек слишком мало. Выходим
                 return;
@@ -134,11 +134,11 @@ namespace OsEngine.Robots.TechSapmles
                 return;
             }
 
-            LineHorisontal line = new LineHorisontal("Some line","Prime", false);
+            LineHorisontal line = new LineHorisontal("Some line", "Prime", false);
 
             line.Value = candles[candles.Count - 1].Close;
             line.TimeStart = candles[0].TimeStart;
-            line.TimeEnd = candles[candles.Count-1].TimeStart;
+            line.TimeEnd = candles[candles.Count - 1].TimeStart;
             line.CanResize = true;
             line.Color = Color.White;
             line.LineWidth = 3; // Толщина линии
@@ -177,7 +177,7 @@ namespace OsEngine.Robots.TechSapmles
             line.LineWidth = 1; // Толщина линии
 
             line.Label = "Some label on segment";
-           
+
             _tab.SetChartElement(line);
         }
 
@@ -198,7 +198,7 @@ namespace OsEngine.Robots.TechSapmles
             {
                 return;
             }
-                                 // второй параметр - имя области на чарте для линии 
+            // второй параметр - имя области на чарте для линии 
             LineHorisontal line = new LineHorisontal("Some line on second area", "MacdArea", false);
 
             line.Value = _macd.DataSeries[0].Last;

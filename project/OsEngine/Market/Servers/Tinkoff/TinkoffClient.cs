@@ -3,20 +3,20 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
-using System.IO;
 using OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Tinkoff
 {
@@ -655,7 +655,8 @@ namespace OsEngine.Market.Servers.Tinkoff
 
                 CreateProcessRouter();
 
-                Thread thread = new Thread(() => {
+                Thread thread = new Thread(() =>
+                {
                     SubscribleTradesAndDepthsGrcConnetction(security);
                 });
                 thread.IsBackground = true;

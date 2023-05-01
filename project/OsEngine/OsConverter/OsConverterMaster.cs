@@ -3,16 +3,15 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market;
 using ComboBox = System.Windows.Controls.ComboBox;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -92,7 +91,7 @@ namespace OsEngine.OsConverter
             }
             catch (Exception error)
             {
-              SendNewLogMessage(error.ToString(),LogMessageType.Error);
+                SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
@@ -298,7 +297,7 @@ namespace OsEngine.OsConverter
                         TimeFrameBuilder timeFrameBuilder = new TimeFrameBuilder();
                         timeFrameBuilder.TimeFrame = TimeFrame;
 
-                        CandleSeries series = new CandleSeries(timeFrameBuilder, new Security() { Name = "Unknown" },StartProgram.IsOsConverter);
+                        CandleSeries series = new CandleSeries(timeFrameBuilder, new Security() { Name = "Unknown" }, StartProgram.IsOsConverter);
 
                         series.IsStarted = true;
 

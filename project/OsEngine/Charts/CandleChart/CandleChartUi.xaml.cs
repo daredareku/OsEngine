@@ -1,17 +1,8 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Globalization;
-using OsEngine.Charts.CandleChart;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Market;
-using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
-using OsEngine.Layout;
 using System.Drawing;
+using System.Windows;
 
 namespace OsEngine.Charts.CandleChart
 {
@@ -48,9 +39,9 @@ namespace OsEngine.Charts.CandleChart
 
         public void SetColorToCandle(int indexCandle, Color newColor)
         {
-             IChartPainter painter = _chart.ChartCandle;
+            IChartPainter painter = _chart.ChartCandle;
 
-             painter.PaintInDifColor(indexCandle, indexCandle+1, "SeriesCandle");
+            painter.PaintInDifColor(indexCandle, indexCandle + 1, "SeriesCandle");
         }
     }
 }

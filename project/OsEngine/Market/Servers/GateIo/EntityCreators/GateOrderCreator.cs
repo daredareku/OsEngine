@@ -10,7 +10,7 @@ namespace OsEngine.Market.Servers.GateIo.EntityCreators
     {
         private string _portfolioNumber;
 
-        private GateOrderCreator(){}
+        private GateOrderCreator() { }
 
         public GateOrderCreator(string portfolioNumber)
         {
@@ -102,7 +102,7 @@ namespace OsEngine.Market.Servers.GateIo.EntityCreators
 
             return trade;
         }
-        
+
         public event Action<MyTrade> NewMyTrade;
     }
 }

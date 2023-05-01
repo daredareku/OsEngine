@@ -3,11 +3,11 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers
 {
@@ -21,7 +21,7 @@ namespace OsEngine.Market.Servers
         /// server type
         /// тип сервера
         /// </summary>
-        ServerType ServerType { get;}
+        ServerType ServerType { get; }
 
         /// <summary>
         /// server state

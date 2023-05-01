@@ -7,7 +7,7 @@ namespace OsEngine.Language
     public class AlertsLocal
     {
         public string TitleAlertMessageFullUi => OsLocalization.ConvertToLocString(
-            "Eng:Alerts_"+
+            "Eng:Alerts_" +
             "Ru:Окно оповещений_");
 
         public string TitleAlertMessageSimpleUi => OsLocalization.ConvertToLocString(
@@ -19,27 +19,27 @@ namespace OsEngine.Language
             "Ru:Настройки алерта_");
 
         public string GridHeader0 => OsLocalization.ConvertToLocString(
-            "Eng:Number_"+
+            "Eng:Number_" +
             "Ru:Номер_");
 
         public string GridHeader1 => OsLocalization.ConvertToLocString(
-            "Eng:Type_"+
+            "Eng:Type_" +
             "Ru:Тип_");
 
         public string GridHeader2 => OsLocalization.ConvertToLocString(
-            "Eng:Type_"+
+            "Eng:Type_" +
             "Ru:Тип_");
 
         public string Message1 => OsLocalization.ConvertToLocString(
-            "Eng:One menu to create the alert is already open!_"+
+            "Eng:One menu to create the alert is already open!_" +
             "Ru:Одно меню создания алерта уже открыто!_");
 
         public string ContextMenu1 => OsLocalization.ConvertToLocString(
-            "Eng:Delete_"+
+            "Eng:Delete_" +
             "Ru:Удалить_");
 
         public string ContextMenu2 => OsLocalization.ConvertToLocString(
-            "Eng:Edit_"+
+            "Eng:Edit_" +
             "Ru:Редактировать_");
 
         public string ContextMenu3 => OsLocalization.ConvertToLocString(

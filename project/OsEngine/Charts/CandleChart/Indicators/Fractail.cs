@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -26,7 +26,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Fractal(string uniqName,bool canDelete)
+        public Fractal(string uniqName, bool canDelete)
         {
             Name = uniqName;
 
@@ -44,7 +44,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// Don't use it from robot creation layer/не используйте его из слоя создания роботов!
         /// </summary>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Fractal(bool canDelete) 
+        public Fractal(bool canDelete)
         {
             Name = Guid.NewGuid().ToString();
 
@@ -305,7 +305,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 ValuesUp.Add(0);
                 ValuesDown.Add(0);
 
-                ValuesUp[ValuesUp.Count -3] = (GetValueUp(candles, candles.Count - 1));
+                ValuesUp[ValuesUp.Count - 3] = (GetValueUp(candles, candles.Count - 1));
                 ValuesDown[ValuesDown.Count - 3] = (GetValueDown(candles, candles.Count - 1));
 
                 if (ValuesDown[ValuesDown.Count - 3] != 0)
@@ -333,7 +333,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return;
             }
             ValuesUp = new List<decimal>();
-            ValuesDown= new List<decimal>();
+            ValuesDown = new List<decimal>();
             for (int i = 0; i < candles.Count; i++)
             {
                 ValuesUp.Add(0);
@@ -343,20 +343,20 @@ namespace OsEngine.Charts.CandleChart.Indicators
             for (int i = 2; i < candles.Count; i++)
             {
 
-                    ValuesUp[i - 2] = GetValueUp(candles, i);
-                    if (ValuesUp[i - 2] != 0)
-                    {
-                        ValuesUp[i - 2 - 1] = 0;
-                        ValuesUp[i - 2 - 2] = 0;
-                    }
+                ValuesUp[i - 2] = GetValueUp(candles, i);
+                if (ValuesUp[i - 2] != 0)
+                {
+                    ValuesUp[i - 2 - 1] = 0;
+                    ValuesUp[i - 2 - 2] = 0;
+                }
 
-                    ValuesDown[i - 2] = GetValueDown(candles, i);
-                    if (ValuesDown[i - 2] != 0)
-                    {
-                        ValuesDown[i - 2 - 1] = 0;
-                        ValuesDown[i - 2 - 2] = 0;
-                    }
-                
+                ValuesDown[i - 2] = GetValueDown(candles, i);
+                if (ValuesDown[i - 2] != 0)
+                {
+                    ValuesDown[i - 2 - 1] = 0;
+                    ValuesDown[i - 2 - 2] = 0;
+                }
+
             }
         }
 

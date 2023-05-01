@@ -1,12 +1,12 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Tester;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Tester;
 
 namespace OsEngine.Market.Servers.Optimizer
 {
@@ -120,11 +120,11 @@ namespace OsEngine.Market.Servers.Optimizer
             PaintGrid();
         }
 
-		// server
+        // server
         // сервер
 
         /// <summary>
-		/// test server
+        /// test server
         /// тестовый сервер
         /// </summary>
         private OptimizerDataStorage _server;
@@ -138,11 +138,11 @@ namespace OsEngine.Market.Servers.Optimizer
             PaintGrid();
         }
 
-		// table with instruments
+        // table with instruments
         //  таблица с инструментами
 
         /// <summary>
-		/// table with instruments
+        /// table with instruments
         /// таблица с инструментами
         /// </summary>
         private DataGridView _myGridView;
@@ -190,7 +190,7 @@ namespace OsEngine.Market.Servers.Optimizer
                     nRow.Cells[0].Value = securities[i].FileAdress;
                     nRow.Cells.Add(new DataGridViewTextBoxCell());
                     nRow.Cells[1].Value = securities[i].Security.Name;
-                   
+
 
                     if (securities[i].DataType == SecurityTesterDataType.Candle)
                     {

@@ -1,11 +1,5 @@
 ﻿using OsEngine.Market.Servers.Bybit.Entities;
 using OsEngine.Market.Servers.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Bybit.Utilities
 {

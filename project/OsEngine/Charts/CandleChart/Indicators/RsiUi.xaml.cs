@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Charts.CandleChart.Indicators
@@ -15,7 +15,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic for RsiUi.xaml
     /// Логика взаимодействия для RsiUi.xaml
     /// </summary>
-    public partial class RsiUi 
+    public partial class RsiUi
     {
         /// <summary>
         /// indicator that we're setting up

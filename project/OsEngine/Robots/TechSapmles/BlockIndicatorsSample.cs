@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.TechSapmles
 {
@@ -45,7 +44,7 @@ namespace OsEngine.Robots.TechSapmles
 
         private void StopOrActivateIndicators()
         {
-            if(_bollingerIsOn.ValueBool 
+            if (_bollingerIsOn.ValueBool
                 != _bollinger.IsOn)
             {
                 _bollinger.IsOn = _bollingerIsOn.ValueBool;
@@ -85,7 +84,7 @@ namespace OsEngine.Robots.TechSapmles
 
         public override void ShowIndividualSettingsDialog()
         {
-          
+
         }
     }
 }

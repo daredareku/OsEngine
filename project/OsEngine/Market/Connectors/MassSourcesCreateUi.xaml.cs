@@ -4,18 +4,16 @@
 */
 
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using OsEngine.Language;
-using MessageBox = System.Windows.MessageBox;
-using OsEngine.Market;
 using System.Windows.Forms;
-using OsEngine.OsTrader.Panels.Tab;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Market.Connectors
 {

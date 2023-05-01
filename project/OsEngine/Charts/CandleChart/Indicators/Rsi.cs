@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// RSI indicator
     /// RSI. Relative Strength Index. Индикатор
     /// </summary>
-    public class Rsi:IIndicator
+    public class Rsi : IIndicator
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Rsi(string uniqName,bool canDelete)
+        public Rsi(string uniqName, bool canDelete)
         {
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Line;

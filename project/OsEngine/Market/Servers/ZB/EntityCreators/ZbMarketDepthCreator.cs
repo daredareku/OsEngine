@@ -3,7 +3,6 @@ using OsEngine.Entity;
 using OsEngine.Market.Servers.Entity;
 using System;
 using System.Linq;
-using System.Data;
 
 namespace OsEngine.Market.Servers.ZB.EntityCreators
 {
@@ -39,7 +38,7 @@ namespace OsEngine.Market.Servers.ZB.EntityCreators
                 });
             }
 
-            for (int i = asks.Count() -1; i> 0 ; i--)
+            for (int i = asks.Count() - 1; i > 0; i--)
             {
                 JToken ask = asks.ElementAt(i);
                 newDepth.Asks.Add(new MarketDepthLevel()

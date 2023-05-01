@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Volume. Candle volume. Indicator
     ///  Volume. Объём свечек. Индикатор
     /// </summary>
-    public class Volume:IIndicator
+    public class Volume : IIndicator
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Volume(string uniqName,bool canDelete)
+        public Volume(string uniqName, bool canDelete)
         {
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Column;
@@ -279,7 +279,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             if (Values == null)
             {
                 Values = new List<decimal>();
-                Values.Add(candles[candles.Count-1].Volume);
+                Values.Add(candles[candles.Count - 1].Volume);
             }
             else
             {
@@ -307,7 +307,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         private void ProcessLastCanlde(List<Candle> candles)
         {
-            Values[Values.Count-1] = (candles[candles.Count - 1].Volume);
+            Values[Values.Count - 1] = (candles[candles.Count - 1].Volume);
         }
     }
 }

@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 ///Breakthrough of the channel built by PriceChannel + -ATR * coefficient,
@@ -38,7 +38,7 @@ public class PriceChannelVolatility : BotPanel
         _pc = (Aindicator)_tab.CreateCandleIndicator(_pc, "Prime");
         _pc.Save();
 
-        _atr = IndicatorsFactory.CreateIndicatorByName("ATR",name + "ATR", false);
+        _atr = IndicatorsFactory.CreateIndicatorByName("ATR", name + "ATR", false);
 
         _atr.ParametersDigit[0].Value = LengthAtr.ValueInt;
 
@@ -171,7 +171,7 @@ public class PriceChannelVolatility : BotPanel
         _lastPcDown = _pc.DataSeries[1].Last;
         _lastAtr = _atr.DataSeries[0].Last;
 
-        if (_pc.DataSeries[0].Values == null || _pc.DataSeries[1].Values == null || 
+        if (_pc.DataSeries[0].Values == null || _pc.DataSeries[1].Values == null ||
             _pc.DataSeries[0].Values.Count < _pc.ParametersDigit[0].Value + 1 ||
             _pc.DataSeries[1].Values.Count < _pc.ParametersDigit[1].Value + 1 ||
             _atr.DataSeries[0].Values == null || _atr.DataSeries[0].Values.Count < _atr.ParametersDigit[0].Value + 1)

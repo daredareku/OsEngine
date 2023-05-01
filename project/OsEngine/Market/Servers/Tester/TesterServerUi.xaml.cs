@@ -3,6 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,9 +14,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
 using Color = System.Drawing.Color;
 
 namespace OsEngine.Market.Servers.Tester
@@ -22,7 +22,7 @@ namespace OsEngine.Market.Servers.Tester
     /// Interaction logic for TesterServerUi.xaml
     /// Логика взаимодействия для TesterServerUi.xaml
     /// </summary>
-    public partial class TesterServerUi 
+    public partial class TesterServerUi
     {
         /// <summary>
         /// constructor
@@ -145,7 +145,7 @@ namespace OsEngine.Market.Servers.Tester
 
             // sets/сеты
 
-            for (int i = 0;sets != null && sets.Count != 0 && i < sets.Count; i++)
+            for (int i = 0; sets != null && sets.Count != 0 && i < sets.Count; i++)
             {
                 ComboBoxSets.Items.Add(sets[i]);
             }
@@ -154,7 +154,7 @@ namespace OsEngine.Market.Servers.Tester
             {
                 ComboBoxSets.SelectedItem = _server.ActiveSet.Split('_')[1];
             }
-            
+
             ComboBoxSets.SelectionChanged += ComboBoxSets_SelectionChanged;
 
             // data for test/данные для тестирования
@@ -165,7 +165,7 @@ namespace OsEngine.Market.Servers.Tester
             ComboBoxDataType.Items.Add(TesterDataType.MarketDepthAllCandleState);
             ComboBoxDataType.Items.Add(TesterDataType.MarketDepthOnlyReadyCandle);
             ComboBoxDataType.SelectedItem = _server.TypeTesterData;
-            ComboBoxDataType.SelectionChanged +=ComboBoxDataType_SelectionChanged;
+            ComboBoxDataType.SelectionChanged += ComboBoxDataType_SelectionChanged;
 
             TextBoxDataPath.Text = _server.PathToFolder;
             ComboBoxDataSourseType.Items.Add(TesterSourceDataType.Folder);
@@ -299,7 +299,7 @@ namespace OsEngine.Market.Servers.Tester
             {
                 Thread.Sleep(100);
 
-                if(_uiIsClosed)
+                if (_uiIsClosed)
                 {
                     return;
                 }
@@ -353,7 +353,7 @@ namespace OsEngine.Market.Servers.Tester
                 TextBoxSlipageSimpleOrder.Text = _server.SlipageToSimpleOrder.ToString(new CultureInfo("ru-RU"));
                 // ignore
             }
-            
+
         }
 
         /// <summary>
@@ -465,7 +465,7 @@ namespace OsEngine.Market.Servers.Tester
 
         private void PaintPausePlayButtonByActualServerState()
         {
-            if(ButtonPausePlay.Dispatcher.CheckAccess() == false)
+            if (ButtonPausePlay.Dispatcher.CheckAccess() == false)
             {
                 ButtonPausePlay.Dispatcher.Invoke(PaintPausePlayButtonByActualServerState);
                 return;
@@ -478,7 +478,7 @@ namespace OsEngine.Market.Servers.Tester
             {
                 ButtonPausePlay.Content = "| |";
             }
-            else if(regime == TesterRegime.Pause)
+            else if (regime == TesterRegime.Pause)
             {
                 ButtonPausePlay.Content = ">";
             }
@@ -498,20 +498,20 @@ namespace OsEngine.Market.Servers.Tester
 
         private void ButtonGoTo_Click(object sender, RoutedEventArgs e)
         {
-           
-            if(_goToUi == null)
+
+            if (_goToUi == null)
             {
                 _goToUi = new GoToUi(_server.TimeStart, _server.TimeEnd, _server.TimeNow);
                 _goToUi.Show();
                 _goToUi.SetLocation(this.Left + this.Width, this.Top);
 
-                _goToUi.Closing += (a,b) =>
+                _goToUi.Closing += (a, b) =>
                 {
-                    if(_goToUi.IsChange)
+                    if (_goToUi.IsChange)
                     {
                         _server.ToDateTimeTestingFast(_goToUi.TimeGoTo);
                     }
-                    
+
                     _goToUi = null;
                 };
             }
@@ -570,7 +570,7 @@ namespace OsEngine.Market.Servers.Tester
             }
         }
 
-// chart/чарт
+        // chart/чарт
 
         /// <summary>
         /// report chart
@@ -601,8 +601,8 @@ namespace OsEngine.Market.Servers.Tester
             areaLineProfit.Position.Height = 70;
             areaLineProfit.Position.Width = 100;
             areaLineProfit.Position.Y = 0;
-            areaLineProfit.CursorX.IsUserSelectionEnabled = false; 
-            areaLineProfit.CursorX.IsUserEnabled = false; 
+            areaLineProfit.CursorX.IsUserSelectionEnabled = false;
+            areaLineProfit.CursorX.IsUserEnabled = false;
             areaLineProfit.AxisX.Enabled = AxisEnabled.False;
 
             _chartReport.ChartAreas.Add(areaLineProfit);
@@ -672,11 +672,11 @@ namespace OsEngine.Market.Servers.Tester
 
                     if (i == 0)
                     {
-                        _chartReport.Series[1].Points.AddXY(i,  portfolio[i] - 1000000);
+                        _chartReport.Series[1].Points.AddXY(i, portfolio[i] - 1000000);
                         continue;
                     }
 
-                    _chartReport.Series[1].Points.AddXY(i, portfolio[i] - portfolio[i-1]);
+                    _chartReport.Series[1].Points.AddXY(i, portfolio[i] - portfolio[i - 1]);
 
                     if (portfolio[i] - portfolio[i - 1] > 0)
                     {
@@ -710,12 +710,12 @@ namespace OsEngine.Market.Servers.Tester
 
             if (portfolio.Count != 0)
             {
-                _chartReport.Series[0].Points.AddXY(_chartReport.Series[0].Points.Count, portfolio[portfolio.Count-1]);
+                _chartReport.Series[0].Points.AddXY(_chartReport.Series[0].Points.Count, portfolio[portfolio.Count - 1]);
 
                 if (portfolio.Count == 1)
                 {
                     _chartReport.Series[1].Points.AddXY(_chartReport.Series[1].Points.Count, portfolio[0] - 1000000);
-                   return;
+                    return;
                 }
 
                 _chartReport.Series[1].Points.AddXY(_chartReport.Series[1].Points.Count, portfolio[portfolio.Count - 1] - portfolio[portfolio.Count - 1 - 1]);
@@ -841,16 +841,16 @@ namespace OsEngine.Market.Servers.Tester
 
         private void SecuritiesGridPainterWorkerPlace()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(5000);
 
-                if(_uiIsClosed)
+                if (_uiIsClosed)
                 {
                     return;
                 }
 
-                if(_neadToRePaintGrid)
+                if (_neadToRePaintGrid)
                 {
                     _neadToRePaintGrid = false;
 
@@ -858,7 +858,7 @@ namespace OsEngine.Market.Servers.Tester
                     {
                         PaintGrid();
                     }
-                    catch(Exception error)
+                    catch (Exception error)
                     {
                         _server.SendLogMessage(error.ToString(), LogMessageType.Error);
                     }
@@ -987,7 +987,7 @@ namespace OsEngine.Market.Servers.Tester
                 SliderFrom.ValueChanged += SliderFrom_ValueChanged;
                 SliderTo.ValueChanged += SliderTo_ValueChanged;
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 try
                 {
@@ -1038,7 +1038,7 @@ namespace OsEngine.Market.Servers.Tester
 
             string str = row.Cells[1].Value.ToString();
 
-            Security security = _server.GetSecurityForName(str,"");
+            Security security = _server.GetSecurityForName(str, "");
 
             if (security == null)
             {
@@ -1055,15 +1055,15 @@ namespace OsEngine.Market.Servers.Tester
             }
         }
 
-// sliders. Setting the start and end time of testing
-// слайдеры. Установка начального и конечного времени тестирования
+        // sliders. Setting the start and end time of testing
+        // слайдеры. Установка начального и конечного времени тестирования
 
         private void SliderTo_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             TextBoxTo.TextChanged -= TextBoxTo_TextChanged;
 
             DateTime to = DateTime.MinValue.AddMinutes(SliderFrom.Minimum + SliderFrom.Maximum - SliderTo.Value);
-            _server.TimeEnd= to;
+            _server.TimeEnd = to;
             _server.SaveSecurityTestSettings();
             TextBoxTo.Text = to.ToString(new CultureInfo("RU-ru"));
 
@@ -1085,7 +1085,7 @@ namespace OsEngine.Market.Servers.Tester
 
             if (SliderFrom.Minimum + SliderFrom.Maximum - SliderTo.Value < SliderFrom.Value)
             {
-                SliderTo.Value = SliderFrom.Minimum + SliderFrom.Maximum -SliderFrom.Value;
+                SliderTo.Value = SliderFrom.Minimum + SliderFrom.Maximum - SliderFrom.Value;
             }
 
             TextBoxFrom.TextChanged += TextBoxFrom_TextChanged;
@@ -1111,7 +1111,7 @@ namespace OsEngine.Market.Servers.Tester
             }
 
             _server.TimeEnd = to;
-           // SliderTo.Value = SliderFrom.Minimum + SliderFrom.Maximum - to.Minute;
+            // SliderTo.Value = SliderFrom.Minimum + SliderFrom.Maximum - to.Minute;
             // SliderFrom.Minimum + SliderFrom.Maximum - SliderTo.Value
             SliderTo.Value = SliderFrom.Minimum + SliderTo.Maximum - (to - DateTime.MinValue).TotalMinutes;
         }

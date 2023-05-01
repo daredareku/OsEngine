@@ -2,10 +2,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Windows;
 using OsEngine.Language;
 using OsEngine.Logging;
+using System;
+using System.Windows;
 
 namespace OsEngine.Market.Servers.SmartCom
 {

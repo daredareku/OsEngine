@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
+using OsEngine.OsTrader.Panels;
 using System;
 using System.Globalization;
 using System.Windows;
-using OsEngine.Language;
-using OsEngine.OsTrader.Panels;
 
 namespace OsEngine.Robots.Patterns
 {
@@ -51,7 +51,7 @@ namespace OsEngine.Robots.Patterns
                 {
                     throw new Exception("");
                 }
-                
+
             }
             catch (Exception)
             {

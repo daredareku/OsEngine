@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.CandleChart.Indicators;
+using OsEngine.Entity;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OsEngine.Charts.CandleChart.Indicators;
-using OsEngine.Entity;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.Patterns
 {
@@ -210,13 +209,13 @@ namespace OsEngine.Robots.Patterns
         private void LogicOpenPosition(List<Candle> candles, List<Position> position)
         {
             if (_lastClose >= _lastHigh - ((_lastHigh - _lastLow) / 3) && _lastOpen >= _lastHigh - ((_lastHigh - _lastLow) / 3)
-                && _lastSma < _lastClose 
+                && _lastSma < _lastClose
                 && Regime != BotTradeRegime.OnlyShort)
             {
                 _tab.BuyAtLimit(VolumeFix, _lastClose + Slipage);
             }
             if (_lastClose <= _lastLow + ((_lastHigh - _lastLow) / 3) && _lastOpen <= _lastLow + ((_lastHigh - _lastLow) / 3)
-                && _lastSma > _lastClose 
+                && _lastSma > _lastClose
                 && Regime != BotTradeRegime.OnlyLong)
             {
                 _tab.SellAtLimit(VolumeFix, _lastClose + Slipage);

@@ -10,7 +10,7 @@ namespace Kraken.WebSockets.Events
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="pair">The pair.</param>
         /// <param name="dataMessage">The data message.</param>
-        public OhlcEventArgs(int channelId, string pair, OhlcMessage dataMessage) 
+        public OhlcEventArgs(int channelId, string pair, OhlcMessage dataMessage)
             : base(channelId, pair, dataMessage)
         {
         }

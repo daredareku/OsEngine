@@ -1,13 +1,13 @@
 ﻿using Com.Lmax.Api.Account;
 using Com.Lmax.Api.OrderBook;
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using OsEngine.Language;
 
 namespace OsEngine.Market.Servers.Lmax
 {
@@ -454,11 +454,11 @@ namespace OsEngine.Market.Servers.Lmax
         public event Action ConnectEvent;
         public event Action DisconnectEvent;
 
-		// log messages
+        // log messages
         // сообщения для лога
 
         /// <summary>
-		/// add a new log message 
+        /// add a new log message 
         /// добавить в лог новое сообщение
         /// </summary>
         private void SendLogMessage(string message, LogMessageType type)
@@ -468,7 +468,7 @@ namespace OsEngine.Market.Servers.Lmax
 
         public void ResearchTradesToOrders(List<Order> orders)
         {
-     
+
         }
 
         /// <summary>

@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using OsEngine.Entity;
 
 namespace OsEngine.Market.Connectors
 {
@@ -220,15 +220,15 @@ namespace OsEngine.Market.Connectors
 
                         ExecuteSimple(order, price);
 
-                        for(int i = 0;i < ordersOnBoard.Count;i++)
+                        for (int i = 0; i < ordersOnBoard.Count; i++)
                         {
-                            if(ordersOnBoard[i].NumberUser == order.NumberUser)
+                            if (ordersOnBoard[i].NumberUser == order.NumberUser)
                             {
                                 ordersOnBoard.RemoveAt(i);
                                 break;
                             }
                         }
-                        
+
                         return true;
                     }
                 }

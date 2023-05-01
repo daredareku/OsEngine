@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
 using RestSharp;
+using System;
+using System.Collections.Concurrent;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
 using WebSocket4Net;
 
 namespace OsEngine.Market.Servers.BitMax
@@ -156,7 +152,7 @@ namespace OsEngine.Market.Servers.BitMax
         {
             try
             {
-                var result = GetData( "margin/balance" , true, _accountGroup.ToString());
+                var result = GetData("margin/balance", true, _accountGroup.ToString());
 
                 var portfolios = JsonConvert.DeserializeAnonymousType(result, new Wallets());
 
@@ -449,7 +445,7 @@ namespace OsEngine.Market.Servers.BitMax
         /// </summary>
         public void SubscribeTradesAndDepths(string security)
         {
-            var subMsg = SubscribeMsg.Replace("message",$"depth:{security}");
+            var subMsg = SubscribeMsg.Replace("message", $"depth:{security}");
             _wsClient?.Send(subMsg);
 
             subMsg = SubscribeMsg.Replace("message", $"trades:{security}");
@@ -557,7 +553,7 @@ namespace OsEngine.Market.Servers.BitMax
             var auth = $"{{\"op\":\"auth\", \"t\": {timeStamp}, \"key\": \"{_apiKey}\", \"sig\": \"{CreateSignature(msg)}\"}}";
 
             _privateStream.Send(auth);
-            
+
             var subStr = _privateSubscribeMsg.Replace("*", "margin");
 
             _privateStream.Send(subStr);
@@ -593,7 +589,7 @@ namespace OsEngine.Market.Servers.BitMax
         /// очередь новых сообщений, пришедших с сервера биржи
         /// </summary>
         private readonly ConcurrentQueue<string> _newMessage = new ConcurrentQueue<string>();
-        
+
         /// <summary>
         /// takes messages that came through ws and puts them in a general queue
         /// берет пришедшие через ws сообщения и кладет их в общую очередь
@@ -601,7 +597,7 @@ namespace OsEngine.Market.Servers.BitMax
         private void GetRes(object sender, MessageReceivedEventArgs e)
         {
             if (_isDisposed)
-            { 
+            {
                 return;
             }
             _newMessage.Enqueue(e.Message);
@@ -623,7 +619,7 @@ namespace OsEngine.Market.Servers.BitMax
         private BitMaxMarketDepthCreator _depthCreator = new BitMaxMarketDepthCreator();
 
         private readonly ConcurrentQueue<string> _newPrivateMessage = new ConcurrentQueue<string>();
-        
+
         /// <summary>
         /// takes messages from the general queue, converts them to C # classes and sends them to up
         /// берет сообщения из общей очереди, конвертирует их в классы C# и отправляет на верх

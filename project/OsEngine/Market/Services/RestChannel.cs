@@ -39,7 +39,7 @@ namespace OsEngine.Market.Services
 
             return responseMsg;
         }
-        
+
         public string SendPostQuery(string url, string endPoint, byte[] data, Dictionary<string, string> headers)
         {
             Uri uri = new Uri(url + endPoint);
@@ -53,7 +53,7 @@ namespace OsEngine.Market.Services
             {
                 httpWebRequest.Headers.Add(header.Key, header.Value);
             }
-            
+
             httpWebRequest.ContentLength = data.Length;
 
             using (Stream reqStream = httpWebRequest.GetRequestStream())

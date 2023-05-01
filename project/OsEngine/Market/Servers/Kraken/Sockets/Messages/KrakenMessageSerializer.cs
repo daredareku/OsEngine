@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 
 namespace Kraken.WebSockets.Messages
 {
@@ -18,7 +18,7 @@ namespace Kraken.WebSockets.Messages
             };
         }
 
-        public TKrakenMessage Deserialize<TKrakenMessage>(string json) 
+        public TKrakenMessage Deserialize<TKrakenMessage>(string json)
             where TKrakenMessage : class, IKrakenMessage
         {
             if (string.IsNullOrEmpty(json))
@@ -29,7 +29,7 @@ namespace Kraken.WebSockets.Messages
             return JsonConvert.DeserializeObject<TKrakenMessage>(json, serializerSettings);
         }
 
-        public string Serialize<TKrakenMessage>(TKrakenMessage message) 
+        public string Serialize<TKrakenMessage>(TKrakenMessage message)
             where TKrakenMessage : class, IKrakenMessage
         {
 #pragma warning disable RECS0017 // Possible compare of value type with 'null'

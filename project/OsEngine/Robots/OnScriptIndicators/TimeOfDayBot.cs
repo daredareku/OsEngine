@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using OsEngine.Entity;
-using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
+﻿using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.OnScriptIndicators
 {
@@ -14,7 +13,7 @@ namespace OsEngine.Robots.OnScriptIndicators
             TabCreate(BotTabType.Simple);
             _tab = TabsSimple[0];
 
-            Regime = CreateParameter("Regime", "Off", new[] {"Off", "Buy", "Sell"});
+            Regime = CreateParameter("Regime", "Off", new[] { "Off", "Buy", "Sell" });
             Volume = CreateParameter("Volume", 3, 1.0m, 50, 4);
             Slippage = CreateParameter("Slippage", 0, 0, 20m, 0.1m);
             TimeToInter = CreateParameterTimeOfDay("Time to Inter", 10, 0, 1, 0);

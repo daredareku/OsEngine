@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using OsEngine.Language;
+﻿using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.Market.Servers.Transaq
 {
@@ -43,7 +43,7 @@ namespace OsEngine.Market.Servers.Transaq
             else
             {
                 _server.ChangePassword(OldPassword.Text, NewPassword.Text, this);
-            }            
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Kraken.WebSockets.Events
         /// <param name="pair">The pair.</param>
         /// <param name="ticker">The ticker.</param>
         public TickerEventArgs(int channelId, string pair, TickerMessage ticker)
-            :base(channelId, pair, ticker)
+            : base(channelId, pair, ticker)
         {
         }
     }

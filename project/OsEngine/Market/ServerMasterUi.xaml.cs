@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
-using System.ComponentModel;
 using OsEngine.Language;
 using OsEngine.Market.Servers;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace OsEngine.Market
 {
@@ -40,7 +40,7 @@ namespace OsEngine.Market
                 }
 
                 Close();
-                
+
                 servers = ServerMaster.GetServers();
                 servers.Find(s => s.ServerType == ServerType.Tester).ShowDialog();
                 return;

@@ -3,29 +3,29 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Journal.Internal;
+using OsEngine.Language;
+using OsEngine.Layout;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Journal.Internal;
-using OsEngine.Logging;
-using Color = System.Drawing.Color;
 using System.Windows.Forms.DataVisualization.Charting;
-using OsEngine.Language;
 using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
 using ChartArea = System.Windows.Forms.DataVisualization.Charting.ChartArea;
+using Color = System.Drawing.Color;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using Series = System.Windows.Forms.DataVisualization.Charting.Series;
-using System.Threading;
-using OsEngine.Layout;
 
 namespace OsEngine.Journal
 {
@@ -88,7 +88,7 @@ namespace OsEngine.Journal
             ButtonAutoReload.IsChecked = false;
 
             LabelEqutyCharteType.Content = OsLocalization.Journal.Label8;
-            
+
 
             CreatePositionsLists();
 
@@ -216,7 +216,7 @@ namespace OsEngine.Journal
                 HostClosePosition = null;
             }
 
-            if(_gridLeftBotsPanel != null)
+            if (_gridLeftBotsPanel != null)
             {
                 HostBotsSelected.Child = null;
                 _gridLeftBotsPanel.CellEndEdit -= _gridLeftBotsPanel_CellEndEdit;
@@ -254,7 +254,7 @@ namespace OsEngine.Journal
                 return;
             }
 
-            if(_allPositions == null)
+            if (_allPositions == null)
             {
                 return;
             }
@@ -267,7 +267,7 @@ namespace OsEngine.Journal
 
                 for (int i = 0; i < _allPositions.Count; i++)
                 {
-                    if(_allPositions[i] == null)
+                    if (_allPositions[i] == null)
                     {
                         continue;
                     }
@@ -339,7 +339,7 @@ namespace OsEngine.Journal
                     }
                 }
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 System.Windows.MessageBox.Show(error.ToString());
             }
@@ -431,7 +431,7 @@ namespace OsEngine.Journal
                     return;
                 }
 
-                if(_autoReloadIsOn == false)
+                if (_autoReloadIsOn == false)
                 {
                     continue;
                 }
@@ -718,13 +718,13 @@ namespace OsEngine.Journal
             int curCountOfPoints = _chartEquity.Series[0].Points.Count;
 
             double sizeArea = _chartEquity.ChartAreas[0].InnerPlotPosition.Size.Width;
-            double allSizeAbs = _chartEquity.Size.Width * (sizeArea/100);
-           
+            double allSizeAbs = _chartEquity.Size.Width * (sizeArea / 100);
+
             double onePointLen = allSizeAbs / curCountOfPoints;
 
             double curMousePosAbs = e.X;
 
-            double curPointNum = curMousePosAbs / onePointLen-1;
+            double curPointNum = curMousePosAbs / onePointLen - 1;
             try
             {
                 curPointNum = Convert.ToDouble(Convert.ToInt32(curPointNum));
@@ -733,23 +733,23 @@ namespace OsEngine.Journal
             {
                 return;
             }
-            
+
             //_chartEquity.ChartAreas[0].CursorX.Position = curPointNum;
-            if(_chartEquity.ChartAreas[0].CursorX.Position != curPointNum)
+            if (_chartEquity.ChartAreas[0].CursorX.Position != curPointNum)
             {
                 _chartEquity.ChartAreas[0].CursorX.SetCursorPosition(curPointNum);
             }
 
             int numPointInt = Convert.ToInt32(curPointNum);
 
-            if(numPointInt <= 0)
+            if (numPointInt <= 0)
             {
                 return;
             }
 
-            if(_chartEquity.Series[0].Points.Count > _lastSeriesEquityChartPointWithLabel)
+            if (_chartEquity.Series[0].Points.Count > _lastSeriesEquityChartPointWithLabel)
             {
-                 _chartEquity.Series[0].Points[_lastSeriesEquityChartPointWithLabel].Label = "";
+                _chartEquity.Series[0].Points[_lastSeriesEquityChartPointWithLabel].Label = "";
             }
             if (_chartEquity.Series[0].Points.Count > numPointInt)
             {
@@ -889,7 +889,7 @@ namespace OsEngine.Journal
                 {
                     decimal curMult = positionsAll[i].MultToJournal;
 
-                    if(chartType == "Absolute")
+                    if (chartType == "Absolute")
                     {
                         curProfit = positionsAll[i].ProfitPortfolioPunkt * (curMult / 100);
                     }
@@ -901,12 +901,12 @@ namespace OsEngine.Journal
 
                     curProfit = Math.Round(curProfit, 8);
 
-                    if(curProfit > maxYValBars)
+                    if (curProfit > maxYValBars)
                     {
                         maxYValBars = curProfit;
                     }
 
-                    if(curProfit < minYvalBars)
+                    if (curProfit < minYvalBars)
                     {
                         minYvalBars = curProfit;
                     }
@@ -993,7 +993,7 @@ namespace OsEngine.Journal
                     _chartEquity.ChartAreas[0].AxisY2.Minimum = (double)minYval;
                 }
 
-                if(minYvalBars != decimal.MaxValue &&
+                if (minYvalBars != decimal.MaxValue &&
                     maxYValBars != 0)
                 {
                     decimal chartHeigh = maxYValBars - minYvalBars;
@@ -1018,12 +1018,12 @@ namespace OsEngine.Journal
 
             int labelCount = 5;
 
-            if(values < 5)
+            if (values < 5)
             {
                 labelCount = values;
             }
 
-            if(labelCount == 0)
+            if (labelCount == 0)
             {
                 return;
             }
@@ -1115,7 +1115,7 @@ namespace OsEngine.Journal
             _chartVolume.Series.Clear();
             _chartVolume.ChartAreas.Clear();
 
-            if(positionsAll == null 
+            if (positionsAll == null
                 || positionsAll.Count == 0)
             {
                 return;
@@ -1482,7 +1482,7 @@ namespace OsEngine.Journal
                 return;
             }
 
-            if(_chartDd.Series == null 
+            if (_chartDd.Series == null
                 || _chartDd.Series.Count == 0)
             {
                 return;
@@ -1512,7 +1512,7 @@ namespace OsEngine.Journal
                 _chartDd.ChartAreas[0].CursorX.SetCursorPosition(curPointNum);
             }
 
-            
+
 
             int numPointInt = Convert.ToInt32(curPointNum);
 
@@ -1570,7 +1570,7 @@ namespace OsEngine.Journal
 
             _chartDd.Series.Clear();
 
-            if (positionsAll == null 
+            if (positionsAll == null
                 || positionsAll.Count == 0)
             {
                 return;
@@ -1582,7 +1582,7 @@ namespace OsEngine.Journal
 
             for (int i = 0; i < positionsAll.Count; i++)
             {
-                currentProfit += positionsAll[i].ProfitPortfolioPunkt * (positionsAll[i].MultToJournal /100);
+                currentProfit += positionsAll[i].ProfitPortfolioPunkt * (positionsAll[i].MultToJournal / 100);
 
                 if (lastMax < currentProfit)
                 {
@@ -1597,8 +1597,8 @@ namespace OsEngine.Journal
 
             Series drowDownPunct = new Series("SeriesDdPunct");
             drowDownPunct.ChartType = SeriesChartType.Line;
-            drowDownPunct.Color = Color.DeepSkyBlue;  
-            drowDownPunct.LabelForeColor = Color.White;   
+            drowDownPunct.Color = Color.DeepSkyBlue;
+            drowDownPunct.LabelForeColor = Color.White;
             drowDownPunct.YAxisType = AxisType.Secondary;
             drowDownPunct.ChartArea = "ChartAreaDdPunct";
             drowDownPunct.BorderWidth = 2;
@@ -1631,17 +1631,17 @@ namespace OsEngine.Journal
 
             decimal minOnY = decimal.MaxValue;
 
-            for(int i = 0;i< ddPunct.Count;i++)
+            for (int i = 0; i < ddPunct.Count; i++)
             {
-                if(ddPunct[i] < minOnY)
+                if (ddPunct[i] < minOnY)
                 {
                     minOnY = ddPunct[i];
                 }
             }
 
-            if(minOnY != decimal.MaxValue)
+            if (minOnY != decimal.MaxValue)
             {
-                _chartDd.ChartAreas[0].AxisY2.Maximum = - Convert.ToDouble(minOnY) * 0.05;
+                _chartDd.ChartAreas[0].AxisY2.Maximum = -Convert.ToDouble(minOnY) * 0.05;
                 _chartDd.ChartAreas[0].AxisY2.Minimum = Convert.ToDouble(minOnY) + Convert.ToDouble(minOnY) * 0.05;
             }
 
@@ -1920,7 +1920,7 @@ namespace OsEngine.Journal
             int number;
             try
             {
-                if(_openPositionGrid.CurrentCell == null)
+                if (_openPositionGrid.CurrentCell == null)
                 {
                     return;
                 }
@@ -2049,7 +2049,7 @@ namespace OsEngine.Journal
             }
             _openPositionGrid.Rows.Clear();
 
-            if(positionsAll == null 
+            if (positionsAll == null
                 || positionsAll.Count == 0)
             {
                 return;
@@ -2220,7 +2220,7 @@ namespace OsEngine.Journal
             int number;
             try
             {
-                if(_closePositionGrid.CurrentCell == null)
+                if (_closePositionGrid.CurrentCell == null)
                 {
                     return;
                 }
@@ -2243,7 +2243,7 @@ namespace OsEngine.Journal
             int number;
             try
             {
-                if(_closePositionGrid.CurrentCell == null)
+                if (_closePositionGrid.CurrentCell == null)
                 {
                     return;
                 }
@@ -2337,7 +2337,7 @@ namespace OsEngine.Journal
             }
             _closePositionGrid.Rows.Clear();
 
-            if (positionsAll == null 
+            if (positionsAll == null
                 || positionsAll.Count == 0)
             {
                 return;
@@ -2490,14 +2490,14 @@ namespace OsEngine.Journal
 
         private void LeftBotsPanelPainter()
         {
-            while(true)
+            while (true)
             {
-                if(IsErase == true)
+                if (IsErase == true)
                 {
                     return;
                 }
 
-                if(_neadToRapaintBotsGrid)
+                if (_neadToRapaintBotsGrid)
                 {
                     _neadToRapaintBotsGrid = false;
                     PaintBotsGrid();
@@ -2593,14 +2593,14 @@ namespace OsEngine.Journal
             List<string> allGroups = GetAllGroups(groups);
 
 
-            for(int i = 0;i < groups.Count;i++)
+            for (int i = 0; i < groups.Count; i++)
             {
                 rows.AddRange(GetGroupRowList(groups[i], allGroups));
             }
 
             _gridLeftBotsPanel.Rows.Clear();
 
-            for(int i = 0;i < rows.Count;i++)
+            for (int i = 0; i < rows.Count; i++)
             {
                 _gridLeftBotsPanel.Rows.Add(rows[i]);
             }
@@ -2612,7 +2612,7 @@ namespace OsEngine.Journal
         {
             List<string> groupsInStrArray = new List<string>();
 
-            for(int i = 0;i < groups.Count;i++)
+            for (int i = 0; i < groups.Count; i++)
             {
                 groupsInStrArray.Add(groups[i].BotGroup);
             }
@@ -2643,9 +2643,9 @@ namespace OsEngine.Journal
             row.Cells.Add(new DataGridViewTextBoxCell()); // мультипликатор
             rows.Add(row);
 
-            for(int i = 0;i < group.Panels.Count;i++)
+            for (int i = 0; i < group.Panels.Count; i++)
             {
-                rows.AddRange(GetPanelRowList(group.Panels[i], groupsAll,i+1));
+                rows.AddRange(GetPanelRowList(group.Panels[i], groupsAll, i + 1));
             }
 
             return rows;
@@ -2659,7 +2659,7 @@ namespace OsEngine.Journal
 
             DataGridViewComboBoxCell groupBox = new DataGridViewComboBoxCell();
 
-            for(int i = 0;i < groupNames.Count;i++)
+            for (int i = 0; i < groupNames.Count; i++)
             {
                 groupBox.Items.Add(groupNames[i]);
             }
@@ -2667,10 +2667,10 @@ namespace OsEngine.Journal
             groupBox.Value = panel.BotGroup;
 
             row.Cells.Add(groupBox); // группа
-          
+
             row.Cells.Add(new DataGridViewTextBoxCell()); // номер
             row.Cells[row.Cells.Count - 1].Value = panelNum;
-            
+
             row.Cells.Add(new DataGridViewTextBoxCell()); // имя
             row.Cells[row.Cells.Count - 1].Value = panel.BotName;
 
@@ -2698,7 +2698,7 @@ namespace OsEngine.Journal
             {
                 PanelGroups myGroup = groups.Find(g => g.BotGroup == oldPanels[i].BotGroup);
 
-                if(myGroup == null)
+                if (myGroup == null)
                 {
                     myGroup = new PanelGroups();
                     myGroup.BotGroup = oldPanels[i].BotGroup;
@@ -2715,19 +2715,19 @@ namespace OsEngine.Journal
         {
             List<Journal> journals = new List<Journal>();
 
-            for(int i = 0;i < _botsJournals.Count;i++)
+            for (int i = 0; i < _botsJournals.Count; i++)
             {
                 BotPanelJournal panel = _botsJournals[i];
 
-                for(int i2 = 0;i2 < panel._Tabs.Count;i2++)
+                for (int i2 = 0; i2 < panel._Tabs.Count; i2++)
                 {
-                    if(panel.IsOn)
+                    if (panel.IsOn)
                     {
                         journals.Add(panel._Tabs[i2].Journal);
 
                         List<Position> poses = panel._Tabs[i2].Journal.AllPosition;
 
-                        for(int i3 = 0; poses != null && i3 < poses.Count;i3++)
+                        for (int i3 = 0; poses != null && i3 < poses.Count; i3++)
                         {
                             poses[i3].MultToJournal = panel.Mult;
                         }
@@ -2808,7 +2808,7 @@ namespace OsEngine.Journal
             _longPositions = _allPositions.FindAll(p => p.Direction == Side.Buy);
             _shortPositions = _allPositions.FindAll(p => p.Direction == Side.Sell);
 
-            if(_allPositions.Count == 0)
+            if (_allPositions.Count == 0)
             {
                 return;
             }
@@ -2836,7 +2836,7 @@ namespace OsEngine.Journal
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    while(reader.EndOfStream == false)
+                    while (reader.EndOfStream == false)
                     {
                         string botString = reader.ReadLine();
 
@@ -2854,7 +2854,7 @@ namespace OsEngine.Journal
 
                         BotPanelJournal journal = _botsJournals.Find(b => b.BotName == botName);
 
-                        if(journal == null)
+                        if (journal == null)
                         {
                             continue;
                         }
@@ -2882,12 +2882,12 @@ namespace OsEngine.Journal
                 using (StreamWriter writer = new StreamWriter(path, false)
                     )
                 {
-                    for(int i = 0;i < _botsJournals.Count;i++)
+                    for (int i = 0; i < _botsJournals.Count; i++)
                     {
-                        string res = _botsJournals[i].BotName + 
+                        string res = _botsJournals[i].BotName +
                             "&" + _botsJournals[i].BotGroup +
                             "&" + _botsJournals[i].Mult +
-                            "&" + _botsJournals[i].IsOn ;
+                            "&" + _botsJournals[i].IsOn;
 
 
                         writer.WriteLine(res);
@@ -2907,13 +2907,13 @@ namespace OsEngine.Journal
             if (e.ColumnIndex == 4)
             {
                 _lastChangeRow = e.RowIndex;
-               Task.Run(ChangeOnOffAwait);
+                Task.Run(ChangeOnOffAwait);
             }
         }
 
         private void _gridLeftBotsPanel_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0)
             {
                 ChangeGroup(e);
             }
@@ -2934,7 +2934,7 @@ namespace OsEngine.Journal
 
         private void ChangeOnOff(int rowIndx)
         {
-            if(TextBoxFrom.Dispatcher.CheckAccess() == false)
+            if (TextBoxFrom.Dispatcher.CheckAccess() == false)
             {
                 TextBoxFrom.Dispatcher.Invoke(new Action<int>(ChangeOnOff), rowIndx);
                 return;
@@ -2950,7 +2950,7 @@ namespace OsEngine.Journal
                 return;
             }
 
-            if(Convert.ToBoolean(textInCell) == false)
+            if (Convert.ToBoolean(textInCell) == false)
             {
                 bot.IsOn = true;
             }
@@ -2977,11 +2977,11 @@ namespace OsEngine.Journal
 
             for (int i = 0; i < group.Panels.Count; i++)
             {
-                if(textInCell =="True")
+                if (textInCell == "True")
                 {
                     group.Panels[i].IsOn = false;
                 }
-                else if(textInCell == "False")
+                else if (textInCell == "False")
                 {
                     group.Panels[i].IsOn = true;
                 }
@@ -3057,9 +3057,9 @@ namespace OsEngine.Journal
 
             int curBotNum = 1;
 
-            for(int i = 0;i < groups.Count; i++)
+            for (int i = 0; i < groups.Count; i++)
             {
-                for (int i2 = 0;i2< groups[i].Panels.Count;i2++)
+                for (int i2 = 0; i2 < groups[i].Panels.Count; i2++)
                 {
                     if (num == curBotNum)
                     {
@@ -3111,7 +3111,7 @@ namespace OsEngine.Journal
             SliderFrom.ValueChanged -= SliderFrom_ValueChanged;
             SliderTo.ValueChanged -= SliderTo_ValueChanged;
 
-            if (startTime == DateTime.MinValue 
+            if (startTime == DateTime.MinValue
                 || endTime == DateTime.MinValue)
             {
                 TextBoxFrom.Text = "";
@@ -3155,7 +3155,7 @@ namespace OsEngine.Journal
                 SliderFrom.Value = SliderFrom.Minimum + SliderFrom.Maximum - SliderTo.Value;
             }
             TextBoxTo.TextChanged += TextBoxTo_TextChanged;
-            IsSlide = true;  			
+            IsSlide = true;
         }
 
         void SliderFrom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -3172,7 +3172,7 @@ namespace OsEngine.Journal
             }
 
             TextBoxFrom.TextChanged += TextBoxFrom_TextChanged;
-            IsSlide = true;  			
+            IsSlide = true;
         }
 
         void TextBoxTo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

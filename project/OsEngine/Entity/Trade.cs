@@ -127,7 +127,7 @@ namespace OsEngine.Entity
                 result += Ask.ToString(CultureInfo.InvariantCulture) + ",";
                 result += BidsVolume.ToString(CultureInfo.InvariantCulture) + ",";
                 result += AsksVolume.ToString(CultureInfo.InvariantCulture);
-                
+
             }
 
             return result;
@@ -143,7 +143,7 @@ namespace OsEngine.Entity
             //20150401,100000,86160.000000000,2
             // либо 20150401,100000,86160.000000000,2, Buy/Sell
 
-            if(string.IsNullOrWhiteSpace(In))
+            if (string.IsNullOrWhiteSpace(In))
             {
                 return;
             }
@@ -165,7 +165,7 @@ namespace OsEngine.Entity
             }
 
             int year = Convert.ToInt32(sIn[0].Substring(0, 4));
-            int month = Convert.ToInt32(sIn[0].Substring(4, 2)); 
+            int month = Convert.ToInt32(sIn[0].Substring(4, 2));
             int day = Convert.ToInt32(sIn[0].Substring(6, 2));
 
             int hour = Convert.ToInt32(sIn[1].Substring(0, 2));
@@ -173,7 +173,7 @@ namespace OsEngine.Entity
             int second = Convert.ToInt32(sIn[1].Substring(4, 2));
 
             Time = new DateTime(year, month, day, hour, minute, second);
-            
+
             Price = sIn[2].ToDecimal();
 
             Volume = sIn[3].ToDecimal();

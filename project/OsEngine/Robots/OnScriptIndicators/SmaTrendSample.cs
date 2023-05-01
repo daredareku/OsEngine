@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 
 namespace OsEngine.Robots.OnScriptIndicators
@@ -15,7 +15,7 @@ namespace OsEngine.Robots.OnScriptIndicators
             TabCreate(BotTabType.Simple);
             _tab = TabsSimple[0];
 
-            Regime = CreateParameter("Regime", "Off", new[] { "Off", "On"});
+            Regime = CreateParameter("Regime", "Off", new[] { "Off", "On" });
             Volume = CreateParameter("Volume", 3, 1.0m, 50, 4);
             Slippage = CreateParameter("Slippage", 0, 0, 20, 1);
             SmaLength = CreateParameter("Sma length", 30, 0, 20, 1);
@@ -43,7 +43,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void SmaTrendSample_ParametrsChangeByUser()
         {
-            if(SmaLength.ValueInt != _sma.ParametersDigit[0].Value)
+            if (SmaLength.ValueInt != _sma.ParametersDigit[0].Value)
             {
                 _sma.ParametersDigit[0].Value = SmaLength.ValueInt;
                 _sma.Save();
@@ -68,7 +68,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         public override void ShowIndividualSettingsDialog()
         {
-            
+
         }
 
         /// <summary>
@@ -101,25 +101,25 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void _tab_CandleFinishedEvent(List<Candle> candles)
         {
-            if(candles.Count < SmaLength.ValueInt +1)
+            if (candles.Count < SmaLength.ValueInt + 1)
             {
                 return;
             }
 
-            if(Regime.ValueString == "Off")
+            if (Regime.ValueString == "Off")
             {
                 return;
             }
 
             List<Position> poses = _tab.PositionsOpenAll;
 
-            if(poses.Count == 0)
+            if (poses.Count == 0)
             {
                 OpenPositionLogic(candles);
             }
             else
             {
-                ClosePositionLogic(poses[0],candles);
+                ClosePositionLogic(poses[0], candles);
             }
         }
 
@@ -127,17 +127,17 @@ namespace OsEngine.Robots.OnScriptIndicators
         {
             decimal smaValue = _sma.DataSeries[0].Last;
 
-            if(smaValue == 0)
+            if (smaValue == 0)
             {
                 return;
             }
 
-            decimal lastCandlePrice = candles[candles.Count-1].Close;
+            decimal lastCandlePrice = candles[candles.Count - 1].Close;
 
             decimal upChannel = _envelop.DataSeries[0].Last;
             decimal downChannel = _envelop.DataSeries[2].Last;
 
-            if(upChannel == 0 ||
+            if (upChannel == 0 ||
                 downChannel == 0)
             {
                 return;
@@ -158,12 +158,12 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void ClosePositionLogic(Position position, List<Candle> candles)
         {
-            if(position.State == PositionStateType.Closing)
+            if (position.State == PositionStateType.Closing)
             {
                 return;
             }
 
-            decimal stopPrice = position.EntryPrice - position.EntryPrice * BaseStopPercent.ValueDecimal/100;
+            decimal stopPrice = position.EntryPrice - position.EntryPrice * BaseStopPercent.ValueDecimal / 100;
 
             if (position.Direction == Side.Sell)
             {
@@ -175,13 +175,13 @@ namespace OsEngine.Robots.OnScriptIndicators
             decimal lastCandlePrice = candles[candles.Count - 1].Close;
 
             if (position.Direction == Side.Buy &&
-                smaValue > stopPrice 
+                smaValue > stopPrice
                 && lastCandlePrice > smaValue)
             {
                 stopPrice = smaValue;
             }
             if (position.Direction == Side.Sell &&
-                smaValue < stopPrice 
+                smaValue < stopPrice
                 && lastCandlePrice < smaValue)
             {
                 stopPrice = smaValue;
@@ -189,7 +189,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             decimal priceOrder = stopPrice;
 
-            if(StartProgram == StartProgram.IsOsTrader)
+            if (StartProgram == StartProgram.IsOsTrader)
             {
                 if (position.Direction == Side.Buy)
                 {

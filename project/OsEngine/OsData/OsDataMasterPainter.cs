@@ -11,13 +11,11 @@ using OsEngine.Market.Servers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using ContextMenu = System.Windows.Forms.ContextMenu;
-using DataGrid = System.Windows.Forms.DataGrid;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
@@ -43,11 +41,11 @@ namespace OsEngine.OsData
         /// <param name="comboBoxTimeFrame">time frame selection menu/меню выбора таймфрейма</param>
         /// <param name="rectangle">square for substrate/квадрат для подложки</param>
         public OsDataMasterPainter(OsDataMaster master,
-            WindowsFormsHost hostChart, 
+            WindowsFormsHost hostChart,
             WindowsFormsHost hostLog,
-            WindowsFormsHost hostSource, 
-            WindowsFormsHost hostSets, 
-            System.Windows.Shapes.Rectangle rectangle, 
+            WindowsFormsHost hostSource,
+            WindowsFormsHost hostSets,
+            System.Windows.Shapes.Rectangle rectangle,
             Grid greedChartPanel,
             System.Windows.Controls.Label setName,
             System.Windows.Controls.Label labelTimeStart,
@@ -131,7 +129,7 @@ namespace OsEngine.OsData
             }
 
             curPainter.StopPaint();
-            
+
         }
 
         public void StartPaintActiveSet()
@@ -143,16 +141,16 @@ namespace OsEngine.OsData
 
             OsDataSetPainter curPainter = null;
 
-            for(int i = 0;i < _painters.Count;i++)
+            for (int i = 0; i < _painters.Count; i++)
             {
-                if(_painters[i].NameSet == _master.SelectSet.SetName)
+                if (_painters[i].NameSet == _master.SelectSet.SetName)
                 {
                     curPainter = _painters[i];
                     break;
                 }
             }
 
-            if(curPainter == null)
+            if (curPainter == null)
             {
                 curPainter = new OsDataSetPainter(_master.SelectSet);
                 curPainter.NewLogMessageEvent += SendNewLogMessage;
@@ -272,7 +270,7 @@ namespace OsEngine.OsData
             colu.HeaderText = OsLocalization.Data.Label5;
             colu.ReadOnly = true;
             colu.Width = 130;
-            
+
             newGrid.Columns.Add(colu);
 
             _gridSources = newGrid;
@@ -361,7 +359,7 @@ namespace OsEngine.OsData
 
             if (ServerMaster.GetServers() == null)
             {
-                ServerMaster.CreateServer(type,false);
+                ServerMaster.CreateServer(type, false);
             }
 
             IServer server = ServerMaster.GetServers().Find(s => s.ServerType == type);
@@ -414,7 +412,7 @@ namespace OsEngine.OsData
             colu.HeaderText = OsLocalization.Data.Label5;
             colu.ReadOnly = true;
             colu.Width = 100;
-          
+
             newGrid.Columns.Add(colu);
 
             _gridset = newGrid;
@@ -504,7 +502,7 @@ namespace OsEngine.OsData
                 {
                     ChangeActivSet(_gridset.CurrentCell.RowIndex);
                 }
-                
+
                 return;
             }
 
@@ -554,7 +552,7 @@ namespace OsEngine.OsData
         /// </summary>
         void DeleteSet_Click(object sender, EventArgs e)
         {
-            if (_gridset.CurrentCell == null || 
+            if (_gridset.CurrentCell == null ||
                 _gridset.CurrentCell.RowIndex <= -1)
             {
                 return;
@@ -595,7 +593,7 @@ namespace OsEngine.OsData
                 return;
             }
 
-            if (_master.SelectSet != null && 
+            if (_master.SelectSet != null &&
                 currentSet.SetName != _master.SelectSet.SetName)
             {
                 StopPaintActiveSet();
@@ -669,9 +667,9 @@ namespace OsEngine.OsData
                 return;
             }
             _master.Sets[num].Delete();
-            _master.Sets[num].BaseSettings.Regime =  DataSetState.Off;
+            _master.Sets[num].BaseSettings.Regime = DataSetState.Off;
 
-            if(_master.SelectSet != null 
+            if (_master.SelectSet != null
                 && _master.Sets[num].SetName == _master.SelectSet.SetName)
             {
                 StopPaintActiveSet();

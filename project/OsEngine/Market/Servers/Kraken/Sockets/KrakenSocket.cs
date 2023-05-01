@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Kraken.WebSockets.Events;
+using Kraken.WebSockets.Messages;
+using Kraken.WebSockets.Sockets;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Kraken.WebSockets.Messages;
-using Newtonsoft.Json.Linq;
-using Kraken.WebSockets.Events;
-using Kraken.WebSockets.Sockets;
 
 
 namespace Kraken.WebSockets
@@ -62,7 +62,7 @@ namespace Kraken.WebSockets
         {
             try
             {
-               // logger?.LogInformation("Trying to connect to '{uri}'", uri);
+                // logger?.LogInformation("Trying to connect to '{uri}'", uri);
 
                 await webSocket.ConnectAsync(new Uri(uri), cancellationToken);
                 InvokeConnected();
@@ -89,11 +89,11 @@ namespace Kraken.WebSockets
             {
                 var jsonMessage = serializer.Serialize(message);
 
-              //  logger?.LogTrace("Trying to send: {@message}", jsonMessage);
+                //  logger?.LogTrace("Trying to send: {@message}", jsonMessage);
 
                 var messageBytes = DEFAULT_ENCODING.GetBytes(jsonMessage);
                 await webSocket.SendAsync(new ArraySegment<byte>(messageBytes), WebSocketMessageType.Text, true, cancellationToken);
-               // logger?.LogTrace("Successfully sent: {@message}", jsonMessage);
+                // logger?.LogTrace("Successfully sent: {@message}", jsonMessage);
                 return;
             }
 
@@ -123,11 +123,11 @@ namespace Kraken.WebSockets
             {
                 while (webSocket.State == WebSocketState.Open)
                 {
-                   // logger?.LogDebug("Waiting for new message");
+                    // logger?.LogDebug("Waiting for new message");
                     var message = await ReadNextMessage(cancellationToken);
 
-                   // logger?.LogDebug("Received new message from websocket");
-                   // logger?.LogTrace("Received: '{message}'", message);
+                    // logger?.LogDebug("Received new message from websocket");
+                    // logger?.LogTrace("Received: '{message}'", message);
 
                     string eventString = null;
                     int? channelId = null;
@@ -159,13 +159,13 @@ namespace Kraken.WebSockets
             }
             catch (Exception ex)
             {
-               // logger?.LogError(ex, "Error while listening or reading new messages from WebSocket");
+                // logger?.LogError(ex, "Error while listening or reading new messages from WebSocket");
                 // TODO: Disconnected-Event
                 throw;
             }
             finally
             {
-              //  logger?.LogInformation("Closing WebSocket");
+                //  logger?.LogInformation("Closing WebSocket");
                 webSocket.Dispose();
             }
         }
@@ -181,9 +181,9 @@ namespace Kraken.WebSockets
                 result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                  //  logger?.LogDebug("Closing connection to socket");
+                    //  logger?.LogDebug("Closing connection to socket");
                     await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, cancellationToken);
-                  //  logger?.LogDebug("Connection successfully closed");
+                    //  logger?.LogDebug("Connection successfully closed");
                     // TODO: Disconnected-Event
                 }
                 else

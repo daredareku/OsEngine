@@ -3,14 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using OsEngine.Charts.CandleChart.Indicators;
 using OsEngine.Entity;
-using OsEngine.Market;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.Trend
 {
@@ -34,7 +31,7 @@ namespace OsEngine.Robots.Trend
 
             Regime = CreateParameter("Regime", "Off", new[] { "Off", "On" });
             Slippage = CreateParameter("Slippage", 0, 0, 20, 1);
-            Volume= CreateParameter("Volume", 0.1m, 0.1m, 50, 0.1m);
+            Volume = CreateParameter("Volume", 0.1m, 0.1m, 50, 0.1m);
             EnvelopDeviation = CreateParameter("Envelop Deviation", 0.3m, 0.3m, 4, 0.3m);
             EnvelopMovingLength = CreateParameter("Envelop Moving Length", 10, 10, 200, 5);
             TrailStop = CreateParameter("Trail Stop", 0.1m, 0.1m, 5, 0.1m);
@@ -131,20 +128,20 @@ namespace OsEngine.Robots.Trend
                 return;
             }
 
-            if(candles.Count +5 < _envelop.MovingAverage.Lenght)
+            if (candles.Count + 5 < _envelop.MovingAverage.Lenght)
             {
                 return;
             }
 
             List<Position> positions = _tab.PositionsOpenAll;
 
-            if(positions.Count == 0)
+            if (positions.Count == 0)
             { // open logic
                 _tab.BuyAtStop(Volume.ValueDecimal,
-                    _envelop.ValuesUp[_envelop.ValuesUp.Count - 1] + 
+                    _envelop.ValuesUp[_envelop.ValuesUp.Count - 1] +
                     Slippage.ValueInt * _tab.Securiti.PriceStep,
                     _envelop.ValuesUp[_envelop.ValuesUp.Count - 1],
-                    StopActivateType.HigherOrEqual,1);
+                    StopActivateType.HigherOrEqual, 1);
 
                 _tab.SellAtStop(Volume.ValueDecimal,
                      _envelop.ValuesDown[_envelop.ValuesDown.Count - 1] -
@@ -155,12 +152,12 @@ namespace OsEngine.Robots.Trend
             else
             { // trail stop logic
 
-                if(positions[0].State != PositionStateType.Open)
+                if (positions[0].State != PositionStateType.Open)
                 {
                     return;
                 }
 
-                if(positions[0].Direction == Side.Buy)
+                if (positions[0].Direction == Side.Buy)
                 {
                     decimal activationPrice = _envelop.ValuesUp[_envelop.ValuesUp.Count - 1] -
                         _envelop.ValuesUp[_envelop.ValuesUp.Count - 1] * (TrailStop.ValueDecimal / 100);
@@ -190,7 +187,7 @@ namespace OsEngine.Robots.Trend
 
         public override void ShowIndividualSettingsDialog()
         {
-           
+
         }
 
         /// <summary>

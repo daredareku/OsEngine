@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -43,7 +43,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public PriceOscillator(string uniqName,bool canDelete)
+        public PriceOscillator(string uniqName, bool canDelete)
         {
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Line;
@@ -52,7 +52,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             PaintOn = true;
             _maShort = new MovingAverage(uniqName + "ma1", false) { Lenght = 12 };
             _maShort.Save();
-            _maLong = new MovingAverage(uniqName + "ma2",false){Lenght = 26};
+            _maLong = new MovingAverage(uniqName + "ma2", false) { Lenght = 26 };
             _maLong.Save();
             CanDelete = canDelete;
             Load();
@@ -72,7 +72,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             ColorBase = Color.DodgerBlue;
             PaintOn = true;
             TypeSerch = PriceOscillatorSerchType.Punkt;
-            _maShort = new MovingAverage(false) {Lenght = 10};
+            _maShort = new MovingAverage(false) { Lenght = 10 };
             _maLong = new MovingAverage(false) { Lenght = 20 };
             CanDelete = canDelete;
         }
@@ -423,7 +423,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             if (Values == null)
             {
                 Values = new List<decimal>();
-                Values.Add(GetValue( candles.Count - 1));
+                Values.Add(GetValue(candles.Count - 1));
             }
             else
             {
@@ -452,7 +452,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             for (int i = 0; i < candles.Count; i++)
             {
-                Values.Add(GetValue( i));
+                Values.Add(GetValue(i));
             }
         }
 
@@ -502,7 +502,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             if (TypeSerch == PriceOscillatorSerchType.Punkt)
             {
-                return Math.Round(difference,8);
+                return Math.Round(difference, 8);
             }
 
             if (TypeSerch == PriceOscillatorSerchType.Persent)

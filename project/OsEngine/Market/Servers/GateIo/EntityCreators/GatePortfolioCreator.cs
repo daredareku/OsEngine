@@ -22,7 +22,7 @@ namespace OsEngine.Market.Servers.GateIo.EntityCreators
         public List<Portfolio> CreatePortfolio(string data)
         {
             var jt = JToken.Parse(data)["datas"].Children();
-            
+
             foreach (var jtPosition in jt)
             {
                 PositionOnBoard pos = new PositionOnBoard();

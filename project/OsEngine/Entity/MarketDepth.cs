@@ -94,7 +94,7 @@ namespace OsEngine.Entity
 
             Time = Time.AddMilliseconds(Convert.ToInt32(save[2]));
 
-            
+
             string[] bids = save[3].Split('*');
 
             Asks = new List<MarketDepthLevel>();
@@ -145,7 +145,7 @@ namespace OsEngine.Entity
             result += Time.ToString("yyyyMMdd_HHmmss") + "_";
 
 
-            result += Time.Millisecond + "_"; 
+            result += Time.Millisecond + "_";
 
             for (int i = 0; i < Asks.Count && i < depth; i++)
             {

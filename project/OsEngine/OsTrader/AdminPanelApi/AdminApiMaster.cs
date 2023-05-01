@@ -23,17 +23,17 @@ namespace OsEngine.OsTrader.AdminPanelApi
         private Counter _counter = new Counter();
 
         private TcpServer _apiServer;
-        
+
         public AdminApiMaster(OsTraderMaster traderMaster)
         {
-            if(traderMaster._startProgram != StartProgram.IsOsTrader)
+            if (traderMaster._startProgram != StartProgram.IsOsTrader)
             {
                 return;
             }
 
             _traderMaster = traderMaster;
             PrimeSettingsMaster.ApiState = ApiState.Off;
-            ServerMaster.ServerCreateEvent += ServerMasterOnServerCreateEvent; 
+            ServerMaster.ServerCreateEvent += ServerMasterOnServerCreateEvent;
             StartApi();
             _counter.Start();
 
@@ -48,7 +48,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
                         SendCounter();
                         SendPortfolios();
                         SendServers();
-                        
+
                         if (_traderMaster.PanelsArray != null)
                         {
                             SendBotList();
@@ -91,7 +91,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
 
         private void ServerMasterOnServerCreateEvent(IServer server)
         {
-            if(server.ServerType == ServerType.Optimizer)
+            if (server.ServerType == ServerType.Optimizer)
             {
                 return;
             }
@@ -326,7 +326,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
 
                 foreach (var positionOnBoard in positionsOnBoard)
                 {
-                    if (positionOnBoard.ValueBegin != 0 || positionOnBoard.ValueCurrent !=0 || positionOnBoard.ValueBlocked != 0)
+                    if (positionOnBoard.ValueBegin != 0 || positionOnBoard.ValueCurrent != 0 || positionOnBoard.ValueBlocked != 0)
                     {
                         JsonObject jPosition = new JsonObject();
                         jPosition.Add(nameof(positionOnBoard.PortfolioName), positionOnBoard.PortfolioName);
@@ -343,7 +343,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
                     jPortfolio.Add("PositionsOnBoard", jPositions);
                 }
             }
-            
+
             return jPortfolio;
         }
 
@@ -388,7 +388,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
             }
 
             jParams.Add("Params", paramsList);
-            
+
             return jParams;
         }
 
@@ -418,7 +418,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
             jLog.Add("NettoCount", lots);
 
             jLog.Add("EventSendTime", DateTime.Now.ToString(CultureInfo.InvariantCulture));
-            
+
             return jLog;
         }
 

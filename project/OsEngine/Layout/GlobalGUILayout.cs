@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using System;
 using System.Collections.Generic;
-using System.Threading;
-using OsEngine.Entity;
 using System.IO;
+using System.Threading;
 
 namespace OsEngine.Layout
 {
@@ -19,7 +19,7 @@ namespace OsEngine.Layout
                     _isFirstTime = false;
                     Load();
 
-                    if(ScreenSettingsIsAllRigth() == false)
+                    if (ScreenSettingsIsAllRigth() == false)
                     {
                         UiOpenWindows = new List<OpenWindow>();
                     }
@@ -48,10 +48,10 @@ namespace OsEngine.Layout
 
             SetLayoutFromWindow(ui, window);
 
-            lock(_lockerArrayWithWindows)
+            lock (_lockerArrayWithWindows)
             {
                 UiOpenWindows.Add(window);
-                if(_isFirstTime == true)
+                if (_isFirstTime == true)
                 {
                     _isFirstTime = false;
                     Load();
@@ -59,7 +59,7 @@ namespace OsEngine.Layout
                 _neadToSave = true;
             }
 
-            SubscribeEvents(ui, name);           
+            SubscribeEvents(ui, name);
         }
 
         private static string _lockerArrayWithWindows = "openUiLocker";
@@ -115,7 +115,7 @@ namespace OsEngine.Layout
 
         private static void SetLayoutFromWindow(System.Windows.Window ui, OpenWindow windowLayout)
         {
-            if(windowLayout.WindowCreateTime.AddSeconds(1) > DateTime.Now)
+            if (windowLayout.WindowCreateTime.AddSeconds(1) > DateTime.Now)
             {
                 SetLayoutInWindow(ui, windowLayout.Layout);
                 return;
@@ -148,12 +148,12 @@ namespace OsEngine.Layout
             else
             {
                 windowLayout.Layout.IsExpand = false;
-            }			
+            }
         }
 
         private static void SetLayoutInWindow(System.Windows.Window ui, OpenWindowLayout layout)
         {
-            if(layout.Height == 0 ||
+            if (layout.Height == 0 ||
                 layout.Widht == 0 ||
                 layout.Left == 0 ||
                 layout.Top == 0)
@@ -178,7 +178,7 @@ namespace OsEngine.Layout
             if (layout.Height < 0 || layout.Widht < 0)
             {
                 return;
-            }           
+            }
 
             if (layout.IsExpand == true)
             {
@@ -201,16 +201,16 @@ namespace OsEngine.Layout
 
         private static void SaveWorkerPlace()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(1000);
 
-                if(_neadToSave == false)
+                if (_neadToSave == false)
                 {
                     continue;
                 }
 
-                if(IsClosed)
+                if (IsClosed)
                 {
                     return;
                 }
@@ -225,7 +225,7 @@ namespace OsEngine.Layout
             {
                 using (StreamWriter writer = new StreamWriter(@"Engine\LayoutGui.txt", false))
                 {
-                    for(int i = 0;i < UiOpenWindows.Count;i++)
+                    for (int i = 0; i < UiOpenWindows.Count; i++)
                     {
                         if (UiOpenWindows[i].Layout.Height == 0 ||
                             UiOpenWindows[i].Layout.Widht == 0 ||
@@ -246,7 +246,7 @@ namespace OsEngine.Layout
                         {
                             continue;
                         }
-                        
+
                         writer.WriteLine(UiOpenWindows[i].GetSaveString());
                     }
 
@@ -270,11 +270,11 @@ namespace OsEngine.Layout
             {
                 using (StreamReader reader = new StreamReader(@"Engine\LayoutGui.txt"))
                 {
-                    while(reader.EndOfStream == false)
+                    while (reader.EndOfStream == false)
                     {
                         string res = reader.ReadLine();
 
-                        if(string.IsNullOrEmpty(res))
+                        if (string.IsNullOrEmpty(res))
                         {
                             return;
                         }
@@ -327,7 +327,7 @@ namespace OsEngine.Layout
                 // ignore
             }
 
-            if(widthCur != widthOld ||
+            if (widthCur != widthOld ||
                 heightCur != heightOld ||
                 monitorCountCur != monitorCountOld)
             {
@@ -404,7 +404,7 @@ namespace OsEngine.Layout
         public decimal Widht;
 
         public decimal Height;
-		
+
         public bool IsExpand;    // является ли окно развернутым		
     }
 }

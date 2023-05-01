@@ -3,9 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -32,7 +32,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// конструктор
         /// </summary>
         /// <param name="fractail">configuration indicator/индикатор для настройки</param>
-        public FractalUi(Fractal fractail) 
+        public FractalUi(Fractal fractail)
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);

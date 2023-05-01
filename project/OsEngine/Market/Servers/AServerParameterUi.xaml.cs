@@ -3,15 +3,14 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Market.Servers.Entity;
-using Color = System.Drawing.Color;
 
 namespace OsEngine.Market.Servers
 {
@@ -66,7 +65,7 @@ namespace OsEngine.Market.Servers
             DataGridFactory.ClearLinks(_paramsGrid);
             _paramsGrid = null;
 
-          
+
         }
 
         private void AServerParameterUi_Closed(object sender, EventArgs e)
@@ -85,7 +84,7 @@ namespace OsEngine.Market.Servers
                     return;
                 }
 
-                if(_server == null)
+                if (_server == null)
                 {
                     return;
                 }

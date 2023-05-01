@@ -66,7 +66,7 @@ namespace OsEngine.Language
 
         public string Label7 => OsLocalization.ConvertToLocString(
             "Eng:Security_" +
-            "Ru:Инструмент_"); 
+            "Ru:Инструмент_");
 
         public string Label8 => OsLocalization.ConvertToLocString(
             "Eng:From what we collect candles_" +

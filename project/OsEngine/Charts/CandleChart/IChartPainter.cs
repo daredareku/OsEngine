@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.Integration;
-using OsEngine.Alerts;
+﻿using OsEngine.Alerts;
 using OsEngine.Charts.CandleChart.Elements;
 using OsEngine.Charts.ColorKeeper;
 using OsEngine.Entity;
 using OsEngine.Indicators;
 using OsEngine.Logging;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.Integration;
 using Grid = System.Windows.Controls.Grid;
 
 namespace OsEngine.Charts.CandleChart
@@ -30,7 +30,7 @@ namespace OsEngine.Charts.CandleChart
         /// начать прорисовку графика
         /// </summary>
         void StartPaintPrimeChart(Grid gridChart, WindowsFormsHost host, System.Windows.Shapes.Rectangle rectangle);
-        
+
         /// <summary>
         /// Stop drawing chart
         /// остановить прорисовку графика

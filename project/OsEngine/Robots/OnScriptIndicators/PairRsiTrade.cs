@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Pair trading based on the RSI indicator
@@ -25,16 +25,16 @@ public class PairRsiTrade : BotPanel
         Volume1 = CreateParameter("Volume 1", 1, 1.0m, 50, 1);
         Volume2 = CreateParameter("Volume 2", 1, 1.0m, 50, 1);
 
-        RsiSpread = CreateParameter("Spread to Rsi", 10, 5.0m, 50, 2,"Indicators");
+        RsiSpread = CreateParameter("Spread to Rsi", 10, 5.0m, 50, 2, "Indicators");
         RsiOnePeriod = CreateParameter("Rsi One period", 14, 5, 50, 2, "Indicators");
         RsiTwoPeriod = CreateParameter("Rsi Two period", 14, 5, 50, 2, "Indicators");
 
-        _rsi1 = IndicatorsFactory.CreateIndicatorByName("RSI",name + "RSI1", false);
+        _rsi1 = IndicatorsFactory.CreateIndicatorByName("RSI", name + "RSI1", false);
         _rsi1.ParametersDigit[0].Value = RsiOnePeriod.ValueInt;
         _rsi1 = (Aindicator)_tab1.CreateCandleIndicator(_rsi1, "Rsi1_Area");
         _rsi1.Save();
 
-        _rsi2 = IndicatorsFactory.CreateIndicatorByName("RSI",name + "RSI2", false);
+        _rsi2 = IndicatorsFactory.CreateIndicatorByName("RSI", name + "RSI2", false);
         _rsi2.ParametersDigit[0].Value = RsiTwoPeriod.ValueInt;
         _rsi2 = (Aindicator)_tab2.CreateCandleIndicator(_rsi2, "Rsi2_Area");
         _rsi2.Save();
@@ -177,7 +177,7 @@ public class PairRsiTrade : BotPanel
             return;
         }
 
-        if (_rsi1.DataSeries[0].Values.Count < _rsi1.ParametersDigit[0].Value + 3 
+        if (_rsi1.DataSeries[0].Values.Count < _rsi1.ParametersDigit[0].Value + 3
             || _rsi2.DataSeries[0].Values.Count < _rsi2.ParametersDigit[0].Value + 3)
         {
             return;

@@ -3,12 +3,9 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OsEngine.Market;
-using OsEngine.Market.Servers.Tester;
 
 namespace OsEngine.Entity
 {
@@ -75,7 +72,7 @@ namespace OsEngine.Entity
         {
             get
             {
-                string _specification 
+                string _specification
                     = Security.NameFull + "_" + TimeFrameBuilder.Specification;
 
                 _specification =
@@ -182,7 +179,7 @@ namespace OsEngine.Entity
         {
             _lastTradeIndex = 0;
 
-            if(CandlesAll != null)
+            if (CandlesAll != null)
             {
                 CandlesAll.Clear();
                 CandlesAll = null;
@@ -223,7 +220,7 @@ namespace OsEngine.Entity
                 (
                     (lastCandle.TimeStart.Add(TimeFrameSpan) < time.AddSeconds(-5))
                     ||
-                    (TimeFrame == TimeFrame.Day 
+                    (TimeFrame == TimeFrame.Day
                      && lastCandle.TimeStart.Date < time.Date)
                 )
                 &&
@@ -265,7 +262,7 @@ namespace OsEngine.Entity
             {
                 Trade lastTrade = trades[trades.Count - 1];
 
-                if(lastTrade == null)
+                if (lastTrade == null)
                 {
                     return;
                 }
@@ -282,7 +279,7 @@ namespace OsEngine.Entity
 
             List<Trade> newTrades = GetActualTrades(trades);
 
-            if(newTrades == null)
+            if (newTrades == null)
             {
                 return;
             }
@@ -303,7 +300,7 @@ namespace OsEngine.Entity
                     continue;
                 }
 
-                if(TimeFrameBuilder.CandleCreateMethodType == CandleCreateMethodType.Simple)
+                if (TimeFrameBuilder.CandleCreateMethodType == CandleCreateMethodType.Simple)
                 { // при классической сборке свечек. Когда мы точно знаем когда у свечи закрытие
                     bool saveInNextCandle = true;
 
@@ -381,14 +378,14 @@ namespace OsEngine.Entity
                             }
                             if (trades[i].Time == _lastTradeTime)
                             {
-                                if(string.IsNullOrEmpty(trades[i].Id))
+                                if (string.IsNullOrEmpty(trades[i].Id))
                                 {
                                     // если IDшников нет - просто игнорируем трейды с идентичным временем
                                     continue;
                                 }
                                 else
                                 {
-                                    if(IsInArrayTradeIds(trades[i].Id))
+                                    if (IsInArrayTradeIds(trades[i].Id))
                                     {// если IDшник в последних 100 трейдах
                                         continue;
                                     }
@@ -417,7 +414,7 @@ namespace OsEngine.Entity
                 if (string.IsNullOrEmpty(newTrades[i2].Id) == false)
                 {
                     AddInListTradeIds(newTrades[i2].Id);
-                } 
+                }
             }
 
             if (newTrades.Count == 0)
@@ -426,7 +423,7 @@ namespace OsEngine.Entity
             }
 
             _lastTradeTime = newTrades[newTrades.Count - 1].Time;
-            
+
             return newTrades;
         }
 
@@ -436,7 +433,7 @@ namespace OsEngine.Entity
         {
             _lastTradeIds.Add(id);
 
-            if(_lastTradeIds.Count > 50)
+            if (_lastTradeIds.Count > 50)
             {
                 _lastTradeIds.RemoveAt(0);
             }
@@ -446,9 +443,9 @@ namespace OsEngine.Entity
         {
             bool isInArray = false;
 
-            for(int i = 0;i < _lastTradeIds.Count;i++)
+            for (int i = 0; i < _lastTradeIds.Count; i++)
             {
-                if(_lastTradeIds[i].Equals(id))
+                if (_lastTradeIds[i].Equals(id))
                 {
                     return true;
                 }
@@ -991,9 +988,9 @@ namespace OsEngine.Entity
         /// </summary>
         private void UpDateSimpleTimeFrame(DateTime time, decimal price, decimal volume, bool canPushUp)
         {
-            if (CandlesAll != null 
-                && CandlesAll.Count > 0 
-                && CandlesAll[CandlesAll.Count - 1] != null 
+            if (CandlesAll != null
+                && CandlesAll.Count > 0
+                && CandlesAll[CandlesAll.Count - 1] != null
                 &&
                 CandlesAll[CandlesAll.Count - 1].TimeStart > time)
             {

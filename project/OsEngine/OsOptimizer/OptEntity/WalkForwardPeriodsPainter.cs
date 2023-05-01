@@ -3,12 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.ColorKeeper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.Integration;
-using OsEngine.Charts.ColorKeeper;
 using Color = System.Drawing.Color;
 
 namespace OsEngine.OsOptimizer.OptEntity
@@ -103,11 +103,11 @@ namespace OsEngine.OsOptimizer.OptEntity
 
             ChartMasterColorKeeper _colorKeeper = new ChartMasterColorKeeper("walkForward");
 
-            Series candleSeries = FindSeriesByNameSafe("SeriesCluster",_chart);
+            Series candleSeries = FindSeriesByNameSafe("SeriesCluster", _chart);
 
             DateTime firstTime = fazes[0].TimeStart;
 
-            for (int i = 0,j = fazes.Count;i < fazes.Count;i++,j--)
+            for (int i = 0, j = fazes.Count; i < fazes.Count; i++, j--)
             {
                 decimal linePriceX = j;
 
@@ -130,26 +130,26 @@ namespace OsEngine.OsOptimizer.OptEntity
                     myPoint.BackSecondaryColor = Color.Green;
                 }
 
-                PaintSeriesSafe(candleSeries,_chart);
+                PaintSeriesSafe(candleSeries, _chart);
 
             }
         }
 
-        private static void PaintSeriesSafe(Series series,Chart _chart)
+        private static void PaintSeriesSafe(Series series, Chart _chart)
         {
             try
             {
 
-                    for (int i = 0; i < _chart.Series.Count; i++)
+                for (int i = 0; i < _chart.Series.Count; i++)
+                {
+                    if (series.Name == _chart.Series[i].Name)
                     {
-                        if (series.Name == _chart.Series[i].Name)
-                        {
-                            _chart.Series.Remove(FindSeriesByNameSafe(series.Name,_chart));
-                            _chart.Series.Insert(i, series);
-                            break;
-                        }
+                        _chart.Series.Remove(FindSeriesByNameSafe(series.Name, _chart));
+                        _chart.Series.Insert(i, series);
+                        break;
                     }
-                
+                }
+
             }
             catch (Exception error)
             {

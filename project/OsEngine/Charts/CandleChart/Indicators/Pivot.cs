@@ -3,16 +3,16 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
-    public class Pivot: IIndicator
+    public class Pivot : IIndicator
     {
         /// <summary>
         /// constructor with parameters. Indicator will be saved
@@ -142,14 +142,14 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// first resistance
         ///   первое сопротивление
         /// </summary> 
-        public List<decimal> ValuesR1 
+        public List<decimal> ValuesR1
         { get; set; }
 
         /// <summary>
         /// first support
         /// первая поддержка
         /// </summary>
-        public List<decimal> ValuesS1 
+        public List<decimal> ValuesS1
         { get; set; }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
                     writer.WriteLine(ColorS1);
                     writer.WriteLine(ColorS2);
-                    writer.WriteLine( ColorS3);
+                    writer.WriteLine(ColorS3);
                     writer.WriteLine(ColorS4);
 
                     writer.WriteLine(ColorR1);
@@ -328,7 +328,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
                     PaintOn = Convert.ToBoolean(reader.ReadLine());
                     MovingAverageTypeCalculation type;
-                    Enum.TryParse(reader.ReadLine(), true,out type);
+                    Enum.TryParse(reader.ReadLine(), true, out type);
 
 
                     reader.Close();

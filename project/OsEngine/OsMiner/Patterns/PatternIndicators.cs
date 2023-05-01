@@ -3,12 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using OsEngine.Charts.CandleChart.Indicators;
 using OsEngine.Entity;
 using OsEngine.Indicators;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 
 namespace OsEngine.OsMiner.Patterns
@@ -91,7 +91,7 @@ namespace OsEngine.OsMiner.Patterns
                 return false;
             }
 
-            if (numberPattern - Length - 2 <=0)
+            if (numberPattern - Length - 2 <= 0)
             {
                 return false;
             }
@@ -118,7 +118,7 @@ namespace OsEngine.OsMiner.Patterns
             {
                 for (int i = 0; i < SequenceCandlePosition.Length; i++)
                 {
-                    for (int i2 = 0; i2 < SequenceCandlePosition[0].Length; i2 ++)
+                    for (int i2 = 0; i2 < SequenceCandlePosition[0].Length; i2++)
                     {
                         if (SequenceCandlePosition[i][i2] != tempIndicators.SequenceCandlePosition[i][i2])
                         {
@@ -132,7 +132,7 @@ namespace OsEngine.OsMiner.Patterns
             {
                 decimal[][] sequence = tempIndicators.Sequence;
 
-                if (sequence == null || 
+                if (sequence == null ||
                     sequence.Length == 0 ||
                     sequence.Length != Sequence.Length ||
                     sequence[0].Length != Sequence[0].Length)
@@ -202,7 +202,7 @@ namespace OsEngine.OsMiner.Patterns
 
             for (int indexIndicator = 0; indexIndicator < valuesToChart.Count; indexIndicator++)
             {
-                for (int i2 = numberPattern - Length, i3 = 0; i2 < numberPattern; i2++,i3++)
+                for (int i2 = numberPattern - Length, i3 = 0; i2 < numberPattern; i2++, i3++)
                 {
                     decimal candleClose = candles[i2].Close;
 
@@ -221,14 +221,14 @@ namespace OsEngine.OsMiner.Patterns
 
             for (int i = 0; i < Sequence.Length; i++)
             {
-                Sequence[i] = new decimal[Length*2];
+                Sequence[i] = new decimal[Length * 2];
             }
 
             Indicators = new List<IIndicator>();
 
             //Variable activation/Активация переменных
-            decimal thisExpand = (100 - Expand)/100;
-            decimal divider = valuesToChart[0][numberPattern]/100;
+            decimal thisExpand = (100 - Expand) / 100;
+            decimal divider = valuesToChart[0][numberPattern] / 100;
             // divider, applied in the whole calculation, measured once. Shows how much one percent of the first entry weighs.
             // делитель, применяется во всём вычислении, измеряется один раз. Показывает сколько весит один процент первого входа
 
@@ -248,7 +248,7 @@ namespace OsEngine.OsMiner.Patterns
                 for (int i2 = numberPattern - Length, i3 = 0; i2 < numberPattern; i2++)
                 {
                     lockal = valuesToChart[indexIndicator][i2] / divider; // может быть плюс i????
-                    Sequence[indexIndicator][i3] = lockal + lockal*thisExpand;
+                    Sequence[indexIndicator][i3] = lockal + lockal * thisExpand;
                     i3++;
                     Sequence[indexIndicator][i3] = lockal - lockal * thisExpand;
                     i3++;
@@ -287,7 +287,7 @@ namespace OsEngine.OsMiner.Patterns
 
                 for (int i2 = 0; i2 < Sequence[i].Length; i2 += 2)
                 {
-                    newMoving.Values.Add((Sequence[i][i2] + Sequence[i][i2+1]) / 2);
+                    newMoving.Values.Add((Sequence[i][i2] + Sequence[i][i2 + 1]) / 2);
                 }
                 Indicators.Add(newMoving);
             }
@@ -344,14 +344,14 @@ namespace OsEngine.OsMiner.Patterns
 
         private decimal[][] GetSequenceFromString(string str)
         {
-            string [] seqFirst = str.Split(')');
+            string[] seqFirst = str.Split(')');
 
             decimal[][] sequence = new decimal[seqFirst.Length][];
 
             for (int i = 0; i < sequence.Length; i++)
             {
                 string[] seqSec = seqFirst[i].Split(';');
-                sequence[i] = new decimal[seqSec.Length-1];
+                sequence[i] = new decimal[seqSec.Length - 1];
 
                 for (int i2 = 0; i2 < seqSec.Length - 1; i2++)
                 {

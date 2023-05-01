@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -112,7 +112,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <summary>
         /// Adx
         /// </summary>
-        public List<decimal> Values 
+        public List<decimal> Values
         { get; set; }
 
         public List<decimal> ValuesDiPlus
@@ -344,7 +344,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             for (int i = 0; i < candles.Count; i++)
             {
-                 Values.Add(GetValueStandart(candles, i));
+                Values.Add(GetValueStandart(candles, i));
             }
         }
 
@@ -415,7 +415,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="candles">candles/свечи</param>
         /// <param name="index">index for which value is required/индекс по которому нужно значение</param>
         /// <returns>indicator value/значение индикатора</returns>
-        public decimal GetValueStandart(List<Candle> candles, int index) 
+        public decimal GetValueStandart(List<Candle> candles, int index)
         {
             if (index == 0)
             {
@@ -425,7 +425,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 _sDIjPlus = null;
                 _sDIjMinus = null;
                 _dX = null;
-                _adX = null; 
+                _adX = null;
             }
             // 1 counting new directional movements
             // 1 рассчитываем новые направленные движения
@@ -464,7 +464,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 // calculating
                 // рассчитываем
                 _adX = MovingAverageWild(_dX, _adX, Lenght, index);
-                return Math.Round(_adX[_adX.Count - 1],4);
+                return Math.Round(_adX[_adX.Count - 1], 4);
             }
         }
 
@@ -495,7 +495,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 _dmjPlus[_dmjPlus.Count - 1] = candles[index].High - candles[index - 1].High;
             }
 
-            if (candles[index].Low <= candles[index-1].Low
+            if (candles[index].Low <= candles[index - 1].Low
                 &&
                 candles[index].High - candles[index - 1].High <= candles[index - 1].Low - candles[index].Low
                 )
@@ -526,10 +526,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             decimal hiToLow = Math.Abs(candles[index].High - candles[index].Low);
-            decimal closeToHigh = Math.Abs(candles[index-1].Close - candles[index].High);
+            decimal closeToHigh = Math.Abs(candles[index - 1].Close - candles[index].High);
             decimal closeToLow = Math.Abs(candles[index - 1].Close - candles[index].Low);
 
-            _trueRange[_trueRange.Count-1] = Math.Max(Math.Max(hiToLow,closeToHigh),closeToLow);
+            _trueRange[_trueRange.Count - 1] = Math.Max(Math.Max(hiToLow, closeToHigh), closeToLow);
         }
 
         private void SdijReload(int index)
@@ -569,7 +569,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
             else
             {
-                _sDIjPlus[_sDIjPlus.Count - 1] = Math.Round(100 *dmjiPlus / trueRange,0);
+                _sDIjPlus[_sDIjPlus.Count - 1] = Math.Round(100 * dmjiPlus / trueRange, 0);
                 _sDIjMinus[_sDIjMinus.Count - 1] = Math.Round(100 * dmjiMinus / trueRange, 0);
             }
         }
@@ -621,7 +621,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     lastValueMoving = moving[moving.Count - 2];
                 }
 
-                moving[moving.Count - 1] = (lastValueMoving * (Lenght - 1) + lastValueSeries)/Lenght;
+                moving[moving.Count - 1] = (lastValueMoving * (Lenght - 1) + lastValueSeries) / Lenght;
 
             }
 
@@ -651,7 +651,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 _dX[_dX.Count - 1] = Math.Round((100 * Math.Abs(_sDIjPlus[_sDIjPlus.Count - 1] - _sDIjMinus[_sDIjMinus.Count - 1])) /
                                      Math.Abs(_sDIjPlus[_sDIjPlus.Count - 1] + _sDIjMinus[_sDIjMinus.Count - 1]));
-                
+
             }
         }
 

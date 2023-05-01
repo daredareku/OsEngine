@@ -3,13 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using OsEngine.Entity;
-using OsEngine.Logging;
 
 namespace OsEngine.Market.Servers.AstsBridge
 {
@@ -21,8 +21,8 @@ namespace OsEngine.Market.Servers.AstsBridge
     public class AstsBridgeWrapper
     {
 
-// PART ONE. Managment version mtesrl.dll
-// ЧАСТЬ ПЕРВАЯ. Managment версия mtesrl.dll
+        // PART ONE. Managment version mtesrl.dll
+        // ЧАСТЬ ПЕРВАЯ. Managment версия mtesrl.dll
 
         /// <summary>
         /// connecto to AstsBrige
@@ -31,7 +31,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <param name="paramsString"> string with parameters / строка с параметрами </param>
         /// <param name="errorString"> the variable in which the error code will be written if something goes wrong / переменная в которую будет записан код ошибки если что-то пойдёт не так</param>
         /// <returns>Connection descriptor or error code (negative value) if something went wrong / Дескриптор соединения или код ошибки(отрицательное значение) если что-то пошло не так</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEConnect", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEConnect",
             CallingConvention = CallingConvention.StdCall)]
         private static extern int MteConnect(
              StringBuilder paramsString,
@@ -43,7 +43,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// </summary>
         /// <param name="procNum">number of connect / номер коннекта</param>
         /// <returns>Status: 0 - enabled and running, else error code / Статус: 0 - включен и работает. Остальное код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEConnectionStatus", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEConnectionStatus",
             CallingConvention = CallingConvention.StdCall)]
         private static extern int MTEConnectionStatus(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum);
@@ -53,7 +53,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// Отключиться от AstsBrige
         /// </summary>
         /// <returns>result of execution. 0 - OK, else error code / результат выполнения. 0 - ОК. Остальное код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEDisconnect", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEDisconnect",
             CallingConvention = CallingConvention.StdCall)]
         private static extern int MteDisconnect(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum);
@@ -63,7 +63,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// Запросить спецификацию ошибки
         /// </summary>
         /// <returns>result of execution. 0 - OK, else error code / результат выполнения. 0 - ОК. Остальное код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEErrorMsg", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEErrorMsg",
             CallingConvention = CallingConvention.StdCall)]
         private static extern IntPtr MteErrorMsg(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum);
@@ -95,7 +95,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <param name="version">number of requested structures / номер запрашиваемых структур</param>
         /// <param name="msg"> variable for request result / переменная в которую будет записан результат запроса</param>
         /// <returns> if less 0, then returns error code / если меньше 0, то код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEStructureEx", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEStructureEx",
             CallingConvention = CallingConvention.StdCall)]
         private static unsafe extern int MteStructureEx(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum,
@@ -111,7 +111,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <param name="userId">field for entering the table identifier(created by the user)/поле для ввода идентификатра таблицы(придумывается пользователем) 
         /// which is then passed to memory at the beginning of this table / которая потом передатся в память в начале этой таблицы</param>
         /// <returns>0 - everything is OK. Else returns error code/0 - всё ок. Всё остальное код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTEAddTable", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTEAddTable",
             CallingConvention = CallingConvention.StdCall)]
         private static extern int MteAddTableInQueueOnRefresh(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum,
@@ -125,7 +125,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <param name="procNum">connection descriptor is issued by MteConnect/дескриптор соединения выданный MteConnect</param>
         /// <param name="msg">request result / результат запросов</param>
         /// <returns>0 - everything is OK. Else returns error code / 0 - всё ок. Всё остальное код ошибки. если пришла ошибка, то msg содержит её спецификацию</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTERefresh", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTERefresh",
             CallingConvention = CallingConvention.StdCall)]
         private static unsafe extern int MteRefresh(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum,
@@ -138,7 +138,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <param name="procNum">connection descriptor is issued by MteConnect/дескриптор соединения выданный MteConnect</param>
         /// <param name="tabNum">table descriptor / дескриптор таблицы</param>
         /// <returns>0 - everything is OK. Else returns error code / 0 - всё ок. Всё остальное код ошибки</returns>
-        [DllImport("mtesrl64.dll", EntryPoint = "MTECloseTable", 
+        [DllImport("mtesrl64.dll", EntryPoint = "MTECloseTable",
             CallingConvention = CallingConvention.StdCall)]
         private static extern int MteCloseTable(
             [param: MarshalAs(UnmanagedType.I4)] Int32 procNum,
@@ -232,9 +232,9 @@ namespace OsEngine.Market.Servers.AstsBridge
             {
                 StringBuilder stringBuilder = new StringBuilder(256);
 
-              int result = MteConnect(startParam, stringBuilder);
+                int result = MteConnect(startParam, stringBuilder);
 
-              if (result >= 0)
+                if (result >= 0)
                 {
                     _isConnected = true;
 
@@ -270,7 +270,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         {
             if (IsConnected)
             {
-              int result =  MteDisconnect(_procNum);
+                int result = MteDisconnect(_procNum);
 
                 _isConnected = false;
                 _procNum = -1;
@@ -318,8 +318,8 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// </summary>
         private List<AstsTransaction> _transactionStruct;
 
-// get data structure
-// принимаем структуры данных
+        // get data structure
+        // принимаем структуры данных
 
         /// <summary>
         /// request data structure for tables
@@ -356,22 +356,22 @@ namespace OsEngine.Market.Servers.AstsBridge
                 int sdvig = 0;
 
                 int[] lenghtFull = new int[1];
-                Marshal.Copy(IntPtr.Add(new IntPtr(ptrOnTable),  sdvig), lenghtFull, 0, 1);
+                Marshal.Copy(IntPtr.Add(new IntPtr(ptrOnTable), sdvig), lenghtFull, 0, 1);
 
                 ptrOnTable += 1; // shift to the length to int / сдвигаем на длинну длинны инта
 
-                string intrFase = GetString(ptrOnTable,out ptrOnTable, sdvig, out sdvig);
+                string intrFase = GetString(ptrOnTable, out ptrOnTable, sdvig, out sdvig);
 
 
                 string intrFaseHader = GetString(ptrOnTable, out ptrOnTable, sdvig, out sdvig);
 
-                _typesStruct = GetAllTypes(ptrOnTable, out ptrOnTable, sdvig, out  sdvig);
+                _typesStruct = GetAllTypes(ptrOnTable, out ptrOnTable, sdvig, out sdvig);
 
-                _tablesStruct = GetAllTables(ptrOnTable, out ptrOnTable, sdvig, out  sdvig);
+                _tablesStruct = GetAllTables(ptrOnTable, out ptrOnTable, sdvig, out sdvig);
 
                 List<AstsTable> table = _tablesStruct.FindAll(t => t.Header == "Обязательства и требования по активам");
 
-                _transactionStruct = GetAllTrans(ptrOnTable, out ptrOnTable, sdvig, out  sdvig);
+                _transactionStruct = GetAllTrans(ptrOnTable, out ptrOnTable, sdvig, out sdvig);
 
                 // string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptrOnTable), sdvig), 400);
 
@@ -406,7 +406,7 @@ namespace OsEngine.Market.Servers.AstsBridge
 
             for (int i = 0; i < typesCount; i++)
             {
-                types.Add(GetOneType(ptr, out ptr, sdvig, out  sdvig));
+                types.Add(GetOneType(ptr, out ptr, sdvig, out sdvig));
             }
 
             newPtr = ptr;
@@ -435,7 +435,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             int numType = GetInt(ptr, out ptr, sdvig);
             if (numType == 0)
             {
-                type.Type  = AstsEnumKind.EkCheck;
+                type.Type = AstsEnumKind.EkCheck;
             }
             else if (numType == 1)
             {
@@ -449,7 +449,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             int constCount = GetInt(ptr, out ptr, sdvig);
 
             type.Consts = new List<AstsEnumConst>();
-            
+
             for (int i = 0; i < constCount; i++)
             {
                 AstsEnumConst newConst = new AstsEnumConst();
@@ -479,10 +479,10 @@ namespace OsEngine.Market.Servers.AstsBridge
             int tableCount = GetInt(ptr, out ptr, sdvig);
 
             List<AstsTable> tables = new List<AstsTable>();
-           
+
             for (int i = 0; i < tableCount; i++)
             {
-                tables.Add(GetOneTable(ptr, out ptr, sdvig, out  sdvig));
+                tables.Add(GetOneTable(ptr, out ptr, sdvig, out sdvig));
             }
 
             newPtr = ptr;
@@ -509,7 +509,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             table.IndexInSystem = GetInt(ptr, out ptr, sdvig);
 
             int numType = GetInt(ptr, out ptr, sdvig);
-            if (numType ==1)
+            if (numType == 1)
             {
                 table.Flag = AstsTableFlags.TfUpdateable;
             }
@@ -522,8 +522,8 @@ namespace OsEngine.Market.Servers.AstsBridge
                 table.Flag = AstsTableFlags.TfOrderbook;
             }
 
-            table.FieldsIn = GetTableFields(ptr, out ptr, sdvig, out sdvig,true);
-            table.FieldsOut = GetTableFields(ptr, out ptr, sdvig, out sdvig,false);
+            table.FieldsIn = GetTableFields(ptr, out ptr, sdvig, out sdvig, true);
+            table.FieldsOut = GetTableFields(ptr, out ptr, sdvig, out sdvig, false);
 
             newPtr = ptr;
             newSdvig = sdvig;
@@ -542,26 +542,26 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// <returns>table fields/поля таблицы</returns>
         private unsafe List<AstsTableField> GetTableFields(int* ptr, out int* newPtr, int sdvig, out int newSdvig, bool neadDefoltValue)
         {
-            
+
             int count = GetInt(ptr, out ptr, sdvig);
 
             List<AstsTableField> fields = new List<AstsTableField>();
-            
+
             for (int i = 0; i < count; i++)
             {
                 AstsTableField field = new AstsTableField();
                 field.Name = GetString(ptr, out ptr, sdvig, out sdvig);
-                
+
                 field.Header = GetString(ptr, out ptr, sdvig, out sdvig);
                 field.Description = GetString(ptr, out ptr, sdvig, out sdvig);
-                
+
                 field.Lenght = GetInt(ptr, out ptr, sdvig);
 
                 int type = GetInt(ptr, out ptr, sdvig);
 
                 if (type == 0)
                 {
-                     field.FieldType = AstsTableFieldType.FtChar;
+                    field.FieldType = AstsTableFieldType.FtChar;
                 }
                 else if (type == 1)
                 {
@@ -635,11 +635,11 @@ namespace OsEngine.Market.Servers.AstsBridge
         {
             int count = GetInt(ptr, out ptr, sdvig);
 
-            List<AstsTransaction> transactions= new List<AstsTransaction>();
+            List<AstsTransaction> transactions = new List<AstsTransaction>();
 
             for (int i = 0; i < count; i++)
             {
-                transactions.Add(GetOneTrans(ptr, out ptr, sdvig, out  sdvig));
+                transactions.Add(GetOneTrans(ptr, out ptr, sdvig, out sdvig));
             }
 
             newPtr = ptr;
@@ -665,7 +665,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             type.Description = GetString(ptr, out ptr, sdvig, out sdvig);
             type.IndexInSystem = GetInt(ptr, out ptr, sdvig);
 
-            type.Fields = GetTableFields(ptr, out ptr, sdvig, out sdvig,true);
+            type.Fields = GetTableFields(ptr, out ptr, sdvig, out sdvig, true);
 
             newPtr = ptr;
             newSdvig = sdvig;
@@ -733,7 +733,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             int[] stringLength = new int[1];
             Marshal.Copy(IntPtr.Add(new IntPtr(ptr), sdvig), stringLength, 0, 1);
 
-            int length = stringLength[0]; 
+            int length = stringLength[0];
 
             ptr += 1; // shift to the int length / сдвигаем на длинну длинны инта
 
@@ -747,11 +747,11 @@ namespace OsEngine.Market.Servers.AstsBridge
 
             while (sdvig >= 4)
             {
-                sdvig -=4;
+                sdvig -= 4;
                 ptr += 1;
             }
 
-            ptr += length/4;
+            ptr += length / 4;
 
             newSdvig = sdvig;
 
@@ -840,14 +840,14 @@ namespace OsEngine.Market.Servers.AstsBridge
 
             int* ptrOnTable;
 
-// portfolios / портфели
+            // portfolios / портфели
 
             int result = MteOpenTableFirstTime(_procNum, "TRDACC", null, true, out ptrOnTable);
 
             if (result >= 0)
             {
                 int sdvig;
-                _tablePortfolios.Descriptor= result;
+                _tablePortfolios.Descriptor = result;
                 ReadTable(ptrOnTable, out ptrOnTable, 0, out sdvig, "TRDACC");
             }
             else
@@ -868,7 +868,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 SendErrorFromAsts(result);
             }
 
-// money limits on portfolio / денежные лимиты по портфелю
+            // money limits on portfolio / денежные лимиты по портфелю
 
             result = MteOpenTableFirstTime(_procNum, "POSITIONS", null, true, out ptrOnTable);
 
@@ -883,7 +883,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 SendErrorFromAsts(result);
             }
 
-// securities / бумаги
+            // securities / бумаги
 
             result = MteOpenTableFirstTime(_procNum, "BOARDS", null, true, out ptrOnTable);
 
@@ -912,7 +912,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             }
             else
             {
-               // string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptrOnTable), 0), 400);
+                // string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptrOnTable), 0), 400);
                 SendErrorFromAsts(result);
                 //break;
             }
@@ -921,7 +921,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             _tableMyTrade.Securities = _tableSecurity.MySecurities;
             _tableTrade.Securities = _tableSecurity.MySecurities;
 
-// securities limits / денежные лимиты по бумагам
+            // securities limits / денежные лимиты по бумагам
 
             result = MteOpenTableFirstTime(_procNum, "RM_HOLD", null, true, out ptrOnTable);
 
@@ -936,7 +936,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 SendErrorFromAsts(result);
             }
 
-// table of all trades / таблица всех сделок
+            // table of all trades / таблица всех сделок
 
             result = MteOpenTableFirstTime(_procNum, "ALL_TRADES", null, true, out ptrOnTable);
 
@@ -977,8 +977,8 @@ namespace OsEngine.Market.Servers.AstsBridge
                 SendErrorFromAsts(result);
             }
 
-// from this table get the maximum and minimum value for securities today
-// из этой таблицы качаем максимальное и минимально знаечение для бумаг на сегодня
+            // from this table get the maximum and minimum value for securities today
+            // из этой таблицы качаем максимальное и минимально знаечение для бумаг на сегодня
 
             result = MteOpenTableFirstTime(_procNum, "ASSETS", "", true, out ptrOnTable);
 
@@ -1009,7 +1009,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         {
             AstsTable tableStruct = _tablesStruct.Find(astsTable => astsTable.Name == nameTable);
 
-           // string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), sdvig), 400);
+            // string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), sdvig), 400);
 
             int refOnTable = GetInt(ptr, out ptr, sdvig);
 
@@ -1018,7 +1018,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 refOnTable = _tablePortfolios.TablePortfolioPositionOnBoardUniq;
             }
 
-            if(refOnTable == 0)
+            if (refOnTable == 0)
             {
                 newSdvig = sdvig;
                 newPtr = ptr;
@@ -1098,12 +1098,12 @@ namespace OsEngine.Market.Servers.AstsBridge
             {
                 countRow = integ;
             }
-            
+
             for (int i = 0; i < countRow; i++)
             {
                 //string res = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), sdvig), 400);
 
-                int fieldCount = GetIntFromByte(ptr, out ptr, sdvig,out sdvig);
+                int fieldCount = GetIntFromByte(ptr, out ptr, sdvig, out sdvig);
                 //string res2 = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), sdvig), 400);
 
                 int dataLength = GetInt(ptr, out ptr, sdvig);
@@ -1120,7 +1120,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 {
                     for (int i2 = 0; i2 < fieldCount; i2++)
                     {
-                        fields.Add(tableStruct.FieldsOut[GetIntFromByte(ptr,out ptr,sdvig,out sdvig)]);
+                        fields.Add(tableStruct.FieldsOut[GetIntFromByte(ptr, out ptr, sdvig, out sdvig)]);
                     }
                 }
 
@@ -1141,7 +1141,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 }
                 if (nameTable == "Unknown")
                 {
-                
+
                 }
                 table.Rows.Add(row);
             }
@@ -1152,15 +1152,15 @@ namespace OsEngine.Market.Servers.AstsBridge
 
             if (table.Name == "ALL_TRADES")
             {
-               _tableTrade.LoadTables(table);
+                _tableTrade.LoadTables(table);
             }
             else if (table.Name == "TRADES")
             {
-               _tableMyTrade.LoadTable(table);
+                _tableMyTrade.LoadTable(table);
             }
             else if (table.Name == "ORDERS")
             {
-               _tableOrder.LoadTable(table);
+                _tableOrder.LoadTable(table);
             }
             else if (table.Name == "BOARDS")
             {
@@ -1168,7 +1168,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             }
             else if (table.Name == "SECURITIES")
             {
-              _tableSecurity.LoadTable(table);
+                _tableSecurity.LoadTable(table);
             }
             else if (table.Name == "ASSETS")
             {
@@ -1190,15 +1190,15 @@ namespace OsEngine.Market.Servers.AstsBridge
             {
                 _tablePortfolios.LoadPositionOnBoard(table);
             }
-            else if (table.Name =="EXT_ORDERBOOK")
+            else if (table.Name == "EXT_ORDERBOOK")
             {
                 _marketDepthTable.LoadTable(table);
             }
             return true;
         }
 
-// work with table updating       
-// работа с обновлением таблиц
+        // work with table updating       
+        // работа с обновлением таблиц
 
         /// <summary>
         /// contact server to send transactions and update table data
@@ -1206,7 +1206,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// </summary>
         public unsafe void Process()
         {
-// sending transaction block / блок отправки транзакций
+            // sending transaction block / блок отправки транзакций
 
             if (!_ordersToExecute.IsEmpty)
             {
@@ -1231,10 +1231,10 @@ namespace OsEngine.Market.Servers.AstsBridge
                     if (result != 0)
                     {
 
-                       // int integer=0;
-                       // string res44 = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), integer), 400);
-                       // string resEx = GetString(ptr, out ptr, 0, out integer);
-                        SendLogMessage(builder.ToString(),LogMessageType.Error);
+                        // int integer=0;
+                        // string res44 = Marshal.PtrToStringAnsi(IntPtr.Add(new IntPtr(ptr), integer), 400);
+                        // string resEx = GetString(ptr, out ptr, 0, out integer);
+                        SendLogMessage(builder.ToString(), LogMessageType.Error);
                         SendErrorFromAsts(result);
                         if (OrderFailedEvent != null)
                         {
@@ -1285,8 +1285,8 @@ namespace OsEngine.Market.Servers.AstsBridge
                 }
             }
 
-// get depths for the first time
-// подгружаем стаканы в первый раз
+            // get depths for the first time
+            // подгружаем стаканы в первый раз
 
             for (int i = 0; _securitiesToMarketDepth != null && i < _securitiesToMarketDepth.Count; i++)
             {
@@ -1320,8 +1320,8 @@ namespace OsEngine.Market.Servers.AstsBridge
                 }
             }
 
-// block of updating table
-// блок обновления таблиц
+            // block of updating table
+            // блок обновления таблиц
 
             if (_marketDepthTable.Descriptors.Count == 0)
             {
@@ -1691,7 +1691,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// securities subscribed to get the depth
         /// бумаги подписанные на получение стакана
         /// </summary>
-        private List<Security> _securitiesToMarketDepth; 
+        private List<Security> _securitiesToMarketDepth;
 
         /// <summary>
         /// start listening depth on the instrument
@@ -1732,7 +1732,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         }
 
 
-        private List<Order> _canselledOrders; 
+        private List<Order> _canselledOrders;
         /// <summary>
         /// cancel order
         /// отменить ордер
@@ -1864,7 +1864,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// </summary>
         private UniversalTable()
         {
-            
+
         }
 
         public UniversalTable(string tableName)
@@ -1928,7 +1928,7 @@ namespace OsEngine.Market.Servers.AstsBridge
 
             try
             {
-               result  = Convert.ToInt32(field.Value);
+                result = Convert.ToInt32(field.Value);
             }
             catch (Exception)
             {
@@ -1992,7 +1992,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 return null;
             }
 
-           return field.Value;
+            return field.Value;
         }
 
         /// <summary>
@@ -2533,7 +2533,7 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// securities
         /// бумаги
         /// </summary>
-        public List<Security> Securities; 
+        public List<Security> Securities;
 
         /// <summary>
         /// parse table
@@ -2600,7 +2600,7 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 if (state == "O")
                 {
-                     order.State = OrderStateType.Activ;
+                    order.State = OrderStateType.Activ;
                 }
                 else if (state == "M")
                 {
@@ -2693,7 +2693,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 trade.Volume = table.Rows[i].GetAsInt32("QUANTITY");
 
 
-                trade.Price = table.Rows[i].GetAsDecimal("PRICE",mySecurity.Decimals);
+                trade.Price = table.Rows[i].GetAsDecimal("PRICE", mySecurity.Decimals);
                 trade.NumberOrderParent = table.Rows[i].GetAsInt64("ORDERNO").ToString();
 
                 string buyS = table.Rows[i].GetAsString("BUYSELL");
@@ -2962,7 +2962,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                     myPortfolio[i2].Number = myPortfolio[i2].Number + "@" + client;
                 }
             }
-           
+
         }
 
         /// <summary>
@@ -2982,14 +2982,14 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 List<string> myC = _codePortfolio.FindAll(code => code.Split('@').Length == 2 && code.Split('@')[1] == firm);
 
-                if(myC.Count == 0)
+                if (myC.Count == 0)
                 {
                     continue;
                 }
 
                 for (int i2 = 0; i2 < myC.Count; i2++)
                 {
-                     myC[i2] = myC[i2].Split('@')[0];
+                    myC[i2] = myC[i2].Split('@')[0];
                 }
 
                 List<Portfolio> myPortfolio = new List<Portfolio>();
@@ -3007,13 +3007,13 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 for (int i2 = 0; i2 < myPortfolio.Count; i2++)
                 {
-                    decimal openValue = table.Rows[i].GetAsDecimal("OPENBAL",0);
+                    decimal openValue = table.Rows[i].GetAsDecimal("OPENBAL", 0);
                     if (openValue != 0)
                     {
                         myPortfolio[i2].ValueBegin = openValue;
                     }
 
-                    decimal currentValue = table.Rows[i].GetAsDecimal("CURRENTPOS",0);
+                    decimal currentValue = table.Rows[i].GetAsDecimal("CURRENTPOS", 0);
                     if (currentValue != 0)
                     {
                         myPortfolio[i2].ValueCurrent = currentValue;
@@ -3025,7 +3025,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                 }
 
 
-            }      
+            }
         }
 
         /// <summary>
@@ -3042,7 +3042,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                     continue;
                 }
 
-                asset = asset.Replace(" ","");
+                asset = asset.Replace(" ", "");
 
                 Security mySecurity = Securities.Find(s => s.Name == asset);
 
@@ -3076,22 +3076,22 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 DateTime time = table.Rows[i].GetAsDateTime("DATE", "");
 
-               /* if (time.Date != DateTime.Now.Date)
-                {
-                    return;
-                }*/
+                /* if (time.Date != DateTime.Now.Date)
+                 {
+                     return;
+                 }*/
 
-                decimal valCred = table.Rows[i].GetAsDecimal("CREDIT",2); //DEBITBALANCE // CREDITBALANCE //DATE
+                decimal valCred = table.Rows[i].GetAsDecimal("CREDIT", 2); //DEBITBALANCE // CREDITBALANCE //DATE
 
                 decimal valDebt = table.Rows[i].GetAsDecimal("DEBIT", 2);
 
-                if(valCred == 0 &&
-                    valDebt ==0 )
+                if (valCred == 0 &&
+                    valDebt == 0)
                 {
                     continue;
                 }
 
-                position.ValueCurrent = (valCred + valDebt)/mySecurity.Lot;
+                position.ValueCurrent = (valCred + valDebt) / mySecurity.Lot;
                 portfolio.SetNewPosition(position);
                 if (PortfolioUpdateEvent != null)
                 {
@@ -3193,7 +3193,7 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                     if (name == "AFLT")
                     {
-                        
+
                     }
 
                     mySecurity.Decimals = table.Rows[i].GetAsInt32("DECIMALS");
@@ -3239,8 +3239,8 @@ namespace OsEngine.Market.Servers.AstsBridge
                     }
                 }
 
-// part two level 1 update
-// часть два обновление Level 1
+                // part two level 1 update
+                // часть два обновление Level 1
 
                 if (MySecurityMoex == null)
                 {
@@ -3258,7 +3258,7 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 string status = table.Rows[i].GetAsString("STATUS"); // STATUS Status A-operations allowed S-operations prohibited/Статус A - операции разрешены S - операции запрещены
 
-                if (status== "S")
+                if (status == "S")
                 {
                     continue;
                 }
@@ -3275,11 +3275,11 @@ namespace OsEngine.Market.Servers.AstsBridge
                     mySecurityMoex.Biddeptht = biddeptht;
                 }
 
-               /* int numbids = table.Rows[i].GetAsInt("NUMBIDS"); //	NUMBIDS Заявок на покупку
-                if (numbids != 0)
-                {
-                    mySecurityMoex.Numbids = numbids;
-                }*/
+                /* int numbids = table.Rows[i].GetAsInt("NUMBIDS"); //	NUMBIDS Заявок на покупку
+                 if (numbids != 0)
+                 {
+                     mySecurityMoex.Numbids = numbids;
+                 }*/
 
                 int offerdepth = table.Rows[i].GetAsInt32("OFFERDEPTH"); //	OFFERDEPTH Lots for sale at the best / Лотов на продажу по лучшей
                 if (offerdepth != 0)
@@ -3292,11 +3292,11 @@ namespace OsEngine.Market.Servers.AstsBridge
                     mySecurityMoex.Offerdeptht = offerdeptht;
                 }
 
-              /*  int numoffers = table.Rows[i].GetAsInt("NUMOFFERS"); // NUMOFFERS Заявок на продажу
-                if (numoffers != 0)
-                {
-                    mySecurityMoex.Numoffers = numoffers;
-                }*/
+                /*  int numoffers = table.Rows[i].GetAsInt("NUMOFFERS"); // NUMOFFERS Заявок на продажу
+                  if (numoffers != 0)
+                  {
+                      mySecurityMoex.Numoffers = numoffers;
+                  }*/
 
                 decimal change = table.Rows[i].GetAsDecimal("CHANGE", mySecurity.Decimals);  //	CHANGE Change to close the previous day / Изменение к закрытию предыдущего дня
                 if (change != 0)
@@ -3429,13 +3429,13 @@ namespace OsEngine.Market.Servers.AstsBridge
         /// process table with places
         /// обработать таблицу с площадками
         /// </summary>
-        public void LoadTable(UniversalTable  table)
+        public void LoadTable(UniversalTable table)
         {
             if (Bords == null)
             {
-                 Bords = new List<AstsBoards>();
+                Bords = new List<AstsBoards>();
             }
-           
+
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 string boardId = table.Rows[i].GetAsString("BOARDID");
@@ -3564,8 +3564,8 @@ namespace OsEngine.Market.Servers.AstsBridge
 
                 MarketDepthLevel level = new MarketDepthLevel();
                 level.Price = table.Rows[i].GetAsDecimal("PRICE", mySecurity.Decimals);
-                
-                if(buySell == "B")
+
+                if (buySell == "B")
                 {
                     level.Bid = table.Rows[i].GetAsInt32("QUANTITY");
                     bool insert = false;
@@ -3583,7 +3583,7 @@ namespace OsEngine.Market.Servers.AstsBridge
                         myDepth.Bids.Add(level);
                     }
                 }
-                else if(buySell == "S")
+                else if (buySell == "S")
                 {
                     level.Ask = table.Rows[i].GetAsInt32("QUANTITY");
                     bool insert = false;

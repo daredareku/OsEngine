@@ -152,7 +152,7 @@ namespace OsEngine.Market.Servers
         public event Action DisconnectEvent;
         protected void OnDisconnectEvent()
         {
-            if(ServerStatus == ServerConnectStatus.Disconnect)
+            if (ServerStatus == ServerConnectStatus.Disconnect)
             {
                 return;
             }

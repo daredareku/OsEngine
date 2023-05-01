@@ -1,4 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity;
+using OsEngine.Market.Servers.Entity;
+using RestSharp;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,14 +13,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity;
-using OsEngine.Market.Servers.Entity;
-using RestSharp;
 using WebSocket4Net;
 using TradeResponse = OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity.TradeResponse;
 
@@ -274,7 +273,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                     continue;
                 }
 
-                if(_isDisposed == true)
+                if (_isDisposed == true)
                 {
                     return;
                 }
@@ -287,7 +286,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                         "api/v1/userDataStream", new Dictionary<string, string>()
                             { { "listenKey=", _spotListenKey } }, false);
 
-                    if(_notMargineAccount == false)
+                    if (_notMargineAccount == false)
                     {
                         CreateQuery(BinanceExchangeType.MarginExchange, Method.PUT,
                             "sapi/v1/userDataStream", new Dictionary<string, string>()
@@ -420,7 +419,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                 {
                     string res = jsonCandles.Trim(new char[] { '[', ']' });
 
-                    if(string.IsNullOrEmpty(res) == true)
+                    if (string.IsNullOrEmpty(res) == true)
                     {
                         return null;
                     }
@@ -760,7 +759,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
         {
             List<Candle> newCandles = new List<Candle>();
 
-            if(oldCandles == null)
+            if (oldCandles == null)
             {
                 return null;
             }
@@ -913,7 +912,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
         {
             var resTime = CreateQuery(BinanceExchangeType.SpotExchange, Method.GET, "api/v1/time", null, false);
             var result = JsonConvert.DeserializeAnonymousType(resTime, new BinanceTime());
-            
+
             if (result != null)
             {
                 return (result.serverTime + 500).ToString();
@@ -1065,7 +1064,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                       order.Price.ToString(CultureInfo.InvariantCulture)
                           .Replace(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator, "."));
                     }
-                  
+
 
                     var res = CreateQuery(BinanceExchangeType.SpotExchange, Method.POST, "api/v3/order", param, true);
 
@@ -1157,7 +1156,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
         {
             List<Order> openOrders = GetAllOpenOrders();
 
-            for(int i = 0;i < openOrders.Count;i++)
+            for (int i = 0; i < openOrders.Count; i++)
             {
                 CancelOrder(openOrders[i]);
             }
@@ -1220,7 +1219,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                     newOrder.SecurityNameCode = allOrders[i2].symbol;
                     newOrder.State = OrderStateType.Activ;
 
-                    if(allOrders[i].type == "")
+                    if (allOrders[i].type == "")
                     {
 
                     }
@@ -1292,7 +1291,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
 
             for (int i = 0; i < oldOpenOrders.Count; i++)
             {
-                if(oldOpenOrders[i].Volume == oldOpenOrders[i].VolumeExecute)
+                if (oldOpenOrders[i].Volume == oldOpenOrders[i].VolumeExecute)
                 {
                     continue;
                 }
@@ -1300,9 +1299,9 @@ namespace OsEngine.Market.Servers.Binance.Spot
 
                 if (myOrder == null)
                 {
-                    for(int i2 = 0;i2 < allOrders.Count;i2++)
+                    for (int i2 = 0; i2 < allOrders.Count; i2++)
                     {
-                        if(string.IsNullOrEmpty(allOrders[i2].clientOrderId))
+                        if (string.IsNullOrEmpty(allOrders[i2].clientOrderId))
                         {
                             continue;
                         }

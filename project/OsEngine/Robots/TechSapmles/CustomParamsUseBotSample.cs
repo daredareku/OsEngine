@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using System;
 
 
 namespace OsEngine.Robots.TechSapmles
@@ -89,7 +89,7 @@ namespace OsEngine.Robots.TechSapmles
             _host = new WindowsFormsHost();
 
             DataGridView newGrid =
-                DataGridFactory.GetDataGridView(DataGridViewSelectionMode.FullRowSelect, 
+                DataGridFactory.GetDataGridView(DataGridViewSelectionMode.FullRowSelect,
                 DataGridViewAutoSizeRowsMode.AllCells);
 
             newGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -139,7 +139,7 @@ namespace OsEngine.Robots.TechSapmles
 
         private void PaintTable(List<Candle> candles)
         {
-            if(_grid.InvokeRequired)
+            if (_grid.InvokeRequired)
             {
                 _grid.Invoke(new Action<List<Candle>>(PaintTable), candles);
                 return;
@@ -152,7 +152,7 @@ namespace OsEngine.Robots.TechSapmles
             List<decimal> atr = _atr.DataSeries[0].Values;
 
 
-            for (int i = 0;i < candles.Count;i++)
+            for (int i = 0; i < candles.Count; i++)
             {
                 _grid.Rows.Add(GetRow(candles[i], smaSlow[i], smaFast[i], atr[i]));
 
@@ -177,11 +177,11 @@ namespace OsEngine.Robots.TechSapmles
 
             row.Cells.Add(new DataGridViewTextBoxCell());
 
-            if(atr != 0)
+            if (atr != 0)
             {
                 row.Cells[4].Value = (fastSma - slowSma) / atr;
             }
-            
+
 
             return row;
         }
@@ -232,7 +232,7 @@ namespace OsEngine.Robots.TechSapmles
 
         public override void ShowIndividualSettingsDialog()
         {
-           
+
         }
 
         // trade logic
@@ -246,12 +246,12 @@ namespace OsEngine.Robots.TechSapmles
                 return;
             }
 
-            if (Regime.ValueString =="Off")
+            if (Regime.ValueString == "Off")
             {
                 return;
             }
 
-            if(candles.Count < AtrLen.ValueInt ||
+            if (candles.Count < AtrLen.ValueInt ||
                 candles.Count < FastSmaLen.ValueInt ||
                 candles.Count < SlowSmaLen.ValueInt)
             {
@@ -260,7 +260,7 @@ namespace OsEngine.Robots.TechSapmles
 
             List<Position> positions = _tab.PositionsOpenAll;
 
-            if(positions.Count == 0)
+            if (positions.Count == 0)
             {
                 // openPos logic
                 OpenPosLogic(candles);
@@ -277,7 +277,7 @@ namespace OsEngine.Robots.TechSapmles
             decimal lastFastSma = _fastSma.DataSeries[0].Last;
             decimal lastSlowSma = _slowSma.DataSeries[0].Last;
 
-            if(lastFastSma < lastSlowSma)
+            if (lastFastSma < lastSlowSma)
             {
                 return;
             }
@@ -287,7 +287,7 @@ namespace OsEngine.Robots.TechSapmles
 
             decimal lenCount = len / lastAtr;
 
-            if(lenCount < AtrCountToInter.ValueDecimal)
+            if (lenCount < AtrCountToInter.ValueDecimal)
             {
                 return;
             }
@@ -297,12 +297,12 @@ namespace OsEngine.Robots.TechSapmles
 
         private void ClosePosLogic(List<Candle> candles, Position pos)
         {
-            if(pos.State != PositionStateType.Open)
+            if (pos.State != PositionStateType.Open)
             {
                 return;
             }
 
-            if(pos.StopOrderIsActiv == true ||
+            if (pos.StopOrderIsActiv == true ||
                 pos.ProfitOrderIsActiv == true)
             {
                 return;

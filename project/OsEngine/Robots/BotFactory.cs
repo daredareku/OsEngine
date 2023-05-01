@@ -3,14 +3,6 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
 using Microsoft.CSharp;
 using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
@@ -19,10 +11,18 @@ using OsEngine.Robots.CounterTrend;
 using OsEngine.Robots.Engines;
 using OsEngine.Robots.High_Frequency;
 using OsEngine.Robots.MarketMaker;
-using OsEngine.Robots.Patterns;
-using OsEngine.Robots.Trend;
 using OsEngine.Robots.OnScriptIndicators;
+using OsEngine.Robots.Patterns;
 using OsEngine.Robots.Screeners;
+using OsEngine.Robots.Trend;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 
 namespace OsEngine.Robots
 {

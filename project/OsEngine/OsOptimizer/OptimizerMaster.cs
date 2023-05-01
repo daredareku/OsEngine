@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Forms.Integration;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
-using OsEngine.Market;
-using OsEngine.Market.Servers.Kraken;
 using OsEngine.Market.Servers.Optimizer;
 using OsEngine.Market.Servers.Tester;
 using OsEngine.OsTrader.Panels;
-using OsEngine.Robots;
 using OsEngine.OsTrader.Panels.Tab.Internal;
-using System.Threading.Tasks;
+using OsEngine.Robots;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.OsOptimizer
 {
@@ -33,7 +30,7 @@ namespace OsEngine.OsOptimizer
             _threadsCount = 1;
             _startDepozit = 100000;
 
-            Storage = new OptimizerDataStorage("Prime",true);
+            Storage = new OptimizerDataStorage("Prime", true);
             Storage.SecuritiesChangeEvent += _storage_SecuritiesChangeEvent;
             Storage.TimeChangeEvent += _storage_TimeChangeEvent;
 
@@ -64,8 +61,8 @@ namespace OsEngine.OsOptimizer
 
         public int GetMaxBotsCount()
         {
-            if(_parameters == null ||
-                _paramOn == null )
+            if (_parameters == null ||
+                _paramOn == null)
             {
                 return 0;
             }
@@ -151,7 +148,7 @@ namespace OsEngine.OsOptimizer
                     _filterDealsCountIsOn = Convert.ToBoolean(reader.ReadLine());
                     _isScript = Convert.ToBoolean(reader.ReadLine());
                     _iterationCount = Convert.ToInt32(reader.ReadLine());
-                    _commissionType = (ComissionType) Enum.Parse(typeof(ComissionType), 
+                    _commissionType = (ComissionType)Enum.Parse(typeof(ComissionType),
                         reader.ReadLine() ?? ComissionType.None.ToString());
                     _commissionValue = Convert.ToDecimal(reader.ReadLine());
                     _lastInSample = Convert.ToBoolean(reader.ReadLine());
@@ -218,7 +215,7 @@ namespace OsEngine.OsOptimizer
             {
                 return;
             }
-             
+
             if (status == null)
             {
                 status = new ProgressBarStatus();
@@ -242,7 +239,7 @@ namespace OsEngine.OsOptimizer
         /// </summary>
         public ProgressBarStatus PrimeProgressBarStatus;
 
-        public BotManualControl ManualControl; 
+        public BotManualControl ManualControl;
 
         public void ShowManualControlDialog()
         {
@@ -363,7 +360,7 @@ namespace OsEngine.OsOptimizer
             }
         }
         private decimal _startDepozit;
-        
+
         /// <summary>
         /// commission type
         /// тип комиссии
@@ -377,8 +374,8 @@ namespace OsEngine.OsOptimizer
                 Save();
             }
         }
-        private ComissionType _commissionType;      
-        
+        private ComissionType _commissionType;
+
         /// <summary>
         /// commission value
         /// размер комиссии
@@ -680,11 +677,11 @@ namespace OsEngine.OsOptimizer
 
         public bool LastInSample
         {
-            get 
-            { 
-                return _lastInSample; 
+            get
+            {
+                return _lastInSample;
             }
-            set 
+            set
             {
                 _lastInSample = value;
                 Save();
@@ -693,7 +690,7 @@ namespace OsEngine.OsOptimizer
 
         private bool _lastInSample;
 
-        private decimal GetInSampleRecurs(decimal curLenghtInSample,int fazeCount, bool lastInSample, int allDays)
+        private decimal GetInSampleRecurs(decimal curLenghtInSample, int fazeCount, bool lastInSample, int allDays)
         {
             // х = Y + Y/P * С;
             // x - общая длинна в днях. Уже известна
@@ -705,14 +702,14 @@ namespace OsEngine.OsOptimizer
 
             int count = fazeCount;
 
-            if(lastInSample)
+            if (lastInSample)
             {
                 count--;
             }
 
             int allLenght = Convert.ToInt32(curLenghtInSample + outOfSampleLength * count);
 
-            if(allLenght > allDays)
+            if (allLenght > allDays)
             {
                 curLenghtInSample--;
                 return GetInSampleRecurs(curLenghtInSample, fazeCount, lastInSample, allDays);
@@ -769,8 +766,8 @@ namespace OsEngine.OsOptimizer
                 newFaze.Days = daysOnInSample;
                 Fazes.Add(newFaze);
 
-                if(_lastInSample 
-                    && i +1 == fazeCount)
+                if (_lastInSample
+                    && i + 1 == fazeCount)
                 {
                     newFaze.Days = daysOnInSample;
                     break;
@@ -785,9 +782,9 @@ namespace OsEngine.OsOptimizer
                 Fazes.Add(newFazeOut);
             }
 
-            for(int i = 0;i < Fazes.Count;i++)
+            for (int i = 0; i < Fazes.Count; i++)
             {
-                if(Fazes[i].Days <= 0)
+                if (Fazes[i].Days <= 0)
                 {
                     SendLogMessage(OsLocalization.Optimizer.Label50, LogMessageType.Error);
                     Fazes = new List<OptimizerFaze>();
@@ -888,7 +885,7 @@ namespace OsEngine.OsOptimizer
                     return null;
                 }
 
-                if(_parameters != null)
+                if (_parameters != null)
                 {
                     _parameters.Clear();
                     _parameters = null;
@@ -896,12 +893,12 @@ namespace OsEngine.OsOptimizer
 
                 _parameters = new List<IIStrategyParameter>();
 
-                for(int i = 0;i < bot.Parameters.Count;i++)
+                for (int i = 0; i < bot.Parameters.Count; i++)
                 {
                     _parameters.Add(bot.Parameters[i]);
                 }
-                
-                for(int i = 0;i < _parameters.Count;i++)
+
+                for (int i = 0; i < _parameters.Count; i++)
                 {
                     GetValueParameterSaveByUser(_parameters[i]);
                 }
@@ -954,7 +951,7 @@ namespace OsEngine.OsOptimizer
                 using (StreamWriter writer = new StreamWriter(@"Engine\" + _strategyName + @"_StandartOptimizerParameters.txt", false)
                     )
                 {
-                    for(int i = 0;i < _parameters.Count;i++)
+                    for (int i = 0; i < _parameters.Count; i++)
                     {
                         writer.WriteLine(_parameters[i].GetStringToSave());
                     }
@@ -987,7 +984,7 @@ namespace OsEngine.OsOptimizer
 
                 List<bool> paramsOnSaveBefore = GetParamsOnOffByStrategy();
 
-                if(paramsOnSaveBefore != null && 
+                if (paramsOnSaveBefore != null &&
                     paramsOnSaveBefore.Count == _paramOn.Count)
                 {
                     _paramOn = paramsOnSaveBefore;
@@ -1222,7 +1219,7 @@ namespace OsEngine.OsOptimizer
 
         public BotPanel TestBot(OptimazerFazeReport faze, OptimizerReport report)
         {
-            if(_aloneTestIsOver == false)
+            if (_aloneTestIsOver == false)
             {
                 return null;
             }
@@ -1241,7 +1238,7 @@ namespace OsEngine.OsOptimizer
             ui.ShowDialog();
 
             Thread.Sleep(500);
-           
+
             return _resultBotAloneTest;
         }
 
@@ -1258,8 +1255,8 @@ namespace OsEngine.OsOptimizer
         private async void RunAloneBotTest()
         {
             await Task.Delay(2000);
-            _resultBotAloneTest = 
-                _optimizerExecutor.TestBot(_fazeToTestAloneTest, _reportToTestAloneTest, 
+            _resultBotAloneTest =
+                _optimizerExecutor.TestBot(_fazeToTestAloneTest, _reportToTestAloneTest,
                 StartProgram.IsTester, _awaitUiMasterAloneTest);
 
             _aloneTestIsOver = true;
@@ -1559,7 +1556,7 @@ namespace OsEngine.OsOptimizer
             result += TimeFrame + "%";
             result += Formula + "%";
 
-            for (int i = 0;i < NamesSecurity.Count;i++)
+            for (int i = 0; i < NamesSecurity.Count; i++)
             {
                 result += NamesSecurity[i];
 

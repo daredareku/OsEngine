@@ -1,0 +1,50 @@
+From https://github.com/AlexWan/OsEngine
+ * branch              HEAD       -> FETCH_HEAD
+error: Your local changes to the following files would be overwritten by merge:
+	project/OsEngine/Charts/CandleChart/ChartCandleMaster.cs
+	project/OsEngine/Entity/AwaitUi.xaml.cs
+	project/OsEngine/Entity/CandleSeries.cs
+	project/OsEngine/Entity/DataGridFactory.cs
+	project/OsEngine/Entity/Order.cs
+	project/OsEngine/Journal/Internal/DealStaticticGenerator.cs
+	project/OsEngine/Journal/Internal/PositionController.cs
+	project/OsEngine/Journal/Journal.cs
+	project/OsEngine/Language/MarketLocal.cs
+	project/OsEngine/Language/MinerLocal.cs
+	project/OsEngine/Language/TraderLocal.cs
+	project/OsEngine/Market/Connectors/ConnectorCandles.cs
+	project/OsEngine/Market/Connectors/OrderExecutionEmulator.cs
+	project/OsEngine/Market/ServerMaster.cs
+	project/OsEngine/Market/ServerMasterPainter.cs
+	project/OsEngine/Market/ServerMasterPortfoliosPainter.cs
+	project/OsEngine/Market/ServerMasterUi.xaml.cs
+	project/OsEngine/Market/Servers/AServerParameterUi.xaml.cs
+	project/OsEngine/Market/Servers/Binance/Futures/BinanceClientFutures.cs
+	project/OsEngine/Market/Servers/Binance/Spot/BinanceClientSpot.cs
+	project/OsEngine/Market/Servers/Bybit/BybitServer.cs
+	project/OsEngine/Market/Servers/GateIo/Futures/GateIoFuturesServer.cs
+	project/OsEngine/Market/Servers/GateIo/GateIoServer.cs
+	project/OsEngine/Market/Servers/Huobi/Futures/HuobiFuturesServer.cs
+	project/OsEngine/Market/Servers/Huobi/FuturesSwap/HuobiFuturesSwapServer.cs
+	project/OsEngine/Market/Servers/Huobi/FuturesSwap/HuobiFuturesSwapServerPermission.cs
+	project/OsEngine/Market/Servers/Huobi/Spot/HuobiSpotServer.cs
+	project/OsEngine/Market/Servers/Tester/TesterServer.cs
+	project/OsEngine/OsData/OsDataMaster.cs
+	project/OsEngine/OsMiner/Patterns/PatternController.cs
+	project/OsEngine/OsMiner/Patterns/PatternControllerUi.xaml.cs
+	project/OsEngine/OsOptimizer/OptimizerReportCharting.cs
+	project/OsEngine/OsOptimizer/OptimizerUi.xaml.cs
+	project/OsEngine/OsTrader/GlobalPosition.cs
+	project/OsEngine/OsTrader/Gui/BotTabsPainter.cs
+	project/OsEngine/OsTrader/Gui/RobotUi.xaml.cs
+	project/OsEngine/OsTrader/Gui/RobotUiLight.xaml.cs
+	project/OsEngine/OsTrader/Gui/TesterUi.xaml.cs
+	project/OsEngine/OsTrader/Gui/TesterUiLight.xaml.cs
+	project/OsEngine/OsTrader/OsTraderMaster.cs
+	project/OsEngine/OsTrader/Panels/BotPanel.cs
+	project/OsEngine/OsTrader/Panels/Tab/BotTabSimple.cs
+	project/OsEngine/Properties/AssemblyInfo.cs
+	project/OsEngine/bin/Debug/Interop.SmartCOM4Lib.dll
+	project/OsEngine/bin/Debug/OsEngine.exe
+Please commit your changes or stash them before you merge.
+Aborting

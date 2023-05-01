@@ -3,12 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.OnScriptIndicators
 {
@@ -79,7 +79,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         public StrategyParameterDecimal ProfitPercent;
 
-      // logic
+        // logic
 
         private void _tab_CandleUpdateEvent(List<Candle> candles)
         {
@@ -95,7 +95,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             List<Position> openPos = _tab.PositionsOpenAll;
 
-            if(openPos.Count == 0)
+            if (openPos.Count == 0)
             {// если позиций нет, пробуем открывать позицию
                 TryByAtFirstTime(candles);
                 return;
@@ -103,20 +103,20 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             Position pos = openPos[0];
 
-            if(pos.CloseActiv == true ||
+            if (pos.CloseActiv == true ||
                 pos.OpenActiv == true)
             { // если какой-то ордер на открытие или закрытие активен
                 return;
             }
 
-            if(pos.Comment == "TradeFaze")
+            if (pos.Comment == "TradeFaze")
             {
                 // здесь мы пирамидимся и усредняемся на входе
                 TradeFaze(pos, candles);
                 // проверка стопов и профитов
                 CheckStopAndProfit(pos, candles);
             }
-            else if(pos.Comment == "CloseFaze")
+            else if (pos.Comment == "CloseFaze")
             { // здесь, после достижения стопа или профита - закрываемся частями
                 CloseFaze(pos, candles);
             }
@@ -149,7 +149,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             Position pos = _tab.BuyAtLimit(FirstVolume.ValueDecimal, _tab.PriceBestAsk);
 
-            if(pos != null)
+            if (pos != null)
             {
                 pos.Comment = "TradeFaze";
             }
@@ -160,7 +160,7 @@ namespace OsEngine.Robots.OnScriptIndicators
         {
             int countAver = CountExecuteOrders(pos.OpenOrders);
 
-            if(countAver >= OpenPosAverCount.ValueInt)
+            if (countAver >= OpenPosAverCount.ValueInt)
             {
                 return;
             }
@@ -175,7 +175,7 @@ namespace OsEngine.Robots.OnScriptIndicators
                 _tab.BuyAtLimitToPosition(pos, _tab.PriceBestAsk, NextVolume.ValueDecimal);
             }
 
-            if(lastPrice < entryDownPrice)
+            if (lastPrice < entryDownPrice)
             {
                 _tab.BuyAtLimitToPosition(pos, _tab.PriceBestAsk, NextVolume.ValueDecimal);
             }
@@ -192,7 +192,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             decimal lastPrice = candles[candles.Count - 1].Close;
 
-            if(lastPrice <= pos.StopOrderPrice)
+            if (lastPrice <= pos.StopOrderPrice)
             {
                 pos.Comment = "CloseFaze";
             }
@@ -205,7 +205,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private int CountExecuteOrders(List<Order> orders)
         {
-            if(orders == null ||
+            if (orders == null ||
                 orders.Count == 0)
             {
                 return 0;
@@ -213,7 +213,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
             int result = 0;
 
-            for(int i = 0;i < orders.Count;i++)
+            for (int i = 0; i < orders.Count; i++)
             {
                 if (orders[i].MyTrades != null &&
                     orders[i].MyTrades.Count != 0)
@@ -229,7 +229,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void CloseFaze(Position pos, List<Candle> candles)
         {
-            if(_lastCandleCloseTime == candles[candles.Count-1].TimeStart)
+            if (_lastCandleCloseTime == candles[candles.Count - 1].TimeStart)
             {
                 return;
             }
@@ -239,12 +239,12 @@ namespace OsEngine.Robots.OnScriptIndicators
             // берём объём для закрытия в одной части
             decimal closeVolume = Math.Round(pos.MaxVolume / ClosePosAverCount.ValueInt, _tab.Securiti.DecimalsVolume);
 
-            if(closeVolume * 2 > pos.OpenVolume)
+            if (closeVolume * 2 > pos.OpenVolume)
             { // приближаемся к завершению
                 closeVolume = pos.OpenVolume;
             }
 
-            if(closeVolume <= 0)
+            if (closeVolume <= 0)
             {// что-то не то наобрезали
                 closeVolume = pos.OpenVolume;
             }

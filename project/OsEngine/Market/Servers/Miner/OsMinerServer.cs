@@ -3,15 +3,15 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Tester;
 
 namespace OsEngine.Market.Servers.Miner
 {
@@ -27,7 +27,7 @@ namespace OsEngine.Market.Servers.Miner
         /// </summary>
         public OsMinerServer(string name)
         {
-            Log = new Log(name + "DataServer",StartProgram.IsOsMiner);
+            Log = new Log(name + "DataServer", StartProgram.IsOsMiner);
             Log.Listen(this);
             _name = name;
 
@@ -134,11 +134,11 @@ namespace OsEngine.Market.Servers.Miner
             _neadToStopThread = true;
         }
 
-// work with data connection
-// работа с подключением данных
+        // work with data connection
+        // работа с подключением данных
 
         /// <summary>
-		/// data source type
+        /// data source type
         /// тип источника данных
         /// </summary>
         public TesterSourceDataType SourceDataType
@@ -279,11 +279,11 @@ namespace OsEngine.Market.Servers.Miner
             }
         }
 
-// Synchronizer
-// Синхронизатор
+        // Synchronizer
+        // Синхронизатор
 
         /// <summary>
-		/// path to data folder. He is the name of the active set
+        /// path to data folder. He is the name of the active set
         /// путь к папке с данными. Он же название активного сета
         /// </summary>
         public string ActiveSet
@@ -322,11 +322,11 @@ namespace OsEngine.Market.Servers.Miner
         /// </summary>
         public DateTime TimeNow;
 
-// work place of main thread
-// место работы основного потока
+        // work place of main thread
+        // место работы основного потока
 
         /// <summary>
-		/// is it time to reload security in the directory
+        /// is it time to reload security in the directory
         /// пора ли перезагружать бумаги в директории
         /// </summary>
         private bool _needToReloadSecurities;
@@ -361,7 +361,7 @@ namespace OsEngine.Market.Servers.Miner
                         return;
                     }
 
-                  
+
 
                     if (_neadToStopThread)
                     {
@@ -376,7 +376,7 @@ namespace OsEngine.Market.Servers.Miner
                             LoadSecurities();
                         }
                     }
-                    
+
                     Thread.Sleep(2000);
                 }
                 catch (Exception error)
@@ -467,7 +467,7 @@ namespace OsEngine.Market.Servers.Miner
             {
 
                 LoadCandleFromFolder(directories[i]);
-                
+
             }
         }
 
@@ -541,10 +541,10 @@ namespace OsEngine.Market.Servers.Miner
                         Candle candleN = new Candle();
                         candleN.SetCandleFromString(reader.ReadLine());
 
-                        decimal open = (decimal) Convert.ToDouble(candleN.Open);
-                        decimal high = (decimal) Convert.ToDouble(candleN.High);
-                        decimal low = (decimal) Convert.ToDouble(candleN.Low);
-                        decimal close = (decimal) Convert.ToDouble(candleN.Close);
+                        decimal open = (decimal)Convert.ToDouble(candleN.Open);
+                        decimal high = (decimal)Convert.ToDouble(candleN.High);
+                        decimal low = (decimal)Convert.ToDouble(candleN.Low);
+                        decimal close = (decimal)Convert.ToDouble(candleN.Close);
 
                         if (open.ToString(culture).Split(',').Length > 1 ||
                             high.ToString(culture).Split(',').Length > 1 ||
@@ -614,14 +614,14 @@ namespace OsEngine.Market.Servers.Miner
 
                             for (int i3 = open.ToString(culture).Length - 1; open.ToString(culture)[i3] == '0'; i3--)
                             {
-                                lenght = lenght*10;
+                                lenght = lenght * 10;
                             }
 
                             int lengthLow = 1;
 
                             for (int i3 = low.ToString(culture).Length - 1; low.ToString(culture)[i3] == '0'; i3--)
                             {
-                                lengthLow = lengthLow*10;
+                                lengthLow = lengthLow * 10;
 
                                 if (lenght > lengthLow)
                                 {
@@ -633,7 +633,7 @@ namespace OsEngine.Market.Servers.Miner
 
                             for (int i3 = high.ToString(culture).Length - 1; high.ToString(culture)[i3] == '0'; i3--)
                             {
-                                lengthHigh = lengthHigh*10;
+                                lengthHigh = lengthHigh * 10;
 
                                 if (lenght > lengthHigh)
                                 {
@@ -645,7 +645,7 @@ namespace OsEngine.Market.Servers.Miner
 
                             for (int i3 = close.ToString(culture).Length - 1; close.ToString(culture)[i3] == '0'; i3--)
                             {
-                                lengthClose = lengthClose*10;
+                                lengthClose = lengthClose * 10;
 
                                 if (lenght > lengthClose)
                                 {
@@ -658,8 +658,8 @@ namespace OsEngine.Market.Servers.Miner
                             }
 
                             if (minPriceStep == 1 &&
-                                open%5 == 0 && high%5 == 0 &&
-                                close%5 == 0 && low%5 == 0)
+                                open % 5 == 0 && high % 5 == 0 &&
+                                close % 5 == 0 && low % 5 == 0)
                             {
                                 countFive++;
                             }
@@ -704,7 +704,7 @@ namespace OsEngine.Market.Servers.Miner
                 }
             }
 
-			// save security
+            // save security
             // сохраняем бумаги
 
             if (security == null ||
@@ -726,9 +726,9 @@ namespace OsEngine.Market.Servers.Miner
                 }
             }
 
-// count time
-// считаем время
-            
+            // count time
+            // считаем время
+
             SecuritiesTester.AddRange(security);
 
             if (SecuritiesTester.Count != 0)
@@ -757,13 +757,13 @@ namespace OsEngine.Market.Servers.Miner
 		/// changed security and server data
         /// изменились бумаги и данные по серверу
         /// </summary>
-        public event Action<List<MinerCandleSeries>> CandleSeriesChangeEvent; 
+        public event Action<List<MinerCandleSeries>> CandleSeriesChangeEvent;
 
-// security
-// бумаги
+        // security
+        // бумаги
 
         /// <summary>
-		/// data currently stored in server
+        /// data currently stored in server
         /// данные хранящиеся в текущий момент в сервере
         /// </summary>
         public List<MinerCandleSeries> SecuritiesTester = new List<MinerCandleSeries>();
@@ -862,11 +862,11 @@ namespace OsEngine.Market.Servers.Miner
             return timeFrame;
         }
 
-// work with logs
-// работа с логами
+        // work with logs
+        // работа с логами
 
         /// <summary>
-		/// send a new log message
+        /// send a new log message
         /// отправить в лог новый мессадж
         /// </summary>
         private void TesterServer_LogMessageEvent(string logMessage)
@@ -939,13 +939,13 @@ namespace OsEngine.Market.Servers.Miner
 		/// available candles
         /// доступные свечи 
         /// </summary>
-        public List<Candle> Candles = new List<Candle>(); 
+        public List<Candle> Candles = new List<Candle>();
 
-// analysis of candle files
-// разбор свечных файлов
+        // analysis of candle files
+        // разбор свечных файлов
 
         /// <summary>
-		/// load candles from file
+        /// load candles from file
         /// загрузка свечек из файла
         /// </summary>
         public void LoadCandles()
@@ -976,11 +976,11 @@ namespace OsEngine.Market.Servers.Miner
             }
         }
 
-// work with logs
-// работа с логами
+        // work with logs
+        // работа с логами
 
         /// <summary>
-		/// save a new log message
+        /// save a new log message
         /// сохранить новую запись в лог
         /// </summary>
         private void SendLogMessage(string message)

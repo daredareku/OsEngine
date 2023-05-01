@@ -3,15 +3,15 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Forms.Integration;
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.OsMiner.Patterns;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
-using OsEngine.Language;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.OsMiner
 {
@@ -34,12 +34,14 @@ namespace OsEngine.OsMiner
         /// set name
         /// имя сета
         /// </summary>
-        public string Name {
+        public string Name
+        {
             get { return _name; }
             set
             {
                 _name = value;
-            } }
+            }
+        }
         private string _name;
 
         /// <summary>
@@ -53,11 +55,11 @@ namespace OsEngine.OsMiner
 
             Name = patterns[0];
 
-            for (int i = 1; i < patterns.Length; i ++)
+            for (int i = 1; i < patterns.Length; i++)
             {
                 PatternController pattern = new PatternController();
                 pattern.Load(patterns[i]);
-                
+
                 Patterns.Add(pattern);
                 pattern.NeadToSaveEvent += pattern_NeadToSaveEvent;
                 pattern.LogMessageEvent += SendNewLogMessage;
@@ -278,7 +280,7 @@ namespace OsEngine.OsMiner
             return null;
         }
 
-// drawing a set/прорисовка сета
+        // drawing a set/прорисовка сета
 
         /// <summary>
         /// start drawing this set
@@ -382,13 +384,13 @@ namespace OsEngine.OsMiner
             {
                 MenuItem[] items = new MenuItem[3];
 
-                items[0] = new MenuItem {Text =OsLocalization.Miner.Message6};
+                items[0] = new MenuItem { Text = OsLocalization.Miner.Message6 };
                 items[0].Click += OsMinerSetAdd_Click;
 
-                items[1] = new MenuItem {Text = OsLocalization.Miner.Message9};
+                items[1] = new MenuItem { Text = OsLocalization.Miner.Message9 };
                 items[1].Click += OsMinerSetRedact_Click;
 
-                items[2] = new MenuItem { Text = OsLocalization.Miner.Message7};
+                items[2] = new MenuItem { Text = OsLocalization.Miner.Message7 };
                 items[2].Click += OsMinerSetDelete_Click;
 
                 ContextMenu menu = new ContextMenu(items);
@@ -448,7 +450,7 @@ namespace OsEngine.OsMiner
                 return;
             }
 
-            if(_activPatternNum == activPattern)
+            if (_activPatternNum == activPattern)
             {
                 return;
             }
@@ -487,7 +489,7 @@ namespace OsEngine.OsMiner
 
             _gridPatternsInSet.Rows.Clear();
 
-            for (int i = Patterns.Count-1; i >-1; i--)
+            for (int i = Patterns.Count - 1; i > -1; i--)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.Cells.Add(new DataGridViewTextBoxCell());
@@ -499,7 +501,7 @@ namespace OsEngine.OsMiner
             }
         }
 
-// logging/логирование
+        // logging/логирование
 
         /// <summary>
         /// send a new message to the top

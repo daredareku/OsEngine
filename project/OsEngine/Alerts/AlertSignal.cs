@@ -109,7 +109,7 @@ namespace OsEngine.Alerts
         /// удалить позицию
         /// </summary>
         DeletePos,
-        
+
         /// <summary>
         /// find position
         /// найти позицию

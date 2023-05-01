@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.BitStamp.BitStampEntity;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.BitStamp
 {
@@ -25,7 +24,7 @@ namespace OsEngine.Market.Servers.BitStamp
             CreateParameterPassword(OsLocalization.Market.ServerParamSecretKey, "");
         }
     }
-    
+
     public class BitStampServerRealization : IServerRealization
     {
         public BitStampServerRealization()
@@ -60,7 +59,7 @@ namespace OsEngine.Market.Servers.BitStamp
         /// </summary>
         public DateTime ServerTime { get; set; }
 
-// requests / запросы
+        // requests / запросы
 
         /// <summary>
         /// bitstamp client
@@ -100,9 +99,9 @@ namespace OsEngine.Market.Servers.BitStamp
         {
             if (_client == null)
             {
-                _client = new BitstampClient(((ServerParameterString) ServerParameters[1]).Value,
-                    ((ServerParameterPassword) ServerParameters[2]).Value,
-                    ((ServerParameterString) ServerParameters[0]).Value);
+                _client = new BitstampClient(((ServerParameterString)ServerParameters[1]).Value,
+                    ((ServerParameterPassword)ServerParameters[2]).Value,
+                    ((ServerParameterString)ServerParameters[0]).Value);
                 _client.Connected += ClientOnConnected;
                 _client.UpdatePairs += ClientOnUpdatePairs;
                 _client.Disconnected += ClientOnDisconnected;

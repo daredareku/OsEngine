@@ -2,11 +2,7 @@
 using OsEngine.Entity;
 using OsEngine.Market.Servers.Bybit.Entities;
 using OsEngine.Market.Servers.Bybit.Utilities;
-using OsEngine.Market.Servers.Entity;
-using OsEngine.Market.Services;
-using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace OsEngine.Market.Servers.Bybit.EntityCreators
 {
@@ -18,7 +14,7 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
 
             var JProperties = data.Children();
 
-            foreach(var jProperty in JProperties)
+            foreach (var jProperty in JProperties)
             {
                 Candle candle = new Candle();
 
@@ -35,7 +31,7 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
             return candles;
         }
 
-        
+
 
         public static List<Candle> GetCandleCollection(Client client, string security, string need_interval_for_query, int from, BybitServerRealization server)
         {

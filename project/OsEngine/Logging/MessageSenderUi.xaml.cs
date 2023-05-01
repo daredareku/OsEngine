@@ -3,8 +3,8 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Windows;
 using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.Logging
 {
@@ -18,7 +18,7 @@ namespace OsEngine.Logging
         /// distribution manager
         /// менедженр рассылки
         /// </summary>
-        private readonly MessageSender _sender; 
+        private readonly MessageSender _sender;
 
         public MessageSenderUi(MessageSender sender) // constructor / конструктор
         {
@@ -157,11 +157,11 @@ namespace OsEngine.Logging
                 _sender.MailSendOn = false;
             }
 
-           _sender.MailSignalSendOn =  CheckBoxMailSignal.IsChecked.Value;
-           _sender.MailTradeSendOn = CheckBoxMailTrade.IsChecked.Value;
-           _sender.MailErrorSendOn = CheckBoxMailError.IsChecked.Value;
-           _sender.MailSystemSendOn = CheckBoxMailSystem.IsChecked.Value;
-           _sender.MailConnectSendOn = CheckBoxMailConnect.IsChecked.Value;
+            _sender.MailSignalSendOn = CheckBoxMailSignal.IsChecked.Value;
+            _sender.MailTradeSendOn = CheckBoxMailTrade.IsChecked.Value;
+            _sender.MailErrorSendOn = CheckBoxMailError.IsChecked.Value;
+            _sender.MailSystemSendOn = CheckBoxMailSystem.IsChecked.Value;
+            _sender.MailConnectSendOn = CheckBoxMailConnect.IsChecked.Value;
 
 
             if (ComboBoxModeSms.Text == OsLocalization.Logging.Label1)

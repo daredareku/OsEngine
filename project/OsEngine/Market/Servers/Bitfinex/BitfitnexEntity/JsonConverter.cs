@@ -2,11 +2,11 @@
 //
 //    var trades = BitfinexSnapshotParser.FromJson(jsonString);
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
 {
@@ -50,7 +50,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (ChangedElement) || t == typeof (ChangedElement?);
+            return t == typeof(ChangedElement) || t == typeof(ChangedElement?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -70,7 +70,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
                         return new ChangedElement { String = stringValue };
 
                     default:
-                        return null;                            
+                        return null;
                 }
 
             }
@@ -146,7 +146,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (DataObject) || t == typeof (DataObject?);
+            return t == typeof(DataObject) || t == typeof(DataObject?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -286,7 +286,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (PurpleWalet) || t == typeof (PurpleWalet?);
+            return t == typeof(PurpleWalet) || t == typeof(PurpleWalet?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -335,7 +335,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (WaletWalet) || t == typeof (WaletWalet?);
+            return t == typeof(WaletWalet) || t == typeof(WaletWalet?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -426,7 +426,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (PurpleWalletUpdate) || t == typeof (PurpleWalletUpdate?);
+            return t == typeof(PurpleWalletUpdate) || t == typeof(PurpleWalletUpdate?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -475,7 +475,7 @@ namespace OsEngine.Market.Servers.Bitfinex.BitfitnexEntity
     {
         public override bool CanConvert(Type t)
         {
-            return t == typeof (WalletUpdateWalletUpdate) || t == typeof (WalletUpdateWalletUpdate?);
+            return t == typeof(WalletUpdateWalletUpdate) || t == typeof(WalletUpdateWalletUpdate?);
         }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)

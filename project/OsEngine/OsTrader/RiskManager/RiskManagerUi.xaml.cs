@@ -3,10 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Globalization;
 using System.Windows;
-using OsEngine.Language;
 
 namespace OsEngine.OsTrader.RiskManager
 {
@@ -60,7 +60,7 @@ namespace OsEngine.OsTrader.RiskManager
             ComboBoxReaction.Items.Add(RiskManagerReactionType.None);
 
             ComboBoxReaction.Text = _riskManager.ReactionType.ToString();
-            
+
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace OsEngine.OsTrader.RiskManager
             }
 
 
-           _riskManager.IsActiv =  CheckBoxIsOn.IsChecked.Value;
-           _riskManager.MaxDrowDownToDayPersent = Convert.ToDecimal(TextBoxOpenMaxDd.Text);
+            _riskManager.IsActiv = CheckBoxIsOn.IsChecked.Value;
+            _riskManager.MaxDrowDownToDayPersent = Convert.ToDecimal(TextBoxOpenMaxDd.Text);
 
-           Enum.TryParse(ComboBoxReaction.Text,false,out _riskManager.ReactionType);
-           _riskManager.Save();
+            Enum.TryParse(ComboBoxReaction.Text, false, out _riskManager.ReactionType);
+            _riskManager.Save();
             Close();
         }
     }

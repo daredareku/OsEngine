@@ -3,13 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -17,7 +17,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     ///  Volume-tick oscillator of contract flow per interval
     ///  объемно-тиковый осциллятор потока контрактов за интервал
     /// </summary>
-    public class TradeThread: IIndicator
+    public class TradeThread : IIndicator
     {
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 }
             }
 
-            decimal vto = (nBuy*vBuy - nSell*vSell)/(nBuy*vBuy + nSell*vSell);
+            decimal vto = (nBuy * vBuy - nSell * vSell) / (nBuy * vBuy + nSell * vSell);
 
             return Math.Round(vto, 5);
         }

@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -17,7 +17,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Indicator AO. AwesomeOscillator
     /// индикатор AO. AwesomeOscillator
     /// </summary>
-    public class AwesomeOscillator:IIndicator
+    public class AwesomeOscillator : IIndicator
     {
         /// <summary>
         /// constructor
@@ -120,7 +120,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 }
 
                 _longSma = new MovingAverage(false) { Lenght = LenghtLong, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
-                _shortSma = new MovingAverage (false){ Lenght = LenghtShort, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
+                _shortSma = new MovingAverage(false) { Lenght = LenghtShort, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
             }
         }
 
@@ -161,8 +161,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 if (_longSma == null)
                 {
-                    _longSma = new MovingAverage (false){ Lenght = 34, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
-                    
+                    _longSma = new MovingAverage(false) { Lenght = 34, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
+
                 }
                 return _longSma.Lenght;
             }
@@ -197,7 +197,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     _shortSma = new MovingAverage(false) { Lenght = 5, TypeCalculationAverage = TypeCalculationAverage, TypePointsToSearch = PriceTypePoints.Median };
                 }
                 _shortSma.Lenght = value;
-            } 
+            }
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             for (int i = 0; i < candles.Count; i++)
             {
                 newCandles.Add(candles[i]);
-                Values.Add(GetValueSimple(newCandles, newCandles.Count-1));
+                Values.Add(GetValueSimple(newCandles, newCandles.Count - 1));
             }
         }
 
@@ -458,7 +458,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-           Values[Values.Count - 1] = GetValueSimple(candles, candles.Count - 1);
+            Values[Values.Count - 1] = GetValueSimple(candles, candles.Count - 1);
         }
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return 0;
             }
 
-            return Math.Round(_shortSma.Values[index] - _longSma.Values[index],6);
+            return Math.Round(_shortSma.Values[index] - _longSma.Values[index], 6);
         }
 
         /// <summary>

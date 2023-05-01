@@ -3,6 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using Newtonsoft.Json;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.BitMex.BitMexEntity;
+using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -13,11 +17,6 @@ using System.Net.WebSockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Newtonsoft.Json;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.BitMex.BitMexEntity;
-using OsEngine.Market.Servers.Entity;
 
 namespace OsEngine.Market.Servers.BitMex
 {
@@ -346,9 +345,9 @@ namespace OsEngine.Market.Servers.BitMex
                             {
                                 var myOrder = JsonConvert.DeserializeAnonymousType(mes, new BitMexMyOrders());
 
-                                if (MyTradeEvent != null && 
+                                if (MyTradeEvent != null &&
                                     myOrder.data.Count != 0
-                                    && 
+                                    &&
                                     (myOrder.data[0].execType == "Trade"
                                     || myOrder.data[0].execType == "New"
                                     || myOrder.data[0].execType == "Filled"))

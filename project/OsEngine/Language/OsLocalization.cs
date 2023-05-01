@@ -77,7 +77,7 @@ namespace OsEngine.Language
             }
             catch
             {
-               
+
             }
         }
 
@@ -98,9 +98,9 @@ namespace OsEngine.Language
                     reader.Close();
                 }
             }
-            catch 
+            catch
             {
-               
+
             }
         }
 
@@ -123,7 +123,7 @@ namespace OsEngine.Language
                         continue;
                     }
 
-                    string [] locCur = locStrings[i].Split(':');
+                    string[] locCur = locStrings[i].Split(':');
 
                     OsLocalType cultureTypeCur;
                     if (Enum.TryParse(locCur[0], out cultureTypeCur))

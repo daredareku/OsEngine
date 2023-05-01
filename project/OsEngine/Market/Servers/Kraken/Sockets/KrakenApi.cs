@@ -1,20 +1,19 @@
-﻿using System;
-using Kraken.WebSockets.Messages;
-using System.Security;
-using System.Security.Cryptography;
+﻿using Kraken.WebSockets.Messages;
+using Kraken.WebSockets.Sockets;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OsEngine.Entity;
+using OsEngine.Market.Servers.Kraken2.Sockets;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.WebSockets;
+using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using OsEngine.Market.Servers.Kraken2.Sockets;
-using Kraken.WebSockets.Sockets;
-using System.Net.WebSockets;
-using Kraken.WebSockets;
-using OsEngine.Entity;
 using Order = Kraken.WebSockets.Messages.Order;
 
 namespace Kraken.WebSockets
@@ -55,7 +54,7 @@ namespace Kraken.WebSockets
 
         public static async Task RunKraken(IKrakenApiClient c, AuthToken token)
         {
-            if(clientOne == null)
+            if (clientOne == null)
             {
                 clientOne = c;
                 c.HeartbeatReceived += Client_HeartbeatReceived;
@@ -108,7 +107,7 @@ namespace Kraken.WebSockets
         }
 
         private static List<MarketDepth> _marketDepths = new List<MarketDepth>();
-        
+
         private static void Client_BookUpdateReceived(object sender, Events.KrakenDataEventArgs<BookUpdateMessage> e)
         {
             string pair = e.Pair.ToString();
@@ -124,26 +123,26 @@ namespace Kraken.WebSockets
                 _marketDepths.Add(depth);
             }
 
-            for (int i = 0; e.DataMessage.Asks != null && i < e.DataMessage.Asks.Length;i++)
+            for (int i = 0; e.DataMessage.Asks != null && i < e.DataMessage.Asks.Length; i++)
             {
                 OsEngine.Entity.MarketDepthLevel ask = new OsEngine.Entity.MarketDepthLevel();
                 ask.Price = e.DataMessage.Asks[i].Price;
                 ask.Ask = e.DataMessage.Asks[i].Volume;
 
-                for(int i2 = 0;i2 < depth.Asks.Count;i2++)
+                for (int i2 = 0; i2 < depth.Asks.Count; i2++)
                 {
-                    if(depth.Asks[i2].Price == ask.Price)
+                    if (depth.Asks[i2].Price == ask.Price)
                     {
                         depth.Asks.RemoveAt(i2);
                         break;
                     }
                 }
 
-                if(ask.Ask != 0)
+                if (ask.Ask != 0)
                 {
                     depth.Asks.Add(ask);
                 }
-                
+
                 depth.Time = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(e.DataMessage.Asks[i].Timestamp));
             }
 
@@ -172,14 +171,14 @@ namespace Kraken.WebSockets
 
             // 1 Теперь сортируем биды и аски
 
-            for(int i = 0;i < depth.Asks.Count;i++)
+            for (int i = 0; i < depth.Asks.Count; i++)
             {
-                for(int i2 = 0;i2< depth.Asks.Count-1;i2++)
+                for (int i2 = 0; i2 < depth.Asks.Count - 1; i2++)
                 {
-                    if(depth.Asks[i2].Price > depth.Asks[i2+1].Price)
+                    if (depth.Asks[i2].Price > depth.Asks[i2 + 1].Price)
                     {
                         MarketDepthLevel level = depth.Asks[i2];
-                        depth.Asks[i2] = depth.Asks[i2+1];
+                        depth.Asks[i2] = depth.Asks[i2 + 1];
                         depth.Asks[i2 + 1] = level;
                     }
                 }
@@ -202,7 +201,7 @@ namespace Kraken.WebSockets
             // 2 Теперь удаляем перехлёсты
 
 
-            while(depth.Bids.Count > 0 &&
+            while (depth.Bids.Count > 0 &&
                 depth.Asks.Count > 0 &&
                 depth.Bids[0].Price > depth.Asks[0].Price)
             {
@@ -357,7 +356,7 @@ namespace Kraken.WebSockets
             depth.Asks.Add(ask);
             depth.Bids.Add(bid);
 
-            if(MarketDepthUpdateEvent != null)
+            if (MarketDepthUpdateEvent != null)
             {
                 MarketDepthUpdateEvent(depth);
             }
@@ -370,7 +369,7 @@ namespace Kraken.WebSockets
 
             Sec security = Securities.Find(sec => sec.NameInSocket == pair);
 
-            for(int i = 0;i < e.DataMessage.Trades.Length;i++)
+            for (int i = 0; i < e.DataMessage.Trades.Length; i++)
             {
                 OsEngine.Entity.Trade trade = new OsEngine.Entity.Trade();
                 trade.SecurityNameCode = security.NameInRest;
@@ -383,7 +382,7 @@ namespace Kraken.WebSockets
                     trade.Side = OsEngine.Entity.Side.Sell;
                 }
 
-                if(TradeUpdateEvent != null)
+                if (TradeUpdateEvent != null)
                 {
                     TradeUpdateEvent(trade);
                 }
@@ -405,7 +404,7 @@ namespace Kraken.WebSockets
         private static void Client_SubscriptionStatusChanged(object sender, Events.KrakenMessageEventArgs<SubscriptionStatus> e)
         {
             string message = e.Message.Status.ToString() + e.Message.Subscription.Name.ToString();
-            if(e.Message.Pair != null)
+            if (e.Message.Pair != null)
             {
                 message += e.Message.Pair.ToString();
             }
@@ -414,7 +413,7 @@ namespace Kraken.WebSockets
                 message += e.Message.ErrorMessage.ToString();
             }
 
-            SendLogMessage(message, 
+            SendLogMessage(message,
                 OsEngine.Logging.LogMessageType.Connect);
 
             // = (sender, e) => 
@@ -429,7 +428,7 @@ namespace Kraken.WebSockets
 
         private static void Client_HeartbeatReceived(object sender, Events.KrakenMessageEventArgs<Heartbeat> e)
         {
-  
+
         }
 
         public event Action<OsEngine.Entity.Order> NewOrderEvent;
@@ -457,7 +456,7 @@ namespace Kraken.WebSockets
         {
             Side type = Side.Buy;
 
-            if(order.Side == OsEngine.Entity.Side.Buy)
+            if (order.Side == OsEngine.Entity.Side.Buy)
             {
                 type = Side.Buy;
             }
@@ -470,7 +469,7 @@ namespace Kraken.WebSockets
 
             Sec security = Securities.Find(s => s.NameInRest == order.SecurityNameCode);
 
-            AddOrderCommand newCommand = new AddOrderCommand(_token.Token,OrderType.Limit, type, security.NameInSocket, volume);
+            AddOrderCommand newCommand = new AddOrderCommand(_token.Token, OrderType.Limit, type, security.NameInSocket, volume);
 
             newCommand.Price = order.Price;
             newCommand.Userref = order.NumberUser.ToString();
@@ -511,7 +510,7 @@ namespace Kraken.WebSockets
                 if (o.UserRef == 0)
                 {
                     OrdersRef myRef = _ordersRefs.Find(ord => ord.MarketRef == o.OrderId);
-                    if(myRef == null)
+                    if (myRef == null)
                     {
                         continue;
                     }
@@ -520,7 +519,7 @@ namespace Kraken.WebSockets
                         numberUser = myRef.UserRef;
                     }
                 }
-                else if(_ordersRefs.Find(ord => ord.UserRef == o.UserRef) == null)
+                else if (_ordersRefs.Find(ord => ord.UserRef == o.UserRef) == null)
                 {
                     OrdersRef newRef = new OrdersRef();
                     newRef.MarketRef = o.OrderId;

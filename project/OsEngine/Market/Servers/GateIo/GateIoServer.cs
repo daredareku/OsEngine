@@ -201,7 +201,7 @@ namespace OsEngine.Market.Servers.GateIo
                                 }
                                 catch (Exception error)
                                 {
-                                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                                 }
 
                             }
@@ -434,7 +434,7 @@ namespace OsEngine.Market.Servers.GateIo
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
         }
 

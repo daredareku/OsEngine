@@ -3,15 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market;
 
 namespace OsEngine.OsTrader.Panels.Tab.Internal
 {
@@ -88,7 +87,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
 
         private string _name;
 
-        public BotManualControl(string name, BotTabSimple botTab,StartProgram startProgram)
+        public BotManualControl(string name, BotTabSimple botTab, StartProgram startProgram)
         {
             _name = name;
             _startProgram = startProgram;
@@ -103,10 +102,10 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
 
             StopDistance = 30;
             StopSlipage = 5;
-           
+
             ProfitDistance = 30;
             ProfitSlipage = 5;
-           
+
             DoubleExitSlipage = 10;
             SecondToOpen = new TimeSpan(0, 0, 0, 50);
             SecondToClose = new TimeSpan(0, 0, 0, 50);
@@ -128,11 +127,11 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                     Activate();
                 }
 
-                lock(_tabsAddLocker)
+                lock (_tabsAddLocker)
                 {
                     TabsToCheck.Add(this);
                 }
-                
+
             }
         }
 
@@ -190,7 +189,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
         /// </summary>
         public void Save()
         {
-            if(_startProgram == StartProgram.IsOsOptimizer)
+            if (_startProgram == StartProgram.IsOsOptimizer)
             {
                 return;
             }
@@ -243,7 +242,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                     File.Delete(@"Engine\" + _name + @"StrategSettings.txt");
                 }
 
-                if(TabsToCheck != null)
+                if (TabsToCheck != null)
                 {
                     lock (_tabsAddLocker)
                     {
@@ -258,7 +257,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                     }
                 }
 
-                if(_botTab != null)
+                if (_botTab != null)
                 {
                     _botTab = null;
                 }
@@ -458,7 +457,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
 
             try
             {
-                if(_botTab == null)
+                if (_botTab == null)
                 {
                     return;
                 }
@@ -593,7 +592,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             {
                 if (position.Direction == Side.Buy)
                 {
-                    decimal priceRedLine = position.EntryPrice - GetStopDistance(position,bot.Securiti);
+                    decimal priceRedLine = position.EntryPrice - GetStopDistance(position, bot.Securiti);
                     decimal priceOrder = priceRedLine - GetStopSlippageDistance(position, bot.Securiti);
 
                     bot.CloseAtStop(position, priceRedLine, priceOrder);
@@ -677,7 +676,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             return result;
         }
 
-        public decimal GetProfitDistanceSlippage(Position position,Security security)
+        public decimal GetProfitDistanceSlippage(Position position, Security security)
         {
             decimal result = 0;
 

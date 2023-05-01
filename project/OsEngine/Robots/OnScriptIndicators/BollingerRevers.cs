@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trend Strategy Based on Breaking Bollinger Lines
@@ -26,7 +26,7 @@ public class BollingerRevers : BotPanel
         _bol = IndicatorsFactory.CreateIndicatorByName("Bollinger", name + "Bollinger", false);
         _bol = (Aindicator)_tab.CreateCandleIndicator(_bol, "Prime");
 
-        _bol.ParametersDigit[0].Value= BollingerLength.ValueInt;
+        _bol.ParametersDigit[0].Value = BollingerLength.ValueInt;
         _bol.ParametersDigit[1].Value = BollingerDeviation.ValueDecimal;
 
         _bol.Save();
@@ -156,7 +156,7 @@ public class BollingerRevers : BotPanel
     {
         if (position.State == PositionStateType.Closing ||
             position.CloseActiv == true ||
-            (position.CloseOrders != null &&  position.CloseOrders.Count > 0)) 
+            (position.CloseOrders != null && position.CloseOrders.Count > 0))
         {
             return;
         }

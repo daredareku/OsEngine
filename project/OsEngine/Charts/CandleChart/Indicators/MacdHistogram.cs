@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -18,7 +18,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Indicator for analysis of convergence and divergence of moving averages in the form of Histogram
     /// Индикатор для анализа схождения-расхождения скользящих средних, в виде Гистограммы
     /// </summary>
-    public class MacdHistogram: IIndicator
+    public class MacdHistogram : IIndicator
     {
         /// <summary>
         /// constructor
@@ -26,7 +26,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public MacdHistogram(string uniqName,bool canDelete)
+        public MacdHistogram(string uniqName, bool canDelete)
         {
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Column;
@@ -39,7 +39,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 _maShort = new MovingAverage(uniqName + "ma1", false) { Lenght = 12, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
                 _maLong = new MovingAverage(uniqName + "ma2", false) { Lenght = 26, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
                 _maSignal = new MovingAverage(uniqName + "maSignal", false) { Lenght = 9, TypeCalculationAverage = MovingAverageTypeCalculation.Simple };
-            } 
+            }
             else
             {
                 _maShort = new MovingAverage(uniqName + "ma1", false);
@@ -65,7 +65,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Column;
             ColorUp = Color.DodgerBlue;
-            ColorDown= Color.DarkRed;
+            ColorDown = Color.DarkRed;
             PaintOn = true;
 
             _maShort = movingShort;
@@ -93,9 +93,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
             ColorUp = Color.DodgerBlue;
             ColorDown = Color.DarkRed;
             PaintOn = true;
-            _maShort = new MovingAverage( false) {Lenght = 12,TypeCalculationAverage = MovingAverageTypeCalculation.Exponential};
-            _maLong = new MovingAverage( false) { Lenght = 26, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
-            _maSignal = new MovingAverage( false){Lenght = 9,TypeCalculationAverage = MovingAverageTypeCalculation.Simple};
+            _maShort = new MovingAverage(false) { Lenght = 12, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
+            _maLong = new MovingAverage(false) { Lenght = 26, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
+            _maSignal = new MovingAverage(false) { Lenght = 9, TypeCalculationAverage = MovingAverageTypeCalculation.Simple };
             CanDelete = canDelete;
         }
 
@@ -410,7 +410,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 ProcessAll(candles);
             }
 
-           // Values = _maSignal.Values;
+            // Values = _maSignal.Values;
         }
 
         /// <summary>
@@ -510,7 +510,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             return _maShort.Values[index] - _maLong.Values[index];
-           
+
         }
 
         private decimal GetMacdHistogram(int index)

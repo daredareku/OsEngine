@@ -3,10 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Globalization;
 using System.Windows;
-using OsEngine.Language;
 
 namespace OsEngine.Entity
 {
@@ -87,7 +87,7 @@ namespace OsEngine.Entity
                 return;
             }
 
-            _security.Go = go/100;
+            _security.Go = go / 100;
             _security.Lot = lot;
             _security.PriceStep = step;
             _security.PriceStepCost = stepCost;

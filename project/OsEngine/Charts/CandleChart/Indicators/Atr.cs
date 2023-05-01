@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -360,19 +360,20 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="candles">candles/свечи</param>
         /// <param name="index">index/индекс</param>
         /// <returns>index value/значение индикатора по индексу</returns>
-        public decimal GetValue(List<Candle> candles,int index)
+        public decimal GetValue(List<Candle> candles, int index)
         {
             TrueRangeReload(candles, index);
             if (!IsWatr)
             {
                 _moving = MovingAverageWild(_trueRange, _moving, Lenght, index);
-            } else
+            }
+            else
             {
                 _moving = MovingAverageExponentiallyWeighted(_trueRange, _moving, Lenght, index);
             }
-            
 
-            return Math.Round(_moving[_moving.Count-1],7);
+
+            return Math.Round(_moving[_moving.Count - 1], 7);
         }
 
         private List<decimal> _moving;
@@ -511,7 +512,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     lastValueMoving = moving[moving.Count - 2];
                 }
 
-                moving[moving.Count - 1] = Math.Round(lastValueMoving + (lastValueSeries-lastValueMoving) * lambda, 7);
+                moving[moving.Count - 1] = Math.Round(lastValueMoving + (lastValueSeries - lastValueMoving) * lambda, 7);
 
             }
 

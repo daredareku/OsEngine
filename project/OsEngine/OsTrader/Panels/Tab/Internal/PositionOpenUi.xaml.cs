@@ -3,11 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Globalization;
-using System.Windows;
 using OsEngine.Entity;
 using OsEngine.Language;
+using System;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Panels.Tab.Internal
 {
@@ -56,9 +55,9 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             }
             catch (Exception)
             {
-                  return;
+                return;
             }
-            
+
 
             if (type == PositionOpenType.Limit)
             {
@@ -77,7 +76,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             {
                 TextBoxAcebergOrdersCount.IsEnabled = false;
             }
-                
+
         }
 
 
@@ -86,7 +85,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
         public decimal Price;
 
         public decimal Volume;
-        
+
         public PositionOpenType OpenType;
 
         public Side Side;

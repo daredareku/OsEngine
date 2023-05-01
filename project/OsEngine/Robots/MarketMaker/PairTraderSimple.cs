@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using OsEngine.Entity;
-using OsEngine.Market;
+﻿using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OsEngine.Robots.MarketMaker
 {

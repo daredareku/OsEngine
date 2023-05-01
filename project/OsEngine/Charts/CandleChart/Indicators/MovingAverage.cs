@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -124,7 +124,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public MovingAverage(string uniqName,bool canDelete)
+        public MovingAverage(string uniqName, bool canDelete)
         {
             Name = uniqName;
             KaufmanFastEma = 2;
@@ -537,11 +537,11 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
             if (TypeCalculationAverage == MovingAverageTypeCalculation.Weighted)
             {
-               Values[Values.Count - 1] = GetValueWeighted(candles, candles.Count - 1);
+                Values[Values.Count - 1] = GetValueWeighted(candles, candles.Count - 1);
             }
             if (TypeCalculationAverage == MovingAverageTypeCalculation.Radchenko)
             {
-               Values[Values.Count - 1] = GetValueRadchenko(Values, candles, candles.Count - 2);
+                Values[Values.Count - 1] = GetValueRadchenko(Values, candles, candles.Count - 2);
             }
             if (TypeCalculationAverage == MovingAverageTypeCalculation.Adaptive)
             {
@@ -576,10 +576,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             for (int i = index; i > index - Lenght; i--)
             {
-                average += GetPoint(candles,i);
+                average += GetPoint(candles, i);
             }
 
-            average = average/Lenght;
+            average = average / Lenght;
 
             return Math.Round(average, 8);
         }
@@ -634,7 +634,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 // это первое значение. Рассчитываем как простую машку
                 decimal lastMoving = 0;
 
-                for (int i = index - Lenght +1; i < index + 1; i++)
+                for (int i = index - Lenght + 1; i < index + 1; i++)
                 {
                     lastMoving += GetPoint(candles, i);
                 }
@@ -650,7 +650,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
                 decimal a = Math.Round(2.0m / (Lenght + 1), 8);
 
-                decimal emaLast = Values[index-1];
+                decimal emaLast = Values[index - 1];
 
                 decimal p = GetPoint(candles, index);
                 //ЕМА(i) = ЕМА(i - 1) + ( К • [ Close(i) - ЕМА (i -1) ] ), 
@@ -658,7 +658,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 //result = a*p + (1 - a)*emaLast;
             }
 
-            return Math.Round(result,8);
+            return Math.Round(result, 8);
         }
 
         /// <summary>
@@ -687,7 +687,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
         }
 
-        
+
         /// <summary>
         /// weighted (help func)
         /// взвешенная (вспомогательная функция)
@@ -969,7 +969,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 {
                     Values.Add(GetValueKaufmanAdaptive(values, i));
                 }
-                
+
                 if (TypeCalculationAverage == MovingAverageTypeCalculation.Hull)
                 {
                     Values.Add(GetValueHull(values, i));
@@ -1092,7 +1092,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             for (int i = index, weight = Lenght; i > index - Lenght; i--, weight--)
             {
-                average += values[i] *weight;
+                average += values[i] * weight;
                 weights += weight;
             }
             if (weights == 0)
@@ -1101,7 +1101,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
             average = average / weights;
 
-            return Math.Round(average,8);
+            return Math.Round(average, 8);
 
         }
 
@@ -1272,7 +1272,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 // 1 calculating ER
                 // 1 высчитываем ER
 
-                decimal signal = Math.Abs(GetPoint(candles, index) - GetPoint(candles, index-Lenght));
+                decimal signal = Math.Abs(GetPoint(candles, index) - GetPoint(candles, index - Lenght));
 
                 decimal noise = 0;
 
@@ -1282,8 +1282,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 }
 
                 decimal er = 1;
-                
-                if(noise != 0)
+
+                if (noise != 0)
                 {
                     er = signal / noise;
                 }
@@ -1295,15 +1295,15 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 decimal aFast = Math.Round(2.0m / (KaufmanFastEma + 1), 8);
                 decimal aSlow = Math.Round(2.0m / (KaufmanSlowEma + 1), 8);
 
-                decimal aDunamic = er*(aFast - aSlow) + aSlow;
-                
+                decimal aDunamic = er * (aFast - aSlow) + aSlow;
+
                 //decimal a = Math.Round(2.0m / (Lenght + 1), 6);
 
-                decimal emaLast = Values[index-1];
+                decimal emaLast = Values[index - 1];
 
                 decimal p = GetPoint(candles, index);
 
-                result = emaLast + (aDunamic *aDunamic)*(p - emaLast);
+                result = emaLast + (aDunamic * aDunamic) * (p - emaLast);
 
                 //result = p*aDunamic + emaLast * (1-aDunamic);
                 //result = emaLast + (aDunamic * (p - emaLast));
@@ -1327,13 +1327,13 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 // 1 calculating ER
                 // 1 высчитываем ER
 
-                decimal signal = Math.Abs(values[index] - values[index-Lenght]);
+                decimal signal = Math.Abs(values[index] - values[index - Lenght]);
 
                 decimal noise = 0;
 
                 for (int i = index; i > 0 && i >= index - Lenght + 1; i--)
                 {
-                    noise += Math.Abs(values[i] - values[i-1]);
+                    noise += Math.Abs(values[i] - values[i - 1]);
                 }
 
                 decimal er = 1;
@@ -1354,7 +1354,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
                 //decimal a = Math.Round(2.0m / (Lenght + 1), 6);
 
-                decimal emaLast = Values[index-1];
+                decimal emaLast = Values[index - 1];
 
                 decimal p = values[index];
 

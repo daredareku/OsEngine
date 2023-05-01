@@ -1,12 +1,12 @@
+using OsEngine.Charts.CandleChart.Elements;
+using OsEngine.Entity;
+using OsEngine.Indicators;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Charts.CandleChart.Elements;
-using OsEngine.Entity;
-using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
-using OsEngine.OsTrader.Panels;
 
 /// <summary>
 /// RSI's concurrent overbought and oversold strategy
@@ -20,7 +20,7 @@ public class RsiTrade : BotPanel
         TabCreate(BotTabType.Simple);
         _tab = TabsSimple[0];
 
-        _rsi = IndicatorsFactory.CreateIndicatorByName("RSI",name + "RSI", false);
+        _rsi = IndicatorsFactory.CreateIndicatorByName("RSI", name + "RSI", false);
         _rsi = (Aindicator)_tab.CreateCandleIndicator(_rsi, "RsiArea");
 
         Upline = new LineHorisontal("upline", "RsiArea", false)

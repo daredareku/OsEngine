@@ -3,8 +3,8 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Windows;
 using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.Logging
 {
@@ -28,7 +28,7 @@ namespace OsEngine.Logging
             {
                 string[] phones = serverSms.Phones.Split(',');
 
-                for (int i = 0; i < phones.Length -1; i++)
+                for (int i = 0; i < phones.Length - 1; i++)
                 {
                     TextBoxFones.Text += phones[i] + "\n";
                 }

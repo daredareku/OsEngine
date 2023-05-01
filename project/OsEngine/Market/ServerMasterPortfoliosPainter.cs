@@ -3,15 +3,15 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers;
 using Point = System.Drawing.Point;
 
 namespace OsEngine.Market
@@ -37,7 +37,7 @@ namespace OsEngine.Market
         /// </summary>
         private void ServerMaster_ServerCreateEvent(IServer server)
         {
-            if(server.ServerType == ServerType.Optimizer)
+            if (server.ServerType == ServerType.Optimizer)
             {
                 return;
             }
@@ -78,7 +78,7 @@ namespace OsEngine.Market
         /// </summary>
         public void StartPaint()
         {
-            if(_positionHost.Dispatcher.CheckAccess() == false)
+            if (_positionHost.Dispatcher.CheckAccess() == false)
             {
                 _positionHost.Dispatcher.Invoke(new Action(StartPaint));
                 return;
@@ -184,14 +184,14 @@ namespace OsEngine.Market
             _neadToPaintPortfolio = true;
         }
 
-// work of thread that draws portfolios and orders
-// работа потока прорисовывающего портфели и ордера
+        // work of thread that draws portfolios and orders
+        // работа потока прорисовывающего портфели и ордера
 
         private async void PainterThreadArea()
         {
             while (true)
             {
-               await Task.Delay(5000);
+                await Task.Delay(5000);
 
                 if (MainWindow.ProccesIsWorked == false)
                 {
@@ -224,8 +224,8 @@ namespace OsEngine.Market
         /// </summary>
         private bool _needToPaintOrders;
 
-// portfolio drawing
-// прорисовка портфеля
+        // portfolio drawing
+        // прорисовка портфеля
 
         /// <summary>
         /// table for drawing portfolios
@@ -281,7 +281,7 @@ namespace OsEngine.Market
                     _portfolios.RemoveAt(500);
                 }
 
-                for(int i = 0;i < _portfolios.Count;i++)
+                for (int i = 0; i < _portfolios.Count; i++)
                 {
                     Portfolio port = _portfolios[i];
 
@@ -290,7 +290,7 @@ namespace OsEngine.Market
                         continue;
                     }
                     List<PositionOnBoard> poses = port.GetPositionOnBoard();
-                    
+
                     while (poses != null &&
                         poses.Count > 500)
                     {
@@ -336,24 +336,24 @@ namespace OsEngine.Market
                     }
                     catch (Exception)
                     {
-                        
+
                     }
                 }
 
-               /* int curUpRow = 0;
-                int curSelectRow = 0;*/
+                /* int curUpRow = 0;
+                 int curSelectRow = 0;*/
 
-               if (curUpRow != 0 && curUpRow != -1)
-               {
-                   _gridPosition.FirstDisplayedScrollingRowIndex = curUpRow;
-               }
+                if (curUpRow != 0 && curUpRow != -1)
+                {
+                    _gridPosition.FirstDisplayedScrollingRowIndex = curUpRow;
+                }
 
-               if (curSelectRow != 0 &&
-                   _gridPosition.Rows.Count > curSelectRow
-                   && curSelectRow != -1)
-               {
-                   _gridPosition.Rows[curSelectRow].Selected = true;
-               }
+                if (curSelectRow != 0 &&
+                    _gridPosition.Rows.Count > curSelectRow
+                    && curSelectRow != -1)
+                {
+                    _gridPosition.Rows[curSelectRow].Selected = true;
+                }
 
             }
             catch (Exception error)
@@ -371,7 +371,7 @@ namespace OsEngine.Market
             try
             {
                 if (portfolio.ValueBegin == 0
-                    && portfolio.ValueCurrent == 0 
+                    && portfolio.ValueCurrent == 0
                     && portfolio.ValueBlocked == 0)
                 {
                     List<PositionOnBoard> poses = portfolio.GetPositionOnBoard();
@@ -479,7 +479,7 @@ namespace OsEngine.Market
                 }
             }
             catch
-            {   
+            {
                 // ignore. Let us sometimes face with null-value, when deleting the original order or modification, but don't break work of mail thread
                 // игнорим. Пусть иногда натыкаемся на налл, при удалении исходного ордера или модификации
                 // зато не мешаем основному потоку работать
@@ -493,8 +493,8 @@ namespace OsEngine.Market
         /// </summary>
         private List<Portfolio> _portfolios;
 
-// orders
-// ордера
+        // orders
+        // ордера
 
         /// <summary>
         /// table for drawing orders
@@ -723,8 +723,8 @@ namespace OsEngine.Market
             }
         }
 
-// user clicks the popup menu       
-// пользователь кликает по всплывающему меню
+        // user clicks the popup menu       
+        // пользователь кликает по всплывающему меню
 
         /// <summary>
         /// user clicked the table with all orders
@@ -775,7 +775,7 @@ namespace OsEngine.Market
         /// </summary>
         private void OrdersCloseAll_Click(object sender, EventArgs e)
         {
-            new Task(()=>
+            new Task(() =>
             {
                 try
                 {
@@ -817,7 +817,7 @@ namespace OsEngine.Market
         /// </summary>
         private void PositionCloseForNumber_Click(object sender, EventArgs e)
         {
-            new Task(()=>
+            new Task(() =>
             {
                 try
                 {
@@ -851,11 +851,11 @@ namespace OsEngine.Market
                     SendNewLogMessage(error.ToString(), LogMessageType.Error);
                 }
             }).Start();
-           
+
         }
 
-// log message
-// сообщения в лог
+        // log message
+        // сообщения в лог
 
         /// <summary>
         /// send a new message to up

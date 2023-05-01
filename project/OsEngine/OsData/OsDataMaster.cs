@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using OsEngine.Logging;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
-using OsEngine.Market.Servers;
+using OsEngine.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace OsEngine.OsData
 {
@@ -105,7 +101,7 @@ namespace OsEngine.OsData
 
             _awaitUiMasterAloneTest.Dispose();
 
-            if(NeadUpDateTableEvent != null)
+            if (NeadUpDateTableEvent != null)
             {
                 NeadUpDateTableEvent();
             }

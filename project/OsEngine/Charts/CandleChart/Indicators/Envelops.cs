@@ -3,16 +3,16 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
-    public class Envelops: IIndicator
+    public class Envelops : IIndicator
     {
         /// <summary>
         /// constructor with unique name. Indicator will be saved
@@ -20,7 +20,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Envelops(string uniqName,bool canDelete)
+        public Envelops(string uniqName, bool canDelete)
         {
             Name = uniqName;
             TypeIndicator = IndicatorChartPaintType.Line;
@@ -34,7 +34,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 // if this is our first download.
                 // если у нас первая загрузка
                 MovingAverage = new MovingAverage(uniqName + "maSignal", false) { Lenght = 9, TypeCalculationAverage = MovingAverageTypeCalculation.Simple };
-            } 
+            }
             else
             {
                 MovingAverage = new MovingAverage(uniqName + "maSignal", false);
@@ -58,7 +58,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             ColorDown = Color.DarkRed;
             PaintOn = true;
             Deviation = 2;
-            MovingAverage = new MovingAverage(false){Lenght = 9,TypeCalculationAverage = MovingAverageTypeCalculation.Simple};
+            MovingAverage = new MovingAverage(false) { Lenght = 9, TypeCalculationAverage = MovingAverageTypeCalculation.Simple };
             CanDelete = canDelete;
         }
 
@@ -383,10 +383,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
             if (ValuesUp == null)
             {
                 ValuesUp = new List<decimal>();
-                ValuesDown= new List<decimal>();
+                ValuesDown = new List<decimal>();
             }
 
-            ValuesUp.Add(GetUpValue(candles.Count-1));
+            ValuesUp.Add(GetUpValue(candles.Count - 1));
             ValuesDown.Add(GetDownValue(candles.Count - 1));
         }
 
@@ -405,7 +405,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             MovingAverage.Process(candles);
 
             ValuesUp = new List<decimal>();
-            ValuesDown= new List<decimal>();
+            ValuesDown = new List<decimal>();
 
             for (int i = 0; i < candles.Count; i++)
             {
@@ -425,7 +425,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return;
             }
 
-            ValuesUp[ValuesUp.Count - 1] = GetUpValue(candles.Count-1);
+            ValuesUp[ValuesUp.Count - 1] = GetUpValue(candles.Count - 1);
             ValuesDown[ValuesDown.Count - 1] = GetDownValue(candles.Count - 1);
         }
 
@@ -435,7 +435,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 index = MovingAverage.Values.Count - 1;
             }
-            return Math.Round(MovingAverage.Values[index] + MovingAverage.Values[index]*(Deviation/100),5);
+            return Math.Round(MovingAverage.Values[index] + MovingAverage.Values[index] * (Deviation / 100), 5);
         }
 
         private decimal GetDownValue(int index)
@@ -444,7 +444,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 index = MovingAverage.Values.Count - 1;
             }
-            return Math.Round(MovingAverage.Values[index] - MovingAverage.Values[index] * (Deviation / 100),5);
+            return Math.Round(MovingAverage.Values[index] - MovingAverage.Values[index] * (Deviation / 100), 5);
         }
     }
 }

@@ -2,6 +2,11 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Charts.CandleChart;
+using OsEngine.Charts.ColorKeeper;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,12 +16,6 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.Integration;
 using System.Windows.Media;
-using OsEngine.Charts.CandleChart;
-using OsEngine.Charts.ColorKeeper;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels.Tab;
 using Rectangle = System.Windows.Shapes.Rectangle;
 
 namespace OsEngine.Charts.ClusterChart
@@ -641,7 +640,7 @@ namespace OsEngine.Charts.ClusterChart
 
                 int pointsCountStart = 0;
 
-                for (int i = 0; i < _volume.VolumeClusters.Count-1; i++)
+                for (int i = 0; i < _volume.VolumeClusters.Count - 1; i++)
                 {
                     if (_volume.VolumeClusters[i].Lines == null)
                     {
@@ -660,7 +659,7 @@ namespace OsEngine.Charts.ClusterChart
                     }
 
                     //ReloadAreaSizes();
-                    PaintAllClusters(history,maxVolume);
+                    PaintAllClusters(history, maxVolume);
                     //ResizeSeriesLabels();
                     //RePaintRightLebels();
                     //ResizeYAxisOnArea("Prime");
@@ -698,7 +697,7 @@ namespace OsEngine.Charts.ClusterChart
 
             int clustersCount = 0;
             int lastClusterNum = -1;
-            int lastClusterInHistory=0;
+            int lastClusterInHistory = 0;
 
             for (int i = 0; i < history.Count; i++)
             {
@@ -716,7 +715,7 @@ namespace OsEngine.Charts.ClusterChart
 
             Series candleSeries = FindSeriesByNameSafe("SeriesCluster");
 
-                for (int i = index; i < history.Count; i++)
+            for (int i = index; i < history.Count; i++)
             {
                 decimal clusterStartY = history[i].NumCluster; // Это точка начала кластера
 
@@ -724,7 +723,7 @@ namespace OsEngine.Charts.ClusterChart
 
                 decimal lineVolume = history[i].GetVolume(_chartType);
 
-                decimal move = Math.Round(lineVolume / maxVolume,4);
+                decimal move = Math.Round(lineVolume / maxVolume, 4);
 
                 if (_chartType == ClusterType.DeltaVolume)
                 {
@@ -741,7 +740,7 @@ namespace OsEngine.Charts.ClusterChart
                 else
                 {
                     candleSeries.Points.AddXY(linePriceX, clusterStartY, clusterStartY + move);
-                    myPoint = candleSeries.Points[candleSeries.Points.Count-1];
+                    myPoint = candleSeries.Points[candleSeries.Points.Count - 1];
                 }
 
                 if (_chartType == ClusterType.DeltaVolume)
@@ -800,23 +799,23 @@ namespace OsEngine.Charts.ClusterChart
 
             ChartArea candleArea = FindAreaByNameSafe("Prime");
 
-            if(candleArea.AxisY.Maximum > clustersCount)
+            if (candleArea.AxisY.Maximum > clustersCount)
             {
                 candleArea.AxisY.Maximum = clustersCount;
             }
 
-             if (candleArea != null)
+            if (candleArea != null)
             //если уже выбран какой-то диапазон
             {
-            // сдвигаем представление вправо
-                  candleArea.AxisY.Maximum = _volume.VolumeClusters.Count + 2;
-                  candleArea.AxisY.Minimum = -1;
+                // сдвигаем представление вправо
+                candleArea.AxisY.Maximum = _volume.VolumeClusters.Count + 2;
+                candleArea.AxisY.Minimum = -1;
             }
 
-             if(lastClusterInHistory != lastClusterNum
-                && candleArea.AxisY.ScrollBar != null)
+            if (lastClusterInHistory != lastClusterNum
+               && candleArea.AxisY.ScrollBar != null)
             {
-                if(candleArea.AxisY.ScaleView.Position + candleArea.AxisY.ScaleView.Size < candleArea.AxisY.Maximum)
+                if (candleArea.AxisY.ScaleView.Position + candleArea.AxisY.ScaleView.Size < candleArea.AxisY.Maximum)
                 {
                     candleArea.AxisY.ScaleView.Position += 1;
                     ResizeXAxis();
@@ -913,12 +912,12 @@ namespace OsEngine.Charts.ClusterChart
             }
 
             ChartArea candleArea = FindAreaByNameSafe("Prime");
-           // if (candleArea != null && candleArea.AxisY.ScrollBar.IsVisible)
-                //если уже выбран какой-то диапазон
-           // {
-                // сдвигаем представление вправо
-                candleArea.AxisY.Maximum = _volume.VolumeClusters.Count + 2;
-                candleArea.AxisY.Minimum = -1;
+            // if (candleArea != null && candleArea.AxisY.ScrollBar.IsVisible)
+            //если уже выбран какой-то диапазон
+            // {
+            // сдвигаем представление вправо
+            candleArea.AxisY.Maximum = _volume.VolumeClusters.Count + 2;
+            candleArea.AxisY.Minimum = -1;
             //}
 
             if (FindSeriesByNameSafe("Cursor") != null)
@@ -1292,7 +1291,7 @@ namespace OsEngine.Charts.ClusterChart
 
             if (double.IsNaN(_chart.ChartAreas[0].AxisY.ScaleView.Size))
             {
-                values = _volume.VolumeClusterLines[_volume.VolumeClusterLines.Count-1].NumCluster+1;
+                values = _volume.VolumeClusterLines[_volume.VolumeClusterLines.Count - 1].NumCluster + 1;
             }
             else
             {
@@ -1301,7 +1300,7 @@ namespace OsEngine.Charts.ClusterChart
             }
 
             if (firstPos < 0 ||
-                firstPos > _volume.VolumeClusters.Count||
+                firstPos > _volume.VolumeClusters.Count ||
                 firstPos + values > _volume.VolumeClusters.Count)
             {
                 return;
@@ -1388,7 +1387,7 @@ namespace OsEngine.Charts.ClusterChart
                 firstPos = (int)_chart.ChartAreas[0].AxisY.ScaleView.Position;
                 lastPos = (int)_chart.ChartAreas[0].AxisY.ScaleView.Size
                 + firstPos;
-                
+
             }
 
             if (firstPos < 0 ||

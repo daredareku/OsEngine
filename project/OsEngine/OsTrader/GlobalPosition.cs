@@ -3,19 +3,16 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Alerts;
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market;
-using System.Drawing;
-using System.IO;
-using System.Text;
-using OsEngine.Language;
-using OsEngine.Alerts;
 
 namespace OsEngine.OsTrader
 {
@@ -64,9 +61,9 @@ namespace OsEngine.OsTrader
                     _journals = new List<Journal.Journal>();
                 }
 
-                for(int i = 0;i < _journals.Count;i++)
+                for (int i = 0; i < _journals.Count; i++)
                 {
-                    if(_journals[i].Name == journal.Name)
+                    if (_journals[i].Name == journal.Name)
                     {
                         return;
                     }
@@ -85,9 +82,9 @@ namespace OsEngine.OsTrader
         {
             List<Position> deals = new List<Position>();
 
-            for(int i = 0;i < _journals.Count;i++)
+            for (int i = 0; i < _journals.Count; i++)
             {
-                if(_journals[i] != null)
+                if (_journals[i] != null)
                 {
                     List<Position> curPoses = _journals[i].OpenPositions;
 
@@ -421,7 +418,7 @@ namespace OsEngine.OsTrader
         /// </summary>
         private async void WatcherHome()
         {
-            if(_startProgram != StartProgram.IsTester &&
+            if (_startProgram != StartProgram.IsTester &&
                 _startProgram != StartProgram.IsOsTrader)
             {
                 return;
@@ -467,7 +464,7 @@ namespace OsEngine.OsTrader
                 for (int i1 = 0; i1 < openPositions.Count; i1++)
                 {
                     Position position = openPositions[i1];
-                    
+
                     bool isIn = false;
                     for (int i = 0; i < _gridOpenDeal.Rows.Count; i++)
                     {
@@ -479,12 +476,12 @@ namespace OsEngine.OsTrader
                             break;
                         }
                     }
-                    
+
                     if (isIn == false)
                     {
                         DataGridViewRow row = GetRow(position);
 
-                        if(row != null)
+                        if (row != null)
                         {
                             _gridOpenDeal.Rows.Add(row);
                         }
@@ -560,8 +557,8 @@ namespace OsEngine.OsTrader
             {
                 AcceptDialogUi ui = new AcceptDialogUi(OsLocalization.Journal.Message5);
                 ui.ShowDialog();
-                
-                if(ui.UserAcceptActioin == false)
+
+                if (ui.UserAcceptActioin == false)
                 {
                     return;
                 }
@@ -588,7 +585,7 @@ namespace OsEngine.OsTrader
                 int number;
                 try
                 {
-                    if(_gridOpenDeal.CurrentCell == null)
+                    if (_gridOpenDeal.CurrentCell == null)
                     {
                         return;
                     }
@@ -622,7 +619,7 @@ namespace OsEngine.OsTrader
                 int number;
                 try
                 {
-                    if(_gridOpenDeal.CurrentCell == null)
+                    if (_gridOpenDeal.CurrentCell == null)
                     {
                         return;
                     }
@@ -656,7 +653,7 @@ namespace OsEngine.OsTrader
                 int number;
                 try
                 {
-                    if(_gridOpenDeal.CurrentCell == null)
+                    if (_gridOpenDeal.CurrentCell == null)
                     {
                         return;
                     }
@@ -689,7 +686,7 @@ namespace OsEngine.OsTrader
                 int number;
                 try
                 {
-                    if(_gridOpenDeal.CurrentCell == null)
+                    if (_gridOpenDeal.CurrentCell == null)
                     {
                         return;
                     }
@@ -730,7 +727,7 @@ namespace OsEngine.OsTrader
                 int number;
                 try
                 {
-                    if(_gridOpenDeal.CurrentCell == null)
+                    if (_gridOpenDeal.CurrentCell == null)
                     {
                         return;
                     }

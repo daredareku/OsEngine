@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -347,7 +347,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             decimal value = (candles[index].High - candles[index].Low) / candles[index].Volume;
 
-            return Math.Round(value,7);
+            return Math.Round(value, 7);
         }
     }
 }

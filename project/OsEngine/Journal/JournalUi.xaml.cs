@@ -3,6 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Journal.Internal;
+using OsEngine.Language;
+using OsEngine.Layout;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,20 +19,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Journal.Internal;
-using OsEngine.Logging;
-using Color = System.Drawing.Color;
-using Rectangle = System.Drawing.Rectangle;
 using System.Windows.Forms.DataVisualization.Charting;
-using OsEngine.Language;
-using OsEngine.Market;
 using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
 using ChartArea = System.Windows.Forms.DataVisualization.Charting.ChartArea;
+using Color = System.Drawing.Color;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
+using Rectangle = System.Drawing.Rectangle;
 using Series = System.Windows.Forms.DataVisualization.Charting.Series;
-using OsEngine.Layout;
 
 namespace OsEngine.Journal
 {
@@ -53,7 +52,7 @@ namespace OsEngine.Journal
         /// constructor
         /// конструктор
         /// </summary>
-        public JournalUi(List<BotPanelJournal> botsJournals,StartProgram startProgram)
+        public JournalUi(List<BotPanelJournal> botsJournals, StartProgram startProgram)
         {
             _startProgram = startProgram;
             _botsJournals = botsJournals;
@@ -112,7 +111,7 @@ namespace OsEngine.Journal
 
             if (TabControlLeft.Dispatcher.CheckAccess() == false)
             {
-                TabControlLeft.Dispatcher.Invoke(new Action<List<BotPanelJournal>>(CreatePositionsLists),_botsJournals);
+                TabControlLeft.Dispatcher.Invoke(new Action<List<BotPanelJournal>>(CreatePositionsLists), _botsJournals);
                 return;
             }
 
@@ -402,7 +401,7 @@ namespace OsEngine.Journal
         /// </summary>
         public void RePaint()
         {
- 
+
             if (!TabControlLeft.CheckAccess())
             {
                 TabControlLeft.Dispatcher.Invoke(RePaint);
@@ -503,10 +502,10 @@ namespace OsEngine.Journal
 
                     if (pos != null)
                     {
-                        PositionUi ui = new PositionUi(pos,_startProgram);
+                        PositionUi ui = new PositionUi(pos, _startProgram);
                         ui.ShowDialog();
 
-                        if(ui.PositionChanged)
+                        if (ui.PositionChanged)
                         {
                             _botsJournals[i]._Tabs[i2].Journal.Save();
                             _botsJournals[i]._Tabs[i2].Journal.NeadToUpdateStatePositions();
@@ -761,7 +760,7 @@ namespace OsEngine.Journal
         /// </summary>
         private void PaintStatTable(List<Position> positionsAll, List<Position> positionsLong, List<Position> positionsShort, bool neadShowTickState)
         {
-            if(_gridStatistics == null)
+            if (_gridStatistics == null)
             {
                 CreateTableToStatistic();
             }
@@ -893,7 +892,7 @@ namespace OsEngine.Journal
                 return;
             }
 
-            if(_chartEquity == null)
+            if (_chartEquity == null)
             {
                 CreateChartProfit();
             }
@@ -1093,7 +1092,7 @@ namespace OsEngine.Journal
                 {
                     label += _chartEquity.Series[i].Points[index].AxisLabel + "\n";
                 }
-                
+
                 label += _chartEquity.Series[i].Points[index].YValues[0];
 
                 _chartEquity.Series[i].Points[index].Label = label;
@@ -1144,7 +1143,7 @@ namespace OsEngine.Journal
                 return;
             }
 
-            if(_chartVolume == null)
+            if (_chartVolume == null)
             {
                 CreateChartVolume();
             }
@@ -1159,7 +1158,7 @@ namespace OsEngine.Journal
             {
                 if (volumes.Find(vol => vol.Security == positionsAll[i].SecurityName) == null)
                 {
-                    volumes.Add(new VolumeSecurity() {Security = positionsAll[i].SecurityName});
+                    volumes.Add(new VolumeSecurity() { Security = positionsAll[i].SecurityName });
                 }
             }
 
@@ -1179,7 +1178,7 @@ namespace OsEngine.Journal
                 {
                     allChange.Add(positionsAll[i].TimeCreate);
                 }
-               
+
                 if (positionsAll[i].State == PositionStateType.Done)
                 {
                     if (allChange.FindIndex(chnge => chnge == positionsAll[i].TimeClose) == -1)
@@ -1200,7 +1199,7 @@ namespace OsEngine.Journal
                 }
                 else if (allChangeSort[0] > allChange[i])
                 {
-                    allChangeSort.Insert(0,allChange[i]);
+                    allChangeSort.Insert(0, allChange[i]);
                 }
                 else
                 {
@@ -1209,7 +1208,7 @@ namespace OsEngine.Journal
                         if (allChangeSort[i2] <= allChange[i] &&
                             allChangeSort[i2 + 1] >= allChange[i])
                         {
-                            allChangeSort.Insert(i2+1,allChange[i]);
+                            allChangeSort.Insert(i2 + 1, allChange[i]);
                             break;
                         }
                     }
@@ -1225,7 +1224,7 @@ namespace OsEngine.Journal
 
             for (int i = 0; i < positionsAll.Count; i++)
             {
-                if(positionsAll[i].SecurityName == "si.txt")
+                if (positionsAll[i].SecurityName == "si.txt")
                 {
 
                 }
@@ -1237,11 +1236,11 @@ namespace OsEngine.Journal
                 {
                     if (positionsAll[i].Direction == Side.Buy)
                     {
-                        volume.Volume[i2] += positionsAll[i].MaxVolume; 
+                        volume.Volume[i2] += positionsAll[i].MaxVolume;
                     }
                     else
                     {
-                        volume.Volume[i2] -= positionsAll[i].MaxVolume; 
+                        volume.Volume[i2] -= positionsAll[i].MaxVolume;
                     }
                 }
                 if (positionsAll[i].State == PositionStateType.Done)
@@ -1256,14 +1255,14 @@ namespace OsEngine.Journal
                         {
                             volume.Volume[i2] += positionsAll[i].MaxVolume;
                         }
-                        
+
                     }
                 }
             }
 
             for (int i = 0; i < volumes.Count; i++)
             {
-                if (i%2 == 0)
+                if (i % 2 == 0)
                 {
                     PaintValuesVolume(volumes[i].Volume, volumes[i].Security, Color.DeepSkyBlue, allChange);
                 }
@@ -1295,7 +1294,7 @@ namespace OsEngine.Journal
         /// <param name="name">paper/бумага</param>
         /// <param name="color">Color series/цвет серии</param>
         /// <param name="times">times/времена</param>
-        private void PaintValuesVolume(List<decimal> volume, string name, Color color, List<DateTime> times )
+        private void PaintValuesVolume(List<decimal> volume, string name, Color color, List<DateTime> times)
         {
             if (volume == null ||
                 volume.Count == 0)
@@ -1304,7 +1303,7 @@ namespace OsEngine.Journal
             }
 
             ChartArea areaLineSecurity = new ChartArea("ChartArea" + name);
-            
+
             areaLineSecurity.CursorX.IsUserSelectionEnabled = false; //allow the user to change the view scope/ разрешаем пользователю изменять рамки представления
             areaLineSecurity.CursorX.IsUserEnabled = true; //trait/чертa
 
@@ -1325,7 +1324,7 @@ namespace OsEngine.Journal
 
             Series volumeSeries = new Series("Series" + name);
             volumeSeries.ChartType = SeriesChartType.Line;
-            volumeSeries.Color = color;   
+            volumeSeries.Color = color;
             volumeSeries.YAxisType = AxisType.Secondary;
             volumeSeries.ChartArea = areaLineSecurity.Name;
             volumeSeries.BorderWidth = 3;
@@ -1364,18 +1363,18 @@ namespace OsEngine.Journal
             nameSeries.Points.Add(maxVolume);
             nameSeries.Points[0].Label = name;
             nameSeries.Points[0].LabelForeColor = color;
-            
+
 
             _chartVolume.Series.Add(nameSeries);
 
             areaLineSecurity.AxisY2.Maximum = maxVolume + 1;
             areaLineSecurity.AxisY2.Minimum = minVolume - 1;
 
-            int interval = Convert.ToInt32(Math.Abs(maxVolume - minVolume)/8);
+            int interval = Convert.ToInt32(Math.Abs(maxVolume - minVolume) / 8);
 
             if (interval > 1)
             {
-                 areaLineSecurity.AxisY2.Interval = interval;
+                areaLineSecurity.AxisY2.Interval = interval;
             }
             else
             {
@@ -1511,12 +1510,12 @@ namespace OsEngine.Journal
         /// <param name="positionsAll"></param>
         private void PaintDrowDown(List<Position> positionsAll)
         {
-            if(_chartDd == null)
+            if (_chartDd == null)
             {
                 CreateChartDrowDown();
             }
 
-             _chartDd.Series.Clear();
+            _chartDd.Series.Clear();
 
             if (positionsAll.Count == 0)
             {
@@ -1576,13 +1575,13 @@ namespace OsEngine.Journal
 
                 if (currentProfit - lastMax < 0)
                 {
-                    ddPepcent[i] = Math.Round(currentProfit - lastMax,4);
+                    ddPepcent[i] = Math.Round(currentProfit - lastMax, 4);
                 }
             }
 
             Series drowDownPersent = new Series("SeriesDdPercent");
             drowDownPersent.ChartType = SeriesChartType.Line;
-            drowDownPersent.Color = Color.DarkOrange;  
+            drowDownPersent.Color = Color.DarkOrange;
             drowDownPersent.YAxisType = AxisType.Secondary;
             drowDownPersent.ChartArea = "ChartAreaDdPersent";
             drowDownPersent.BorderWidth = 2;
@@ -1832,11 +1831,11 @@ namespace OsEngine.Journal
                 items.Add(new MenuItem { Text = OsLocalization.Journal.PositionMenuItem10 });
                 items[2].Click += OpenDealClearAll_Click;
 
-                if(_botsJournals.Count != 0)
+                if (_botsJournals.Count != 0)
                 {
                     List<MenuItem> itemsBots = new List<MenuItem>();
 
-                    for(int i = 0;i < _botsJournals.Count;i++)
+                    for (int i = 0; i < _botsJournals.Count; i++)
                     {
                         itemsBots.Add(new MenuItem { Text = _botsJournals[i].BotName });
                         itemsBots[i].Click += OpenDealCreatePosition_Click;
@@ -1922,7 +1921,7 @@ namespace OsEngine.Journal
                 {
                     numbers.Add(Convert.ToInt32(_openPositionGrid.Rows[i].Cells[0].Value));
                 }
-                
+
             }
             catch (Exception)
             {
@@ -1949,7 +1948,7 @@ namespace OsEngine.Journal
         /// </summary>
         void OpenDealCreatePosition_Click(object sender, EventArgs e)
         {
-            if(_botsJournals == null ||
+            if (_botsJournals == null ||
                 _botsJournals.Count == 0)
             {
                 return;
@@ -1982,7 +1981,7 @@ namespace OsEngine.Journal
         /// </summary>
         private void PaintOpenPositionGrid(List<Position> positionsAll)
         {
-            if(_openPositionGrid == null)
+            if (_openPositionGrid == null)
             {
                 CreateOpenPositionTable();
             }
@@ -2071,7 +2070,7 @@ namespace OsEngine.Journal
         {
             try
             {
-               SaveFileDialog myDialog = new SaveFileDialog();
+                SaveFileDialog myDialog = new SaveFileDialog();
                 myDialog.Filter = "*.txt|";
                 myDialog.ShowDialog();
 
@@ -2138,9 +2137,9 @@ namespace OsEngine.Journal
             }
             catch (Exception error)
             {
-                SendNewLogMessage(error.ToString(),LogMessageType.Error);
+                SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
-           
+
 
         }
 
@@ -2207,15 +2206,15 @@ namespace OsEngine.Journal
                 }
                 List<Position> poses = new List<Position>();
 
-                for (int i = 0;i < _botsJournals.Count;i++)
+                for (int i = 0; i < _botsJournals.Count; i++)
                 {
-                    for(int j = 0;j < _botsJournals[i]._Tabs.Count;j++)
+                    for (int j = 0; j < _botsJournals[i]._Tabs.Count; j++)
                     {
                         poses.AddRange(_botsJournals[i]._Tabs[j].Journal.AllPosition.FindAll(p => p.State == PositionStateType.OpeningFail));
                     }
                 }
 
-                for(int i = 0; i < poses.Count;i++)
+                for (int i = 0; i < poses.Count; i++)
                 {
                     numbers.Add(poses[i].Number);
                 }
@@ -2262,14 +2261,14 @@ namespace OsEngine.Journal
             }
             _closePositionGrid.Rows.Clear();
 
-            if(positionsAll.Count == 0)
+            if (positionsAll.Count == 0)
             {
                 return;
             }
 
             List<Position> closePositions = new List<Position>();
 
-            for(int i = 0;i < positionsAll.Count;i++)
+            for (int i = 0; i < positionsAll.Count; i++)
             {
                 if (positionsAll[i].State == PositionStateType.Done ||
                     positionsAll[i].State == PositionStateType.OpeningFail)
@@ -2278,7 +2277,7 @@ namespace OsEngine.Journal
                 }
             }
 
-            if(closePositions.Count == 0)
+            if (closePositions.Count == 0)
             {
                 return;
             }
@@ -2287,7 +2286,7 @@ namespace OsEngine.Journal
             {
                 for (int i2 = i; i2 < closePositions.Count; i2++)
                 {
-                    if(closePositions[i].TimeClose > closePositions[i2].TimeClose)
+                    if (closePositions[i].TimeClose > closePositions[i2].TimeClose)
                     {
                         Position pos = closePositions[i2];
                         closePositions[i2] = closePositions[i];
@@ -2296,11 +2295,11 @@ namespace OsEngine.Journal
                 }
             }
 
-           
+
 
             for (int i = 0; i < closePositions.Count; i++)
             {
-                 _closePositionGrid.Rows.Insert(0, GetRow(closePositions[i]));
+                _closePositionGrid.Rows.Insert(0, GetRow(closePositions[i]));
             }
         }
         // messages to the log

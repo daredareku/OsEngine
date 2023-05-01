@@ -3,13 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market;
 
 namespace OsEngine.OsTrader.RiskManager
 {
@@ -100,8 +99,8 @@ namespace OsEngine.OsTrader.RiskManager
             _startProgram = startProgram;
             _name = nameBot + "RiskManager";
             MaxDrowDownToDayPersent = 1;
-            
-            if(_startProgram != StartProgram.IsOsOptimizer)
+
+            if (_startProgram != StartProgram.IsOsOptimizer)
             {
                 Load();
 

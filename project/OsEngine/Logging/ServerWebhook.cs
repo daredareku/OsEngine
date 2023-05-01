@@ -3,24 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using Newtonsoft.Json;
+using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Threading;
-using Newtonsoft.Json;
-using OsEngine.OsTrader.Gui;
-using RestSharp;
-using Application = System.Windows.Application;
-using Color = System.Drawing.Color;
 
 namespace OsEngine.Logging
 {
@@ -30,8 +19,8 @@ namespace OsEngine.Logging
     /// </summary>
     public class ServerWebhook
     {
-// singleton
-// синглетон
+        // singleton
+        // синглетон
         private static ServerWebhook _server; // webhook messaging server / сервер рассылки сообщений через вебхуки
 
         /// <summary>
@@ -677,7 +666,7 @@ namespace OsEngine.Logging
                     return hexColor;
             }
         }
-        
+
         private string MessageEntityCode(LogMessage message)
         {
             string entityCode;

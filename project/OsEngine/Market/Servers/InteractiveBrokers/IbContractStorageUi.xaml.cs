@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;

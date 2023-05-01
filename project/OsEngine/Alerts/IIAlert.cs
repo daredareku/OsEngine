@@ -3,8 +3,8 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
 using OsEngine.Entity;
+using System.Collections.Generic;
 
 namespace OsEngine.Alerts
 {
@@ -17,7 +17,7 @@ namespace OsEngine.Alerts
 
         void Delete();
 
-        bool IsOn { get; set;}
+        bool IsOn { get; set; }
 
         string Name { get; set; }
 
@@ -56,7 +56,7 @@ namespace OsEngine.Alerts
         /// процент
         /// </summary>
         Persent,
-        
+
         /// <summary>
         /// абсолютные значения
         /// </summary>

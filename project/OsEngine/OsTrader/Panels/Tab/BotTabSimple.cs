@@ -3,15 +3,6 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Forms.Integration;
-using System.Windows.Shapes;
 using OsEngine.Alerts;
 using OsEngine.Charts.CandleChart;
 using OsEngine.Charts.CandleChart.Elements;
@@ -25,6 +16,15 @@ using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Optimizer;
 using OsEngine.Market.Servers.Tester;
 using OsEngine.OsTrader.Panels.Tab.Internal;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Forms.Integration;
+using System.Windows.Shapes;
 
 namespace OsEngine.OsTrader.Panels.Tab
 {

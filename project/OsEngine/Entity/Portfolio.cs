@@ -65,7 +65,7 @@ namespace OsEngine.Entity
 
             if (_positionOnBoard != null && _positionOnBoard.Count != 0)
             {
-                for (int i = 0; i < _positionOnBoard.Count; i ++)
+                for (int i = 0; i < _positionOnBoard.Count; i++)
                 {
                     if (_positionOnBoard[i].SecurityNameCode == position.SecurityNameCode)
                     {

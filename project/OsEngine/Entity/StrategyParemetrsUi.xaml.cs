@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Controls;
-using System.Windows.Forms.Integration;
 using OsEngine.Language;
 using OsEngine.OsTrader.Panels;
+using System;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.Entity
 {
@@ -34,7 +34,7 @@ namespace OsEngine.Entity
 
             ButtonAccept.Content = OsLocalization.Entity.ButtonAccept;
 
-            if(string.IsNullOrEmpty(settings.Title))
+            if (string.IsNullOrEmpty(settings.Title))
             {
                 Title = OsLocalization.Entity.TitleParametersUi;
             }
@@ -42,13 +42,13 @@ namespace OsEngine.Entity
             {
                 Title = settings.Title;
             }
-            
+
 
             List<List<IIStrategyParameter>> sorted = GetParamSortedByTabName();
 
-            for(int i = 0;i < sorted.Count;i++)
+            for (int i = 0; i < sorted.Count; i++)
             {
-                if(sorted[i][0].TabName == null)
+                if (sorted[i][0].TabName == null)
                 {
                     CreateTab(sorted[i], settings.FirstTabLabel);
                 }
@@ -57,8 +57,8 @@ namespace OsEngine.Entity
                     CreateTab(sorted[i], sorted[i][0].TabName);
                 }
             }
-            
-            for(int i = 0;i < settings.CustomTabs.Count;i++)
+
+            for (int i = 0; i < settings.CustomTabs.Count; i++)
             {
                 CreateCustomTab(settings.CustomTabs[i]);
             }
@@ -74,9 +74,9 @@ namespace OsEngine.Entity
             this.Closed -= ParemetrsUi_Closed;
             _parameters = null;
 
-            if(_tabs != null)
+            if (_tabs != null)
             {
-                for (int i = 0;i < _tabs.Count; i++)
+                for (int i = 0; i < _tabs.Count; i++)
                 {
                     _tabs[i].Dispose();
                 }
@@ -91,11 +91,11 @@ namespace OsEngine.Entity
         {
             List<List<IIStrategyParameter>> sorted = new List<List<IIStrategyParameter>>();
 
-            for(int i = 0;i < _parameters.Count;i++)
+            for (int i = 0; i < _parameters.Count; i++)
             {
                 List<IIStrategyParameter> myList = sorted.Find(s => s[0].TabName == _parameters[i].TabName);
 
-                if(myList != null)
+                if (myList != null)
                 {
                     myList.Add(_parameters[i]);
                 }
@@ -107,9 +107,9 @@ namespace OsEngine.Entity
                 }
             }
 
-            for(int i = 0;i < sorted.Count;i++)
+            for (int i = 0; i < sorted.Count; i++)
             {// переставляем принудительно параметры без имени вкладки в первый слот вкладок
-                if(sorted[i][0].TabName == null && i != 0)
+                if (sorted[i][0].TabName == null && i != 0)
                 {
                     List<IIStrategyParameter> par = sorted[i];
                     sorted.RemoveAt(i);
@@ -169,22 +169,22 @@ namespace OsEngine.Entity
 
         public void Dispose()
         {
-            if(_grid != null 
+            if (_grid != null
                 && _grid.InvokeRequired)
             {
                 _grid.Invoke(new Action(Dispose));
                 return;
             }
 
-             _parameters = null;
+            _parameters = null;
 
-            if(_host != null)
+            if (_host != null)
             {
                 _host.Child = null;
                 _host = null;
             }
 
-            if(_grid != null)
+            if (_grid != null)
             {
                 _grid.CellValueChanged -= _grid_CellValueChanged;
                 _grid.CellClick -= _grid_Click;
@@ -325,9 +325,9 @@ namespace OsEngine.Entity
                     }
 
                     row.Cells[0].Value = param.Label;
-                    
+
                     row.Height = param.RowHeight;
-                    
+
                     row.Cells[0].Style.Font = new System.Drawing.Font("Areal", param.TextHeight);
                     row.Cells[0].Style.ForeColor = param.Color;
 
@@ -336,14 +336,14 @@ namespace OsEngine.Entity
                     row.Cells[1].Style.Font = new System.Drawing.Font("Areal", param.TextHeight);
                     row.Cells[1].Style.ForeColor = param.Color;
 
-                    
+
                 }
                 else if (_parameters[i].Type == StrategyParameterType.CheckBox)
                 {
                     DataGridViewCheckBoxCell cell = new DataGridViewCheckBoxCell();
                     StrategyParameterCheckBox param = (StrategyParameterCheckBox)_parameters[i];
 
-                    row.Cells[0].Value = _parameters[i].Name; 
+                    row.Cells[0].Value = _parameters[i].Name;
                     cell.Value = param.CheckState;
 
                     row.Cells.Add(cell);
@@ -437,7 +437,7 @@ namespace OsEngine.Entity
 
                         if (value == true)
                         {
-                            ((StrategyParameterCheckBox) _parameters[i]).CheckState = CheckState.Checked;
+                            ((StrategyParameterCheckBox)_parameters[i]).CheckState = CheckState.Checked;
                         }
                         else
                         {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using OsEngine.Market.Servers.Lmax;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using OsEngine.Market.Servers.Lmax;
 
 namespace OsEngine.Market.Servers.FixProtocolEntities
 {

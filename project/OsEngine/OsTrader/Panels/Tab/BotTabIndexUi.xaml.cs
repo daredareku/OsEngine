@@ -3,17 +3,17 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
-using OsEngine.Entity;
 
 namespace OsEngine.OsTrader.Panels.Tab
 {
-    
+
     public partial class BotTabIndexUi
     {
-        
+
         public BotTabIndexUi(BotTabIndex spread)
         {
             InitializeComponent();
@@ -110,7 +110,7 @@ namespace OsEngine.OsTrader.Panels.Tab
                 DataGridViewRow row = new DataGridViewRow();
 
                 row.Cells.Add((new DataGridViewTextBoxCell()));
-                row.Cells[0].Value = "A"+i;
+                row.Cells[0].Value = "A" + i;
 
                 row.Cells.Add(new DataGridViewTextBoxCell());
                 if (string.IsNullOrWhiteSpace(_spread.Tabs[i].SecurityName))
@@ -122,7 +122,7 @@ namespace OsEngine.OsTrader.Panels.Tab
                 {
                     row.Cells[1].Value = _spread.Tabs[i].SecurityName;
                 }
-                
+
                 row.Cells.Add((new DataGridViewTextBoxCell()));
                 row.Cells[2].Value = _spread.Tabs[i].ServerType.ToString();
 
@@ -154,7 +154,7 @@ namespace OsEngine.OsTrader.Panels.Tab
 
         private void ButtonAccept_Click(object sender, RoutedEventArgs e)
         {
-            if(_spread.UserFormula != TextboxUserFormula.Text 
+            if (_spread.UserFormula != TextboxUserFormula.Text
                 || IndexOrSourcesChanged == true)
             {
                 _spread.UserFormula = TextboxUserFormula.Text;

@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.AutoTestBots
 {
@@ -38,7 +38,7 @@ namespace OsEngine.Robots.AutoTestBots
 
         }
 
-// логика проверки
+        // логика проверки
 
         private void _screenerTab_CandleFinishedEvent(List<Candle> candles, BotTabSimple tab)
         {
@@ -53,7 +53,7 @@ namespace OsEngine.Robots.AutoTestBots
 
             List<Trade> trades = candle.Trades;
 
-            if(trades == null ||
+            if (trades == null ||
                 trades.Count == 0)
             { // включаем сохранение трейдов в свечку
                 tab.Connector.SaveTradesInCandles = true;
@@ -67,13 +67,13 @@ namespace OsEngine.Robots.AutoTestBots
             decimal close = trades[trades.Count - 1].Price;
             decimal volume = 0;
 
-            for(int i = 0;i < trades.Count;i++)
+            for (int i = 0; i < trades.Count; i++)
             {
-                if(trades[i].Price > high)
+                if (trades[i].Price > high)
                 {
                     high = trades[i].Price;
                 }
-                if(trades[i].Price < low)
+                if (trades[i].Price < low)
                 {
                     low = trades[i].Price;
                 }

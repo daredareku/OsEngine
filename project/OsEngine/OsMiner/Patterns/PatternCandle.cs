@@ -3,12 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using OsEngine.Charts.CandleChart.Indicators;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.OsMiner.Patterns
 {
@@ -22,7 +21,7 @@ namespace OsEngine.OsMiner.Patterns
         public PatternCandle()
         {
             Weigth = 1;
-            Type =  PatternType.Candle;
+            Type = PatternType.Candle;
             Expand = 99.8m;
             Length = 2;
         }
@@ -186,7 +185,7 @@ namespace OsEngine.OsMiner.Patterns
             }
 
             //Variable activation/Активация переменных
-            decimal thisExpand = (100-Expand) /100;
+            decimal thisExpand = (100 - Expand) / 100;
             decimal divider = candles[numberPattern].Open / 100; // divider, applied in the whole calculation, measured once. Shows how much one percent of the first entry weighs./делитель, применяется во всём вычислении, измеряется один раз. Показывает сколько весит один процент первого входа
             decimal lockal;
             for (int i = 0; i < Length; i++)
@@ -227,10 +226,10 @@ namespace OsEngine.OsMiner.Patterns
             {
                 Candle newCandle = new Candle();
 
-                newCandle.Open = Math.Round((Sequence[i][0] + Sequence[i][1]) / 2 ,3);
-                newCandle.High = Math.Round((Sequence[i][2] + Sequence[i][3]) / 2 ,3);
-                newCandle.Low = Math.Round((Sequence[i][4] + Sequence[i][5]) / 2 ,3);
-                newCandle.Close = Math.Round((Sequence[i][6] + Sequence[i][7]) / 2 , 3);
+                newCandle.Open = Math.Round((Sequence[i][0] + Sequence[i][1]) / 2, 3);
+                newCandle.High = Math.Round((Sequence[i][2] + Sequence[i][3]) / 2, 3);
+                newCandle.Low = Math.Round((Sequence[i][4] + Sequence[i][5]) / 2, 3);
+                newCandle.Close = Math.Round((Sequence[i][6] + Sequence[i][7]) / 2, 3);
 
                 result.Add(newCandle);
             }
@@ -244,7 +243,7 @@ namespace OsEngine.OsMiner.Patterns
         /// </summary>
         public void Load(string saveString)
         {
-            string [] array = saveString.Split('^');
+            string[] array = saveString.Split('^');
 
             Length = Convert.ToInt32(array[1]);
             Weigth = array[2].ToDecimal();
@@ -257,13 +256,13 @@ namespace OsEngine.OsMiner.Patterns
                 return;
             }
 
-            Sequence = new decimal[array.Length- 5][];
+            Sequence = new decimal[array.Length - 5][];
 
             Length = Sequence.Length;
 
             for (int i = 0; i < Sequence.Length; i++)
             {
-                string[] lockal = array[5+i].Split(';');
+                string[] lockal = array[5 + i].Split(';');
 
                 Sequence[i] = new decimal[8];
                 //Open:
@@ -313,7 +312,7 @@ namespace OsEngine.OsMiner.Patterns
 
                     for (int ii = 0; ii < Sequence[i].Length; ii++)// run on the second/ бежим по второму
                     {
-                        saveStr += Convert.ToString(Sequence[i][ii],CultureInfo.InvariantCulture);
+                        saveStr += Convert.ToString(Sequence[i][ii], CultureInfo.InvariantCulture);
                         saveStr += ";";
                     }
 

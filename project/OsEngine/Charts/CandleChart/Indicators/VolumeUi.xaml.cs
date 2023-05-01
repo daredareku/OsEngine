@@ -3,9 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace OsEngine.Charts.CandleChart.Indicators
@@ -17,7 +17,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     public partial class VolumeUi
     {
         private Volume _volume; // fractal//фрактал
-      public VolumeUi(Volume fractail) // constructor//конструктор
+        public VolumeUi(Volume fractail) // constructor//конструктор
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);

@@ -1,7 +1,7 @@
 ﻿
 namespace OsEngine.Market.Servers.Finam
 {
-    public class FinamServerPermission: IServerPermission
+    public class FinamServerPermission : IServerPermission
     {
         public ServerType ServerType
         {

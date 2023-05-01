@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trend strategy at the intersection of the indicator RVI
@@ -22,7 +22,7 @@ public class RviTrade : BotPanel
 
         RviLenght = CreateParameter("RviLength", 10, 10, 80, 3);
 
-        _rvi = IndicatorsFactory.CreateIndicatorByName("RVI",name + "RviArea", false);
+        _rvi = IndicatorsFactory.CreateIndicatorByName("RVI", name + "RviArea", false);
         _rvi = (Aindicator)_tab.CreateCandleIndicator(_rvi, "MacdArea");
         _rvi.ParametersDigit[0].Value = RviLenght.ValueInt;
         _rvi.Save();

@@ -3,12 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
-using System.Threading;
 using OsEngine.Entity;
 using OsEngine.OsTrader.Panels;
 using OsEngine.Robots;
 using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace OsEngine.OsOptimizer.OptimizerEntity
 {

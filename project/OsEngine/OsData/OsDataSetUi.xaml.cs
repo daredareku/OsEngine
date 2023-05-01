@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Market;
 using OsEngine.Market.Servers;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OsEngine.OsData
 {
@@ -45,12 +45,12 @@ namespace OsEngine.OsData
 
             if (set.SetName != "Set_")
             {
-                TextBoxFolderName.IsEnabled = false;              
+                TextBoxFolderName.IsEnabled = false;
             }
 
             TextBoxFolderName.Text = set.SetName.Split('_')[1];
 
-            if (_set.BaseSettings.Source == ServerType.None 
+            if (_set.BaseSettings.Source == ServerType.None
                 && (set.SetName == null || set.SetName == "Set_"))
             {
                 TextBoxFolderName.Text = OsLocalization.Data.Label45;
@@ -58,7 +58,7 @@ namespace OsEngine.OsData
                 TextBoxFolderName.TextChanged += TextBoxFolderName_TextChanged;
                 TextBoxFolderName.MouseEnter += TextBoxFolderName_MouseEnter;
             }
-            
+
             ComboBoxRegime.Items.Add(DataSetState.Off);
             ComboBoxRegime.Items.Add(DataSetState.On);
             ComboBoxRegime.SelectedItem = _set.BaseSettings.Regime;
@@ -83,7 +83,7 @@ namespace OsEngine.OsData
             CheckBoxTfTickIsOn.IsChecked = set.BaseSettings.TfTickIsOn;
             CheckBoxTfMarketDepthIsOn.IsChecked = set.BaseSettings.TfMarketDepthIsOn;
 
-            List < ServerType > serverTypes = ServerMaster.ActiveServersTypes;
+            List<ServerType> serverTypes = ServerMaster.ActiveServersTypes;
 
             ComboBoxSource.Items.Add(ServerType.None);
 
@@ -139,7 +139,7 @@ namespace OsEngine.OsData
 
         private void TextBoxFolderName_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if(TextBoxFolderName.Text == OsLocalization.Data.Label45)
+            if (TextBoxFolderName.Text == OsLocalization.Data.Label45)
             {
                 TextBoxFolderName.Text = "";
                 TextBoxFolderName.MouseEnter -= TextBoxFolderName_MouseEnter;
@@ -150,7 +150,7 @@ namespace OsEngine.OsData
         {
             string text = TextBoxFolderName.Text;
 
-            if(string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
             {
                 ComboBoxSource.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -168,7 +168,7 @@ namespace OsEngine.OsData
         {
             if (ComboBoxSource.SelectedItem != null)
             {
-                if(ComboBoxSource.SelectedItem.ToString() == "None")
+                if (ComboBoxSource.SelectedItem.ToString() == "None")
                 {
                     return;
                 }
@@ -253,25 +253,25 @@ namespace OsEngine.OsData
                 else
                 {
                     UpdComboBoxToPermission(CheckBoxTf1MinuteIsOn, permission.DataFeedTf1MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf2MinuteIsOn,permission.DataFeedTf2MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf5MinuteIsOn,permission.DataFeedTf5MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf10MinuteIsOn,permission.DataFeedTf10MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf15MinuteIsOn,permission.DataFeedTf15MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf30MinuteIsOn,permission.DataFeedTf30MinuteCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf1HourIsOn,permission.DataFeedTf1HourCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf2HourIsOn,permission.DataFeedTf2HourCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf4HourIsOn,permission.DataFeedTf4HourCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf2MinuteIsOn, permission.DataFeedTf2MinuteCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf5MinuteIsOn, permission.DataFeedTf5MinuteCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf10MinuteIsOn, permission.DataFeedTf10MinuteCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf15MinuteIsOn, permission.DataFeedTf15MinuteCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf30MinuteIsOn, permission.DataFeedTf30MinuteCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf1HourIsOn, permission.DataFeedTf1HourCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf2HourIsOn, permission.DataFeedTf2HourCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf4HourIsOn, permission.DataFeedTf4HourCanLoad);
 
-                    UpdComboBoxToPermission(CheckBoxTf1SecondIsOn,permission.DataFeedTf1SecondCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf2SecondIsOn,permission.DataFeedTf2SecondCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf5SecondIsOn,permission.DataFeedTf5SecondCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf10SecondIsOn,permission.DataFeedTf10SecondCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf15SecondIsOn,permission.DataFeedTf15SecondCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTf20SecondIsOn,permission.DataFeedTf20SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf1SecondIsOn, permission.DataFeedTf1SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf2SecondIsOn, permission.DataFeedTf2SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf5SecondIsOn, permission.DataFeedTf5SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf10SecondIsOn, permission.DataFeedTf10SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf15SecondIsOn, permission.DataFeedTf15SecondCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTf20SecondIsOn, permission.DataFeedTf20SecondCanLoad);
                     UpdComboBoxToPermission(CheckBoxTf30SecondIsOn, permission.DataFeedTf30SecondCanLoad);
 
-                    UpdComboBoxToPermission(CheckBoxTfMarketDepthIsOn,permission.DataFeedTfMarketDepthCanLoad);
-                    UpdComboBoxToPermission(CheckBoxTfTickIsOn,permission.DataFeedTfTickCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTfMarketDepthIsOn, permission.DataFeedTfMarketDepthCanLoad);
+                    UpdComboBoxToPermission(CheckBoxTfTickIsOn, permission.DataFeedTfTickCanLoad);
                 }
             }
         }
@@ -289,7 +289,7 @@ namespace OsEngine.OsData
         /// allow user to touch controls
         /// разрешить пользователю трогать контролы
         /// </summary>
-        private void EnableControls(bool Enabled=true)
+        private void EnableControls(bool Enabled = true)
         {
             CheckBoxTf1SecondIsOn.IsEnabled = Enabled;
             CheckBoxTf2SecondIsOn.IsEnabled = Enabled;
@@ -330,7 +330,7 @@ namespace OsEngine.OsData
             _set.SetName = "Set_" + TextBoxFolderName.Text;
 
             DataSetState regime;
-            Enum.TryParse(ComboBoxRegime.SelectedItem.ToString(), out regime );
+            Enum.TryParse(ComboBoxRegime.SelectedItem.ToString(), out regime);
             _set.BaseSettings.Regime = regime;
 
             _set.BaseSettings.Tf1SecondIsOn = CheckBoxTf1SecondIsOn.IsChecked.Value;
@@ -364,15 +364,15 @@ namespace OsEngine.OsData
 
             _set.BaseSettings.NeadToUpdate = CheckBoxNeadToUpDate.IsChecked.Value;
 
-            if(_set.SecuritiesLoad != null)
+            if (_set.SecuritiesLoad != null)
             {
-                for(int i = 0;i < _set.SecuritiesLoad.Count;i++)
+                for (int i = 0; i < _set.SecuritiesLoad.Count; i++)
                 {
                     _set.SecuritiesLoad[i].CopySettingsFromParam(_set.BaseSettings);
                 }
             }
 
-            
+
             _set.Save();
         }
 
@@ -414,7 +414,7 @@ namespace OsEngine.OsData
             _grid.Rows.Clear();
             List<SecurityToLoad> names = _set.SecuritiesLoad;
 
-            for (int i = 0;names != null &&  i < names.Count; i++)
+            for (int i = 0; names != null && i < names.Count; i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.Cells.Add(new DataGridViewTextBoxCell());
@@ -452,7 +452,7 @@ namespace OsEngine.OsData
                 return;
             }
 
-            _set.DeleteSecurity(_grid.Rows.Count -1 -_grid.CurrentCell.RowIndex);
+            _set.DeleteSecurity(_grid.Rows.Count - 1 - _grid.CurrentCell.RowIndex);
             ReloadSecuritiesOnTable();
         }
 
@@ -464,7 +464,7 @@ namespace OsEngine.OsData
                 return;
             }
 
-            if(ComboBoxSource.SelectedItem == null ||
+            if (ComboBoxSource.SelectedItem == null ||
                 ComboBoxSource.SelectedItem.ToString() == "None")
             {
                 MessageBox.Show(OsLocalization.Data.Label44);

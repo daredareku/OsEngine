@@ -3,10 +3,10 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -134,7 +134,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 _alligator.PaintOn = CheckBoxPaintOnOff.IsChecked.Value;
             }
-            
+
 
             MovingAverageTypeCalculation type;
 
@@ -151,7 +151,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// top line color button
         /// кнопка цвет верхней линии
         /// </summary>
-        private void ButtonColorUp_Click(object sender, RoutedEventArgs e) 
+        private void ButtonColorUp_Click(object sender, RoutedEventArgs e)
         {
             ColorDialog dialog = new ColorDialog();
             dialog.Color = HostColorUp.Child.BackColor;

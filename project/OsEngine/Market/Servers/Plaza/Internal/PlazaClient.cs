@@ -3,14 +3,14 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
 using OsEngine.Entity;
 using OsEngine.Language;
 using ru.micexrts.cgate;
 using ru.micexrts.cgate.message;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Plaza.Internal
 {
@@ -34,7 +34,7 @@ namespace OsEngine.Market.Servers.Plaza.Internal
             GateOpenString = "ini=Plaza/PlazaStartSettings.ini;key=" + key;
         }
 
-		// connection settings constants
+        // connection settings constants
         // константы настроек соединения
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace OsEngine.Market.Servers.Plaza.Internal
         /// </summary>
         private const string ListnerOrders = "p2mqreply://;ref=srvlink";
 
-		// server status
+        // server status
         // статус сервера
 
         private ServerConnectStatus _serverConnectStatus;
@@ -154,11 +154,11 @@ namespace OsEngine.Market.Servers.Plaza.Internal
         /// </summary>
         public event Action<ServerConnectStatus> ConnectStatusChangeEvent;
 
-		// connection setup and listening
+        // connection setup and listening
         // установка соединения и слежение за ним
 
         /// <summary>
-		/// object to connect to router
+        /// object to connect to router
         /// объект подключения к Роутеру
         /// </summary>
         public Connection Connection;
@@ -566,7 +566,7 @@ namespace OsEngine.Market.Servers.Plaza.Internal
                             catch (Exception error)
                             {
                                 // could not connect/не получилось подключиться
-                               SendLogMessage(error.ToString());
+                                SendLogMessage(error.ToString());
                                 Thread.Sleep(10000);
                                 try
                                 {
@@ -645,11 +645,11 @@ namespace OsEngine.Market.Servers.Plaza.Internal
             }
         }
 
-		// Instruments. thread FORTS_FUTINFO_REPL table "fut_sess_contents"
+        // Instruments. thread FORTS_FUTINFO_REPL table "fut_sess_contents"
         // Инструменты. поток FORTS_FUTINFO_REPL таблица "fut_sess_contents"
 
         /// <summary>
-		/// listner responsible for accepting tools
+        /// listner responsible for accepting tools
         /// листнер отвечающий за приём инструментов
         /// </summary>
         private Listener _listenerInfo;
@@ -769,7 +769,7 @@ namespace OsEngine.Market.Servers.Plaza.Internal
                                         UpdateSecurity(security);
                                     }
 
-                                    if(_securities.Find(s => s.NameId.Equals(security.NameId)) == null)
+                                    if (_securities.Find(s => s.NameId.Equals(security.NameId)) == null)
                                     {
                                         _securities.Add(security);
                                     }
@@ -810,11 +810,11 @@ namespace OsEngine.Market.Servers.Plaza.Internal
         /// </summary>
         public event Action<Security> UpdateSecurity;
 
-// Positions and portfolios. thread FORTS_POS_REPL and tables "position" and "part"
-// Позиции и портфели. поток FORTS_POS_REPL и c таблица "position" и "part"
+        // Positions and portfolios. thread FORTS_POS_REPL and tables "position" and "part"
+        // Позиции и портфели. поток FORTS_POS_REPL и c таблица "position" и "part"
 
         /// <summary>
-		/// portfolio listener
+        /// portfolio listener
         /// листнер портфелей
         /// </summary>
         private Listener _listenerPortfolio;
@@ -1108,11 +1108,11 @@ Connection conn, Listener listener, Message msg)
         /// </summary>
         private List<Portfolio> _portfolios;
 
-// listening ticks. thread FORTS_DEALS_REPL "deal" table
-// Прослушка тиков. поток FORTS_DEALS_REPL таблица "deal"
+        // listening ticks. thread FORTS_DEALS_REPL "deal" table
+        // Прослушка тиков. поток FORTS_DEALS_REPL таблица "deal"
 
         /// <summary>
-		/// tick listener
+        /// tick listener
         /// листнер тиков
         /// </summary>
         private Listener _listenerTrade;
@@ -1299,11 +1299,11 @@ Connection conn, Listener listener, Message msg)
         /// </summary>
         public event Action<Trade, bool> NewTradeEvent;
 
-// depth thread FORTS_FUTAGGR20_REPL table "orders_aggr"
-// Стаканы поток FORTS_FUTAGGR20_REPL таблица "orders_aggr"
+        // depth thread FORTS_FUTAGGR20_REPL table "orders_aggr"
+        // Стаканы поток FORTS_FUTAGGR20_REPL таблица "orders_aggr"
 
         /// <summary>
-		/// depth listener
+        /// depth listener
         /// листнер стаканов
         /// </summary>
         private Listener _listenerMarketDepth;
@@ -1527,11 +1527,11 @@ Connection conn, Listener listener, Message msg)
         /// </summary>
         public event Action<MarketDepth> MarketDepthChangeEvent;
 
-// my trades and orderLog thread FORTS_FUTTRADE_REPLL table "user_deal" "orders_log"
-// Мои сделки и ордерЛог поток FORTS_FUTTRADE_REPLL таблица "user_deal" "orders_log"
+        // my trades and orderLog thread FORTS_FUTTRADE_REPLL table "user_deal" "orders_log"
+        // Мои сделки и ордерЛог поток FORTS_FUTTRADE_REPLL таблица "user_deal" "orders_log"
 
         /// <summary>
-		/// listener of my deals and my orders
+        /// listener of my deals and my orders
         /// листнер моих сделок и моих ордеров
         /// </summary>
         private Listener _listenerOrderAndMyDeal;
@@ -1790,11 +1790,11 @@ Connection conn, Listener listener, Message msg)
         /// </summary>
         public event Action<Order> NewMyOrderEvent;
 
-		// order execution
+        // order execution
         // Исполнение заявок
 
         /// <summary>
-		/// listener listening to publisher's answers (thing that transmit orders to the system)
+        /// listener listening to publisher's answers (thing that transmit orders to the system)
         /// листнер прослушивающий ответы публишера(штуки которая передаёт ордера в систему)
         /// </summary>
         private Listener _listenerOrderSendMirror;
@@ -2054,7 +2054,7 @@ Connection conn, Listener listener, Message msg)
             if (record != null)
             {
                 record[1] += 1;
-				// if algorithm tries to remove one bid five times, then order cancellation will be ignored
+                // if algorithm tries to remove one bid five times, then order cancellation will be ignored
                 // если алгоритм пытается снять одну заявку пять раз, то снятие этой заявки будет проигнорировано
                 if (record[1] > 5)
                 {
@@ -2095,7 +2095,7 @@ Connection conn, Listener listener, Message msg)
         [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptionsAttribute]
         private void ExecutorOrdersThreadArea()
         {
-            
+
             while (Thread.CurrentThread.Name != "deleteThread")
             {
                 if (Status == ServerConnectStatus.Connect && _ordersToExecute != null && _ordersToExecute.Count != 0)
@@ -2144,7 +2144,7 @@ Connection conn, Listener listener, Message msg)
 
                             int isinId = GetIsinId(order.SecurityNameCode);
 
-                            if(isinId == -1)
+                            if (isinId == -1)
                             {
                                 continue;
                             }
@@ -2222,7 +2222,7 @@ Connection conn, Listener listener, Message msg)
 
             for (int i = 0; i < _securities.Count; i++)
             {
-                if(_securities[i].Name.Equals(isin))
+                if (_securities[i].Name.Equals(isin))
                 {
                     return Convert.ToInt32(_securities[i].NameId);
 
@@ -2285,12 +2285,12 @@ Connection conn, Listener listener, Message msg)
                 }
             }
         }
-	
-		// sending messages to up
+
+        // sending messages to up
         // Отправка сообщений на верх
 
         /// <summary>
-		/// send log message
+        /// send log message
         /// отправить сообщение в лог
         /// </summary>
         private void SendLogMessage(string message)

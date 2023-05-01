@@ -121,18 +121,18 @@ namespace OsEngine.Logging
             {
                 SmscPost = false;
             }
-                
 
-            string[] formats = {"flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1", "mms=1", "mail=1", "call=1"};
+
+            string[] formats = { "flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1", "mms=1", "mail=1", "call=1" };
 
             string[] m = _smsc_send_cmd("send", "cost=3&phones=" + _urlencode(phones)
                                                 + "&mes=" + _urlencode(message) + "&id=" + id.ToString() + "&translit=" + translit.ToString()
-                                                + (format > 0 ? "&" + formats[format-1] : "") + (sender != "" ? "&sender=" + _urlencode(sender) : "")
+                                                + (format > 0 ? "&" + formats[format - 1] : "") + (sender != "" ? "&sender=" + _urlencode(sender) : "")
                                                 + (time != "" ? "&time=" + _urlencode(time) : "") + (query != "" ? "&" + query : ""), files);
 
             // (id, cnt, cost, balance) или (id, -error)
 
-            if (SmscDebug) 
+            if (SmscDebug)
             {
                 if (Convert.ToInt32(m[1]) <= 0)
                     //_print_debug("Сообщение отправлено успешно. ID: " + m[0] + ", всего SMS: " + m[1] + ", стоимость: " + m[2] + ", баланс: " + m[3]);
@@ -167,7 +167,8 @@ namespace OsEngine.Logging
 
                 request = (HttpWebRequest)WebRequest.Create(url);
 
-                if (SmscPost) {
+                if (SmscPost)
+                {
                     request.Method = "POST";
 
                     string postHeader, boundary = "----------" + DateTime.Now.Ticks.ToString("x");
@@ -177,12 +178,14 @@ namespace OsEngine.Logging
 
                     byte[] output = new byte[0];
 
-                    if (files == null) {
+                    if (files == null)
+                    {
                         request.ContentType = "application/x-www-form-urlencoded";
                         output = Encoding.UTF8.GetBytes(arg);
                         request.ContentLength = output.Length;
                     }
-                    else {
+                    else
+                    {
                         request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                         string[] par = arg.Split('&');
@@ -206,7 +209,8 @@ namespace OsEngine.Logging
                                 sb.Append("\"; filename=\"");
                                 sb.Append(Path.GetFileName(files[pcnt]));
                             }
-                            else {
+                            else
+                            {
                                 nv = par[pcnt - fl].Split('=');
                                 sb.Append(nv[0]);
                             }
@@ -241,7 +245,8 @@ namespace OsEngine.Logging
                                     output = _concatb(output, tbuf);
                                 }
                             }
-                            else {
+                            else
+                            {
                                 byte[] vl = Encoding.UTF8.GetBytes(nv[1]);
                                 output = _concatb(output, vl);
                             }
@@ -264,13 +269,15 @@ namespace OsEngine.Logging
                     sr = new StreamReader(response.GetResponseStream());
                     ret = sr.ReadToEnd();
                 }
-                catch (WebException) {
+                catch (WebException)
+                {
                     ret = "";
                 }
             }
             while (ret == "" && ++i < 4);
 
-            if (ret == "") {
+            if (ret == "")
+            {
                 if (SmscDebug)
                     _print_debug("Ошибка чтения адреса: " + url);
 
@@ -297,7 +304,8 @@ namespace OsEngine.Logging
 
         // parameter coding in http-request
         // кодирование параметра в http-запросе
-        private string _urlencode(string str) {
+        private string _urlencode(string str)
+        {
             if (SmscPost) return str;
 
             return WebUtility.UrlEncode(str);
@@ -317,7 +325,8 @@ namespace OsEngine.Logging
 
         // print debug information
         // вывод отладочной информации
-        private void _print_debug(string str) {
+        private void _print_debug(string str)
+        {
             System.Windows.Forms.MessageBox.Show(str);
         }
     }

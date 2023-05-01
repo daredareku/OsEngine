@@ -3,14 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.OsData;
 
 namespace OsEngine.Market.Servers
 {

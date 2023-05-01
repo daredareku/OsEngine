@@ -1,4 +1,9 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Miner;
+using OsEngine.Market.Servers.Tester;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
@@ -6,11 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using System.Windows.Input;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Miner;
-using OsEngine.Market.Servers.Tester;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
@@ -117,8 +117,8 @@ namespace OsEngine.OsMiner.Patterns
         }
 
 
-// Auto pattern search
-// Авто поиск паттернов
+        // Auto pattern search
+        // Авто поиск паттернов
 
         private void InitializeMiningTab()
         {
@@ -186,8 +186,8 @@ namespace OsEngine.OsMiner.Patterns
             _pattern.ShowTestResults();
         }
 
-// pattern search tab
-// вкладка поиска паттернов
+        // pattern search tab
+        // вкладка поиска паттернов
 
         void InitializeTabPatternsSearch()
         {
@@ -199,7 +199,7 @@ namespace OsEngine.OsMiner.Patterns
             TextBoxWeigthToTempPattern.Text = _pattern.WeigthToTempPattern.ToString(CultureInfo.InvariantCulture);
             TextBoxWeigthToTempPattern.TextChanged += TextBoxWeigthToTempPattern_TextChanged;
 
-            _pattern.PaintController(HostTempPattern,HostSinglePatternToOpen,HostSinglePatternToClose);
+            _pattern.PaintController(HostTempPattern, HostSinglePatternToOpen, HostSinglePatternToClose);
             _pattern.BackTestEndEvent += _pattern_BackTestEndEvent;
 
             TextBoxExpandToTempPattern.Text = _pattern.ExpandToTempPattern.ToString(CultureInfo.InvariantCulture);
@@ -218,9 +218,9 @@ namespace OsEngine.OsMiner.Patterns
             try
             {
                 // Мужики бисило в майнере параметр (Узнаваемость) который постоянно надо было проблемотично менять, внес коррективы в проверку текста если что можете обновить протестировал вроде работает
-                if (TextBoxExpandToTempPattern.Text.Length>0)
+                if (TextBoxExpandToTempPattern.Text.Length > 0)
                 {
-                  _pattern.ExpandToTempPattern = TextBoxExpandToTempPattern.Text.ToDecimal();
+                    _pattern.ExpandToTempPattern = TextBoxExpandToTempPattern.Text.ToDecimal();
                 }
 
             }
@@ -247,7 +247,7 @@ namespace OsEngine.OsMiner.Patterns
         {
             try
             {
-                _pattern.WeigthToTempPattern = 
+                _pattern.WeigthToTempPattern =
                     TextBoxWeigthToTempPattern.Text.ToDecimal();
             }
             catch (Exception)
@@ -296,14 +296,14 @@ namespace OsEngine.OsMiner.Patterns
             PaintGridPatternsToClose();
         }
 
-// individual tabs patterns
-// индивидуальные вкладки паттернов
+        // individual tabs patterns
+        // индивидуальные вкладки паттернов
 
         void TabControlTypePatternsToFind_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (TabControlTypePatternsToFind.SelectedIndex == 0)
             {
-               _pattern.GetTempPattern(PatternType.Candle);
+                _pattern.GetTempPattern(PatternType.Candle);
             }
             else if (TabControlTypePatternsToFind.SelectedIndex == 1)
             {
@@ -354,7 +354,7 @@ namespace OsEngine.OsMiner.Patterns
 
         void ComboBoxTypeWatchCandlePattern_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ComboBoxTypeWatchCandlePattern.SelectedItem == null)
+            if (ComboBoxTypeWatchCandlePattern.SelectedItem == null)
             {
                 return;
             }
@@ -374,7 +374,7 @@ namespace OsEngine.OsMiner.Patterns
             PatternVolume pattern = (PatternVolume)_pattern.GetTempPattern(PatternType.Volume);
             try
             {
-                
+
                 pattern.Length = Convert.ToInt32(TextBoxVolumePatternLength.Text);
             }
             catch (Exception)
@@ -387,7 +387,7 @@ namespace OsEngine.OsMiner.Patterns
 
         void InitializeTimePatternTab()
         {
-           
+
             PatternTime pattern = (PatternTime)_pattern.GetTempPattern(PatternType.Time);
 
             TextBoxPatternTimeStartTime.Text = pattern.StartTime.ToShortTimeString();
@@ -461,8 +461,8 @@ namespace OsEngine.OsMiner.Patterns
             _pattern.GetPatternToIndex();
             _pattern.Save();
         }
-// tab opening position VARIABLES
-// вкладка открытие позиции ПЕРЕМЕННЫЕ
+        // tab opening position VARIABLES
+        // вкладка открытие позиции ПЕРЕМЕННЫЕ
 
         void InitializeTabOpenPosition()
         {
@@ -524,7 +524,7 @@ namespace OsEngine.OsMiner.Patterns
                 TextBoxWeigthToInter.Text == "0.")
             {
                 return;
-            } 
+            }
             try
             {
                 _pattern.WeigthToInter = TextBoxWeigthToInter.Text.ToDecimal();
@@ -553,8 +553,8 @@ namespace OsEngine.OsMiner.Patterns
             _pattern.Save();
         }
 
-// tab opening position WORK WITH GRID
-// вкладка открытие позиции РАБОТА С ГРИДАМИ
+        // tab opening position WORK WITH GRID
+        // вкладка открытие позиции РАБОТА С ГРИДАМИ
 
         private DataGridView _gridPatternsToOpen;
 
@@ -591,17 +591,17 @@ namespace OsEngine.OsMiner.Patterns
 
             DataGridViewColumn column4 = new DataGridViewColumn();
             column4.CellTemplate = cell0;
-            column4.HeaderText  = OsLocalization.Miner.Label55;
+            column4.HeaderText = OsLocalization.Miner.Label55;
             column4.ReadOnly = false;
             column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns.Add(column4);
-            
+
             grid.Rows.Add(null, null);
 
             host.Child = grid;
         }
 
-        DataGridViewRow GetRow(IPattern pattern,int num)
+        DataGridViewRow GetRow(IPattern pattern, int num)
         {
             DataGridViewRow nRow = new DataGridViewRow();
             nRow.Cells.Add(new DataGridViewTextBoxCell());
@@ -630,7 +630,7 @@ namespace OsEngine.OsMiner.Patterns
 
             for (int i = 0; i < _pattern.PatternsToOpen.Count; i++)
             {
-                _gridPatternsToOpen.Rows.Add(GetRow(_pattern.PatternsToOpen[i],i+1));
+                _gridPatternsToOpen.Rows.Add(GetRow(_pattern.PatternsToOpen[i], i + 1));
             }
 
             _gridPatternsToOpen.CellValueChanged += _gridPatternsToOpen_CellValueChanged;
@@ -670,10 +670,10 @@ namespace OsEngine.OsMiner.Patterns
             {
                 MenuItem[] items = new MenuItem[2];
 
-                items[0] = new MenuItem { Text = OsLocalization.Miner.Message6};
+                items[0] = new MenuItem { Text = OsLocalization.Miner.Message6 };
                 items[0].Click += GridPatternsToOpenAdd_Click;
 
-                items[1] = new MenuItem { Text = OsLocalization.Miner.Message7};
+                items[1] = new MenuItem { Text = OsLocalization.Miner.Message7 };
                 items[1].Click += GridPatternsToOpenRemove_Click;
 
                 ContextMenu menu = new ContextMenu(items);
@@ -703,8 +703,8 @@ namespace OsEngine.OsMiner.Patterns
             PaintGridPatternsToOpen();
         }
 
-// tab position closing variable
-// вкладка закрытие позиции ПЕРЕМЕННЫЕ
+        // tab position closing variable
+        // вкладка закрытие позиции ПЕРЕМЕННЫЕ
 
         void InitializeTabClosePosition()
         {
@@ -861,8 +861,8 @@ namespace OsEngine.OsMiner.Patterns
             _pattern.Save();
         }
 
-// tab position closing WORKS WITH GRIDES
-// вкладка закрытие позиции РАБОТА С ГРИДАМИ
+        // tab position closing WORKS WITH GRIDES
+        // вкладка закрытие позиции РАБОТА С ГРИДАМИ
 
         private DataGridView _gridPatternsToClose;
 
@@ -890,10 +890,10 @@ namespace OsEngine.OsMiner.Patterns
             {
                 for (int i = 0; i < _gridPatternsToClose.Rows.Count; i++)
                 {
-                    _pattern.PatternsToClose[i].Weigth = 
+                    _pattern.PatternsToClose[i].Weigth =
                         _gridPatternsToClose.Rows[i].Cells[2].Value.ToString().ToDecimal();
 
-                    _pattern.PatternsToClose[i].Expand = 
+                    _pattern.PatternsToClose[i].Expand =
                         _gridPatternsToClose.Rows[i].Cells[3].Value.ToString().ToDecimal();
                 }
                 _pattern.Save();
@@ -953,8 +953,8 @@ namespace OsEngine.OsMiner.Patterns
             PaintGridPatternsToClose();
         }
 
-// DATE tab
-// вкладка ДАТА
+        // DATE tab
+        // вкладка ДАТА
 
         void InitializeTabDataSeries()
         {

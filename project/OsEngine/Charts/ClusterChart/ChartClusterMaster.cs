@@ -2,18 +2,18 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.IO;
 using System.Windows.Forms.Integration;
 using System.Windows.Shapes;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.OsTrader.Panels.Tab;
 using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
 
 namespace OsEngine.Charts.ClusterChart
 {
-    public class ChartClusterMaster 
+    public class ChartClusterMaster
     {
         public ChartClusterMaster(string name, StartProgram startProgram, HorizontalVolume volume)
         {
@@ -62,7 +62,7 @@ namespace OsEngine.Charts.ClusterChart
                 using (StreamReader reader = new StreamReader(@"Engine\" + _name + @"ClusterChartMasterSet.txt"))
                 {
                     Enum.TryParse(reader.ReadLine(), out _chartType);
-                    _chart.ChartType =_chartType;
+                    _chart.ChartType = _chartType;
                     reader.Close();
                 }
             }
@@ -212,7 +212,7 @@ namespace OsEngine.Charts.ClusterChart
         /// исходящее сообщение для лога
         /// </summary>
         public event Action<string, LogMessageType> LogMessageEvent;
- 
+
         /// <summary>
         /// get chart
         /// взять чарт

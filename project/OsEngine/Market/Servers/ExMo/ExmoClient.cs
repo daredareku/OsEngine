@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using RestSharp.Extensions.MonoHttp;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -7,11 +12,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Newtonsoft.Json.Linq;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
-using RestSharp.Extensions.MonoHttp;
 
 namespace OsEngine.Market.Servers.ExMo
 {
@@ -151,7 +151,7 @@ namespace OsEngine.Market.Servers.ExMo
         private string ToQueryString(IDictionary<string, string> dic)
         {
             var array = (from key in dic.Keys
-                    select string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(dic[key])))
+                         select string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(dic[key])))
                 .ToArray();
             return string.Join("&", array);
         }
@@ -180,7 +180,7 @@ namespace OsEngine.Market.Servers.ExMo
         public static long GetTimestamp()
         {
             var d = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds;
-            return (long) d;
+            return (long)d;
         }
 
         #region Подписка на дату
@@ -432,7 +432,7 @@ namespace OsEngine.Market.Servers.ExMo
                         newTrade.Side = Side.Buy;
                     }
 
-                    trades.Insert(0,newTrade);
+                    trades.Insert(0, newTrade);
                 }
 
                 if (NewTradesEvent != null)
@@ -442,11 +442,11 @@ namespace OsEngine.Market.Servers.ExMo
             }
 
             // "trade_id": 3,
-           // "type": "sell",
-           // "price": "100",
-           // "quantity": "1",
-           // "amount": "100",
-           // "date": 1435488248
+            // "type": "sell",
+            // "price": "100",
+            // "quantity": "1",
+            // "amount": "100",
+            // "date": 1435488248
 
 
         }
@@ -491,7 +491,7 @@ namespace OsEngine.Market.Servers.ExMo
 
                     var str = bid.ToArray();
                     newBid.Price = str[0].ToString()
-                        .Replace("{","")
+                        .Replace("{", "")
                         .Replace("}", "")
                         .ToDecimal();
 
@@ -670,10 +670,10 @@ namespace OsEngine.Market.Servers.ExMo
 
         public List<MyTrade> UpdMyTrades(string securities)
         {
-            var jsonCurrency = 
+            var jsonCurrency =
                 ApiQuery("user_trades", new Dictionary<string, string>(), securities, 30);
 
-            var jProperties = 
+            var jProperties =
                 JToken.Parse(jsonCurrency).SelectToken("").Children<JProperty>();
 
             List<MyTrade> trades = new List<MyTrade>();
@@ -689,7 +689,7 @@ namespace OsEngine.Market.Servers.ExMo
                     MyTrade newMyTrade = new MyTrade();
 
                     newMyTrade.SecurityNameCode = security;
-                    newMyTrade.Volume 
+                    newMyTrade.Volume
                         = trade.SelectToken("quantity").ToString().ToDecimal();
                     newMyTrade.Price
                         = trade.SelectToken("price").ToString().ToDecimal();
@@ -699,11 +699,11 @@ namespace OsEngine.Market.Servers.ExMo
                     string type = trade.SelectToken("type").ToString();
 
                     if (type == "buy")
-                    {newMyTrade.Side = Side.Buy;}
+                    { newMyTrade.Side = Side.Buy; }
                     else
-                    {newMyTrade.Side = Side.Sell; }
+                    { newMyTrade.Side = Side.Sell; }
 
-                    newMyTrade.NumberTrade = 
+                    newMyTrade.NumberTrade =
                         trade.SelectToken("trade_id").ToString();
 
                     newMyTrade.NumberOrderParent =
@@ -822,7 +822,7 @@ namespace OsEngine.Market.Servers.ExMo
                 {
                     if (IsConnected == false)
                     {
-                        SendLogMessage("Cansel order fail. Exchange isnt work",LogMessageType.Error);
+                        SendLogMessage("Cansel order fail. Exchange isnt work", LogMessageType.Error);
                         return;
                     }
 

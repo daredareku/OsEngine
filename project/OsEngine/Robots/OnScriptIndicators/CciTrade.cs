@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Drawing;
 using OsEngine.Charts.CandleChart.Elements;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
+using System.Drawing;
 
 /// <summary>
 /// Counter Trend Strategy Based on CCI Indicator. Max - 3 poses
@@ -25,7 +25,7 @@ public class CciTrade : BotPanel
         UpLineValue = CreateParameter("Up Line Value", 150, 50.0m, 300, 20m);
         DownLineValue = CreateParameter("Down Line Value", -150, -300.0m, -50, 20);
 
-        _cci = IndicatorsFactory.CreateIndicatorByName("CCI",name + "Cci", false);
+        _cci = IndicatorsFactory.CreateIndicatorByName("CCI", name + "Cci", false);
         _cci.ParametersDigit[0].Value = CciLength.ValueInt;
         _cci = (Aindicator)_tab.CreateCandleIndicator(_cci, "CciArea");
         _cci.Save();

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Entity.Utils;
 using OsEngine.Language;
@@ -14,6 +7,13 @@ using OsEngine.Market.Servers.Entity;
 using QuikSharp;
 using QuikSharp.DataStructures;
 using QuikSharp.DataStructures.Transaction;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Candle = OsEngine.Entity.Candle;
 using Order = OsEngine.Entity.Order;
 using Trade = OsEngine.Entity.Trade;
@@ -1258,7 +1258,7 @@ namespace OsEngine.Market.Servers.QuikLua
                 {
                     for (int i = 0; i < trades.Count; i++)
                     {
-                       // EventsOnOnTrade(trades[i]);
+                        // EventsOnOnTrade(trades[i]);
                     }
                 }
             }

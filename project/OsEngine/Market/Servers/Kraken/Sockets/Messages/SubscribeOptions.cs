@@ -46,7 +46,7 @@ namespace Kraken.WebSockets.Messages
             Name = name ?? throw new ArgumentNullException(nameof(name));
             if (SubscribeOptionNames.AllowedNames.All(x => x != name))
             {
-                throw new ArgumentOutOfRangeException(nameof(name), name, 
+                throw new ArgumentOutOfRangeException(nameof(name), name,
                     $"Allowed values: {string.Join(",", SubscribeOptionNames.AllowedNames)}");
             }
 

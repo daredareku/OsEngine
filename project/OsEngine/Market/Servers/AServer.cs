@@ -3,6 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,10 +14,6 @@ using System.IO;
 using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 
 namespace OsEngine.Market.Servers
 {
@@ -63,7 +63,7 @@ namespace OsEngine.Market.Servers
 
                 CreateParameterBoolean(OsLocalization.Market.ServerParam9, false);
                 _needToRemoveCandlesFromMemory = (ServerParameterBool)ServerParameters[ServerParameters.Count - 1];
-               
+
                 CreateParameterBoolean(OsLocalization.Market.ServerParam10, true);
                 _needToUseFullMarketDepth = (ServerParameterBool)ServerParameters[ServerParameters.Count - 1];
 
@@ -134,13 +134,13 @@ namespace OsEngine.Market.Servers
 
             get
             {
-                if(_alreadyLoadAwaitInfoFromServerPermission == false)
+                if (_alreadyLoadAwaitInfoFromServerPermission == false)
                 {
                     _alreadyLoadAwaitInfoFromServerPermission = true;
 
                     IServerPermission permission = ServerMaster.GetServerPermission(this.ServerType);
 
-                    if(permission != null)
+                    if (permission != null)
                     {
                         _waitTimeAfterFirstStart = permission.WaitTimeAfterFirstStartToSendOrders;
                     }
@@ -694,7 +694,7 @@ namespace OsEngine.Market.Servers
                         }
 
                         DeleteCandleManager();
- 
+
                         ServerRealization.Connect();
                         LastStartServerTime = DateTime.Now;
 
@@ -793,7 +793,7 @@ namespace OsEngine.Market.Servers
         /// </summary>
         void _serverRealization_Disconnected()
         {
-            if(ServerStatus == ServerConnectStatus.Disconnect)
+            if (ServerStatus == ServerConnectStatus.Disconnect)
             {
                 return;
             }
@@ -814,7 +814,7 @@ namespace OsEngine.Market.Servers
         {
             if (_candleManager == null)
             {
-                _candleManager = new CandleManager(this,StartProgram.IsOsTrader);
+                _candleManager = new CandleManager(this, StartProgram.IsOsTrader);
                 _candleManager.CandleUpdateEvent += _candleManager_CandleUpdateEvent;
                 _candleManager.LogMessageEvent += SendLogMessage;
             }
@@ -1160,7 +1160,7 @@ namespace OsEngine.Market.Servers
 
                     if (positions != null)
                     {
-                        for(int i2 = 0;i2 < positions.Count;i2++)
+                        for (int i2 = 0; i2 < positions.Count; i2++)
                         {
                             curPortfolio.SetNewPosition(positions[i2]);
                         }
@@ -1217,7 +1217,7 @@ namespace OsEngine.Market.Servers
 
             for (int i = 0; i < _securities.Count; i++)
             {
-                if(_securities[i].Name == securityName &&
+                if (_securities[i].Name == securityName &&
                     _securities[i].NameClass == securityClass)
                 {
                     _frequentlyUsedSecurities.Add(_securities[i]);
@@ -1247,13 +1247,13 @@ namespace OsEngine.Market.Servers
                 return;
             }
 
-            if (_securities == null 
+            if (_securities == null
                 && securities.Count > 5000)
             {
                 _securities = securities;
                 _securitiesToSend.Enqueue(_securities);
 
-                 return;
+                return;
             }
 
             if (_securities == null)
@@ -1430,7 +1430,7 @@ namespace OsEngine.Market.Servers
                 _candleManager.StopSeries(series);
             }
 
-            if(_candleStorage != null)
+            if (_candleStorage != null)
             {
                 _candleStorage.RemoveSeries(series);
             }
@@ -1500,7 +1500,7 @@ namespace OsEngine.Market.Servers
 
             for (int i = 0; _securities != null && i < _securities.Count; i++)
             {
-                if(_securities[i].Name == securityName &&
+                if (_securities[i].Name == securityName &&
                     _securities[i].NameClass == securityClass)
                 {
                     security = _securities[i];
@@ -1537,15 +1537,15 @@ namespace OsEngine.Market.Servers
                         actualTime);
             }
 
-           /* if (series.CandlesAll == null)
-            {
-                List<Trade> trades = ServerRealization.GetTickDataToSecurity(security, startTime, endTime, actualTime);
-                if (trades != null &&
-                    trades.Count != 0)
-                {
-                    series.PreLoad(trades);
-                }
-            }*/
+            /* if (series.CandlesAll == null)
+             {
+                 List<Trade> trades = ServerRealization.GetTickDataToSecurity(security, startTime, endTime, actualTime);
+                 if (trades != null &&
+                     trades.Count != 0)
+                 {
+                     series.PreLoad(trades);
+                 }
+             }*/
 
             if (series.CandlesAll != null &&
                 series.CandlesAll.Count != 0)
@@ -1640,7 +1640,7 @@ namespace OsEngine.Market.Servers
 
         private decimal _currentBestBid;
         private decimal _currentBestAsk;
-        
+
         /// <summary>
         /// came a new depth
         /// пришел обновленный стакан
@@ -2173,7 +2173,7 @@ namespace OsEngine.Market.Servers
         {
             for (int i = 0; i < _myExecuteOrdersAllSessions.Count; i++)
             {
-                if(_myExecuteOrdersAllSessions[i] == null)
+                if (_myExecuteOrdersAllSessions[i] == null)
                 {
                     continue;
                 }
@@ -2189,7 +2189,7 @@ namespace OsEngine.Market.Servers
             {
                 if (_myCanselOrdersAllSessions[i].NumberMarket == trade.NumberOrderParent)
                 {
-                    if(_myCanselOrdersAllSessions[i] == null)
+                    if (_myCanselOrdersAllSessions[i] == null)
                     {
                         continue;
                     }
@@ -2230,7 +2230,7 @@ namespace OsEngine.Market.Servers
 
                 try
                 {
-                    
+
                     if (ServerStatus == ServerConnectStatus.Disconnect)
                     {
                         continue;
@@ -2246,7 +2246,7 @@ namespace OsEngine.Market.Servers
                     ThisSessionOrdersManagment();
 
                 }
-                catch(Exception error)
+                catch (Exception error)
                 {
                     SendLogMessage(error.ToString(), LogMessageType.Error);
                     Thread.Sleep(10000);
@@ -2257,11 +2257,11 @@ namespace OsEngine.Market.Servers
         private void ThisSessionOrdersManagment()
         {
             return;
-            for(int i = 0;i < _myExecuteOrdersThisSession.Count;i++)
+            for (int i = 0; i < _myExecuteOrdersThisSession.Count; i++)
             {
                 Order order = _myExecuteOrdersThisSession[i];
 
-                if (order.TimeCreate.AddMinutes(3)< ServerTime)
+                if (order.TimeCreate.AddMinutes(3) < ServerTime)
                 {
                     List<Order> ordersToCheck = new List<Order>();
                     ordersToCheck.Add(order);
@@ -2287,7 +2287,7 @@ namespace OsEngine.Market.Servers
                     _lastTimeCheckOrders = DateTime.Now;
                     CheckOrderStatesOnStartProgramm();
 
-                    while(_myExecuteOrdersAllSessions.Count > 1)
+                    while (_myExecuteOrdersAllSessions.Count > 1)
                     {
                         _myExecuteOrdersAllSessions.RemoveAt(0);
                     }
@@ -2336,7 +2336,7 @@ namespace OsEngine.Market.Servers
             {
                 using (StreamReader reader = new StreamReader(@"Engine\" + ServerType + @" OpenOrders.txt"))
                 {
-                    while(reader.EndOfStream == false)
+                    while (reader.EndOfStream == false)
                     {
                         string str = reader.ReadLine();
                         Order ord = new Order();
@@ -2363,7 +2363,7 @@ namespace OsEngine.Market.Servers
                         string saveStr = _myExecuteOrdersAllSessions[i].GetStringForSave().ToString();
                         writer.WriteLine(saveStr);
                     }
-                   
+
                     writer.Close();
                 }
             }
@@ -2423,11 +2423,11 @@ namespace OsEngine.Market.Servers
         private void CheckOrderStatesOnStartProgramm()
         {
             return;
-            if(_myExecuteOrdersAllSessions.Count != 0)
+            if (_myExecuteOrdersAllSessions.Count != 0)
             {
                 _serverRealization.GetOrdersState(_myExecuteOrdersAllSessions);
             }
-            if(_myCanselOrdersAllSessions.Count != 0)
+            if (_myCanselOrdersAllSessions.Count != 0)
             {
                 _serverRealization.GetOrdersState(_myCanselOrdersAllSessions);
             }

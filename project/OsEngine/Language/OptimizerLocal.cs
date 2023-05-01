@@ -323,7 +323,7 @@ namespace OsEngine.Language
             "Eng:Iteration count_" +
             "Ru:Кол-во итераций_");
 
-        public string Label37=> OsLocalization.ConvertToLocString(
+        public string Label37 => OsLocalization.ConvertToLocString(
             "Eng:Series and Results_" +
             "Ru:Серии и результаты_");
 
@@ -333,12 +333,12 @@ namespace OsEngine.Language
 
         public string Label39 => OsLocalization.ConvertToLocString(
             "Eng:Sort by_" +
-            "Ru:Метод сортировки_");       
-        
+            "Ru:Метод сортировки_");
+
         public string Label40 => OsLocalization.ConvertToLocString(
             "Eng:Commission Type_" +
             "Ru:Тип комиссии_");
-        
+
         public string Label41 => OsLocalization.ConvertToLocString(
             "Eng:Commission Value_" +
             "Ru:Размер комиссии_");

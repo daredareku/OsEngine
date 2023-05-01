@@ -46,7 +46,7 @@ namespace OsEngine.Market.Servers.Entity
         public string Name
         {
             get { return _name; }
-            set { _name = value.Replace("^",""); }
+            set { _name = value.Replace("^", ""); }
         }
 
         private string _name;
@@ -125,7 +125,7 @@ namespace OsEngine.Market.Servers.Entity
 
         public string GetStringToSave()
         {
-            return  Type + "^" + Name + "^" + Value.ToString(CultureInfo.InvariantCulture);
+            return Type + "^" + Name + "^" + Value.ToString(CultureInfo.InvariantCulture);
         }
 
         public void LoadFromStr(string value)
@@ -178,7 +178,7 @@ namespace OsEngine.Market.Servers.Entity
 
         public string GetStringToSave()
         {
-            return  Type + "^" + Name + "^" + Value;
+            return Type + "^" + Name + "^" + Value;
         }
 
         public void LoadFromStr(string value)
@@ -231,7 +231,7 @@ namespace OsEngine.Market.Servers.Entity
 
         public string GetStringToSave()
         {
-            return  Type + "^" + Name + "^" + Value;
+            return Type + "^" + Name + "^" + Value;
         }
 
         public void LoadFromStr(string value)
@@ -373,7 +373,7 @@ namespace OsEngine.Market.Servers.Entity
     /// enum server parameter
     /// перечисление
     /// </summary>
-    public class ServerParameterEnum: IServerParameter
+    public class ServerParameterEnum : IServerParameter
     {
         public string Name
         {

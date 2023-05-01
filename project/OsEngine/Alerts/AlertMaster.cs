@@ -3,19 +3,17 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.Integration;
 using OsEngine.Charts.CandleChart;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Connectors;
-using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
@@ -35,7 +33,7 @@ namespace OsEngine.Alerts
         /// <param name="name">name of owner of alerts repository/имя владельца хранилища алертов</param>
         /// <param name="connector">connector/коннектор</param>
         /// <param name="chartMaster">chart/чарт</param>
-        public AlertMaster(string name, ConnectorCandles connector, ChartCandleMaster chartMaster) 
+        public AlertMaster(string name, ConnectorCandles connector, ChartCandleMaster chartMaster)
         {
             _name = name;
             _connector = connector;
@@ -65,7 +63,7 @@ namespace OsEngine.Alerts
 
         private void CreateGrid()
         {
-            if(HostAllert == null)
+            if (HostAllert == null)
             {
                 return;
             }
@@ -121,7 +119,7 @@ namespace OsEngine.Alerts
         /// alerts array
         /// массив Алертов
         /// </summary>
-        private List<IIAlert> _alertArray; 
+        private List<IIAlert> _alertArray;
 
         /// <summary>
         /// connector
@@ -151,7 +149,7 @@ namespace OsEngine.Alerts
         /// load settings from file
         /// загрузить настройки из файла
         /// </summary>
-        private void Load() 
+        private void Load()
         {
             if (!File.Exists(@"Engine\" + _name + "AlertKeeper.txt"))
             {
@@ -205,7 +203,7 @@ namespace OsEngine.Alerts
             }
             catch (Exception error)
             {
-                SendNewMessage(error.ToString(),LogMessageType.Error);
+                SendNewMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
@@ -289,7 +287,7 @@ namespace OsEngine.Alerts
                     File.Delete(@"Engine\" + _name + "AlertKeeper.txt");
                 }
 
-                if(_alertArray != null)
+                if (_alertArray != null)
                 {
                     for (int i = 0; i < _alertArray.Count; i++)
                     {
@@ -320,7 +318,7 @@ namespace OsEngine.Alerts
 
         private void DeleteVisual()
         {
-            if(HostAllert == null)
+            if (HostAllert == null)
             {
                 return;
             }
@@ -352,7 +350,7 @@ namespace OsEngine.Alerts
         /// удалить алерт по номеру
         /// </summary>
         /// <param name="number">alert number/номер алерта</param>
-        public void DeleteFromNumber(int number) 
+        public void DeleteFromNumber(int number)
         {
             try
             {
@@ -382,7 +380,7 @@ namespace OsEngine.Alerts
             try
             {
                 if (_alertArray == null
-                     || alert == null 
+                     || alert == null
                      || _alertArray.Count == 0)
                 {
                     return;
@@ -391,8 +389,8 @@ namespace OsEngine.Alerts
                 _chartMaster.DeleteAlert(alert);
 
                 alert.Delete();
-               
-                for (int i = 0;i < _alertArray.Count;i++)
+
+                for (int i = 0; i < _alertArray.Count; i++)
                 {
                     if (_alertArray[i].Name == alert.Name)
                     {
@@ -416,7 +414,7 @@ namespace OsEngine.Alerts
         /// сохранить в хранилище новый Алерт
         /// </summary>
         /// <param name="newAlert">new alert/новый алерт</param>
-        public void SetNewAlert(IIAlert newAlert) 
+        public void SetNewAlert(IIAlert newAlert)
         {
             try
             {
@@ -523,7 +521,7 @@ namespace OsEngine.Alerts
                 }
                 if (_alertArray[number].TypeAlert == AlertType.PriceAlert)
                 {
-                   ((AlertToPrice)_alertArray[number]).ShowDialog();
+                    ((AlertToPrice)_alertArray[number]).ShowDialog();
                     Save();
                 }
             }
@@ -582,14 +580,14 @@ namespace OsEngine.Alerts
 
                 Security sec = _connector.Security;
 
-                if(sec == null)
+                if (sec == null)
                 {
                     return null;
                 }
 
                 for (int i = 0; i < _alertArray.Count; i++)
                 {
-                    if(_alertArray[i].IsOn == false)
+                    if (_alertArray[i].IsOn == false)
                     {
                         continue;
                     }
@@ -663,10 +661,10 @@ namespace OsEngine.Alerts
         /// </summary>
         void AlertDelete_Click(object sender, EventArgs e)
         {
-            if(GridViewBox == null)
+            if (GridViewBox == null)
             {
                 return;
-            }    
+            }
 
             if (GridViewBox.CurrentCell == null ||
                 GridViewBox.CurrentCell.RowIndex <= -1)
@@ -753,7 +751,7 @@ namespace OsEngine.Alerts
                     return;
                 }
 
-                if(pricePoint == 0)
+                if (pricePoint == 0)
                 {
                     return;
                 }
@@ -770,7 +768,7 @@ namespace OsEngine.Alerts
         /// start drawing alerts
         /// начать прорисовку Алертов
         /// </summary>
-        public void StartPaint(WindowsFormsHost alertHost) 
+        public void StartPaint(WindowsFormsHost alertHost)
         {
             try
             {
@@ -778,12 +776,12 @@ namespace OsEngine.Alerts
 
                 if (!HostAllert.Dispatcher.CheckAccess())
                 {
-                    HostAllert.Dispatcher.Invoke(new Action<WindowsFormsHost>(StartPaint),alertHost);
+                    HostAllert.Dispatcher.Invoke(new Action<WindowsFormsHost>(StartPaint), alertHost);
                     return;
                 }
 
                 CreateGrid();
-                
+
                 HostAllert.Child = GridViewBox;
                 _isPaint = true;
                 Paint();
@@ -876,7 +874,7 @@ namespace OsEngine.Alerts
                     return;
                 }
 
-                if(GridViewBox == null)
+                if (GridViewBox == null)
                 {
                     return;
                 }
@@ -897,13 +895,13 @@ namespace OsEngine.Alerts
                     nRow.Cells.Add(new DataGridViewTextBoxCell());
                     if (_alertArray[i].IsOn)
                     {
-                        nRow.Cells[2].Value = "On"; 
+                        nRow.Cells[2].Value = "On";
                     }
                     else
                     {
-                        nRow.Cells[2].Value = "Off"; 
+                        nRow.Cells[2].Value = "Off";
                     }
-                   
+
 
                     GridViewBox.Rows.Add(nRow);
                 }

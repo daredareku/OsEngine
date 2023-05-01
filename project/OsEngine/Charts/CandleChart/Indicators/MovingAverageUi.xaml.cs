@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic  for MovingAverageUi.xaml
     /// Логика взаимодействия для MovingAverageUi.xaml
     /// </summary>
-    public partial class MovingAverageUi 
+    public partial class MovingAverageUi
     {
         /// <summary>
         /// indicator that we're setting up
@@ -60,7 +60,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             ComboBoxMovingType.SelectionChanged += ComboBoxMovingType_SelectionChanged;
 
             ComboBoxMovingType.SelectedItem = _mA.TypeCalculationAverage;
-            
+
 
             CheckBoxPaintOnOff.IsChecked = _mA.PaintOn;
             ComboBoxPriceField.Items.Add(PriceTypePoints.Open);

@@ -3,16 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Windows;
 using OsEngine.Charts.CandleChart;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
-using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
 using OsEngine.Layout;
+using OsEngine.Market;
+using System;
+using System.Globalization;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Gui
 {
@@ -29,9 +27,9 @@ namespace OsEngine.OsTrader.Gui
             OsEngine.Layout.StickyBorders.Listen(this);
             ServerMaster.SetHostTable(HostPositionOnBoard, HostOrdersOnBoard);
             _strategyKeeper = new OsTraderMaster(GridChart, ChartHostPanel, HostGlass, HostOpenPosition, HostClosePosition, HostAllPosition,
-                                         HostBotLog, HostBotLogPrime, RectChart, HostAllert, TabControlBotsName,TabControlBotTab,TextBoxPrice,GridChartControlPanel, StartProgram.IsOsTrader);
+                                         HostBotLog, HostBotLogPrime, RectChart, HostAllert, TabControlBotsName, TabControlBotTab, TextBoxPrice, GridChartControlPanel, StartProgram.IsOsTrader);
             Closing += RobotUi_Closing;
-           
+
 
             LocationChanged += RobotUi_LocationChanged;
 
@@ -70,7 +68,7 @@ namespace OsEngine.OsTrader.Gui
             if (CheckBoxPaintOnOff.IsChecked.HasValue &&
                 CheckBoxPaintOnOff.IsChecked.Value)
             {
-                 _strategyKeeper.StartPaint();
+                _strategyKeeper.StartPaint();
             }
             else
             {
@@ -136,8 +134,8 @@ namespace OsEngine.OsTrader.Gui
         private OsTraderMaster _strategyKeeper;
 
 
-// main menu
-// главное меню 
+        // main menu
+        // главное меню 
 
         private void ButtonServer_Click(object sender, RoutedEventArgs e)
         {
@@ -154,19 +152,19 @@ namespace OsEngine.OsTrader.Gui
             _strategyKeeper.DeleteActiv();
         }
 
-// the management of the individual bot
-// управление отдельным ботом
+        // the management of the individual bot
+        // управление отдельным ботом
         private void buttonStrategManualSettings_Click(object sender, RoutedEventArgs e)
         {
             _strategyKeeper.BotManualSettingsDialog();
         }
 
-// scalp trade engine
-// привод
+        // scalp trade engine
+        // привод
 
         private void buttonBuyFast_Click_1(object sender, RoutedEventArgs e)
         {
-            decimal volume; 
+            decimal volume;
             try
             {
                 volume = TextBoxVolumeFast.Text.ToDecimal();
@@ -194,8 +192,8 @@ namespace OsEngine.OsTrader.Gui
             _strategyKeeper.BotSellMarket(volume);
         }
 
-// manual control of the position
-// ручное управление позицией
+        // manual control of the position
+        // ручное управление позицией
 
         private void ButtonStrategIndividualSettings_Click(object sender, RoutedEventArgs e)
         {

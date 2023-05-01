@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Language;
@@ -15,6 +7,14 @@ using OsEngine.Market.Servers.Binance.Futures.Entity;
 using OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity;
 using OsEngine.Market.Servers.Entity;
 using RestSharp;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
 using WebSocket4Net;
 using TradeResponse = OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity.TradeResponse;
 
@@ -122,7 +122,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
         /// запрвшиваем новый listenKey для веб сокета от Binance через отправку делаем HTTP запроса
         /// </summary>
         public void RenewListenKey()
-        {           
+        {
             try
             {
                 _listenKey = CreateListenKey();
@@ -170,7 +170,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
 
             try
             {
-                if(_socketClient != null)
+                if (_socketClient != null)
                 {
                     _socketClient.Opened -= Connect;
                     _socketClient.Closed -= Disconnect;
@@ -408,7 +408,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
 
         public AccountResponseFutures GetAccountInfoFromDFut(string response)
         {
-            if(response == null)
+            if (response == null)
             {
                 return null;
             }
@@ -419,11 +419,11 @@ namespace OsEngine.Market.Servers.Binance.Futures
 
             List<AssetFutures> assets = new List<AssetFutures>();
 
-            for(int i = 0;i < assetsCoinM.Count;i++)
+            for (int i = 0; i < assetsCoinM.Count; i++)
             {
                 AssetFutures futAss = new AssetFutures();
                 futAss.asset = assetsCoinM[i].asset;
-                futAss.marginBalance= assetsCoinM[i].balance;
+                futAss.marginBalance = assetsCoinM[i].balance;
                 assets.Add(futAss);
             }
 
@@ -875,7 +875,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
         /// <returns></returns>
         private List<Candle> BuildCandles(List<Candle> oldCandles, int needTf, int oldTf)
         {
-            if(oldCandles == null)
+            if (oldCandles == null)
             {
                 return null;
             }
@@ -1179,16 +1179,16 @@ namespace OsEngine.Market.Servers.Binance.Futures
         {
             bool isInArray = false;
 
-            for(int i = 0;i < _canselOrders.Count;i++)
+            for (int i = 0; i < _canselOrders.Count; i++)
             {
-                if(_canselOrders[i].NumberUser == order.NumberUser)
+                if (_canselOrders[i].NumberUser == order.NumberUser)
                 {
                     isInArray = true;
                     break;
                 }
             }
 
-            if(isInArray == true)
+            if (isInArray == true)
             {
                 return false;
             }
@@ -1209,11 +1209,11 @@ namespace OsEngine.Market.Servers.Binance.Futures
             {
                 try
                 {
-                    if(CanCanselOrder(order) == false)
+                    if (CanCanselOrder(order) == false)
                     {
                         Order onBoard = GetOrderState(order);
 
-                        if(onBoard == null)
+                        if (onBoard == null)
                         {
                             order.State = OrderStateType.Cancel;
 
@@ -1287,7 +1287,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
                     namesSec.Add(oldOpenOrders[i].SecurityNameCode);
                 }
             }
-            
+
             string endPoint = "/" + type_str_selector + "/v1/allOrders";
 
             List<HistoryOrderReport> allOrders = new List<HistoryOrderReport>();
@@ -1939,9 +1939,9 @@ namespace OsEngine.Market.Servers.Binance.Futures
         public bool HedgeMode
         {
             get { return _hedgeMode; }
-            set 
-            { 
-                if(value == _hedgeMode)
+            set
+            {
+                if (value == _hedgeMode)
                 {
                     return;
                 }
@@ -1959,11 +1959,11 @@ namespace OsEngine.Market.Servers.Binance.Futures
                 {
                     return;
                 }
-                var rs = CreateQuery(Method.GET, "/" + type_str_selector + "/v1/positionSide/dual", new Dictionary<string, string>(),true);
+                var rs = CreateQuery(Method.GET, "/" + type_str_selector + "/v1/positionSide/dual", new Dictionary<string, string>(), true);
                 if (rs != null)
                 {
                     var modeNow = JsonConvert.DeserializeAnonymousType(rs, new HedgeModeResponse());
-                    if(modeNow.dualSidePosition != HedgeMode)
+                    if (modeNow.dualSidePosition != HedgeMode)
                     {
                         var param = new Dictionary<string, string>();
                         param.Add("dualSidePosition=", HedgeMode.ToString().ToLower());

@@ -1,20 +1,20 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.OsOptimizer.OptEntity;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.OsOptimizer.OptEntity;
 
 namespace OsEngine.OsOptimizer
 {
     public class OptimizerReportCharting
     {
         public OptimizerReportCharting(WindowsFormsHost hostDataGrid, WindowsFormsHost hostColumnsResult,
-            WindowsFormsHost hostPieChartResult, System.Windows.Controls.ComboBox boxTypeSort, 
-            WindowsFormsHost hostOutOfSampleEquity, System.Windows.Controls.Label outOfSampleLabel, 
+            WindowsFormsHost hostPieChartResult, System.Windows.Controls.ComboBox boxTypeSort,
+            WindowsFormsHost hostOutOfSampleEquity, System.Windows.Controls.Label outOfSampleLabel,
             System.Windows.Controls.Label robustnessMetrica)
         {
             _sortBotsType = SortBotsType.TotalProfit;
@@ -195,14 +195,14 @@ namespace OsEngine.OsOptimizer
             {
                 return true;
             }
-             else if (sortType == SortBotsType.SharpRatio &&
-                     rep1.SharpRatio < rep2.SharpRatio)
+            else if (sortType == SortBotsType.SharpRatio &&
+                    rep1.SharpRatio < rep2.SharpRatio)
             {
                 return true;
             }
 
             return false;
-        } 
+        }
 
         /// <summary>
         /// robot sorting type in the results table
@@ -221,7 +221,7 @@ namespace OsEngine.OsOptimizer
 
         private void CreateGridDep()
         {
-            _gridDep = DataGridFactory.GetDataGridView(DataGridViewSelectionMode.ColumnHeaderSelect, DataGridViewAutoSizeRowsMode.None,true);
+            _gridDep = DataGridFactory.GetDataGridView(DataGridViewSelectionMode.ColumnHeaderSelect, DataGridViewAutoSizeRowsMode.None, true);
             _gridDep.ScrollBars = ScrollBars.Vertical;
 
             DataGridViewTextBoxCell cell0 = new DataGridViewTextBoxCell();
@@ -416,7 +416,7 @@ namespace OsEngine.OsOptimizer
                 row.Cells.Add(cell7);
 
                 DataGridViewTextBoxCell cell8 = new DataGridViewTextBoxCell();
-                cell8.Value = Math.Round(reportToPaint.AverageProfitPercent,4).ToStringWithNoEndZero();
+                cell8.Value = Math.Round(reportToPaint.AverageProfitPercent, 4).ToStringWithNoEndZero();
                 row.Cells.Add(cell8);
 
                 DataGridViewTextBoxCell cell9 = new DataGridViewTextBoxCell();
@@ -571,7 +571,7 @@ namespace OsEngine.OsOptimizer
             allCount += count40_60;
             allCount += count60_80;
 
-            if(allCount != 0)
+            if (allCount != 0)
             {
                 decimal oneBestPieW = 100 / allCount;
                 decimal robustness = 0;
@@ -754,7 +754,7 @@ namespace OsEngine.OsOptimizer
 
         private void PaintOutOfSampleEquityChart()
         {
-            if(_reports == null ||
+            if (_reports == null ||
                 _reports.Count == 0)
             {
                 return;
@@ -766,7 +766,7 @@ namespace OsEngine.OsOptimizer
             List<decimal> values = new List<decimal>();
 
             decimal averageProfitPercent = 0;
-            
+
 
             for (int i = 0; i < _reports.Count; i += 2)
             {
@@ -786,7 +786,7 @@ namespace OsEngine.OsOptimizer
                 OptimizerReport bestBotInOutOfSample
                     = _reports[i + 1].Reports.Find(b => b.BotName.Replace(" OutOfSample", "") == bestBot.BotName.Replace(" InSample", ""));
 
-                if(bestBotInOutOfSample == null)
+                if (bestBotInOutOfSample == null)
                 {
                     continue;
                 }
@@ -804,11 +804,11 @@ namespace OsEngine.OsOptimizer
 
                 averageProfitPercent += bestBotInOutOfSample.AverageProfitPercent;
             }
-            if(values.Count != 0)
+            if (values.Count != 0)
             {
                 averageProfitPercent = averageProfitPercent / values.Count;
             }
-            
+
 
             ChartPainterLine.Paint(_windowsFormsHostOutOfSampleEquity, values);
 
@@ -821,7 +821,7 @@ namespace OsEngine.OsOptimizer
             {
                 // ignore
             }
-}
+        }
 
         // логирование
 

@@ -20,7 +20,7 @@ namespace Kraken.WebSockets.Messages
         /// <returns></returns>
         internal static OrderDescription CreateFromJObject(JObject orderDescriptionObject)
         {
-            if(orderDescriptionObject == null)
+            if (orderDescriptionObject == null)
             {
                 return null;
             }

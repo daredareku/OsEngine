@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// <summary>
     /// Bollinger. Bollinger indicator/Индикатор Боллинджер
     /// </summary>
-    public class Bollinger: IIndicator
+    public class Bollinger : IIndicator
     {
         /// <summary>
         /// constructor
@@ -24,7 +24,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         /// <param name="uniqName">unique name/уникальное имя</param>
         /// <param name="canDelete">whether user can remove indicator from chart manually/можно ли пользователю удалить индикатор с графика вручную</param>
-        public Bollinger(string uniqName,bool canDelete)
+        public Bollinger(string uniqName, bool canDelete)
         {
             Name = uniqName;
 
@@ -407,9 +407,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return new decimal[2];
             }
 
-            decimal [] bollinger = new decimal[2];
-// 1 count SMA
-// 1 считаем СМА
+            decimal[] bollinger = new decimal[2];
+            // 1 count SMA
+            // 1 считаем СМА
 
             decimal valueSma = 0;
 
@@ -451,11 +451,11 @@ namespace OsEngine.Charts.CandleChart.Indicators
             //делим полученную сумму на количество элементов в выборке (или на n-1, если n>30)
             if (Lenght > 30)
             {
-                summ = summ/(Lenght - 1);
+                summ = summ / (Lenght - 1);
             }
             else
             {
-                summ = summ/Lenght;
+                summ = summ / Lenght;
             }
             // calculating root.
             // вычисляем корень
@@ -464,9 +464,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
             // 3 count bollinger lines
             // 3 считаем линии боллинжера
 
-            bollinger[0] = Math.Round(valueSma + Convert.ToDecimal(summ) * Deviation,6);
+            bollinger[0] = Math.Round(valueSma + Convert.ToDecimal(summ) * Deviation, 6);
 
-            bollinger[1] = Math.Round(valueSma -Convert.ToDecimal(summ) * Deviation,6);
+            bollinger[1] = Math.Round(valueSma - Convert.ToDecimal(summ) * Deviation, 6);
 
             return bollinger;
         }

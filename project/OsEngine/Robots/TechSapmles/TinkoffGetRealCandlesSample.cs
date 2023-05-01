@@ -1,11 +1,10 @@
 ﻿using OsEngine.Entity;
 using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Attributes;
-
+using OsEngine.Market.Servers;
 // 1 добавляем коннектор тинькова и сервера в юзинги
 using OsEngine.Market.Servers.Tinkoff;
-using OsEngine.Market.Servers;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Attributes;
 
 namespace OsEngine.Robots.TechSapmles
 {

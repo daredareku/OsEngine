@@ -49,8 +49,8 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
                 PositionOnBoard pos = new PositionOnBoard();
 
                 pos.PortfolioName = "BybitPortfolio";
-                pos.SecurityNameCode 
-                    = posJson.SelectToken("symbol").ToString() 
+                pos.SecurityNameCode
+                    = posJson.SelectToken("symbol").ToString()
                     + "_" + posJson.SelectToken("side").ToString();
 
                 pos.ValueBegin = posJson.SelectToken("size").Value<decimal>();

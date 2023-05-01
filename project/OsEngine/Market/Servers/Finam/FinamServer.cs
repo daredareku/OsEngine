@@ -3,6 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,10 +18,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 using Action = System.Action;
 
 namespace OsEngine.Market.Servers.Finam
@@ -442,7 +442,7 @@ namespace OsEngine.Market.Servers.Finam
                 errorOnPage = true;
             }
 
-            if (response == "" 
+            if (response == ""
                 || response.Contains("Страница недоступна")
                 || errorOnPage)
             {
@@ -1828,7 +1828,7 @@ namespace OsEngine.Market.Servers.Finam
 
             while (timeStart.Date < timeEnd.Date)
             {
-                string tradesOneDay = GetTrades(timeStart.Date, timeStart.Date,1);
+                string tradesOneDay = GetTrades(timeStart.Date, timeStart.Date, 1);
                 timeStart = timeStart.AddDays(1);
 
                 if (tradesOneDay != null)
@@ -1839,7 +1839,7 @@ namespace OsEngine.Market.Servers.Finam
                 GC.WaitForPendingFinalizers();
             }
 
-            string tradesToday = GetTrades(timeStart.Date, timeStart.Date,1);
+            string tradesToday = GetTrades(timeStart.Date, timeStart.Date, 1);
 
             if (tradesToday != null)
             {
@@ -1858,8 +1858,8 @@ namespace OsEngine.Market.Servers.Finam
         /// <returns></returns>
         private string GetTrades(DateTime timeStart, DateTime timeEnd, int iteration)
         {
-           /* SendLogMessage(OsLocalization.Market.Message56 + SecurityFinam.Name +
-                           OsLocalization.Market.Message57 + timeStart.Date, LogMessageType.System);*/
+            /* SendLogMessage(OsLocalization.Market.Message56 + SecurityFinam.Name +
+                            OsLocalization.Market.Message57 + timeStart.Date, LogMessageType.System);*/
             //http://195.128.78.52/GBPUSD_141201_141206.csv?market=5&em=86&code=GBPUSD&df=1&mf=11&yf=2014&from=01.12.2014&dt=6&mt=11&yt=2014&to=06.12.2014&
             //p=2&f=GBPUSD_141201_141206&e=.csv&cn=GBPUSD&dtf=1&tmf=3&MSOR=1&mstime=on&mstimever=1&sep=3&sep2=1&datf=5&at=1
 
@@ -1995,11 +1995,11 @@ namespace OsEngine.Market.Servers.Finam
                     break;
                 }
 
-                if(timeWhaiting.AddMinutes(10) < DateTime.Now)
+                if (timeWhaiting.AddMinutes(10) < DateTime.Now)
                 {
                     // пытаемся дважды запросить данные рекурсией
                     // если не выходит, возвращаем null
-                    if(iteration == 1)
+                    if (iteration == 1)
                     {
                         iteration++;
                         wb.CancelAsync();
@@ -2013,7 +2013,7 @@ namespace OsEngine.Market.Servers.Finam
                         {
 
                         }
-                        
+
                         Thread.Sleep(5000);
                         return GetTrades(timeStart, timeEnd, iteration);
                     }
@@ -2050,7 +2050,7 @@ namespace OsEngine.Market.Servers.Finam
             {
                 string[] s = reader.ReadLine().Split(',');
 
-                if(s.Length < 5)
+                if (s.Length < 5)
                 {
                     continue;
                 }

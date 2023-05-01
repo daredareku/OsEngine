@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
-using OsEngine.Indicators;
 
 namespace OsEngine.Robots.High_Frequency
 {
@@ -72,7 +72,7 @@ namespace OsEngine.Robots.High_Frequency
 
         private void Logic()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(TimeRebuildOrder.ValueInt * 1000);
 
@@ -83,7 +83,7 @@ namespace OsEngine.Robots.High_Frequency
 
                 if (Regime.ValueString == "Off")
                 {
-                   continue;
+                    continue;
                 }
 
                 if (_sma.DataSeries[0].Values == null ||
@@ -105,9 +105,9 @@ namespace OsEngine.Robots.High_Frequency
 
             Position[] poses = openPositions.ToArray();
 
-            for (int i = 0; poses != null && i < poses.Length;i++)
+            for (int i = 0; poses != null && i < poses.Length; i++)
             {
-                if(poses[i].State != PositionStateType.Open)
+                if (poses[i].State != PositionStateType.Open)
                 {
                     _tab.CloseAllOrderToPosition(poses[i]);
                 }
@@ -115,7 +115,7 @@ namespace OsEngine.Robots.High_Frequency
             }
             Thread.Sleep(1000);
 
-            if(openPositions.Count != 0)
+            if (openPositions.Count != 0)
             {
                 Thread.Sleep(1000);
             }
@@ -146,10 +146,10 @@ namespace OsEngine.Robots.High_Frequency
                     if (poses[i].Direction == Side.Buy)
                     {
                         decimal price = lastBestSell;
-                        decimal priceToPercent = 
-                            poses[i].EntryPrice + poses[i].EntryPrice * (PersentFromBorder.ValueDecimal / 100 / 2); 
+                        decimal priceToPercent =
+                            poses[i].EntryPrice + poses[i].EntryPrice * (PersentFromBorder.ValueDecimal / 100 / 2);
 
-                        if((poses[i].CloseOrders == null ||
+                        if ((poses[i].CloseOrders == null ||
                             poses[i].CloseOrders.Count < 3) &&
                             priceToPercent > price)
                         {
@@ -182,7 +182,7 @@ namespace OsEngine.Robots.High_Frequency
         {
             List<Position> openPositions = _tab.PositionsOpenAll;
 
-            if(openPositions.Count > 0)
+            if (openPositions.Count > 0)
             {
                 return;
             }
@@ -193,7 +193,7 @@ namespace OsEngine.Robots.High_Frequency
 
             // проверяем чтобы цены были не дальше 1% от машки
 
-            if(Math.Abs(lastMa / lastBestBuy) > 1.01m ||
+            if (Math.Abs(lastMa / lastBestBuy) > 1.01m ||
                 Math.Abs(lastMa / lastBestBuy) < 0.99m)
             {
                 return;
@@ -205,10 +205,10 @@ namespace OsEngine.Robots.High_Frequency
                 return;
             }
 
-            decimal priceBuy = _tab.PriceBestAsk - _tab.PriceBestAsk * (PersentFromBorder.ValueDecimal /100);
+            decimal priceBuy = _tab.PriceBestAsk - _tab.PriceBestAsk * (PersentFromBorder.ValueDecimal / 100);
             decimal priceSell = _tab.PriceBestBid + _tab.PriceBestAsk * (PersentFromBorder.ValueDecimal / 100);
 
-            _tab.BuyAtLimit(Volume.ValueDecimal, Math.Round(priceBuy,PriceDecimals.ValueInt));
+            _tab.BuyAtLimit(Volume.ValueDecimal, Math.Round(priceBuy, PriceDecimals.ValueInt));
             _tab.SellAtLimit(Volume.ValueDecimal, Math.Round(priceSell, PriceDecimals.ValueInt));
         }
     }

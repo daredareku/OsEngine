@@ -3,11 +3,11 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
 using System;
 using System.Globalization;
 using System.Windows;
-using OsEngine.Entity;
-using OsEngine.Language;
 
 namespace OsEngine.Alerts
 {
@@ -108,7 +108,7 @@ namespace OsEngine.Alerts
             {
                 MyAlert.IsOn = CheckBoxOnOff.IsChecked.Value;
             }
- 
+
             Enum.TryParse(ComboBoxActivationType.SelectedItem.ToString(), out MyAlert.TypeActivation);
 
             MyAlert.PriceActivation = TextBoxPriceActivation.Text.ToDecimal();

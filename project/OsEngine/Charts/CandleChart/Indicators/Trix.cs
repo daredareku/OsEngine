@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -418,11 +418,11 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             _trixMa1.Process(candles);
-            _vtrixMa1[_vtrixMa1.Count-1] = GetMa(candles.Count - 1);
+            _vtrixMa1[_vtrixMa1.Count - 1] = GetMa(candles.Count - 1);
             _trixMa2.Process(_vtrixMa1);
-            _vtrixMa2[_vtrixMa2.Count-1] = GetMa2(candles.Count - 1);
+            _vtrixMa2[_vtrixMa2.Count - 1] = GetMa2(candles.Count - 1);
             _trixMa3.Process(_vtrixMa2);
-            _vtrixMa3[_vtrixMa3.Count-1] = GetMa3(candles.Count - 1);
+            _vtrixMa3[_vtrixMa3.Count - 1] = GetMa3(candles.Count - 1);
 
             Values[Values.Count - 1] = GetValue(candles.Count - 1);
         }
@@ -435,13 +435,13 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <returns>index value/значение индикатора по индексу</returns>
         private decimal GetValue(int index)
         {
-            if ( index < 2 || index >= _vtrixMa3.Count || _vtrixMa3[index - 1] == 0 || _vtrixMa3[index] == 0)
+            if (index < 2 || index >= _vtrixMa3.Count || _vtrixMa3[index - 1] == 0 || _vtrixMa3[index] == 0)
             {
                 return 0;
             }
-            decimal value = (_vtrixMa3[index] - _vtrixMa3[index - 1])*100/_vtrixMa3[index - 1];
+            decimal value = (_vtrixMa3[index] - _vtrixMa3[index - 1]) * 100 / _vtrixMa3[index - 1];
 
-            return Math.Round(value,4);
+            return Math.Round(value, 4);
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         private decimal GetMa(int index)
         {
-            if (index < Period && 
+            if (index < Period &&
                 index < 2 || index >= _trixMa1.Values.Count)
             {
                 return 0;
@@ -465,7 +465,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         private decimal GetMa2(int index)
         {
-            if (index < Period * 2 -1 ||
+            if (index < Period * 2 - 1 ||
                 index < 2 || index >= _trixMa2.Values.Count)
             {
                 return 0;
@@ -480,7 +480,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         private decimal GetMa3(int index)
         {
-            if (index < Period*7-1 || index < 2 || index >= _trixMa3.Values.Count)
+            if (index < Period * 7 - 1 || index < 2 || index >= _trixMa3.Values.Count)
             {
                 return 0;
             }

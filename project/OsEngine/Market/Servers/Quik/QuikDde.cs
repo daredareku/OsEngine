@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Logging;
 
 namespace OsEngine.Market.Servers.Quik
 {
@@ -20,8 +20,8 @@ namespace OsEngine.Market.Servers.Quik
     internal class QuikDde
     {
 
-// work with the chanel subscription
-// работа с подпиской на каналы
+        // work with the chanel subscription
+        // работа с подпиской на каналы
 
         public QuikDde(string service)
         {
@@ -31,8 +31,8 @@ namespace OsEngine.Market.Servers.Quik
 
         private qC.QuikCon _server;
 
-// access to QUIK and DDE activation
-// доступ к Квик и активация ДДЕ
+        // access to QUIK and DDE activation
+        // доступ к Квик и активация ДДЕ
 
         public bool IsRegistered
         {
@@ -89,7 +89,7 @@ namespace OsEngine.Market.Servers.Quik
             }
             if (messageType.Split('_')[0] == "message")
             {
-                SendLogMessage(messageType.Split('_')[1],LogMessageType.System);
+                SendLogMessage(messageType.Split('_')[1], LogMessageType.System);
             }
             if (messageType.Split('_')[0] == "status")
             {
@@ -274,11 +274,11 @@ namespace OsEngine.Market.Servers.Quik
             }
         }
 
-        public event Action<Security,decimal,decimal> UpdateSecurity;
+        public event Action<Security, decimal, decimal> UpdateSecurity;
 
         public event Action<DateTime> UpdateTimeSecurity;
 
-  // 2) all trades table / таблица всех сделок
+        // 2) all trades table / таблица всех сделок
         private void TradesUpdated(long id, object[,] table)
         {
             try
@@ -319,7 +319,7 @@ namespace OsEngine.Market.Servers.Quik
                         );
                     }
 
-                    
+
 
 
 
@@ -367,10 +367,10 @@ namespace OsEngine.Market.Servers.Quik
 
         public event Action<List<Trade>> UpdateTrade;
 
-  // 3) portfolios of spot and derivatives / порфели и спот и деривативы
+        // 3) portfolios of spot and derivatives / порфели и спот и деривативы
         private void PortfolioSpotUpdated(long id, object[,] table)
         {
-             int countElem = table.GetLength(0);
+            int countElem = table.GetLength(0);
 
             if (countElem == 0)
             {
@@ -385,7 +385,7 @@ namespace OsEngine.Market.Servers.Quik
                 {
                     return;
                 }
-                
+
                 decimal valueBegin = ToDecimal(table[i, 1]);
 
                 decimal profitLoss = ToDecimal(table[i, 3]);
@@ -452,7 +452,7 @@ namespace OsEngine.Market.Servers.Quik
                 UpdatePortfolios(_portfolios);
             }
         }
-        
+
         private void PortfolioSpotNumberUpdated(long id, object[,] table)
         {
             int countElem = table.GetLength(0);
@@ -500,7 +500,7 @@ namespace OsEngine.Market.Servers.Quik
 
             for (int i = 0; i < countElem; i++)
             {
-                string numberPortfolio =table[i, 0].ToString();
+                string numberPortfolio = table[i, 0].ToString();
                 decimal valueBegin = ToDecimal(table[i, 1]);
                 decimal valueBlock = ToDecimal(table[i, 2]);
                 decimal profitLoss = ToDecimal(table[i, 3]) + ToDecimal(table[i, 4]);
@@ -529,7 +529,7 @@ namespace OsEngine.Market.Servers.Quik
 
         private List<Portfolio> _portfolios;
 
-        private List<QuikPortfolio> _portfoliosQuik; 
+        private List<QuikPortfolio> _portfoliosQuik;
 
         public event Action<List<Portfolio>> UpdatePortfolios;
 
@@ -608,7 +608,7 @@ namespace OsEngine.Market.Servers.Quik
             }
         }
 
-  // 5) depths / стаканы
+        // 5) depths / стаканы
         private void GlassUpdated(long id, object[,] table, string nameSecurity)
         {
             int countElem = table.GetLength(0);
@@ -629,7 +629,8 @@ namespace OsEngine.Market.Servers.Quik
             {
                 if (ToDecimal(table[i, 0]) == 0)
                 {
-                    bids.Add(new MarketDepthLevel() {
+                    bids.Add(new MarketDepthLevel()
+                    {
                         Bid = ToDecimal(table[i, 2]),
                         Price = ToDecimal(table[i, 1]),
                         Ask = 0
@@ -642,7 +643,7 @@ namespace OsEngine.Market.Servers.Quik
                         Bid = 0,
                         Price = ToDecimal(table[i, 1]),
                         Ask = ToDecimal(table[i, 0])
-                    }); 
+                    });
                 }
             }
 
@@ -712,14 +713,14 @@ namespace OsEngine.Market.Servers.Quik
             return result;
         }
 
-// logginf
-// работа с логами
+        // logginf
+        // работа с логами
 
-        private void SendLogMessage(string message,LogMessageType type)
+        private void SendLogMessage(string message, LogMessageType type)
         {
             if (LogMessageEvent != null)
             {
-                LogMessageEvent(message,type);
+                LogMessageEvent(message, type);
             }
         }
 

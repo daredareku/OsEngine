@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using Jayrock.Json;
+﻿using Jayrock.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
-using OsEngine.Market.Servers.Kraken;
 using OsEngine.Market.Servers.Kraken.KrakenEntity;
-using Trade = OsEngine.Entity.Trade;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Kraken
 {

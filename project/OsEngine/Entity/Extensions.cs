@@ -13,7 +13,7 @@ namespace OsEngine.Entity
             {
                 return null;
             }
-            
+
             // это для того чтобы из названия бумаги удалять кавычки (правка @cibermax).
             // К примеру ПАО ЛУКОЙЛ, АДР tiker LKOD@GS не получалось создать папку выдавало исключение
             char x = '"';
@@ -47,7 +47,7 @@ namespace OsEngine.Entity
                 .Replace(x.ToString(), "");
 
 
-            if(len != value.Length)
+            if (len != value.Length)
             {
                 return true;
             }
@@ -57,7 +57,7 @@ namespace OsEngine.Entity
 
         public static decimal ToDecimal(this string value)
         {
-            if(value == null)
+            if (value == null)
             {
                 return 0;
             }
@@ -88,11 +88,11 @@ namespace OsEngine.Entity
         {
             string result = value.ToString(CultureInfo.GetCultureInfo("ru-RU"));
 
-            if(result.Contains(","))
+            if (result.Contains(","))
             {
                 result = result.TrimEnd('0');
 
-                if(result.EndsWith(","))
+                if (result.EndsWith(","))
                 {
                     result = result.TrimEnd(',');
                 }
@@ -214,7 +214,7 @@ namespace OsEngine.Entity
 
             int indxStart = newCandles.Count - 500;
 
-            if(indxStart < 0)
+            if (indxStart < 0)
             {
                 indxStart = 0;
             }
@@ -236,7 +236,7 @@ namespace OsEngine.Entity
                     }
                 }
 
-                if(candleInsertInOldArray == false)
+                if (candleInsertInOldArray == false)
                 {
                     i += 10;
                 }
@@ -396,14 +396,14 @@ namespace OsEngine.Entity
         {
             string result = "";
 
-            for(int i = 0; row.Cells != null && i < row.Cells.Count;i++)
+            for (int i = 0; row.Cells != null && i < row.Cells.Count; i++)
             {
-                if(row.Cells[i].Value == null)
+                if (row.Cells[i].Value == null)
                 {
-                    result +=  ",";
+                    result += ",";
                     continue;
                 }
-                result += row.Cells[i].Value.ToString().Replace("\n"," ").Replace("\r"," ").Replace(",",".") + ",";
+                result += row.Cells[i].Value.ToString().Replace("\n", " ").Replace("\r", " ").Replace(",", ".") + ",";
             }
 
             return result;

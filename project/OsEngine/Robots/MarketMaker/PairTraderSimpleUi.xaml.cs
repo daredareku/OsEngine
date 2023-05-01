@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OsEngine.Language;
+using OsEngine.OsTrader.Panels;
+using System;
 using System.Globalization;
 using System.Windows;
-using OsEngine.Language;
-using OsEngine.OsTrader.Panels;
 
 namespace OsEngine.Robots.MarketMaker
 {

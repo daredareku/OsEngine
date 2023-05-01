@@ -4,17 +4,17 @@
 */
 
 using OsEngine.Entity;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market;
 using OsEngine.Market.Servers;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Text;
+using System.Threading.Tasks;
 
 
 namespace OsEngine.OsData
@@ -921,7 +921,7 @@ namespace OsEngine.OsData
                 // ignore
             }
 
-            for (int i = 0; DataPies != null &&i < DataPies.Count; i++)
+            for (int i = 0; DataPies != null && i < DataPies.Count; i++)
             {
                 DataPies[i].Delete();
             }
@@ -931,13 +931,13 @@ namespace OsEngine.OsData
                 DataPies.Clear();
             }
 
-            for(int i = 0;i < MdSourses.Count;i++)
+            for (int i = 0; i < MdSourses.Count; i++)
             {
                 MdSourses[i].Delete();
                 MdSourses[i].NewLogMessageEvent -= SendNewLogMessage;
             }
 
-            if(MdSourses != null)
+            if (MdSourses != null)
             {
                 MdSourses = null;
             }
@@ -1086,7 +1086,7 @@ namespace OsEngine.OsData
                 {
                     ProcessMarketDepth(server, param);
                 }
-                else if (TimeFrame == TimeFrame.Sec1 
+                else if (TimeFrame == TimeFrame.Sec1
                     || TimeFrame == TimeFrame.Sec2
                     || TimeFrame == TimeFrame.Sec5
                     || TimeFrame == TimeFrame.Sec10
@@ -1526,7 +1526,7 @@ namespace OsEngine.OsData
 
             Status = SecurityLoadStatus.Load;
 
-            if(needToSave)
+            if (needToSave)
             {
                 SaveTradeDataExitFile(DataPies);
             }
@@ -1686,9 +1686,9 @@ namespace OsEngine.OsData
 
             MarketDepthLoader loader = null;
 
-            for(int i = 0;i < MdSourses.Count;i++)
+            for (int i = 0; i < MdSourses.Count; i++)
             {
-                if(MdSourses[i].SecName == SecName 
+                if (MdSourses[i].SecName == SecName
                     && MdSourses[i].SecClass == SecClass
                     && MdSourses[i].Depth == param.MarketDepthDepth)
                 {
@@ -1697,7 +1697,7 @@ namespace OsEngine.OsData
                 }
             }
 
-            if(loader == null)
+            if (loader == null)
             {
                 loader = new MarketDepthLoader(SecName, SecClass, param.Source, param.MarketDepthDepth);
                 loader.NewLogMessageEvent += SendNewLogMessage;
@@ -1713,7 +1713,7 @@ namespace OsEngine.OsData
 
             StringBuilder builder = new StringBuilder();
 
-            if(source.SaveStrings == null)
+            if (source.SaveStrings == null)
             {
                 return;
             }
@@ -1722,13 +1722,13 @@ namespace OsEngine.OsData
             {
                 string str = null;
 
-                if(source.SaveStrings.TryDequeue(out str))
+                if (source.SaveStrings.TryDequeue(out str))
                 {
                     builder.Append(str + "\r");
                 }
             }
 
-            if(builder.Length == 0)
+            if (builder.Length == 0)
             {
                 return;
             }
@@ -1888,7 +1888,7 @@ namespace OsEngine.OsData
         {
             _isDeleted = true;
 
-            if(MarketDepthSource != null)
+            if (MarketDepthSource != null)
             {
                 MarketDepthSource.Clear();
                 MarketDepthSource.Delete();
@@ -1939,7 +1939,7 @@ namespace OsEngine.OsData
 
         private void MarketDepthSource_MarketDepthUpdateEvent(MarketDepth md)
         {
-            if(_isDeleted == true)
+            if (_isDeleted == true)
             {
                 return;
             }
@@ -2121,7 +2121,7 @@ namespace OsEngine.OsData
                 start = Trades[0].Time;
             }
 
-            StartActualTime =  start;
+            StartActualTime = start;
 
             // 2 актуальное время конца
 

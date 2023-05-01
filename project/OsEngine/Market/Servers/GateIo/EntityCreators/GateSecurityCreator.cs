@@ -17,7 +17,7 @@ namespace OsEngine.Market.Servers.GateIo.EntityCreators
         public List<Security> Create(string data)
         {
             var jProperties = JToken.Parse(data).SelectToken("pairs").Children<JObject>().Properties();
-            
+
             foreach (var jProperty in jProperties)
             {
                 try

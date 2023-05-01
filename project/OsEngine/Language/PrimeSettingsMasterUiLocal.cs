@@ -8,11 +8,11 @@ namespace OsEngine.Language
     public class PrimeSettingsMasterUiLocal
     {
         public string Title => OsLocalization.ConvertToLocString(
-            "Eng:Configuration_"+
+            "Eng:Configuration_" +
             "Ru:Общие настройки_");
 
         public string LanguageLabel => OsLocalization.ConvertToLocString(
-            "Eng:Language"+
+            "Eng:Language" +
             "_Ru:Язык_");
 
         public string ShowExtraLogWindowLabel => OsLocalization.ConvertToLocString(
@@ -24,7 +24,7 @@ namespace OsEngine.Language
             "Ru:Звук экстренного лога_");
 
         public string TransactionSoundLabel => OsLocalization.ConvertToLocString(
-            "Eng:Transaction sound_"+
+            "Eng:Transaction sound_" +
             "Ru:Звук по сделке_");
 
         public string TextBoxMessageToUsers => OsLocalization.ConvertToLocString(

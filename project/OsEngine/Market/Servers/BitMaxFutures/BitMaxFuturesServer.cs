@@ -470,7 +470,8 @@ namespace OsEngine.Market.Servers.BitMaxFutures
             {
                 _wsClient = new WebSocket(WebsocketPublicChanel);
 
-                _wsClient.Opened += new EventHandler((sender, e) => {
+                _wsClient.Opened += new EventHandler((sender, e) =>
+                {
                     ConnectTradesChanel(sender, e, security.NameFull);
                 });
 

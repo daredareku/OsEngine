@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trading robot on the index. The intersection of MA on the index from the bottom up long, with the reverse intersection of shorts
@@ -196,11 +196,11 @@ public class OneLegArbitrage : BotPanel
                     else
                     {
                         _tab2.CloseAtMarket(openPositions[i], openPositions[i].OpenVolume);
-                        if(openPositions.Count < 2)
+                        if (openPositions.Count < 2)
                         {
                             _tab2.BuyAtLimit(Volume.ValueDecimal, _lastPrice + _tab2.Securiti.PriceStep * Slippage.ValueInt);
                         }
-                        
+
                     }
                 }
             }

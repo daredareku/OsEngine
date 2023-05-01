@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Language;
@@ -17,6 +9,14 @@ using OsEngine.Market.Servers.Huobi.Request;
 using OsEngine.Market.Servers.Huobi.Response;
 using OsEngine.Market.Services;
 using RestSharp;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Huobi.FuturesSwap
 {

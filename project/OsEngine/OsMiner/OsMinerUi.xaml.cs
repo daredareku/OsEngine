@@ -14,7 +14,7 @@ namespace OsEngine.OsMiner
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);
-            _miner = new OsMinerMaster(HostLog, HostSets, HostPatternSets, HostChart,RectChart);
+            _miner = new OsMinerMaster(HostLog, HostSets, HostPatternSets, HostChart, RectChart);
 
             Label5.Header = OsLocalization.Miner.Label5;
             Label6.Header = OsLocalization.Miner.Label6;

@@ -3,12 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Windows;
-using System.ComponentModel;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
 using OsEngine.Layout;
+using OsEngine.Market;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Gui
 {
@@ -52,7 +51,7 @@ namespace OsEngine.OsTrader.Gui
         private void Local()
         {
             Title = Title + " " + OsEngine.PrimeSettings.PrimeSettingsMaster.LabelInHeaderBotStation;
-            TabItemAllPos.Header = OsLocalization.Trader.Label20 ;
+            TabItemAllPos.Header = OsLocalization.Trader.Label20;
             TextBoxPositionBord.Header = OsLocalization.Trader.Label21;
             TextBoxPositionAllOrders.Header = OsLocalization.Trader.Label22;
             TabItemLogPrime.Header = OsLocalization.Trader.Label24;

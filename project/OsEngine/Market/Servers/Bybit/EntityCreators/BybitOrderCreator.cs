@@ -2,9 +2,6 @@
 using OsEngine.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Bybit.EntityCreators
 {
@@ -50,7 +47,7 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
                 //Cancelled
                 //PendingCancel - matching engine has received the cancelation request but it may not be canceled successfully
 
-                if(status == "New" ||
+                if (status == "New" ||
                     status == "PartiallyFilled" ||
                     status == "Created")
                 {
@@ -84,9 +81,9 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
 
 
                 orders.Add(order);
-                }
+            }
 
             return orders;
-                }
+        }
     }
 }

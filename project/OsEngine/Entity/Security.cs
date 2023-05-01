@@ -80,8 +80,8 @@ namespace OsEngine.Entity
                 }
 
                 string step = Convert.ToDecimal(Convert.ToDouble(_priceStep)).ToString(new CultureInfo("ru-RU"));
-               
-                if(step.Split(',').Length == 1)
+
+                if (step.Split(',').Length == 1)
                 {
                     _decimals = 0;
                 }
@@ -156,7 +156,7 @@ namespace OsEngine.Entity
                 {
                     _decimals = step.Split(',')[1].Length;
                 }
-                else if(step.Split('.').Length > 1)
+                else if (step.Split('.').Length > 1)
                 {
                     _decimals = step.Split('.')[1].Length;
                 }
@@ -232,12 +232,12 @@ namespace OsEngine.Entity
             NameFull = array[2];
             NameId = array[3];
             NameFull = array[4];
-            Enum.TryParse(array[5],out State);
+            Enum.TryParse(array[5], out State);
             PriceStep = array[6].ToDecimal();
             Lot = array[7].ToDecimal();
             PriceStepCost = array[8].ToDecimal();
             Go = array[9].ToDecimal();
-            Enum.TryParse(array[10],out SecurityType);
+            Enum.TryParse(array[10], out SecurityType);
             _decimals = Convert.ToInt32(array[11]);
             PriceLimitLow = array[12].ToDecimal();
             PriceLimitHigh = array[13].ToDecimal();

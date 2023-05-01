@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.CandleChart.Indicators;
+using OsEngine.Entity;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using OsEngine.Charts.CandleChart.Indicators;
-using OsEngine.Entity;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.MarketMaker
 {
@@ -166,7 +165,7 @@ namespace OsEngine.Robots.MarketMaker
 
         private void Tab1_CandleFinishedEvent(List<Candle> candlesTab1)
         {
-            if(_tab1.CandlesFinishedOnly == null ||
+            if (_tab1.CandlesFinishedOnly == null ||
                 _tab2.CandlesFinishedOnly == null ||
                 _tabIndex.Candles == null)
             {

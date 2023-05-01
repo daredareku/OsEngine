@@ -3,9 +3,8 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
 using OsEngine.Entity;
-using OsEngine.Market;
+using System;
 
 namespace OsEngine.OsTrader.Panels.Tab.Internal
 {
@@ -26,13 +25,13 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             Position newDeal = new Position();
 
             newDeal.Number = NumberGen.GetNumberDeal(startProgram);
-            
 
-           
+
+
             newDeal.Direction = direction;
             newDeal.State = PositionStateType.Opening;
 
-            newDeal.AddNewOpenOrder(CreateOrder(security, direction, priceOrder, volume, priceType, timeLife, startProgram,OrderPositionConditionType.Open));
+            newDeal.AddNewOpenOrder(CreateOrder(security, direction, priceOrder, volume, priceType, timeLife, startProgram, OrderPositionConditionType.Open));
 
             newDeal.NameBot = botName;
             newDeal.Lots = security.Lot;
@@ -50,14 +49,14 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
         /// создать ордер
         /// </summary>
         public Order CreateOrder(Security security,
-            Side direction, decimal priceOrder, decimal volume, 
+            Side direction, decimal priceOrder, decimal volume,
             OrderPriceType priceType, TimeSpan timeLife, StartProgram startProgram,
                 OrderPositionConditionType positionConditionType)
         {
             Order newOrder = new Order();
 
             newOrder.NumberUser = NumberGen.GetNumberOrder(startProgram);
-            
+
             newOrder.Side = direction;
             newOrder.Price = priceOrder;
             newOrder.Volume = volume;

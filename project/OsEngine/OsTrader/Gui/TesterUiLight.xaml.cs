@@ -3,14 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Globalization;
-using System.Windows;
-using OsEngine.Charts.CandleChart;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
 using OsEngine.Layout;
+using OsEngine.Market;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Gui
 {
@@ -36,7 +33,7 @@ namespace OsEngine.OsTrader.Gui
             Closing += TesterUi_Closing;
             Local();
 
-            BotTabsPainter painter = new BotTabsPainter(_strategyKeeper,BotsHost);
+            BotTabsPainter painter = new BotTabsPainter(_strategyKeeper, BotsHost);
 
             TabControlPrime.SelectionChanged += TabControlPrime_SelectionChanged;
             TabControlPrime.MouseEnter += TabControlPrime_MouseEnter;

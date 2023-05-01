@@ -42,4 +42,3 @@ namespace Kraken.WebSockets.Events
         }
     }
 }
- 

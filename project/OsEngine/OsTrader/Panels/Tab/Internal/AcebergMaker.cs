@@ -3,10 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OsEngine.Entity;
 
 namespace OsEngine.OsTrader.Panels.Tab.Internal
 {
@@ -42,7 +42,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                 _acebergOrders = new List<Aceberg>();
             }
 
-            Aceberg newAceberg = new Aceberg(price, lifiTime, ordersCount, position, bot,type,volume);
+            Aceberg newAceberg = new Aceberg(price, lifiTime, ordersCount, position, bot, type, volume);
 
             newAceberg.NewOrderNeadToCansel += newAceberg_newOrderNeadToCansel;
             newAceberg.NewOrderNeadToExecute += newAceberg_newOrderNeadToExecute;
@@ -105,7 +105,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             if (toClose == null ||
                 toClose.Count == 0)
             {
-               return;
+                return;
             }
 
             for (int i = 0; i < toClose.Count; i++)
@@ -151,7 +151,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
         /// <param name="volume">sum volume / общий объём</param>
         public Aceberg(decimal price, TimeSpan lifiTime, int ordersCount, Position position, BotTabSimple bot, AcebergType type, decimal volume)
         {
-         
+
             _bot = bot;
             _price = price;
             _lifiTime = lifiTime;
@@ -261,7 +261,7 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                 orders[i].SecurityNameCode = _bot.Securiti.Name;
                 orders[i].SecurityClassCode = _bot.Securiti.NameClass;
                 orders[i].NumberUser = NumberGen.GetNumberOrder(_bot.StartProgram);
-  
+
                 if (i + 1 == orders.Length)
                 {
                     decimal realVolume = 0;
@@ -286,13 +286,13 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             Side side;
             if (_position.Direction == Side.Buy)
             {
-                 side = Side.Sell;
+                side = Side.Sell;
             }
             else
             {
                 side = Side.Buy;
             }
-           
+
 
             int realCountOrders = _ordersCount;
 
@@ -485,13 +485,13 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
                 {
                     _position.AddNewOpenOrder(_ordersInSystem);
                 }
-                else if(_type == AcebergType.Close)
+                else if (_type == AcebergType.Close)
                 {
                     _position.AddNewCloseOrder(_ordersInSystem);
                 }
                 else if (_type == AcebergType.ModificateBuy)
                 {
-                    if (_position.Direction == Side.Buy && _ordersInSystem.Side == Side.Buy||
+                    if (_position.Direction == Side.Buy && _ordersInSystem.Side == Side.Buy ||
                         _position.Direction == Side.Sell && _ordersInSystem.Side == Side.Sell)
                     {
                         _position.AddNewOpenOrder(_ordersInSystem);

@@ -4,6 +4,6 @@
     {
         TKrakenMessage Deserialize<TKrakenMessage>(string json) where TKrakenMessage : class, IKrakenMessage;
 
-        string Serialize<TKrakenMessage>(TKrakenMessage message) where TKrakenMessage : class, IKrakenMessage; 
+        string Serialize<TKrakenMessage>(TKrakenMessage message) where TKrakenMessage : class, IKrakenMessage;
     }
 }

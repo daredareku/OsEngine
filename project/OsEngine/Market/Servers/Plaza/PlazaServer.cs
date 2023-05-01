@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
 using OsEngine.Market.Servers.Plaza.Internal;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Plaza
 {
@@ -68,12 +68,12 @@ namespace OsEngine.Market.Servers.Plaza
 
         public void GetSecurities()
         {
-            
+
         }
 
         public void GetPortfolios()
         {
-            
+
         }
 
         public void SendOrder(Order order)
@@ -113,7 +113,7 @@ namespace OsEngine.Market.Servers.Plaza
 
         public void GetOrdersState(List<Order> orders)
         {
-            
+
         }
 
         // parsing incoming data

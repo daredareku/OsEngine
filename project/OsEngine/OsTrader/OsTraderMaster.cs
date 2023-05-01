@@ -15,6 +15,7 @@ using OsEngine.OsTrader.AdminPanelApi;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.RiskManager;
+using OsEngine.PrimeSettings;
 using OsEngine.Robots;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.Integration;
 using System.Windows.Shapes;
-using OsEngine.PrimeSettings;
 using Grid = System.Windows.Controls.Grid;
 
 namespace OsEngine.OsTrader
@@ -108,7 +108,7 @@ namespace OsEngine.OsTrader
 
             _tabBotNames = tabPanel;
 
-            if(_tabBotNames != null)
+            if (_tabBotNames != null)
             {
                 _tabBotNames.Items.Clear();
             }
@@ -129,11 +129,11 @@ namespace OsEngine.OsTrader
 
             Load();
 
-            if(_tabBotNames != null)
+            if (_tabBotNames != null)
             {
                 _tabBotNames.SelectionChanged += _tabBotControl_SelectionChanged;
             }
-            
+
             ReloadRiskJournals();
             _globalController.StartPaint();
 
@@ -345,7 +345,7 @@ namespace OsEngine.OsTrader
 
                     for (int i = 0; PanelsArray != null && i < PanelsArray.Count; i++)
                     {
-                        if(PanelsArray[i].IsScript == false)
+                        if (PanelsArray[i].IsScript == false)
                         {
                             writer.WriteLine(PanelsArray[i].NameStrategyUniq + "@" +
                                              PanelsArray[i].GetNameStrategyType() +
@@ -528,7 +528,7 @@ namespace OsEngine.OsTrader
         /// </summary>
         private void ReloadRiskJournals()
         {
-            if(_startProgram == StartProgram.IsOsOptimizer)
+            if (_startProgram == StartProgram.IsOsOptimizer)
             {
                 return;
             }
@@ -685,7 +685,7 @@ namespace OsEngine.OsTrader
                     panelsJournal.Add(botPanel);
                 }
 
-                if(journalVersion == 2)
+                if (journalVersion == 2)
                 {
                     _journalUi2 = new JournalUi2(panelsJournal, _startProgram);
                     _journalUi2.LogMessageEvent += SendNewLogMessage;
@@ -718,7 +718,7 @@ namespace OsEngine.OsTrader
                     {
                         _journalUi1.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     }
-                                
+
                     _journalUi1.Show();
                 }
             }
@@ -730,7 +730,7 @@ namespace OsEngine.OsTrader
 
         private void _journalUi_Closed(object sender, EventArgs e)
         {
-            if(_journalUi2 != null)
+            if (_journalUi2 != null)
             {
                 _journalUi2.LogMessageEvent -= SendNewLogMessage;
                 _journalUi2.Closed -= _journalUi_Closed;
@@ -752,7 +752,7 @@ namespace OsEngine.OsTrader
 
         private void _globalController_UserSelectActionEvent(Position pos, SignalType signal)
         {
-            for(int i = 0;i < PanelsArray.Count;i++)
+            for (int i = 0; i < PanelsArray.Count; i++)
             {
                 PanelsArray[i].UserSetPositionAction(pos, signal);
             }
@@ -878,7 +878,7 @@ namespace OsEngine.OsTrader
                 ServerMaster.StopPaint();
                 _globalController.StopPaint();
 
-                if(_tabBotNames != null)
+                if (_tabBotNames != null)
                 {
                     _tabBotNames.IsEnabled = false;
 
@@ -887,7 +887,7 @@ namespace OsEngine.OsTrader
                         _activPanel.StopPaint();
                     }
                 }
-                
+
                 _log.StopPaint();
             }
             catch (Exception error)
@@ -904,7 +904,7 @@ namespace OsEngine.OsTrader
         {
             try
             {
-               if(_tabBotNames != null)
+                if (_tabBotNames != null)
                 {
                     if (!_tabBotNames.Dispatcher.CheckAccess())
                     {
@@ -1004,7 +1004,7 @@ namespace OsEngine.OsTrader
 
                 Save();
 
-                if(_tabBotNames != null)
+                if (_tabBotNames != null)
                 {
                     _tabBotNames.Items.Clear();
 
@@ -1113,7 +1113,7 @@ namespace OsEngine.OsTrader
                 }
                 PanelsArray.Add(newRobot);
 
-                if(BotCreateEvent != null)
+                if (BotCreateEvent != null)
                 {
                     BotCreateEvent(newRobot);
                 }
@@ -1134,7 +1134,7 @@ namespace OsEngine.OsTrader
         public void HotUpdateActiveBot()
         {
             SendNewLogMessage(OsLocalization.Trader.Label161, LogMessageType.System);
-            
+
             HotUpdateResult<BotPanel> result = HotUpdateManager.Instance.Update(_activPanel);
             if (HotUpdateResultStatus.Success == result.Status)
             {

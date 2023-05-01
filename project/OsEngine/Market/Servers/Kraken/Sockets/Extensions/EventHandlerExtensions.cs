@@ -1,6 +1,6 @@
-﻿using System;
-using Kraken.WebSockets.Events;
+﻿using Kraken.WebSockets.Events;
 using Kraken.WebSockets.Messages;
+using System;
 
 namespace Kraken.WebSockets.Extensions
 {

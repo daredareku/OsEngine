@@ -3,15 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using OsEngine.Entity;
-using OsEngine.Market;
 using OsEngine.OsMiner;
 using OsEngine.OsMiner.Patterns;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OsEngine.Robots.Patterns
 {
@@ -33,7 +32,7 @@ namespace OsEngine.Robots.Patterns
             _minerMaster.LogMessageEvent += _minerMaster_LogMessageEvent;
 
             DeleteEvent += Strategy_DeleteEvent;
-            Regime= BotTradeRegime.Off;
+            Regime = BotTradeRegime.Off;
 
             WeigthToInter = 1;
             WeigthToExit = 1;
@@ -48,7 +47,7 @@ namespace OsEngine.Robots.Patterns
             ExitFromSomeCandlesSleepage = 0;
             TrailingStopIsOn = false;
             TreilingStopValue = 20;
-            TreilingStopSleepage =0;
+            TreilingStopSleepage = 0;
             MaxPosition = 3;
             OpenVolume = 1;
 
@@ -130,7 +129,7 @@ namespace OsEngine.Robots.Patterns
             return names;
         }
 
-// settings / настройки
+        // settings / настройки
 
         /// <summary>
         /// regime
@@ -265,7 +264,7 @@ namespace OsEngine.Robots.Patterns
         public decimal OpenVolume;
 
 
-// work with file system / работа с файловой системой
+        // work with file system / работа с файловой системой
 
         /// <summary>
         /// save settings
@@ -297,7 +296,7 @@ namespace OsEngine.Robots.Patterns
                     writer.WriteLine(NameGroupPatternsToTrade);
                     writer.WriteLine(InterToPatternSleepage);
                     writer.WriteLine(ExitToPatternsSleepage);
-                    writer.WriteLine(MaxPosition );
+                    writer.WriteLine(MaxPosition);
                     writer.WriteLine(OpenVolume);
                     writer.WriteLine(NameSetToTrade);
 
@@ -369,7 +368,7 @@ namespace OsEngine.Robots.Patterns
             }
         }
 
-//trading logic /  торговая логика
+        //trading logic /  торговая логика
 
         /// <summary>
         /// trading tab
@@ -407,7 +406,7 @@ namespace OsEngine.Robots.Patterns
             {
                 if (CheckInter(PatternsToOpen, candles, candles.Count - 1, WeigthToInter))
                 {
-                    InterInNewPosition(candles[candles.Count-1].Close);
+                    InterInNewPosition(candles[candles.Count - 1].Close);
                 }
             }
 
@@ -419,14 +418,14 @@ namespace OsEngine.Robots.Patterns
                 }
                 decimal priceExit;
 
-                priceExit = CheckExit(positions[i], PatternsToClose, candles, candles.Count - 1, candles[candles.Count-1].Close);
+                priceExit = CheckExit(positions[i], PatternsToClose, candles, candles.Count - 1, candles[candles.Count - 1].Close);
 
                 if (priceExit == 0)
                 {
                     continue;
                 }
 
-                _tab.CloseAtLimit(positions[i],priceExit,positions[i].OpenVolume);
+                _tab.CloseAtLimit(positions[i], priceExit, positions[i].OpenVolume);
             }
         }
 
@@ -473,7 +472,7 @@ namespace OsEngine.Robots.Patterns
             {
                 if (position.Direction == Side.Buy)
                 {
-                    decimal stopPrice = position.EntryPrice - position.EntryPrice * (StopOrderValue/100);
+                    decimal stopPrice = position.EntryPrice - position.EntryPrice * (StopOrderValue / 100);
                     decimal stopOrderPrice = stopPrice - _tab.Securiti.PriceStep * StopOrderSleepage;
                     _tab.CloseAtStop(position, stopPrice, stopOrderPrice);
                 }
@@ -522,7 +521,7 @@ namespace OsEngine.Robots.Patterns
         {
             if (CheckInter(patterns, candles, index, WeigthToExit))
             {
-                return GetPriceExit(position,price,ExitToPatternsSleepage);
+                return GetPriceExit(position, price, ExitToPatternsSleepage);
             }
 
             if (TrailingStopIsOn)
@@ -530,7 +529,7 @@ namespace OsEngine.Robots.Patterns
                 if (position.Direction == Side.Buy)
                 {
                     decimal newTrail = candles[candles.Count - 1].Close - candles[candles.Count - 1].Close * (TreilingStopValue / 100);
-                    _tab.CloseAtTrailingStop(position,newTrail,newTrail - _tab.Securiti.PriceStep * StopOrderSleepage);
+                    _tab.CloseAtTrailingStop(position, newTrail, newTrail - _tab.Securiti.PriceStep * StopOrderSleepage);
                 }
                 else
                 {
@@ -543,7 +542,7 @@ namespace OsEngine.Robots.Patterns
             {
                 if (GetIndexInter(position.TimeOpen, candles) + ExitFromSomeCandlesValue <= index)
                 {
-                    return GetPriceExit(position, price,ExitFromSomeCandlesSleepage);
+                    return GetPriceExit(position, price, ExitFromSomeCandlesSleepage);
                 }
             }
 
@@ -575,7 +574,7 @@ namespace OsEngine.Robots.Patterns
         {
             if (position.Direction == Side.Buy)
             {
-                return price - _tab.Securiti.PriceStep*sleepage;
+                return price - _tab.Securiti.PriceStep * sleepage;
             }
             else // if (position.Direction == Side.Sell)
             {

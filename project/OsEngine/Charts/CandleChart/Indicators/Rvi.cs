@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -388,9 +388,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return;
             }
 
-            _moveAverage[_moveAverage.Count-1] = GetMoveAverage(candles, candles.Count - 1);
+            _moveAverage[_moveAverage.Count - 1] = GetMoveAverage(candles, candles.Count - 1);
             _rangeAverage[_rangeAverage.Count - 1] = GetRangeAverage(candles, candles.Count - 1);
-            _rvi[_rvi.Count-1] = (GetRvi(candles.Count - 1));
+            _rvi[_rvi.Count - 1] = (GetRvi(candles.Count - 1));
 
             ValuesUp[ValuesUp.Count - 1] = GetValue(candles, candles.Count - 1);
             ValuesDown[ValuesDown.Count - 1] = GetValueSecond(candles, candles.Count - 1);
@@ -416,7 +416,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         {
             if (index >= Period + 6)
             {
-                return Math.Round((_rvi[index] + 2 * _rvi[index - 1] + 2 * _rvi[index - 2] + _rvi[index - 3]) / 6,2);
+                return Math.Round((_rvi[index] + 2 * _rvi[index - 1] + 2 * _rvi[index - 2] + _rvi[index - 3]) / 6, 2);
             }
             else
             {
@@ -468,10 +468,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
             decimal sumMa = 0;
             decimal sumRa = 0;
 
-            for (int i = index - Period + 1; i < index+1; i++)
+            for (int i = index - Period + 1; i < index + 1; i++)
             {
                 sumMa = sumMa + _moveAverage[i];
-                sumRa = sumRa + _rangeAverage[i]; 
+                sumRa = sumRa + _rangeAverage[i];
             }
 
             if (sumRa == 0 || sumMa == 0)
@@ -479,7 +479,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return 0;
             }
 
-            return Math.Round(sumMa/sumRa,2);
+            return Math.Round(sumMa / sumRa, 2);
         }
 
         private List<decimal> _moveAverage;

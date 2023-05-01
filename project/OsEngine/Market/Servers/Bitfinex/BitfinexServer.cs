@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Bitfinex.BitfitnexEntity;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Bitfinex
 {
@@ -14,7 +14,7 @@ namespace OsEngine.Market.Servers.Bitfinex
     /// Bitfinex server
     /// сервер Bitfinex
     /// </summary>
-    public class BitfinexServer:AServer
+    public class BitfinexServer : AServer
     {
         public BitfinexServer()
         {
@@ -25,7 +25,7 @@ namespace OsEngine.Market.Servers.Bitfinex
             CreateParameterPassword(OsLocalization.Market.ServerParamSecretKey, "");
             CreateParameterBoolean(OsLocalization.Market.ServerParam4, false);
         }
-        
+
         /// <summary>
         /// take candles by instrument
         /// взять свечи по инструменту
@@ -35,7 +35,7 @@ namespace OsEngine.Market.Servers.Bitfinex
         /// <returns></returns>
         public List<Candle> GetCandleHistory(string securityName, TimeSpan seriesTimeFrameSpan)
         {
-           return ((BitfinexServerRealization)ServerRealization).GetCandleHistory(securityName, seriesTimeFrameSpan, 500, DateTime.MinValue, DateTime.MinValue);
+            return ((BitfinexServerRealization)ServerRealization).GetCandleHistory(securityName, seriesTimeFrameSpan, 500, DateTime.MinValue, DateTime.MinValue);
         }
     }
 
@@ -205,7 +205,7 @@ namespace OsEngine.Market.Servers.Bitfinex
 
                 List<Security> securitiisOsa = new List<Security>();
 
-                for(int i = 0;i < securities.Count;i++)
+                for (int i = 0; i < securities.Count; i++)
                 {
                     var sec = securities[i];
                     Security security = new Security();
@@ -261,7 +261,7 @@ namespace OsEngine.Market.Servers.Bitfinex
         /// </summary>
         private void SetPriceStepInSecurity(Security security)
         {
-           BitfinexTickerTradeInfo info = _client.GetTradeInfo(security.Name);
+            BitfinexTickerTradeInfo info = _client.GetTradeInfo(security.Name);
 
             // find the longest string / находим самую длинную строку 
 
@@ -355,11 +355,11 @@ namespace OsEngine.Market.Servers.Bitfinex
         /// </summary>
         public void GetOrdersState(List<Order> orders)
         {
-            
+
         }
 
-// parsing incoming data
-// разбор входящих данных
+        // parsing incoming data
+        // разбор входящих данных
 
         /// <summary>
         /// receive new message from client
@@ -805,7 +805,7 @@ namespace OsEngine.Market.Servers.Bitfinex
 
             DateTime curEnd = trades[0].Time;
 
-            DateTime cu = trades[trades.Count-1].Time;
+            DateTime cu = trades[trades.Count - 1].Time;
 
             while (curEnd <= startTime == false)
             {
@@ -847,7 +847,7 @@ namespace OsEngine.Market.Servers.Bitfinex
 
                 if (end == DateTime.MaxValue)
                 {
-                    param.Add("","t" + security + "/hist" + "?"
+                    param.Add("", "t" + security + "/hist" + "?"
                                   + "limit=" + count);
                 }
                 else
@@ -871,7 +871,7 @@ namespace OsEngine.Market.Servers.Bitfinex
                     newTrade.Time = time;
                     newTrade.SecurityNameCode = security;
                     double vol = tradesHist[i][2];
-                    newTrade.Volume= Math.Abs(Convert.ToDecimal(vol));
+                    newTrade.Volume = Math.Abs(Convert.ToDecimal(vol));
                     newTrade.Price = Convert.ToDecimal(tradesHist[i][3]);
                     if (vol > 0)
                     {
@@ -882,7 +882,7 @@ namespace OsEngine.Market.Servers.Bitfinex
                         newTrade.Side = Side.Sell;
                     }
 
-                    trades.Insert(0,newTrade);
+                    trades.Insert(0, newTrade);
                 }
 
                 return trades;

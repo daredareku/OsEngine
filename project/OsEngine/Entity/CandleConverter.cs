@@ -2,14 +2,14 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Logging;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Logging;
-using OsEngine.OsTrader.Panels.Tab;
 using ComboBox = System.Windows.Controls.ComboBox;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -77,7 +77,7 @@ namespace OsEngine.Entity
 
             _comboBoxTimeFrame.SelectedItem = TimeFrame;
 
-            if(_comboBoxTimeFrame.SelectedItem == null)
+            if (_comboBoxTimeFrame.SelectedItem == null)
             {
                 _comboBoxTimeFrame.SelectedItem = TimeFrame.Min5;
             }

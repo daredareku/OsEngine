@@ -17,8 +17,8 @@ namespace OsEngine.Logging
     /// </summary>
     public class ServerMail
     {
-// singleton
-// синглетон
+        // singleton
+        // синглетон
         private static ServerMail _server; // mailing server / сервер рассылки
 
         /// <summary>
@@ -101,14 +101,14 @@ namespace OsEngine.Logging
                     }
                     else
                     {
-                        string[] newAdress = new string[Adress.Length+1];
+                        string[] newAdress = new string[Adress.Length + 1];
 
                         for (int ii = 0; ii < Adress.Length; ii++)
                         {
                             newAdress[ii] = Adress[ii];
                         }
-                        
-                        newAdress[newAdress.Length -1] = reader.ReadLine();
+
+                        newAdress[newAdress.Length - 1] = reader.ReadLine();
                         Adress = newAdress;
                         IsReady = true;
                     }
@@ -244,7 +244,7 @@ namespace OsEngine.Logging
             }
             catch
             {
-                 // ingored
+                // ingored
             }
         }
     }

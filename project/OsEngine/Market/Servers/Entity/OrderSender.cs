@@ -3,9 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Threading;
-using OsEngine.Entity;
 
 namespace OsEngine.Market.Servers.Entity
 {

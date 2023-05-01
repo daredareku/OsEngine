@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Market.Servers.Tester;
 using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.OsOptimizer
@@ -65,7 +65,7 @@ namespace OsEngine.OsOptimizer
             {
                 ComboBoxTimeFrame.Items.Add(timeFrame[i]);
             }
-            
+
             if (index != null)
             {
                 Index = new TabIndexEndTimeFrame();
@@ -80,7 +80,7 @@ namespace OsEngine.OsOptimizer
                 TextBoxFormula.Text = Index.Formula;
                 ComboBoxTimeFrame.SelectedItem = Index.TimeFrame.ToString();
                 PaintTable();
-                
+
             }
             else
             {
@@ -245,7 +245,7 @@ namespace OsEngine.OsOptimizer
                 return;
             }
 
-            Enum.TryParse(ComboBoxTimeFrame.SelectedItem.ToString(), out Index.TimeFrame); 
+            Enum.TryParse(ComboBoxTimeFrame.SelectedItem.ToString(), out Index.TimeFrame);
             Index.Formula = TextBoxFormula.Text;
 
             NeadToSave = true;

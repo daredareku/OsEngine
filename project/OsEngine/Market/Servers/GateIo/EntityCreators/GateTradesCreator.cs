@@ -14,7 +14,7 @@ namespace OsEngine.Market.Servers.GateIo.EntityCreators
             var jt = JObject.Parse(data);
 
             var tradesData = (JArray)jt["params"];
-            
+
             foreach (var trade in tradesData[1])
             {
                 var security = tradesData[0].ToString();

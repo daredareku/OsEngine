@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -272,14 +272,14 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         public void ShowDialog()
         {
-             StochasticOscillatorUi ui = new StochasticOscillatorUi(this);
+            StochasticOscillatorUi ui = new StochasticOscillatorUi(this);
 
-             ui.ShowDialog();
+            ui.ShowDialog();
 
-             if (ui.IsChange && _myCandles != null)
-             {
-                 Reload();
-             }    
+            if (ui.IsChange && _myCandles != null)
+            {
+                Reload();
+            }
         }
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 ValuesDown = new List<decimal>();
             }
 
-            _t1.Add(GetT1(candles, candles.Count-1));
+            _t1.Add(GetT1(candles, candles.Count - 1));
             _t2.Add(GetT2(candles, candles.Count - 1));
 
             _tM1.Process(_t1);
@@ -387,8 +387,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
             _k.Add(GetK(candles.Count - 1));
             _kM.Process(_k);
 
-            ValuesUp.Add(Math.Round(_k[_k.Count - 1],2));
-            ValuesDown.Add(Math.Round(_kM.Values[_kM.Values.Count - 1],2));
+            ValuesUp.Add(Math.Round(_k[_k.Count - 1], 2));
+            ValuesDown.Add(Math.Round(_kM.Values[_kM.Values.Count - 1], 2));
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             for (int i = 0; i < candles.Count; i++)
             {
-                _t1.Add(GetT1(candles,i));
+                _t1.Add(GetT1(candles, i));
                 _t2.Add(GetT2(candles, i));
 
                 _tM1.Process(_t1);
@@ -432,8 +432,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 _k.Add(GetK(i));
                 _kM.Process(_k);
 
-                ValuesUp.Add(Math.Round(_k[_k.Count-1],2));
-                ValuesDown.Add(Math.Round(_kM.Values[_kM.Values.Count-1],2));
+                ValuesUp.Add(Math.Round(_k[_k.Count - 1], 2));
+                ValuesDown.Add(Math.Round(_kM.Values[_kM.Values.Count - 1], 2));
             }
         }
 
@@ -455,8 +455,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
             _k[_k.Count - 1] = GetK(candles.Count - 1);
             _kM.Process(_k);
 
-            ValuesUp[ValuesUp.Count-1] = Math.Round(_k[_k.Count - 1],2) ;
-            ValuesDown[ValuesDown.Count-1] = Math.Round(_kM.Values[_kM.Values.Count - 1],2);
+            ValuesUp[ValuesUp.Count - 1] = Math.Round(_k[_k.Count - 1], 2);
+            ValuesDown[ValuesDown.Count - 1] = Math.Round(_kM.Values[_kM.Values.Count - 1], 2);
         }
 
         private decimal GetT1(List<Candle> candles, int index)
@@ -510,7 +510,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
         private decimal GetK(int index)
         {
-            if (index < P2 + P3 +3 ||
+            if (index < P2 + P3 + 3 ||
                 _tM2.Values[index] == 0 ||
                 _tM1.Values[index] == 0)
             {

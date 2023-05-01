@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.GateIo.Futures.Response
 {
@@ -26,7 +21,7 @@ namespace OsEngine.Market.Servers.GateIo.Futures.Response
         public string timeFrame;
     }
 
-        public partial class GfCandle
+    public partial class GfCandle
     {
         [JsonProperty("t")]
         public long T { get; set; }

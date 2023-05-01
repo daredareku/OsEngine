@@ -3,10 +3,10 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic  for AtrUi.xaml
     /// Логика взаимодействия для AtrUi.xaml
     /// </summary>
-    public partial class DynamicTrendDetectorUi 
+    public partial class DynamicTrendDetectorUi
     {
         /// <summary>
         /// indicator
@@ -79,7 +79,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             _dtd.ColorBase = HostColorBase.Child.BackColor;
-            _dtd.Lenght= Convert.ToInt32(TextBoxLenght.Text);
+            _dtd.Lenght = Convert.ToInt32(TextBoxLenght.Text);
             _dtd.PaintOn = CheckBoxPaintOnOff.IsChecked.Value;
             _dtd.CorrectionCoeff = Convert.ToDecimal(TextBoxCorrectionCoeff.Text);
             _dtd.Save();

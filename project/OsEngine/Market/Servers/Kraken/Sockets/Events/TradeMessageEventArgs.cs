@@ -14,7 +14,7 @@ namespace Kraken.WebSockets.Events
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="pair">The pair.</param>
         /// <param name="dataMessage">The data message.</param>
-        public TradeEventArgs(int channelId, string pair, TradeMessage dataMessage) 
+        public TradeEventArgs(int channelId, string pair, TradeMessage dataMessage)
             : base(channelId, pair, dataMessage)
         {
         }

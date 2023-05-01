@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Binance.Futures.Entity;
 using OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Binance.Futures
 {
@@ -287,8 +287,8 @@ namespace OsEngine.Market.Servers.Binance.Futures
                 {
                     startOver.AddDays(1);
                     break;
-                }    
-                   
+                }
+
                 startOver = trades[trades.Count - 1].Time.AddMilliseconds(1);
 
 
@@ -800,7 +800,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
                     string qtyInStr = minQty.ToStringWithNoEndZero().Replace(",", ".");
                     if (qtyInStr.Replace(",", ".").Split('.').Length > 1)
                     {
-                        security.DecimalsVolume = qtyInStr.Replace(",",".").Split('.')[1].Length;
+                        security.DecimalsVolume = qtyInStr.Replace(",", ".").Split('.')[1].Length;
                     }
                 }
 

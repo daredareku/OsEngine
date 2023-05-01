@@ -3,19 +3,9 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Indicators;
-using OsEngine.Logging;
-using OsEngine.Market;
-using System.Windows.Forms;
-using System.Threading;
-using OsEngine.Robots.Engines;
-using OsEngine.Language;
-using OsEngine.Alerts;
 
 namespace OsEngine.Market.Connectors
 {

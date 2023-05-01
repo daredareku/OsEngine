@@ -4,17 +4,17 @@
  * регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using ru.micexrts.cgate.message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OsEngine.Entity;
-using ru.micexrts.cgate.message;
 
 namespace OsEngine.Market.Servers.Plaza.Internal
 {
     public class PlazaMarketDepthCreator
     {
-        
+
         private List<MarketDepth> _marketDepths;
 
         private List<RevisionInfo> _marketDepthsRevisions;

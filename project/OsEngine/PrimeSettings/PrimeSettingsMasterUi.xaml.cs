@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using OsEngine.Language;
 
 
 namespace OsEngine.PrimeSettings

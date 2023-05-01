@@ -3,21 +3,21 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Windows;
 using OsEngine.Charts.CandleChart;
 using OsEngine.Entity;
 using OsEngine.Journal;
 using OsEngine.Language;
+using OsEngine.Layout;
 using OsEngine.Logging;
 using OsEngine.Market;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Tester;
-using OsEngine.Layout;
+using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Windows;
 
 namespace OsEngine.OsTrader.Panels
 {

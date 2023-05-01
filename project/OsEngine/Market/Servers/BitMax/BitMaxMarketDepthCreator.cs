@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Market.Services;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace OsEngine.Market.Servers.BitMax
 {
@@ -96,7 +95,7 @@ namespace OsEngine.Market.Servers.BitMax
                 SortBids(needDepth.Bids);
             }
 
-            if (quotes.Data.Asks!= null)
+            if (quotes.Data.Asks != null)
             {
                 var asksLevels = quotes.Data.Asks;
 

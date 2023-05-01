@@ -3,10 +3,10 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic  for  AdxUi.xaml
     /// Логика взаимодействия для AdxUi.xaml
     /// </summary>
-    public partial class AdxUi 
+    public partial class AdxUi
     {
         /// <summary>
         /// indicator
@@ -35,7 +35,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// конструктор
         /// </summary>
         /// <param name="adx"> indicator that will be editing/индикатор который будем редактировать</param>
-        public AdxUi(Adx adx) 
+        public AdxUi(Adx adx)
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);
@@ -78,7 +78,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             _adx.ColorBase = HostColorBase.Child.BackColor;
-            _adx.Lenght= Convert.ToInt32(TextBoxLenght.Text);
+            _adx.Lenght = Convert.ToInt32(TextBoxLenght.Text);
             _adx.PaintOn = CheckBoxPaintOnOff.IsChecked.Value;
 
             _adx.Save();

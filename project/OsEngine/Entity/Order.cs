@@ -3,12 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Market;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using OsEngine.Market;
 
 namespace OsEngine.Entity
 {
@@ -24,7 +23,7 @@ namespace OsEngine.Entity
             TimeCreate = DateTime.MinValue;
             TimeCallBack = DateTime.MinValue;
             TimeCancel = DateTime.MinValue;
-            TimeDone =  DateTime.MinValue;
+            TimeDone = DateTime.MinValue;
             NumberMarket = "";
             Side = Side.None;
         }
@@ -97,17 +96,17 @@ namespace OsEngine.Entity
                 if (_trades != null && (_volumeExecute == 0 || _volumeExecuteChange))
                 {
                     _volumeExecute = 0;
-                    
-                    for(int i = 0;i < _trades.Count;i++)
+
+                    for (int i = 0; i < _trades.Count; i++)
                     {
-                        if(_trades[i] == null)
+                        if (_trades[i] == null)
                         {
                             continue;
                         }
 
                         _volumeExecute += _trades[i].Volume;
                     }
-                    
+
                     _volumeExecuteChange = false;
                     return _volumeExecute;
                 }
@@ -135,13 +134,13 @@ namespace OsEngine.Entity
         /// order status: None, Pending, Done, Patrial, Fail
         /// статус ордера: None, Pending, Done, Patrial, Fail
         /// </summary>
-        public OrderStateType State 
+        public OrderStateType State
         {
             get { return _state; }
             set
             {
                 _state = value;
-            } 
+            }
         }
 
         private OrderStateType _state;
@@ -199,7 +198,7 @@ namespace OsEngine.Entity
                 if (TimeCallBack == DateTime.MinValue ||
                     TimeCreate == DateTime.MinValue)
                 {
-                    return new TimeSpan(0,0,0,0);
+                    return new TimeSpan(0, 0, 0, 0);
                 }
 
                 return (TimeCallBack - TimeCreate);
@@ -271,7 +270,7 @@ namespace OsEngine.Entity
 
             if (_trades != null)
             {
-                for (int i = 0; i < _trades.Count;i++)
+                for (int i = 0; i < _trades.Count; i++)
                 {
                     if (_trades[i] == null)
                     {
@@ -323,12 +322,12 @@ namespace OsEngine.Entity
 
             for (int i = 0; i < _trades.Count; i++)
             {
-                if(_trades[i] == null)
+                if (_trades[i] == null)
                 {
                     continue;
                 }
 
-                price += _trades[i].Volume*_trades[i].Price;
+                price += _trades[i].Volume * _trades[i].Price;
                 volumeExecute += _trades[i].Volume;
             }
 
@@ -337,7 +336,7 @@ namespace OsEngine.Entity
                 return Price;
             }
 
-            price = price/volumeExecute;
+            price = price / volumeExecute;
 
             return price;
         }
@@ -367,7 +366,7 @@ namespace OsEngine.Entity
         {
             get
             {
-                if (_trades == null 
+                if (_trades == null
                     || _trades.Count == 0)
                 {
                     return false;
@@ -376,7 +375,7 @@ namespace OsEngine.Entity
                 {
                     return true;
                 }
-                
+
             }
         }
 
@@ -428,7 +427,7 @@ namespace OsEngine.Entity
             {
                 for (int i = 0; i < _trades.Count; i++)
                 {
-                    if(_trades[i] == null)
+                    if (_trades[i] == null)
                     {
                         continue;
                     }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Market.Servers.GateIo.Futures.Response;
 using OsEngine.Market.Services;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.GateIo.Futures.Entities
 {
@@ -121,7 +118,7 @@ namespace OsEngine.Market.Servers.GateIo.Futures.Entities
                     SortAsks(needDepth.Asks);
                 }
 
-                returnedDepth.Add( needDepth.GetCopy());
+                returnedDepth.Add(needDepth.GetCopy());
             }
 
             return returnedDepth;

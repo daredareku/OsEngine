@@ -5,15 +5,15 @@
 
 using OsEngine.Entity;
 using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.OsOptimizer.OptEntity;
 using OsEngine.OsTrader.Panels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Logging;
 using MessageBox = System.Windows.MessageBox;
-using OsEngine.OsOptimizer.OptEntity;
-using System.IO;
 
 namespace OsEngine.OsOptimizer
 {
@@ -46,11 +46,11 @@ namespace OsEngine.OsOptimizer
             LabelTotalProfitInOutOfSample.Content = OsLocalization.Optimizer.Label43;
             ButtonSaveInFile.Content = OsLocalization.Optimizer.Label45;
             ButtonLoadFromFile.Content = OsLocalization.Optimizer.Label46;
-            LabelRobustnessMetric.Content = OsLocalization.Optimizer.Label53; 
+            LabelRobustnessMetric.Content = OsLocalization.Optimizer.Label53;
 
             Title += "   " + master.StrategyName;
-            
-            if(master.TabsSimpleNamesAndTimeFrames != null &&
+
+            if (master.TabsSimpleNamesAndTimeFrames != null &&
                 master.TabsSimpleNamesAndTimeFrames.Count == 1)
             {
                 Title += "  " + master.TabsSimpleNamesAndTimeFrames[0].NameSecurity + "  " + master.TabsSimpleNamesAndTimeFrames[0].TimeFrame;
@@ -716,7 +716,7 @@ namespace OsEngine.OsOptimizer
 
             BotPanel bot = _master.TestBot(fazeReport, fazeReport.Reports[e.RowIndex]);
 
-            if(bot == null)
+            if (bot == null)
             {
                 return;
             }

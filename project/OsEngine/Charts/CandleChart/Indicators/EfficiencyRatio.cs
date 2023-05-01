@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -375,7 +375,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             if (eR2 != 0)
             {
-                return Math.Round(eR1/eR2, 4);
+                return Math.Round(eR1 / eR2, 4);
             }
 
             return 0;

@@ -2,10 +2,10 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -15,7 +15,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// Interaction logic  for StochasticOscillatorUi.xaml
     /// Логика взаимодействия для StochasticOscillatorUi.xaml
     /// </summary>
-    public partial class StochasticOscillatorUi 
+    public partial class StochasticOscillatorUi
     {
         /// <summary>
         /// indicator
@@ -86,7 +86,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         {
             try
             {
-                if (Convert.ToInt32(TextBoxLenght.Text) <= 0||
+                if (Convert.ToInt32(TextBoxLenght.Text) <= 0 ||
                     Convert.ToInt32(TextBoxLenght2.Text) <= 0 ||
                     Convert.ToInt32(TextBoxLenght3.Text) <= 0)
                 {

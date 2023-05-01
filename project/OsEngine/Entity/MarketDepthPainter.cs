@@ -2,6 +2,8 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,8 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Language;
-using OsEngine.Logging;
 
 namespace OsEngine.Entity
 {
@@ -213,7 +213,7 @@ namespace OsEngine.Entity
 
                 DataGridViewCellStyle styleBlue = new DataGridViewCellStyle();
                 styleBlue.Alignment = DataGridViewContentAlignment.MiddleRight;
-                styleBlue.ForeColor = Color.FromArgb(57, 157,54);
+                styleBlue.ForeColor = Color.FromArgb(57, 157, 54);
                 styleBlue.Font = new Font("Areal", 3);
 
                 for (int i = 0; i < 25; i++)
@@ -287,7 +287,7 @@ namespace OsEngine.Entity
                     {
                         return;
                     }
-  
+
                     price = _glassBox.Rows[_glassBox.CurrentCell.RowIndex].Cells[2].Value.ToString().ToDecimal();
                 }
                 catch (Exception)
@@ -325,12 +325,12 @@ namespace OsEngine.Entity
                     return;
                 }
 
-                if(_glassBox == null)
+                if (_glassBox == null)
                 {
                     CreateGlass();
                     TryPaintMarketDepth();
                 }
-                
+
                 _textBoxLimitPrice = textBoxLimitPrice;
                 _textBoxLimitPrice.TextChanged += _textBoxLimitPrice_TextChanged;
                 _hostGlass = glass;
@@ -379,7 +379,7 @@ namespace OsEngine.Entity
                     _hostGlass = null;
                 }
 
-                if(_glassBox != null)
+                if (_glassBox != null)
                 {
 
                     _glassBox.SelectionChanged -= _glassBox_SelectionChanged;
@@ -407,7 +407,7 @@ namespace OsEngine.Entity
                 return;
             }
 
-            if(_glassBox == null)
+            if (_glassBox == null)
             {
                 return;
             }
@@ -560,7 +560,7 @@ namespace OsEngine.Entity
 
                     StringBuilder builder = new StringBuilder(percentFromMax);
 
-                    for (int i2 = 0; i2 < percentFromMax ; i2++)
+                    for (int i2 = 0; i2 < percentFromMax; i2++)
                     {
                         builder.Append('|');
                     }

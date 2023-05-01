@@ -1,9 +1,6 @@
-﻿using System;
+﻿using OsEngine.Market.Servers.FixProtocolEntities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OsEngine.Market.Servers.FixProtocolEntities;
 
 namespace OsEngine.Market.Servers.Lmax.LmaxEntity
 {

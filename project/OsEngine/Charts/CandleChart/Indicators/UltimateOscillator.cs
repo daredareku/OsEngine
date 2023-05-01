@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -373,13 +373,13 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <returns>indicator value/значение индикатора</returns>
         public decimal GetValue(List<Candle> candles, int index)
         {
-            if(index == 0)
+            if (index == 0)
             {
                 _bp = new List<decimal>();
                 _tr = new List<decimal>();
             }
 
-            if(index < Period1 ||
+            if (index < Period1 ||
                 index < Period2 ||
                 index < Period3)
             {
@@ -398,7 +398,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             decimal bpPer3 = SummList(index - Period3, index, _bp);
             decimal trPer3 = SummList(index - Period3, index, _tr);
 
-            if(trPer1 == 0 ||
+            if (trPer1 == 0 ||
                 trPer2 == 0 ||
                 trPer3 == 0)
             {
@@ -409,14 +409,14 @@ namespace OsEngine.Charts.CandleChart.Indicators
             decimal average14 = bpPer2 / trPer2;
             decimal average28 = bpPer3 / trPer3;
 
-            return 100 * ((4 * average7)+(2* average14)+average28) / (4+3+2);
+            return 100 * ((4 * average7) + (2 * average14) + average28) / (4 + 3 + 2);
         }
 
         private decimal SummList(int indxStart, int indxEnd, List<decimal> array)
         {
             decimal result = 0;
 
-            for (int i = indxStart; i < array.Count && i < indxEnd + 1;i++)
+            for (int i = indxStart; i < array.Count && i < indxEnd + 1; i++)
             {
                 result += array[i];
             }
@@ -432,9 +432,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
             // Buying Pressure(BP) = Close - Minimum(Lowest between Current Low or Previous Close) 
             //=Закрытие - Минимальное (минимальное между текущим или предыдущим закрытием)
 
-            decimal result = candles[index].Close - Math.Min(candles[index].Low,candles[index-1].Close);
+            decimal result = candles[index].Close - Math.Min(candles[index].Low, candles[index - 1].Close);
 
-            while(_bp.Count <= index)
+            while (_bp.Count <= index)
             {
                 _bp.Add(0);
             }

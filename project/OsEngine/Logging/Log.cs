@@ -3,17 +3,6 @@
 *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.Integration;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Market;
@@ -27,6 +16,15 @@ using OsEngine.OsOptimizer;
 using OsEngine.OsTrader;
 using OsEngine.OsTrader.Panels;
 using OsEngine.PrimeSettings;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Media;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.Logging
 {

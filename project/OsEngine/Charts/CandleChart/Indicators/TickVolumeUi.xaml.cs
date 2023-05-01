@@ -3,9 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -15,7 +15,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// </summary>
     public partial class TickVolumeUi
     {
-        private TickVolume _volume; 
+        private TickVolume _volume;
 
         public TickVolumeUi(TickVolume volume) // constructor//конструктор
         {

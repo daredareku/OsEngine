@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -126,7 +126,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         public int RsiLenght
         {
-            get { return _rsiLength;}
+            get { return _rsiLength; }
             set
             {
                 if (value == _rsiLength)
@@ -436,7 +436,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// </summary>
         private decimal GetValue(List<Candle> candles, int index)
         {
-            if (index < _rsiLength+3 ||
+            if (index < _rsiLength + 3 ||
                 index < K ||
                 index < D)
             {
@@ -494,7 +494,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                         max = rsi[i];
                     }
                 }
-                catch 
+                catch
                 {
 
                 }

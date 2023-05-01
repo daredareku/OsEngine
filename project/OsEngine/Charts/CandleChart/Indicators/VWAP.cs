@@ -1,11 +1,11 @@
 ﻿using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -374,9 +374,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             _lastCandlesCount = candles.Count;
-            
+
             _myCandles = candles;
 
             _myCandles.RemoveAt(candles.Count - 1);

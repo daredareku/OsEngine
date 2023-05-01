@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 
 namespace OsEngine.Entity
@@ -15,7 +11,7 @@ namespace OsEngine.Entity
             _valueMaximum = maxValue;
             _valueCurrent = curValue;
 
-            if(needStartFakeValueMove)
+            if (needStartFakeValueMove)
             {
                 Thread worker = new Thread(FakeMoveValueTreadArea);
                 worker.Start();
@@ -40,11 +36,11 @@ namespace OsEngine.Entity
 
         private void FakeMoveValueTreadArea()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(500);
 
-                if(_isDisposed)
+                if (_isDisposed)
                 {
                     return;
                 }
@@ -53,7 +49,7 @@ namespace OsEngine.Entity
 
                 val += val + _valueMaximum / 7;
 
-                if(val > _valueMaximum)
+                if (val > _valueMaximum)
                 {
                     val = 0;
                 }
@@ -67,13 +63,13 @@ namespace OsEngine.Entity
             get { return _label; }
             set
             {
-                if(_label == value)
+                if (_label == value)
                 {
                     return;
                 }
                 _label = value;
 
-                if(LabelChangedEvent != null)
+                if (LabelChangedEvent != null)
                 {
                     LabelChangedEvent(_label);
                 }
@@ -86,14 +82,14 @@ namespace OsEngine.Entity
             get { return _valueCurrent; }
             set
             {
-                if(value == _valueCurrent)
+                if (value == _valueCurrent)
                 {
                     return;
                 }
 
                 _valueCurrent = value;
 
-                if(ValueCurrentChangedEvent != null)
+                if (ValueCurrentChangedEvent != null)
                 {
                     ValueCurrentChangedEvent(_valueCurrent);
                 }
@@ -106,14 +102,14 @@ namespace OsEngine.Entity
             get { return _valueMaximum; }
             set
             {
-                if(value == _valueMaximum)
+                if (value == _valueMaximum)
                 {
                     return;
                 }
 
                 _valueMaximum = value;
 
-                if(ValueMaximumChangedEvent != null)
+                if (ValueMaximumChangedEvent != null)
                 {
                     ValueMaximumChangedEvent(_valueMaximum);
                 }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Kraken.WebSockets.Events;
+using Kraken.WebSockets.Extensions;
+using Kraken.WebSockets.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Kraken.WebSockets.Events;
-using Kraken.WebSockets.Extensions;
-using Kraken.WebSockets.Messages;
 
 namespace Kraken.WebSockets
 {
@@ -137,7 +137,7 @@ namespace Kraken.WebSockets
         {
             if (subscribe == null)
             {
-               // logger.LogError("No subscribe options passed to method");
+                // logger.LogError("No subscribe options passed to method");
                 throw new ArgumentNullException(nameof(subscribe));
             }
 
@@ -146,7 +146,7 @@ namespace Kraken.WebSockets
 
         private async Task SubscribeAsyncInternal(Subscribe subscribe)
         {
-           // logger.LogTrace("Adding subscription: {subscribe}", subscribe);
+            // logger.LogTrace("Adding subscription: {subscribe}", subscribe);
             await socket.SendAsync(subscribe);
         }
 
@@ -286,7 +286,7 @@ namespace Kraken.WebSockets
                     var subscription = Subscriptions.ContainsKey(eventArgs.ChannelId.Value) ? Subscriptions[eventArgs.ChannelId.Value] : null;
                     if (subscription == null)
                     {
-                       // logger.LogWarning("Didn't find a subscription for channelId {channelId}", eventArgs.ChannelId);
+                        // logger.LogWarning("Didn't find a subscription for channelId {channelId}", eventArgs.ChannelId);
                         break;
                     }
 

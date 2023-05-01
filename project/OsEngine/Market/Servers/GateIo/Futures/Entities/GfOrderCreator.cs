@@ -4,10 +4,6 @@ using OsEngine.Market.Servers.Entity;
 using OsEngine.Market.Servers.GateIo.Futures.Response;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.GateIo.Futures.Entities
 {
@@ -31,7 +27,7 @@ namespace OsEngine.Market.Servers.GateIo.Futures.Entities
             foreach (var gfOrder in jt.Result)
             {
 
-                if(gfOrder.Text == "web")
+                if (gfOrder.Text == "web")
                 {
                     continue;
                 }
@@ -66,7 +62,7 @@ namespace OsEngine.Market.Servers.GateIo.Futures.Entities
 
                 default:
                     return OrderStateType.None;
-            }       
+            }
         }
 
         public List<MyTrade> CreateMyTrades(string data)

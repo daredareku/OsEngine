@@ -3,15 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
-using OsEngine.Entity;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
-using OsEngine.OsTrader.Panels.Attributes;
-using OsEngine.Market.Servers;
-using OsEngine.Market;
 using OsEngine.Charts.CandleChart;
+using OsEngine.Entity;
+using OsEngine.Market.Servers;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Attributes;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace OsEngine.Robots.AutoTestBots
@@ -63,7 +62,7 @@ namespace OsEngine.Robots.AutoTestBots
                 return;
             }
 
-            if (_lastClickTime.AddSeconds(10)> DateTime.Now)
+            if (_lastClickTime.AddSeconds(10) > DateTime.Now)
             {
                 return;
             }
@@ -73,7 +72,7 @@ namespace OsEngine.Robots.AutoTestBots
 
             List<Candle> candlesFromOsEngine = _tab.CandlesAll;
 
-            if(candlesFromOsEngine == null 
+            if (candlesFromOsEngine == null
                 || candlesFromOsEngine.Count < 10)
             {
                 return;
@@ -100,7 +99,7 @@ namespace OsEngine.Robots.AutoTestBots
 
             // 2 создаём отдельные чарты для свечных графиков
 
-            if(_uiOsEngineCandles == null)
+            if (_uiOsEngineCandles == null)
             {
                 _uiOsEngineCandles = new CandleChartUi("myCandlesTestBot", this.StartProgram);
                 _uiOsEngineCandles.Show();
@@ -114,7 +113,7 @@ namespace OsEngine.Robots.AutoTestBots
 
             _uiOsEngineCandles.ProcessCandles(candlesFromOsEngine);
 
-            if(_uiOsServerCandles == null)
+            if (_uiOsServerCandles == null)
             {
                 _uiOsServerCandles = new CandleChartUi("serverCandlesTestBot", this.StartProgram);
                 _uiOsServerCandles.Show();
@@ -150,7 +149,7 @@ namespace OsEngine.Robots.AutoTestBots
                 Candle osCandle = _osCandles[indexMyC];
                 Candle servCandle = _servCandles[indexServC];
 
-                if(indexMyC +1 == _osCandles.Count)
+                if (indexMyC + 1 == _osCandles.Count)
                 {
 
                 }
@@ -200,7 +199,7 @@ namespace OsEngine.Robots.AutoTestBots
 
         private void ButtonVolume_UserClickOnButtonEvent()
         {
-            if(_uiOsEngineCandles != null ||
+            if (_uiOsEngineCandles != null ||
                 _uiOsServerCandles != null)
             {
                 _tab.SetNewLogMessage("Предыдущее окно ещё не закрыто!!!", Logging.LogMessageType.Error);

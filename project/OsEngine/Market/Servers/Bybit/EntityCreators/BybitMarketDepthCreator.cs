@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using OsEngine.Entity;
+using OsEngine.Market.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using OsEngine.Entity;
-using OsEngine.Market.Servers.Bybit.Utilities;
-using OsEngine.Market.Services;
 
 namespace OsEngine.Market.Servers.Bybit.Entities
 {
@@ -148,7 +144,7 @@ namespace OsEngine.Market.Servers.Bybit.Entities
                                 };
 
                                 all_depths.Find(x => x.SecurityNameCode == security_name).Asks.Find(x => x.Price == new_ask_level.Price).Ask = new_ask_level.Ask;
-                            
+
                             }
                             catch (Exception ex)
                             {

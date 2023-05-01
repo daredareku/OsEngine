@@ -18,7 +18,7 @@ namespace Kraken.WebSockets.Messages
             return new TodayAnd24HourValue<TValue>
             {
                 Today = (TValue)ConvertToken(tokenArray[0]),
-                Last24Hours = (TValue) ConvertToken(tokenArray[1])
+                Last24Hours = (TValue)ConvertToken(tokenArray[1])
             };
         }
 

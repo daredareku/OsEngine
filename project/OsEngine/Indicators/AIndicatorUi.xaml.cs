@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Language;
+using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Indicators

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.CSharp;
+using OsEngine.Entity;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using Microsoft.CSharp;
-using OsEngine.Entity;
 
 namespace OsEngine.Indicators
 {
@@ -20,7 +20,7 @@ namespace OsEngine.Indicators
         {
             List<string> results = new List<string>();
 
-            for(int i = 0;i < Files.Count;i++)
+            for (int i = 0; i < Files.Count; i++)
             {
                 results.Add(Files[i]);
             }
@@ -86,7 +86,7 @@ namespace OsEngine.Indicators
 
         public static List<string> GetFullNamesFromFolder(string directory)
         {
-            for(int i = 0;i < _filesInDir.Count;i++)
+            for (int i = 0; i < _filesInDir.Count; i++)
             {
                 if (_filesInDir[i] == null)
                 {
@@ -130,7 +130,7 @@ namespace OsEngine.Indicators
             return dir.GetFilesCopy();
         }
 
-        public static Aindicator CreateIndicatorByName(string nameClass, string name, bool canDelete,StartProgram startProgram = StartProgram.IsOsTrader)
+        public static Aindicator CreateIndicatorByName(string nameClass, string name, bool canDelete, StartProgram startProgram = StartProgram.IsOsTrader)
         {
             Aindicator Indicator = null;
 

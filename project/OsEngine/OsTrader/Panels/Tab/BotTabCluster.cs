@@ -3,16 +3,16 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms.Integration;
-using System.Windows.Shapes;
 using OsEngine.Charts.ClusterChart;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Connectors;
-using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms.Integration;
+using System.Windows.Shapes;
+using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
 
 namespace OsEngine.OsTrader.Panels.Tab
 {
@@ -318,7 +318,7 @@ namespace OsEngine.OsTrader.Panels.Tab
             _chartMaster.Clear();
         }
 
-// control / управление
+        // control / управление
 
         /// <summary>
         /// settings gui
@@ -338,7 +338,7 @@ namespace OsEngine.OsTrader.Panels.Tab
         {
             CandleConnector.ShowDialog(false);
         }
-       
+
         /// <summary>
         /// stop drawing / 
         /// остановить прорисовку
@@ -370,7 +370,7 @@ namespace OsEngine.OsTrader.Panels.Tab
             _chartMaster.Process(_horizontalVolume);
         }
 
-// data request / запрос данных
+        // data request / запрос данных
 
         /// <summary>
         /// volume columns
@@ -453,7 +453,7 @@ namespace OsEngine.OsTrader.Panels.Tab
             get { return _horizontalVolume.MinDeltaVolumeCluster; }
         }
 
-// data access methods / методы доступа к данным
+        // data access methods / методы доступа к данным
 
         /// <summary>
         /// find cluster with maximum volume / 
@@ -479,7 +479,7 @@ namespace OsEngine.OsTrader.Panels.Tab
             return _horizontalVolume.FindMinVolumeCluster(startIndex, endIndex, typeCluster);
         }
 
-// outgoing events / исходящие события
+        // outgoing events / исходящие события
 
         /// <summary>
         /// the cluster has changed with the maximum total volume / 
@@ -577,7 +577,7 @@ namespace OsEngine.OsTrader.Panels.Tab
         /// </summary>
         public event Action<HorizontalVolumeLine> MinDeltaLineChangeEvent;
 
-// log / логирование
+        // log / логирование
 
         /// <summary>
         /// send new log message / 

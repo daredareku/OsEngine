@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Jayrock.Json;
+using Jayrock.Json.Conversion;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,18 +12,12 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using Jayrock.Json;
-using Jayrock.Json.Conversion;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
 using System.Threading;
-using System.Collections.Concurrent;
 
 namespace OsEngine.Market.Servers.Kraken.KrakenEntity
 {
 
-    public class KrakenRestApi : IDisposable 
+    public class KrakenRestApi : IDisposable
     {
         string _url;
         int _version;
@@ -152,7 +152,7 @@ namespace OsEngine.Market.Servers.Kraken.KrakenEntity
             webRequest.ContentType = "application/x-www-form-urlencoded";
             webRequest.Method = "POST";
             webRequest.Headers.Add("API-Key", _key);
-            
+
             byte[] base64DecodedSecred = Convert.FromBase64String(_secret);
 
             var np = nonce + Convert.ToChar(0) + props;
@@ -425,7 +425,7 @@ namespace OsEngine.Market.Servers.Kraken.KrakenEntity
             string reqs = string.Format("pair={0}", pair);
 
             if (since != null)
-            reqs += string.Format("&since={0}", since.ToString());
+                reqs += string.Format("&since={0}", since.ToString());
 
 
             return QueryPublic("Trades", reqs) as JsonObject;
@@ -462,7 +462,7 @@ namespace OsEngine.Market.Servers.Kraken.KrakenEntity
         {
             string reqs = string.Format("pair={0}", pair);
             if (interval != null)
-                reqs += string.Format("&interval={0}", interval.ToString());  
+                reqs += string.Format("&interval={0}", interval.ToString());
 
             if (since != null)
                 reqs += string.Format("&since={0}", since.ToString());
@@ -865,16 +865,16 @@ namespace OsEngine.Market.Servers.Kraken.KrakenEntity
 
         private void DopThreadToCanselOrders()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(3000);
 
                 if (_ordersToCansel.IsEmpty == false)
                 {
                     string numOrd = null;
-                    if(_ordersToCansel.TryDequeue(out numOrd))
+                    if (_ordersToCansel.TryDequeue(out numOrd))
                     {
-                        CancelOrder(numOrd,false);
+                        CancelOrder(numOrd, false);
                     }
                 }
             }
@@ -884,15 +884,15 @@ namespace OsEngine.Market.Servers.Kraken.KrakenEntity
 
         public JsonObject CancelOrder(string txid, bool isFirstTime)
         {
-            lock(_cancelLocker)
+            lock (_cancelLocker)
             {
                 string reqs = string.Format("&txid={0}", txid);
 
-                if(isFirstTime == true)
+                if (isFirstTime == true)
                 {
                     _ordersToCansel.Enqueue(txid);
                 }
-               
+
                 return QueryPrivate("CancelOrder", reqs);
             }
         }

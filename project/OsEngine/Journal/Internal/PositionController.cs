@@ -3,20 +3,18 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Alerts;
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Alerts;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Journal.Internal
 {
@@ -90,12 +88,12 @@ namespace OsEngine.Journal.Internal
 
             Activate();
 
-            if(_startProgram != StartProgram.IsOsOptimizer)
+            if (_startProgram != StartProgram.IsOsOptimizer)
             {
                 ControllersToCheck.Add(this);
                 Load();
             }
-  
+
             if (_deals != null &&
                 _deals.Count > 0)
             {
@@ -208,7 +206,7 @@ namespace OsEngine.Journal.Internal
         {
             try
             {
-                if(_startProgram == StartProgram.IsOsOptimizer)
+                if (_startProgram == StartProgram.IsOsOptimizer)
                 {
                     return;
                 }
@@ -227,18 +225,18 @@ namespace OsEngine.Journal.Internal
                     }
                 }
 
-                if(_gridOpenDeal != null)
+                if (_gridOpenDeal != null)
                 {
                     _gridOpenDeal.Click -= _gridOpenDeal_Click;
                     _gridOpenDeal = null;
 
                 }
-                if(_gridCloseDeal != null)
+                if (_gridCloseDeal != null)
                 {
                     _gridCloseDeal.Click -= _gridCloseDeal_Click;
                     _gridCloseDeal = null;
                 }
-               
+
                 if (_startProgram != StartProgram.IsOsOptimizer)
                 {
                     for (int i = 0; i < ControllersToCheck.Count; i++)
@@ -353,7 +351,7 @@ namespace OsEngine.Journal.Internal
                 return;
             }
 
-            if(_startProgram == StartProgram.IsOsOptimizer)
+            if (_startProgram == StartProgram.IsOsOptimizer)
             {
                 return;
             }
@@ -407,9 +405,9 @@ namespace OsEngine.Journal.Internal
 
         public void NeadToUpdateStatePositions()
         {
-            for(int i = 0;i < _deals.Count;i++)
+            for (int i = 0; i < _deals.Count; i++)
             {
-                if(_deals[i] == null)
+                if (_deals[i] == null)
                 {
                     _deals.RemoveAt(i);
                     i--;
@@ -418,7 +416,7 @@ namespace OsEngine.Journal.Internal
 
                 UpdeteOpenPositionArray(_deals[i]);
             }
-           
+
             _openLongChanged = true;
             _openShortChanged = true;
             _closePositionChanged = true;
@@ -549,7 +547,7 @@ namespace OsEngine.Journal.Internal
                 }
             }
 
-            for (int i = 0; _closeShortPositions != null &&  i < _closeShortPositions.Count; i++)
+            for (int i = 0; _closeShortPositions != null && i < _closeShortPositions.Count; i++)
             {
                 if (_closeShortPositions[i].Number == position.Number)
                 {
@@ -753,11 +751,11 @@ namespace OsEngine.Journal.Internal
                 return;
             }
 
-            if(_startProgram != StartProgram.IsOsOptimizer)
+            if (_startProgram != StartProgram.IsOsOptimizer)
             {
                 for (int i = positions.Count - 1; i > -1; i--)
                 {
-                    if (positions[i].State == PositionStateType.Open 
+                    if (positions[i].State == PositionStateType.Open
                         || positions[i].State == PositionStateType.ClosingFail)
                     {
                         decimal profitOld = positions[i].ProfitOperationPunkt;
@@ -1091,7 +1089,7 @@ namespace OsEngine.Journal.Internal
                     return;
                 }
 
-                if(_gridOpenDeal == null ||
+                if (_gridOpenDeal == null ||
                     _gridCloseDeal == null)
                 {
                     return;
@@ -1166,7 +1164,7 @@ namespace OsEngine.Journal.Internal
         /// </summary>
         private void ClearPositionsGrid()
         {
-            if(_gridOpenDeal == null)
+            if (_gridOpenDeal == null)
             {
                 return;
             }
@@ -1176,11 +1174,11 @@ namespace OsEngine.Journal.Internal
                 return;
             }
 
-            if(_gridOpenDeal != null)
+            if (_gridOpenDeal != null)
             {
                 _gridOpenDeal.Rows.Clear();
             }
-            else if(_gridCloseDeal != null)
+            else if (_gridCloseDeal != null)
             {
                 _gridCloseDeal.Rows.Clear();
             }
@@ -1225,12 +1223,12 @@ namespace OsEngine.Journal.Internal
 
             CreateTable();
 
-            if(_positionsToPaint == null)
+            if (_positionsToPaint == null)
             {
                 _positionsToPaint = new List<Position>();
             }
 
-            for(int i = 0;i < AllPositions.Count;i++)
+            for (int i = 0; i < AllPositions.Count; i++)
             {
                 _positionsToPaint.Add(AllPositions[i]);
             }
@@ -1276,7 +1274,7 @@ namespace OsEngine.Journal.Internal
         {
             try
             {
-                if(_gridOpenDeal == null)
+                if (_gridOpenDeal == null)
                 {
                     return;
                 }
@@ -1450,7 +1448,7 @@ namespace OsEngine.Journal.Internal
                 return;
             }
 
-            if(_positionsToPaint == null)
+            if (_positionsToPaint == null)
             {
                 return;
             }

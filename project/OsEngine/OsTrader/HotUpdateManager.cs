@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.CSharp;
+using OsEngine.Indicators;
+using OsEngine.OsTrader.Panels;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.CSharp;
-using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels;
 
 namespace OsEngine.OsTrader
 {
@@ -84,7 +84,7 @@ namespace OsEngine.OsTrader
             string botUniqName = GetBotUniqName(bot);
             if (_classPathCache.ContainsKey(botUniqName))
             {
-                return new List<string> {_classPathCache[botUniqName]};
+                return new List<string> { _classPathCache[botUniqName] };
             }
 
             string className = bot.GetType().Name;
@@ -129,7 +129,7 @@ namespace OsEngine.OsTrader
                 }
 
                 string typeName = results.CompiledAssembly.DefinedTypes.ElementAt(0).FullName;
-                T result = (T) results.CompiledAssembly.CreateInstance(typeName, false,
+                T result = (T)results.CompiledAssembly.CreateInstance(typeName, false,
                     BindingFlags.Instance | BindingFlags.Public, null,
                     initParams, null, null);
                 compilerParameters.TempFiles.Delete();

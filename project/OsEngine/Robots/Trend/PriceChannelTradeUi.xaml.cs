@@ -3,12 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Globalization;
-using System.Windows;
+using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.OsTrader.Panels;
-using OsEngine.Entity;
+using System;
+using System.Windows;
 
 namespace OsEngine.Robots.Trend
 {

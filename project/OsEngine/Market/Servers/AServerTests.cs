@@ -3,18 +3,13 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OkonkwoOandaV20.TradeLibrary.DataTypes.Trade;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
-using ru.micexrts.cgate;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using Trade = OsEngine.Entity.Trade;
 
 namespace OsEngine.Market.Servers
@@ -85,12 +80,12 @@ namespace OsEngine.Market.Servers
 
         void server_UserWhantDisconnect()
         {
-            
+
         }
 
         void server_UserWhantConnect()
         {
-            
+
         }
 
         void server_UserSetOrderOnExecute(Order order)
@@ -103,8 +98,8 @@ namespace OsEngine.Market.Servers
             _lastTimeUserSetOrderToCansel = DateTime.Now;
         }
 
-// standard events
-// стандартные события
+        // standard events
+        // стандартные события
 
         void server_NewBidAscIncomeEvent(decimal bid, decimal ask, Security security)
         {
@@ -120,7 +115,7 @@ namespace OsEngine.Market.Servers
 
         void server_TimeServerChangeEvent(DateTime time)
         {
-            
+
         }
 
         void server_SecuritiesChangeEvent(List<Security> securities)
@@ -153,8 +148,8 @@ namespace OsEngine.Market.Servers
             {
                 return;
             }
-            for (int i = trades.Count-1; 
-                i > 0 && i > trades.Count-10; 
+            for (int i = trades.Count - 1;
+                i > 0 && i > trades.Count - 10;
                 i--)
             {
                 _trades.Enqueue(trades[i]);
@@ -163,7 +158,7 @@ namespace OsEngine.Market.Servers
 
         void server_NewOrderIncomeEvent(Order order)
         {
-           _orders.Enqueue(order);
+            _orders.Enqueue(order);
         }
 
         void server_NewMyTradeEvent(MyTrade myTrade)
@@ -182,18 +177,18 @@ namespace OsEngine.Market.Servers
 
         void server_NeadToReconnectEvent()
         {
-          
+
         }
 
         void server_ConnectStatusChangeEvent(string status)
         {
-           
+
         }
 
         #region Валидация простых данных
 
-// bid/ask validation
-// валидация бида с аском
+        // bid/ask validation
+        // валидация бида с аском
 
         private BidAskSender _bidAsk = new BidAskSender();
 
@@ -245,8 +240,8 @@ namespace OsEngine.Market.Servers
 
         }
 
-// orders validation
-// валидация ордеров
+        // orders validation
+        // валидация ордеров
 
         private ConcurrentQueue<Order> _orders = new ConcurrentQueue<Order>();
 
@@ -358,8 +353,8 @@ namespace OsEngine.Market.Servers
             }
         }
 
-// MyTrade validation
-// валидация сделок MyTrade
+        // MyTrade validation
+        // валидация сделок MyTrade
 
         private ConcurrentQueue<MyTrade> _myTrades = new ConcurrentQueue<MyTrade>();
 
@@ -428,8 +423,8 @@ namespace OsEngine.Market.Servers
             }
         }
 
-// market depth data validation
-// валидация данных стакана
+        // market depth data validation
+        // валидация данных стакана
 
         private MarketDepth _marketDepthToCheck;
         private bool _marketDepthCheckIsOver = true;
@@ -557,10 +552,10 @@ namespace OsEngine.Market.Servers
             }
         }
 
-// security data validation
-// валидация данных по бумагам
+        // security data validation
+        // валидация данных по бумагам
 
-        private ConcurrentQueue<Security> _securitiesToCheck = new ConcurrentQueue<Security>();  
+        private ConcurrentQueue<Security> _securitiesToCheck = new ConcurrentQueue<Security>();
 
         private void CheckSecurity()
         {
@@ -589,7 +584,7 @@ namespace OsEngine.Market.Servers
                 if (string.IsNullOrEmpty(security.NameClass))
                 {
                     SendLogMessage("Security Error. No Name Class. ", LogMessageType.Error);
-                     continue;
+                    continue;
                 }
                 if (string.IsNullOrEmpty(security.NameFull))
                 {
@@ -647,10 +642,10 @@ namespace OsEngine.Market.Servers
             }
         }
 
-// anonymous trade table validation
-// валидация таблицы обезличенных сделок
+        // anonymous trade table validation
+        // валидация таблицы обезличенных сделок
 
-        private ConcurrentQueue<Trade> _trades = new ConcurrentQueue<Trade>(); 
+        private ConcurrentQueue<Trade> _trades = new ConcurrentQueue<Trade>();
 
         private void CheckTrade()
         {
@@ -663,7 +658,7 @@ namespace OsEngine.Market.Servers
                 }
 
                 Trade trade = null;
-                _trades.TryDequeue(out  trade);
+                _trades.TryDequeue(out trade);
 
                 if (trade == null)
                 {
@@ -700,12 +695,12 @@ namespace OsEngine.Market.Servers
             }
         }
 
-// portfolios validation
-// валидация портфелей
+        // portfolios validation
+        // валидация портфелей
 
         private DateTime _lastTimeChangePortfolio = DateTime.MinValue;
 
-        private ConcurrentQueue<Portfolio> _portfolios = new ConcurrentQueue<Portfolio>(); 
+        private ConcurrentQueue<Portfolio> _portfolios = new ConcurrentQueue<Portfolio>();
 
         private void CheckPortfolio()
         {
@@ -715,7 +710,7 @@ namespace OsEngine.Market.Servers
 
                 if (_lastTimeExecuteOrder != DateTime.MinValue &&
                     _lastTimeExecuteOrder.AddSeconds(20) > DateTime.Now &&
-                    _lastTimeExecuteOrder.AddSeconds(10) < DateTime.Now&&
+                    _lastTimeExecuteOrder.AddSeconds(10) < DateTime.Now &&
                     _lastTimeChangePortfolio.AddSeconds(10) < _lastTimeExecuteOrder)
                 { // order executed, the portfolio has not changed / ордер исполнился, портфель не поменялся.
                     SendLogMessage("Portfolio Error. No reaction or change position after execute order. ", LogMessageType.Error);
@@ -728,7 +723,7 @@ namespace OsEngine.Market.Servers
                 }
 
                 Portfolio portfolio = null;
-                _portfolios.TryDequeue(out  portfolio);
+                _portfolios.TryDequeue(out portfolio);
 
                 if (portfolio == null)
                 {
@@ -744,7 +739,7 @@ namespace OsEngine.Market.Servers
 
                 _lastTimeChangePortfolio = DateTime.Now;
 
-                if ((portfolio.ValueBegin != 0 || portfolio.ValueBlocked != 0) 
+                if ((portfolio.ValueBegin != 0 || portfolio.ValueBlocked != 0)
                     &&
                     portfolio.ValueCurrent == 0)
                 {

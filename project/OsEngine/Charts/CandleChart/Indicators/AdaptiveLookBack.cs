@@ -3,12 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -305,7 +305,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             if (Values == null)
             {
                 Values = new List<decimal>();
-                Values.Add(GetValue(candles, candles.Count - 1,false));
+                Values.Add(GetValue(candles, candles.Count - 1, false));
             }
             else
             {
@@ -356,9 +356,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="index">index/индекс</param>
         /// <param name="updateOnly">need to update only last value/нужно обновить только последнее значение</param>
         /// <returns>indicator value by index//значение индикатора по индексу</returns>
-        private decimal GetValue(List<Candle> candles,int index, bool updateOnly)
+        private decimal GetValue(List<Candle> candles, int index, bool updateOnly)
         {
-            if (index< 5 ||
+            if (index < 5 ||
                 index < Lenght + 3)
             {
                 return 0;
@@ -406,15 +406,15 @@ namespace OsEngine.Charts.CandleChart.Indicators
                         _swingBarArray.Add(index);
                     }
                 }
-                
-                
+
+
             }
 
             int lastSwingInCalc = (_swingBarArray.Count - Lenght);
 
             if (lastSwingInCalc >= 0)
             {
-                return (index - _swingBarArray[lastSwingInCalc])/Lenght;
+                return (index - _swingBarArray[lastSwingInCalc]) / Lenght;
             }
 
             return 0;

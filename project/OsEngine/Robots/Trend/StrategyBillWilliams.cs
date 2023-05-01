@@ -3,15 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows;
 using OsEngine.Charts.CandleChart.Indicators;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace OsEngine.Robots.Trend
 {

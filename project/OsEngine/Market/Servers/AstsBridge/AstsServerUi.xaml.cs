@@ -3,10 +3,10 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Windows;
 using OsEngine.Language;
 using OsEngine.Logging;
+using System;
+using System.Windows;
 
 namespace OsEngine.Market.Servers.AstsBridge
 {
@@ -40,7 +40,7 @@ namespace OsEngine.Market.Servers.AstsBridge
             ComboBoxDislocation.Items.Add(AstsDislocation.Internet);
 
             ComboBoxDislocation.SelectedItem = server.Dislocation;
-           
+
             CheckBoxNeadToSaveTrade.IsChecked = server.NeadToSaveTicks;
             TextBoxCountDaysSave.Text = server.CountDaysTickNeadToSave.ToString();
 

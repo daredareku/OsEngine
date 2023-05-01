@@ -3,19 +3,18 @@ using Com.Lmax.Api.Account;
 using Com.Lmax.Api.MarketData;
 using Com.Lmax.Api.OrderBook;
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
-using OsEngine.Market.Servers.Lmax.LmaxEntity;
 using OsEngine.Market.Servers.FixProtocolEntities;
+using OsEngine.Market.Servers.Lmax.LmaxEntity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using OsEngine.Language;
 
 
 namespace OsEngine.Market.Servers.Lmax
@@ -716,11 +715,11 @@ namespace OsEngine.Market.Servers.Lmax
 
         #endregion
 
-		// log messages
+        // log messages
         // сообщения для лога
 
         /// <summary>
-		/// add a new log message
+        /// add a new log message
         /// добавить в лог новое сообщение
         /// </summary>
         private void SendLogMessage(string message, LogMessageType type)

@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using OsEngine.Market.Servers.OKX.Entity;
+using SuperSocket.ClientEngine;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
-using Newtonsoft.Json;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.OKX.Entity;
-using OsEngine.Market.Servers.Entity;
 using WebSocket4Net;
-using System.Net.Http;
-using SuperSocket.ClientEngine;
 
 
 namespace OsEngine.Market.Servers.OKX
@@ -266,7 +266,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -302,7 +302,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -465,7 +465,7 @@ namespace OsEngine.Market.Servers.OKX
 
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -476,7 +476,8 @@ namespace OsEngine.Market.Servers.OKX
             {
                 _wsClientPositions = new WebSocket(_privateWebSocket);
 
-                _wsClientPositions.Opened += new EventHandler((sender, e) => {
+                _wsClientPositions.Opened += new EventHandler((sender, e) =>
+                {
                     //_rateGateWebSocketPositions.WaitToProceed();
                     ConnectPositionsChanel(sender, e, security.Name);
                 });
@@ -654,7 +655,7 @@ namespace OsEngine.Market.Servers.OKX
 
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -665,7 +666,8 @@ namespace OsEngine.Market.Servers.OKX
             {
                 _wsClientOrders = new WebSocket(_privateWebSocket);
 
-                _wsClientOrders.Opened += new EventHandler((sender, e) => {
+                _wsClientOrders.Opened += new EventHandler((sender, e) =>
+                {
                     //_rateGateWebSocketOrders.WaitToProceed();
                     ConnectOrdersChanel(sender, e, security.Name);
                 });
@@ -777,7 +779,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -835,7 +837,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -887,7 +889,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
 
             for (int i = 0; i < potfolios.Count; i++)
@@ -943,7 +945,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
         }
 
@@ -1011,7 +1013,7 @@ namespace OsEngine.Market.Servers.OKX
                         SendLogMessage("service is unavailable", LogMessageType.Error);
                         return;
                     }
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -1040,7 +1042,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
 
             return String.Empty;
@@ -1129,7 +1131,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -1166,7 +1168,8 @@ namespace OsEngine.Market.Servers.OKX
             {
                 _wsClientDepths = new WebSocket(_publicWebSocket);
 
-                _wsClientDepths.Opened += new EventHandler((sender, e) => {
+                _wsClientDepths.Opened += new EventHandler((sender, e) =>
+                {
                     //_rateGateWebSocketDepths.WaitToProceed();
                     ConnectDepthsChanel(sender, e, security.Name);
                 });
@@ -1247,7 +1250,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -1303,7 +1306,8 @@ namespace OsEngine.Market.Servers.OKX
             {
                 _wsClientTrades = new WebSocket(_publicWebSocket); // create web-socket / создаем вебсоке
 
-                _wsClientTrades.Opened += new EventHandler((sender, e) => {
+                _wsClientTrades.Opened += new EventHandler((sender, e) =>
+                {
                     //_rateGateWebSocketTicks.WaitToProceed();
                     ConnectTradesChanel(sender, e, security.Name);
                 }); //Connect
@@ -1374,7 +1378,7 @@ namespace OsEngine.Market.Servers.OKX
 
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                 }
             }
         }
@@ -1491,7 +1495,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
         }
 

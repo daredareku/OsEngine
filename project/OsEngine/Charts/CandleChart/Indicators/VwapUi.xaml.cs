@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Forms;
-using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {

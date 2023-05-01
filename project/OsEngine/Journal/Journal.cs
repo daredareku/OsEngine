@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms.Integration;
 using OsEngine.Alerts;
 using OsEngine.Entity;
 using OsEngine.Journal.Internal;
 using OsEngine.Logging;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.Journal
 {
@@ -34,7 +34,7 @@ namespace OsEngine.Journal
 
             try
             {
-                _positionController = new PositionController(name,startProgram);
+                _positionController = new PositionController(name, startProgram);
                 _positionController.PositionStateChangeEvent += _positionController_DealStateChangeEvent;
                 _positionController.PositionNetVolumeChangeEvent += _positionController_PositionNetVolumeChangeEvent;
                 _positionController.UserSelectActionEvent += _positionController_UserSelectActionEvent;
@@ -103,7 +103,7 @@ namespace OsEngine.Journal
         /// </summary>
         public ComissionType ComissionType
         {
-            get {return _positionController.ComissionType; }
+            get { return _positionController.ComissionType; }
             set { _positionController.ComissionType = value; }
         }
 
@@ -139,7 +139,7 @@ namespace OsEngine.Journal
             {
                 try
                 {
-                    if(_positionController == null)
+                    if (_positionController == null)
                     {
                         return null;
                     }

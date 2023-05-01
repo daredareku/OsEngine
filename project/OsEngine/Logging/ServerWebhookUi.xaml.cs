@@ -3,9 +3,8 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Windows;
 using OsEngine.Language;
+using System.Windows;
 
 namespace OsEngine.Logging
 {
@@ -15,7 +14,7 @@ namespace OsEngine.Logging
     /// </summary>
     public partial class ServerWebhookDeliveryUi
     {
-         public ServerWebhookDeliveryUi() // constructor / конструктор
+        public ServerWebhookDeliveryUi() // constructor / конструктор
         {
             InitializeComponent();
             OsEngine.Layout.StickyBorders.Listen(this);

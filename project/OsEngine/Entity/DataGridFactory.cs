@@ -2,12 +2,12 @@
  * Your rights to use code governed by this license http://o-s-a.net/doc/license_simple_engine.pdf
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using OsEngine.Language;
 using System.IO;
+using System.Windows.Forms;
 
 namespace OsEngine.Entity
 {
@@ -29,7 +29,7 @@ namespace OsEngine.Entity
             grid.ScrollBars = ScrollBars.None;
             grid.BackColor = Color.FromArgb(21, 26, 30);
             grid.BackgroundColor = Color.FromArgb(21, 26, 30);
-           
+
             grid.GridColor = Color.FromArgb(17, 18, 23);
             grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.BorderStyle = BorderStyle.None;
@@ -37,10 +37,10 @@ namespace OsEngine.Entity
             DataGridViewCellStyle style = new DataGridViewCellStyle();
             style.Alignment = DataGridViewContentAlignment.TopLeft;
             style.WrapMode = DataGridViewTriState.True;
-            style.BackColor =  Color.FromArgb(21, 26, 30);
+            style.BackColor = Color.FromArgb(21, 26, 30);
             style.SelectionBackColor = Color.FromArgb(17, 18, 23);
             style.ForeColor = Color.FromArgb(154, 156, 158);
-          
+
             grid.DefaultCellStyle = style;
 
             DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
@@ -238,9 +238,9 @@ namespace OsEngine.Entity
             newGrid.Columns.Add(colum1);
 
             // position SIDE
-            if(readOnly == true)
+            if (readOnly == true)
             {
-                
+
                 DataGridViewColumn colum2 = new DataGridViewColumn();
                 colum2.CellTemplate = cell0;
                 colum2.HeaderText = OsLocalization.Entity.PositionColumn6;
@@ -402,7 +402,7 @@ namespace OsEngine.Entity
             newGrid.Columns.Add(colum01);
 
             // Time Create
-            if(readOnly)
+            if (readOnly)
             {
                 DataGridViewColumn colum02 = new DataGridViewColumn();
                 colum02.CellTemplate = cell0;
@@ -437,7 +437,7 @@ namespace OsEngine.Entity
             newGrid.Columns.Add(colum1);
 
             // Direction
-            if(readOnly)
+            if (readOnly)
             {
                 DataGridViewColumn colum2 = new DataGridViewColumn();
                 colum2.CellTemplate = cell0;
@@ -499,7 +499,7 @@ namespace OsEngine.Entity
             newGrid.Columns.Add(colum5);
 
             // Type
-            if(readOnly)
+            if (readOnly)
             {
                 DataGridViewColumn colum6 = new DataGridViewColumn();
                 colum6.CellTemplate = cell0;

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OsEngine.Entity;
 
 namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 {
@@ -71,5 +68,5 @@ namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
         public string figi;
         public Quotation expectedYield;
         public Quotation quantityLots;
-    }   
+    }
 }

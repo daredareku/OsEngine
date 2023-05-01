@@ -3,11 +3,6 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Threading;
 using OsEngine.Alerts;
 using OsEngine.Entity;
 using OsEngine.Language;
@@ -15,6 +10,9 @@ using OsEngine.Logging;
 using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Optimizer;
 using OsEngine.Market.Servers.Tester;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace OsEngine.Market.Connectors
@@ -108,7 +106,7 @@ namespace OsEngine.Market.Connectors
                     Enum.TryParse(reader.ReadLine(), true, out ServerType);
                     _securityClass = reader.ReadLine();
 
-                    if(reader.EndOfStream == false)
+                    if (reader.EndOfStream == false)
                     {
                         _eventsIsOn = Convert.ToBoolean(reader.ReadLine());
                     }
@@ -141,7 +139,7 @@ namespace OsEngine.Market.Connectors
             {
                 return;
             }
-                try
+            try
             {
                 using (StreamWriter writer = new StreamWriter(@"Engine\" + _name + @"ConnectorPrime.txt", false))
                 {
@@ -167,7 +165,7 @@ namespace OsEngine.Market.Connectors
         /// </summary>
         public void Delete()
         {
-          if(StartProgram != StartProgram.IsOsOptimizer)
+            if (StartProgram != StartProgram.IsOsOptimizer)
             {
                 TimeFrameBuilder.Delete();
 
@@ -367,7 +365,7 @@ namespace OsEngine.Market.Connectors
                 {
                     if (_myServer != null)
                     {
-                        return _myServer.GetSecurityForName(_securityName,_securityClass);
+                        return _myServer.GetSecurityForName(_securityName, _securityClass);
                     }
                 }
                 catch (Exception error)
@@ -439,7 +437,7 @@ namespace OsEngine.Market.Connectors
                 }
                 TimeFrameBuilder.CandleMarketDataType = value;
 
-                if(value == CandleMarketDataType.MarketDepth)
+                if (value == CandleMarketDataType.MarketDepth)
                 {
                     NeadToLoadServerData = true;
                 }
@@ -871,11 +869,11 @@ namespace OsEngine.Market.Connectors
             {
                 while (true)
                 {
-                    if(ServerType == ServerType.Optimizer)
+                    if (ServerType == ServerType.Optimizer)
                     {
                         await Task.Delay(1);
                     }
-                    else if(ServerType == ServerType.Tester)
+                    else if (ServerType == ServerType.Tester)
                     {
                         await Task.Delay(10);
                     }
@@ -975,7 +973,7 @@ namespace OsEngine.Market.Connectors
                                 continue;
                             }
 
-                            if(StartProgram == StartProgram.IsOsTrader)
+                            if (StartProgram == StartProgram.IsOsTrader)
                             {
                                 await Task.Delay(1000);
                             }
@@ -983,7 +981,7 @@ namespace OsEngine.Market.Connectors
                             {
                                 await Task.Delay(1);
                             }
-                            
+
                             lock (_myServerLocker)
                             {
                                 if (_myServer != null)
@@ -1063,7 +1061,7 @@ namespace OsEngine.Market.Connectors
                 server.NewMyTradeEvent += ConnectorBot_NewMyTradeEvent;
                 server.NewOrderIncomeEvent += ConnectorBot_NewOrderIncomeEvent;
             }
- 
+
             server.NeadToReconnectEvent += _myServer_NeadToReconnectEvent;
         }
 
@@ -1246,7 +1244,7 @@ namespace OsEngine.Market.Connectors
 
                 if (EmulatorIsOn)
                 {
-                    if(_emulator != null)
+                    if (_emulator != null)
                     {
                         _emulator.ProcessBidAsc(_bestAsk, _bestBid, MarketTime);
                     }
@@ -1335,7 +1333,7 @@ namespace OsEngine.Market.Connectors
                 {
                     if (_myServer != null)
                     {
-                        return _myServer.GetAllTradesToSecurity(_myServer.GetSecurityForName(_securityName,_securityClass));
+                        return _myServer.GetAllTradesToSecurity(_myServer.GetSecurityForName(_securityName, _securityClass));
                     }
                 }
                 catch (Exception error)
@@ -1469,7 +1467,7 @@ namespace OsEngine.Market.Connectors
                     StartProgram != StartProgram.IsOsOptimizer &&
                     (EmulatorIsOn || _myServer.ServerType == ServerType.Finam))
                 {
-                    if(_emulator != null)
+                    if (_emulator != null)
                     {
                         _emulator.OrderExecute(order);
                     }
@@ -1502,7 +1500,7 @@ namespace OsEngine.Market.Connectors
 
                 if (EmulatorIsOn || _myServer.ServerType == ServerType.Finam)
                 {
-                    if(_emulator != null)
+                    if (_emulator != null)
                     {
                         _emulator.OrderCancel(order);
                     }

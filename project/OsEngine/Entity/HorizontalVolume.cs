@@ -3,13 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Logging;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using OsEngine.Logging;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Entity
 {
@@ -147,41 +147,41 @@ namespace OsEngine.Entity
 
                     cluster.Time = candles[i].TimeStart;
                     cluster.LogMessageEvent += SendNewLogMessage;
-                    cluster.MaxSummLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MaxSummLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MaxSummLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MaxBuyLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MaxBuyLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MaxBuyLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MaxSellLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MaxSellLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MaxSellLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MaxDeltaLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MaxDeltaLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MaxDeltaLineChangeEvent?.Invoke(line);
                     };
 
-                    cluster.MinSummLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MinSummLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MinSummLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MinBuyLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MinBuyLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MinBuyLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MinSellLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MinSellLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MinSellLineChangeEvent?.Invoke(line);
                     };
-                    cluster.MinDeltaLineChangeEvent += delegate(HorizontalVolumeLine line)
+                    cluster.MinDeltaLineChangeEvent += delegate (HorizontalVolumeLine line)
                     {
                         MinDeltaLineChangeEvent?.Invoke(line);
                     };
 
-                    cluster.NewLineCreateEvent += delegate(HorizontalVolumeLine line) { VolumeClusterLines.Add(line); };
+                    cluster.NewLineCreateEvent += delegate (HorizontalVolumeLine line) { VolumeClusterLines.Add(line); };
                 }
                 // upload the cluster with data
                 // прогружаем кластер данными
@@ -325,7 +325,7 @@ namespace OsEngine.Entity
         /// </summary>
         public Security Security
         {
-            get { return _security;}
+            get { return _security; }
             set
             {
                 if (value == null)
@@ -442,7 +442,7 @@ namespace OsEngine.Entity
                 startIndex = 0;
             }
 
-            for(int i = startIndex; VolumeClusters != null && i < endIndex && i < VolumeClusters.Count; i++)
+            for (int i = startIndex; VolumeClusters != null && i < endIndex && i < VolumeClusters.Count; i++)
             {
                 if (VolumeClusters[i].MaxSummVolumeLine == null)
                 {
@@ -679,7 +679,7 @@ namespace OsEngine.Entity
     /// </summary>
     public class HorizontalVolumeCluster
     {
-        public HorizontalVolumeCluster(decimal stepLines,Security security)
+        public HorizontalVolumeCluster(decimal stepLines, Security security)
         {
             StepLines = stepLines;
             Decimals = security.Decimals;
@@ -996,7 +996,7 @@ namespace OsEngine.Entity
                 return price;
             }
 
-            if(StepSecurity > StepLines)
+            if (StepSecurity > StepLines)
             {
                 return price;
             }
@@ -1150,9 +1150,9 @@ namespace OsEngine.Entity
                 }
                 catch (Exception e)
                 {
-                    SendNewLogMessage(e.ToString(),LogMessageType.Error);
+                    SendNewLogMessage(e.ToString(), LogMessageType.Error);
                 }
-              
+
             }
         }
         // outgoing events

@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -382,12 +382,12 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             decimal sum2 = 0;
 
-            if (index <= Period )
+            if (index <= Period)
             {
                 return 0;
             }
 
-            for (int i = index - Period+1; i < index + 1; i++)
+            for (int i = index - Period + 1; i < index + 1; i++)
             {
                 sum1 = sum1 + _cmo1[i];
                 sum2 = sum2 + _cmo2[i];
@@ -399,10 +399,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
             else
             {
-                value = (sum1 - sum2)/(sum1 + sum2)*100;
+                value = (sum1 - sum2) / (sum1 + sum2) * 100;
             }
 
-            return Math.Round(value,2);
+            return Math.Round(value, 2);
         }
 
         private decimal GetCmo1(List<Candle> candles, int index)

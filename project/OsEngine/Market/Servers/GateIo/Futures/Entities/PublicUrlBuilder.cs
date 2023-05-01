@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OsEngine.Market.Servers.GateIo.Futures.Entities
+﻿namespace OsEngine.Market.Servers.GateIo.Futures.Entities
 {
     public class PublicUrlBuilder
     {

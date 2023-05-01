@@ -21,7 +21,7 @@ namespace OsEngine.Market.Servers.Transaq.TransaqEntity
         [XmlAttribute(AttributeName = "remove")]
         public string Remove { get; set; }
     }
-    
+
     [XmlRoot(ElementName = "server_status")]
     public class ServerStatus
     {

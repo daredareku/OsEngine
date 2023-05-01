@@ -14,9 +14,9 @@ namespace OsEngine.Layout
         {
             SubscribeEvents(ui);
 
-            lock(_windowsArrayLoker)
+            lock (_windowsArrayLoker)
             {
-                if(ui.Uid == "")
+                if (ui.Uid == "")
                 {
                     ui.Uid = (DateTime.Now - DateTime.MinValue).TotalMilliseconds.ToString();
                 }
@@ -109,7 +109,7 @@ namespace OsEngine.Layout
                     }
                 }
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 System.Windows.MessageBox.Show(error.ToString());
             }
@@ -140,7 +140,7 @@ namespace OsEngine.Layout
                     return;
                 }
 
-                if(window.IsReady() == false)
+                if (window.IsReady() == false)
                 {
                     return;
                 }
@@ -165,12 +165,12 @@ namespace OsEngine.Layout
             windowActive.UpdatePosition();
             windowActive.UpdateDirection();
 
-            if(windowActive.Direction == MoveWindowDirection.None)
+            if (windowActive.Direction == MoveWindowDirection.None)
             {
                 return;
             }
 
-            if (windowActive.Direction == MoveWindowDirection.Left 
+            if (windowActive.Direction == MoveWindowDirection.Left
                 || windowActive.Direction == MoveWindowDirection.LeftDown
                 || windowActive.Direction == MoveWindowDirection.LeftUp)
             {// проверяем ЛЕВУЮ границу окна
@@ -186,7 +186,7 @@ namespace OsEngine.Layout
 
                         double distanceP = _windows[i].GetPersentDistance(windowActive.Left, BorderType.Right);
 
-                        if(distanceP > 0 && distanceP < 0.5)
+                        if (distanceP > 0 && distanceP < 0.5)
                         {
                             windowActive.FreezeX(_windows[i].Right + 1);
                             break;
@@ -339,7 +339,7 @@ namespace OsEngine.Layout
             _leftPrev = Left;
             _upPrev = Up;
 
-            if(_height != 0 && _width != 0 &&
+            if (_height != 0 && _width != 0 &&
                 (_height != Ui.Height
                 || _width != Ui.Width))
             {
@@ -436,7 +436,7 @@ namespace OsEngine.Layout
         {
             double result = 100;
 
-            if(borderTypeToGetDistance == BorderType.Up &&
+            if (borderTypeToGetDistance == BorderType.Up &&
                 Up != 0)
             {
                 result = Math.Abs(Up - border) / (border / 100);
@@ -480,11 +480,11 @@ namespace OsEngine.Layout
 
         public void FreezeX(double leftX)
         {
-            if(_xIsFreezing == true)
+            if (_xIsFreezing == true)
             {
                 return;
             }
-            if(_lastTimeFreezeUnFreezeX.AddSeconds(1)> DateTime.Now)
+            if (_lastTimeFreezeUnFreezeX.AddSeconds(1) > DateTime.Now)
             {
                 return;
             }
@@ -498,7 +498,7 @@ namespace OsEngine.Layout
 
         public void CheckFreezeStateX()
         {
-            if(_xIsFreezing == false)
+            if (_xIsFreezing == false)
             {
                 return;
             }
@@ -511,7 +511,7 @@ namespace OsEngine.Layout
 
             double xMouseMovePercent = xMouseMove / (_mousePositionStartXFreez / 100);
 
-            if(xMouseMovePercent > 0.5)
+            if (xMouseMovePercent > 0.5)
             {
                 UnFreezeX();
                 return;

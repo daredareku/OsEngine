@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Windows;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.OsTrader.Panels;
+using System;
+using System.Windows;
 
 namespace OsEngine.Robots.MarketMaker
 {
@@ -46,7 +46,7 @@ namespace OsEngine.Robots.MarketMaker
         {
             try
             {
-                if (TextBoxVolumeOne.Text.ToDecimal() <= 0||
+                if (TextBoxVolumeOne.Text.ToDecimal() <= 0 ||
                     TextBoxSpreadBeetwenLine.Text.ToDecimal() <= 0)
                 {
                     throw new Exception("");

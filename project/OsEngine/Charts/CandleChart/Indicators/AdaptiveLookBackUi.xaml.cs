@@ -3,10 +3,10 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Language;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -77,7 +77,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
 
             _alb.ColorBase = HostColorBase.Child.BackColor;
-            _alb.Lenght= Convert.ToInt32(TextBoxLenght.Text);
+            _alb.Lenght = Convert.ToInt32(TextBoxLenght.Text);
             _alb.PaintOn = CheckBoxPaintOnOff.IsChecked.Value;
 
             _alb.Save();

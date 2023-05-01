@@ -1,15 +1,12 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OsEngine.Entity;
 
 namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 {
     public class InstrumentsResponse
     {
-       public List<Instrument> instruments;
+        public List<Instrument> instruments;
     }
 
     public class Instrument
@@ -61,7 +58,7 @@ namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 
         public decimal GetValue()
         {
-            if(_value != Decimal.MinValue)
+            if (_value != Decimal.MinValue)
             {
                 return _value;
             }
@@ -84,7 +81,7 @@ namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 
             string valInStr = unitsWithNoMin + ",";
 
-            for(int i = 0;i < nanoWithNoMin.Length; i++)
+            for (int i = 0; i < nanoWithNoMin.Length; i++)
             {
                 valInStr += nanoWithNoMin[i].ToString();
             }

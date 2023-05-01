@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Market.Servers.Bybit.Entities;
-using OsEngine.Market.Servers.Bybit.Utilities;
-using OsEngine.Market.Servers.Entity;
-using OsEngine.Market.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace OsEngine.Market.Servers.Bybit.EntityCreators
 {
@@ -54,7 +50,7 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
 
             JToken account_response = server.CreatePrivateGetQuery(client, "/v2/public/trading-records", parameters);
 
-            if(account_response == null)
+            if (account_response == null)
             {
                 return null;
             }
@@ -87,7 +83,7 @@ namespace OsEngine.Market.Servers.Bybit.EntityCreators
                 trade.Id = data_item.SelectToken("trade_id").ToString();
                 trade.Side = data_item.SelectToken("side").ToString() == "Sell" ? Side.Sell : Side.Buy;
                 trade.Volume = data_item.SelectToken("size").Value<decimal>();
-                
+
 
                 trades.Add(trade);
             }

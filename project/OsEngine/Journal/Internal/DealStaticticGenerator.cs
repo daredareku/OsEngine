@@ -3,10 +3,10 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using OsEngine.Entity;
 
 namespace OsEngine.Journal.Internal
 {
@@ -76,8 +76,8 @@ namespace OsEngine.Journal.Internal
             report.Add(Math.Round(GetAllProfitPersent(deals), 6).ToString(new CultureInfo("ru-RU")));//Net profti %
             report.Add(deals.Length.ToString(new CultureInfo("ru-RU")));// Number of transactions
             report.Add(GetAverageTimeOnPoses(deals));
-            report.Add(GetSharpRatio(deals,7).ToString());
-            
+            report.Add(GetSharpRatio(deals, 7).ToString());
+
             report.Add(Math.Round(GetProfitFactor(deals), 6).ToString(new CultureInfo("ru-RU")));   //Profit Factor
             report.Add(Math.Round(GetRecovery(deals), 6).ToString(new CultureInfo("ru-RU")));   // Recovery
             report.Add("");
@@ -124,22 +124,22 @@ namespace OsEngine.Journal.Internal
             TimeSpan allTime = new TimeSpan();
             int dealsCount = 0;
 
-            for(int i = 0;i < deals.Length;i++)
+            for (int i = 0; i < deals.Length; i++)
             {
                 DateTime openTime = deals[i].TimeOpen;
                 DateTime closeTime = deals[i].TimeClose;
-                
-                if(closeTime == DateTime.MinValue)
+
+                if (closeTime == DateTime.MinValue)
                 {
                     continue;
                 }
-                
+
                 dealsCount++;
 
                 allTime += closeTime - openTime;
             }
 
-            if(dealsCount == 0)
+            if (dealsCount == 0)
             {
                 result = "0";
             }
@@ -148,12 +148,12 @@ namespace OsEngine.Journal.Internal
                 long seconds = Convert.ToInt64(allTime.Ticks / dealsCount);
                 allTime = new TimeSpan(seconds);
 
-                result = 
-                    "H: " + Convert.ToInt32(allTime.TotalHours) 
+                result =
+                    "H: " + Convert.ToInt32(allTime.TotalHours)
                     + " M: " + Convert.ToInt32(allTime.Minutes)
                     + " S: " + Convert.ToInt32(allTime.Seconds);
             }
-            
+
             return result;
         }
 
@@ -179,7 +179,7 @@ namespace OsEngine.Journal.Internal
         /// take a profit as a percentage of the deposit
         /// взять профит в процентах к депозиту
         /// </summary>
-        public static decimal GetAllProfitPersent(Position[] deals) 
+        public static decimal GetAllProfitPersent(Position[] deals)
         {
             if (deals == null || deals.Length == 0)
             {
@@ -188,11 +188,11 @@ namespace OsEngine.Journal.Internal
 
             decimal start = 0;
             int i = 0;
-            while (start  == 0)
+            while (start == 0)
             {
-                start = deals[i ].PortfolioValueOnOpenPosition;
-                i ++;
-                if(i >= deals.Length)
+                start = deals[i].PortfolioValueOnOpenPosition;
+                i++;
+                if (i >= deals.Length)
                     break;
             }
 
@@ -211,7 +211,7 @@ namespace OsEngine.Journal.Internal
         /// to take the average profit from the deal as a percentage
         /// взять средний профит со сделки в процентах
         /// </summary>
-        public static decimal GetMidleProfitInPersent(Position[] deals) 
+        public static decimal GetMidleProfitInPersent(Position[] deals)
         {
             if (deals.Length == 0)
             {
@@ -227,7 +227,7 @@ namespace OsEngine.Journal.Internal
                 decimal enter = deals[i].EntryPrice;
                 decimal exit = deals[i].ClosePrice;
 
-                if(exit == 0)
+                if (exit == 0)
                 {
                     divider--;
                     continue;
@@ -247,7 +247,7 @@ namespace OsEngine.Journal.Internal
                 }
             }
 
-            if(divider <= 0)
+            if (divider <= 0)
             {
                 return 0;
             }
@@ -261,7 +261,7 @@ namespace OsEngine.Journal.Internal
         /// </summary>
         public static decimal GetMidleProfitInPunkt(Position[] deals)
         {
-            if(deals.Length == 0)
+            if (deals.Length == 0)
             {
                 return 0;
             }
@@ -287,7 +287,7 @@ namespace OsEngine.Journal.Internal
 
             try
             {
-                    return Math.Round(profit / deals.Length, 6);
+                return Math.Round(profit / deals.Length, 6);
             }
             catch (Exception)
             {
@@ -347,7 +347,7 @@ namespace OsEngine.Journal.Internal
 
             */
 
-            if(deals == null ||
+            if (deals == null ||
                 deals.Length == 0)
             {
                 return 0;
@@ -357,7 +357,7 @@ namespace OsEngine.Journal.Internal
 
             decimal ahpr = GetAllProfitPersent(deals);
 
-            if(ahpr == 0)
+            if (ahpr == 0)
             {
                 return 0;
             }
@@ -367,14 +367,14 @@ namespace OsEngine.Journal.Internal
             DateTime timeFirstDeal = DateTime.MaxValue;
             DateTime timeEndDeal = DateTime.MinValue;
 
-            for(int i = 0;i < deals.Length;i++)
+            for (int i = 0; i < deals.Length; i++)
             {
-                if(deals[i].TimeOpen < timeFirstDeal)
+                if (deals[i].TimeOpen < timeFirstDeal)
                 {
                     timeFirstDeal = deals[i].TimeOpen;
                 }
 
-                if(deals[i].TimeOpen > timeEndDeal)
+                if (deals[i].TimeOpen > timeEndDeal)
                 {
                     timeEndDeal = deals[i].TimeOpen;
                 }
@@ -400,7 +400,7 @@ namespace OsEngine.Journal.Internal
 
             List<decimal> profitArray = new List<decimal>();
 
-            for(int i = 0;i < deals.Length;i++)
+            for (int i = 0; i < deals.Length; i++)
             {
                 profitArray.Add(deals[i].ProfitPortfolioPersent);
             }
@@ -409,21 +409,21 @@ namespace OsEngine.Journal.Internal
 
             // Sharpe Ratio = (AHPR - (1+RFR)) / SD
 
-            if(sd == 0)
+            if (sd == 0)
             {
                 return 0;
             }
 
             decimal sharp = (ahpr - (1 + rfr)) / sd;
 
-            return Math.Round(sharp,4);
+            return Math.Round(sharp, 4);
         }
 
         private static decimal GetValueStandardDeviation(List<decimal> candles)
         {
-            int lenght = candles.Count-1;
+            int lenght = candles.Count - 1;
 
-            if(lenght < 2)
+            if (lenght < 2)
             {
                 return 0;
             }
@@ -506,7 +506,7 @@ namespace OsEngine.Journal.Internal
                 }
             }
 
-            if(profit == 0)
+            if (profit == 0)
             {
                 return profit;
             }
@@ -809,7 +809,7 @@ namespace OsEngine.Journal.Internal
         /// take maximum drawdown
         /// взять максимальную просадку
         /// </summary>
-        public static decimal GetMaxDownPersent(Position[] deals) 
+        public static decimal GetMaxDownPersent(Position[] deals)
         {
             decimal maxDown = decimal.MaxValue;
 
@@ -893,7 +893,7 @@ namespace OsEngine.Journal.Internal
 
             decimal commissionTotal = 0;
 
-            for(int i = 0;i < deals.Length;i++)
+            for (int i = 0; i < deals.Length; i++)
             {
                 commissionTotal += deals[i].CommissionTotal() * (deals[i].MultToJournal / 100);
             }

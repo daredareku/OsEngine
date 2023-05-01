@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OsEngine.Entity;
+using OsEngine.Logging;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using OkonkwoOandaV20.TradeLibrary.DataTypes.Order;
-using OsEngine.Entity;
-using OsEngine.Logging;
 using WebSocket4Net;
 using Order = OsEngine.Entity.Order;
 
@@ -55,23 +53,23 @@ namespace OsEngine.Market.Servers.Hitbtc
         /// </summary>
         public void Connect()
         {
-            if (string.IsNullOrEmpty(_pubKey)||
+            if (string.IsNullOrEmpty(_pubKey) ||
                 string.IsNullOrEmpty(_secKey))
             {
                 return;
             }
 
             // check server availability for HTTP communication with it / проверяем доступность сервера для HTTP общения с ним
-            Uri uri = new Uri(_baseUrl+"/api/2");
+            Uri uri = new Uri(_baseUrl + "/api/2");
 
             try
             {
                 ServicePointManager.SecurityProtocol =
                     SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-                var httpWebRequest = (HttpWebRequest) WebRequest.Create(uri);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
 
-                var httpWebResponse = (HttpWebResponse) httpWebRequest.GetResponse();
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
             }
             catch (Exception exception)
@@ -120,7 +118,7 @@ namespace OsEngine.Market.Servers.Hitbtc
             {
                 // ignore
             }
-            
+
             _isDisposed = true;
         }
 
@@ -209,7 +207,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                 try
                 {
 
-                    HttpWebRequest request = (HttpWebRequest) WebRequest.Create(_baseUrl + endpoint);
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_baseUrl + endpoint);
                     request.Method = method.ToUpper();
                     request.Accept = "application/json; charset=utf-8";
 
@@ -220,7 +218,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                         authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
                         request.Headers["Authorization"] = "Basic " + authInfo;
 
-                        var response = (HttpWebResponse) request.GetResponse();
+                        var response = (HttpWebResponse)request.GetResponse();
 
                         string strResponse = "";
                         using (var sr = new StreamReader(response.GetResponseStream()))
@@ -232,7 +230,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                     }
                     else
                     {
-                        var response = (HttpWebResponse) request.GetResponse();
+                        var response = (HttpWebResponse)request.GetResponse();
 
                         string strResponse = "";
                         using (var sr = new StreamReader(response.GetResponseStream()))
@@ -662,7 +660,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                     _wsClient.Send(subscribeTrades);
                     SendLogMessage(subscribeTrades, LogMessageType.System);
 
-                    
+
 
                 }
 
@@ -862,7 +860,7 @@ namespace OsEngine.Market.Servers.Hitbtc
 
                                 if (UpdatePortfolio != null)
                                 {
-                                    UpdatePortfolio(GetPortfolioName(),quotes);
+                                    UpdatePortfolio(GetPortfolioName(), quotes);
                                 }
                                 continue;
                             }
@@ -1034,6 +1032,6 @@ namespace OsEngine.Market.Servers.Hitbtc
 
         #endregion
 
-        
+
     }
 }

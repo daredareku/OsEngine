@@ -68,7 +68,7 @@ namespace Kraken.WebSockets.Messages
         /// Gets the number of trades
         /// </summary>
         public TodayAnd24HourValue<int> Trades { get; private set; }
-        
+
         /// <summary>
         /// Gets the low price.
         /// </summary>
@@ -76,7 +76,7 @@ namespace Kraken.WebSockets.Messages
         /// The low price.
         /// </value>
         public TodayAnd24HourValue<decimal> LowPrice { get; private set; }
-        
+
         /// <summary>
         /// Gets the high price.
         /// </summary>
@@ -84,7 +84,7 @@ namespace Kraken.WebSockets.Messages
         /// The high price.
         /// </value>
         public TodayAnd24HourValue<decimal> HighPrice { get; private set; }
-        
+
         /// <summary>
         /// Gets the open price.
         /// </summary>
@@ -116,7 +116,7 @@ namespace Kraken.WebSockets.Messages
                 VolumeWeightedAveragePrice = TodayAnd24HourValue<decimal>.CreateFromJArray(message["p"] as JArray),
                 Trades = TodayAnd24HourValue<int>.CreateFromJArray(message["t"] as JArray),
                 LowPrice = TodayAnd24HourValue<decimal>.CreateFromJArray(message["l"] as JArray),
-                HighPrice = TodayAnd24HourValue<decimal>.CreateFromJArray(message["h"]as JArray),
+                HighPrice = TodayAnd24HourValue<decimal>.CreateFromJArray(message["h"] as JArray),
                 OpenPrice = TodayAnd24HourValue<decimal>.CreateFromJArray(message["o"] as JArray)
             };
 

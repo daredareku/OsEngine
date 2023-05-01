@@ -3,6 +3,9 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,9 +14,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
 
 namespace OsEngine.Market.Servers.NinjaTrader
 {
@@ -56,11 +56,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
         public bool IsConnected;
 
-// request to Ninja
-// запросы к Нинзе
+        // request to Ninja
+        // запросы к Нинзе
 
         /// <summary>
-		/// request list of securities
+        /// request list of securities
         /// запросить список бумаг
         /// </summary>
         public void GetSecurities()
@@ -94,7 +94,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
         public void ExecuteOrder(Order order)
         {
             string orderMes = "OrderExecute" + "@";
-            orderMes += order.SecurityNameCode +"#";
+            orderMes += order.SecurityNameCode + "#";
             orderMes += order.PortfolioNumber + "#";
             orderMes += order.NumberUser + "#";
             orderMes += order.Side + "#";
@@ -121,11 +121,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
             _messagesToSend.Enqueue(orderMes);
         }
 
-// thread sending request messages
-// поток отсылающий сообщения с запросами
+        // thread sending request messages
+        // поток отсылающий сообщения с запросами
 
         /// <summary>
-		/// whether need threads to be stopped
+        /// whether need threads to be stopped
         /// нужно ли чтобы потоки были остановлены
         /// </summary>
         private bool _threadsNeadToStop;
@@ -229,11 +229,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
             return request;
         }
 
-// processing responses after our requests
-// обработка ответов после наших запросов     
+        // processing responses after our requests
+        // обработка ответов после наших запросов     
 
         /// <summary>
-		/// place to sort incoming data from Ninja
+        /// place to sort incoming data from Ninja
         /// место сортировки входящих от нинзи данных
         /// </summary>
         /// <param name="message"></param>
@@ -476,7 +476,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
                     myDepth.Asks.Count > 0)
 
                 {
-                    while(str[1] == "Bid" && (str[2] == "Add" || str[2] == "Update") &&
+                    while (str[1] == "Bid" && (str[2] == "Add" || str[2] == "Update") &&
                           myDepth.Asks.Count > 0 &&
                         myDepth.Bids[0].Price >= myDepth.Asks[0].Price)
                     {
@@ -511,7 +511,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 if (myDepth.Asks == null ||
                     myDepth.Bids == null ||
-                    myDepth.Asks.Count == 0||
+                    myDepth.Asks.Count == 0 ||
                     myDepth.Bids.Count == 0)
                 {
                     return;
@@ -536,7 +536,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 if (levels[i].Price < newLevel.Price)
                 {
-                    levels.Insert(i,newLevel);
+                    levels.Insert(i, newLevel);
                     return;
                 }
             }
@@ -582,10 +582,10 @@ namespace OsEngine.Market.Servers.NinjaTrader
         /// </summary>
         private void LoadPortfolios(string message)
         {
-           /* string portfolioStr = account.Name + "#"; // portfolio / портфель
+            /* string portfolioStr = account.Name + "#"; // portfolio / портфель
 
-            portfolioStr += value + "$"; // current amount of money in the account / текущее кол-во денег на счёте
-            */
+             portfolioStr += value + "$"; // current amount of money in the account / текущее кол-во денег на счёте
+             */
             if (_portfolios == null)
             {
                 _portfolios = new List<Portfolio>();
@@ -599,13 +599,13 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 Portfolio newPos = new Portfolio();
                 newPos.Number = trdStr[0];
-                newPos.ValueCurrent= trdStr[1].ToDecimal();
+                newPos.ValueCurrent = trdStr[1].ToDecimal();
 
                 Portfolio myPortfolio = _portfolios.Find(p => p.Number == newPos.Number);
 
                 if (myPortfolio == null)
                 {
-                   _portfolios.Add(newPos);
+                    _portfolios.Add(newPos);
                 }
                 else
                 {
@@ -618,7 +618,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
                 }
             }
         }
-        
+
         private List<Portfolio> _portfolios;
 
         /// <summary>
@@ -645,7 +645,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 PositionOnBoard newPos = new PositionOnBoard();
                 newPos.SecurityNameCode = trdStr[0];
-                newPos.PortfolioName= trdStr[1];
+                newPos.PortfolioName = trdStr[1];
                 newPos.ValueCurrent = trdStr[2].ToDecimal();
 
                 Portfolio myPortfolio = _portfolios.Find(p => p.Number == newPos.PortfolioName);
@@ -663,29 +663,29 @@ namespace OsEngine.Market.Servers.NinjaTrader
                 }
             }
         }
-        
+
         /// <summary>
-		/// parsing incoming messages about trades
+        /// parsing incoming messages about trades
         /// разбор входящих сообщений о трейдах
         /// </summary>
         private void LoadMyTrades(string message)
         {
-           /* string tradeStr = execution.Instrument.FullName + "#"; // security name / имя инструмента
-            tradeStr += execution.ExecutionId + "#"; // number in the exchange / номер на бирже
-            tradeStr += execution.OrderId + "#"; // order number / номер ордера по которому прошла сделка
-            tradeStr += execution.Price + "#"; // matching price / цена сведения
-            tradeStr += execution.Quantity + "#"; // volume / объём
+            /* string tradeStr = execution.Instrument.FullName + "#"; // security name / имя инструмента
+             tradeStr += execution.ExecutionId + "#"; // number in the exchange / номер на бирже
+             tradeStr += execution.OrderId + "#"; // order number / номер ордера по которому прошла сделка
+             tradeStr += execution.Price + "#"; // matching price / цена сведения
+             tradeStr += execution.Quantity + "#"; // volume / объём
 
-            if (execution.MarketPosition == MarketPosition.Long)
-            {
-                tradeStr += "Buy" + "#";
-            }
-            else
-            {
-                tradeStr += "Sell" + "#";
-            }
+             if (execution.MarketPosition == MarketPosition.Long)
+             {
+                 tradeStr += "Buy" + "#";
+             }
+             else
+             {
+                 tradeStr += "Sell" + "#";
+             }
 
-            tradeStr += execution.Time + "$";*/
+             tradeStr += execution.Time + "$";*/
 
 
             string[] messageInArray = message.Split('$');
@@ -696,12 +696,12 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 MyTrade newMyTrade = new MyTrade();
                 newMyTrade.SecurityNameCode = trdStr[0];
-                newMyTrade.NumberTrade= trdStr[1];
+                newMyTrade.NumberTrade = trdStr[1];
                 newMyTrade.NumberOrderParent = trdStr[2];
                 newMyTrade.Price = trdStr[3].ToDecimal();
-                newMyTrade.Volume= trdStr[4].ToDecimal();
+                newMyTrade.Volume = trdStr[4].ToDecimal();
                 Enum.TryParse(trdStr[5], out newMyTrade.Side);
-                newMyTrade.Time= Convert.ToDateTime(trdStr[6], CultureInfo.InvariantCulture);
+                newMyTrade.Time = Convert.ToDateTime(trdStr[6], CultureInfo.InvariantCulture);
 
                 if (MyTradeEvent != null)
                 {
@@ -716,58 +716,58 @@ namespace OsEngine.Market.Servers.NinjaTrader
         /// </summary>
         private void LoadOrders(string message)
         {
-          /*  
-           * string orderstr = order.ClientId + "#"; // номер который ему дал клиент
-            orderstr += order.Id + "#"; // номер на бирже
-            orderstr += order.Instrument.FullName + "#"; // имя инструмента
-            orderstr += order.Quantity + "#"; // весь объём ордера
-            orderstr += order.Filled + "#"; // исполнено
-            orderstr += order.LimitPrice + "#"; // цена ордера
-            orderstr += order.Account.Name + "#"; // портфель
+            /*  
+             * string orderstr = order.ClientId + "#"; // номер который ему дал клиент
+              orderstr += order.Id + "#"; // номер на бирже
+              orderstr += order.Instrument.FullName + "#"; // имя инструмента
+              orderstr += order.Quantity + "#"; // весь объём ордера
+              orderstr += order.Filled + "#"; // исполнено
+              orderstr += order.LimitPrice + "#"; // цена ордера
+              orderstr += order.Account.Name + "#"; // портфель
 
-            if (order.OrderAction == OrderAction.Buy ||
-                order.OrderAction == OrderAction.BuyToCover)
-            {
-                orderstr += "Buy" + "#";
-            }
-            else
-            {
-                orderstr += "Sell" + "#";
-            }
+              if (order.OrderAction == OrderAction.Buy ||
+                  order.OrderAction == OrderAction.BuyToCover)
+              {
+                  orderstr += "Buy" + "#";
+              }
+              else
+              {
+                  orderstr += "Sell" + "#";
+              }
 
-            if
-                (order.OrderState == OrderState.Initialized ||
-                order.OrderState == OrderState.Accepted ||
-                order.OrderState == OrderState.Submitted ||
-                order.OrderState == OrderState.Working)
-            {
-                orderstr += "Activ" + "#";
-            }
-            else if
-                (order.OrderState == OrderState.Cancelled ||
-                order.OrderState == OrderState.Rejected ||
-                order.OrderState == OrderState.CancelPending ||
-                order.OrderState == OrderState.CancelSubmitted)
-            {
-                orderstr += "Cansel" + "#";
-            }
-            else if
-                (order.OrderState == OrderState.PartFilled)
-            {
-                orderstr += "Partial" + "#";
-            }
-            else if
-                (order.OrderState == OrderState.Filled)
-            {
-                orderstr += "Done" + "#";
-            }
-            else
-            {
-                return;
-            }
+              if
+                  (order.OrderState == OrderState.Initialized ||
+                  order.OrderState == OrderState.Accepted ||
+                  order.OrderState == OrderState.Submitted ||
+                  order.OrderState == OrderState.Working)
+              {
+                  orderstr += "Activ" + "#";
+              }
+              else if
+                  (order.OrderState == OrderState.Cancelled ||
+                  order.OrderState == OrderState.Rejected ||
+                  order.OrderState == OrderState.CancelPending ||
+                  order.OrderState == OrderState.CancelSubmitted)
+              {
+                  orderstr += "Cansel" + "#";
+              }
+              else if
+                  (order.OrderState == OrderState.PartFilled)
+              {
+                  orderstr += "Partial" + "#";
+              }
+              else if
+                  (order.OrderState == OrderState.Filled)
+              {
+                  orderstr += "Done" + "#";
+              }
+              else
+              {
+                  return;
+              }
 
 
-            orderstr += order.Time + "$";*/
+              orderstr += order.Time + "$";*/
 
             string[] messageInArray = message.Split('$');
 
@@ -777,7 +777,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
                 Order newOrder = new Order();
                 newOrder.NumberUser = Convert.ToInt32(ordStr[0]);
-                newOrder.NumberMarket= ordStr[1];
+                newOrder.NumberMarket = ordStr[1];
                 newOrder.SecurityNameCode = ordStr[2];
                 newOrder.Volume = ordStr[3].ToDecimal();
                 newOrder.VolumeExecute = ordStr[4].ToDecimal();
@@ -892,8 +892,8 @@ namespace OsEngine.Market.Servers.NinjaTrader
                 result.Append(newAccount + "&");
             }*/
 
-            if(_portfolios == null)
-            { _portfolios = new List<Portfolio>();}
+            if (_portfolios == null)
+            { _portfolios = new List<Portfolio>(); }
 
             string[] securityArray = message.Split('&');
 
@@ -956,11 +956,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
             }
         }
 
-		// outgoing events
+        // outgoing events
         // исходящие события
-        
+
         /// <summary>
-		/// my new orders
+        /// my new orders
         /// новые мои ордера
         /// </summary>
         public event Action<Order> MyOrderEvent;
@@ -1007,11 +1007,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
         /// </summary>
         public event Action Disconnected;
 
-		// log messages
+        // log messages
         // сообщения для лога
 
         /// <summary>
-		/// add a new log message
+        /// add a new log message
         /// добавить в лог новое сообщение
         /// </summary>
         private void SendLogMessage(string message, LogMessageType type)

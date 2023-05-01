@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Market;
 using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.Robots
@@ -23,11 +22,11 @@ namespace OsEngine.Robots
             OsEngine.Layout.StickyBorders.Listen(this);
             OsEngine.Layout.StartupLocation.Start_MouseInCentre(this);
 
-            for (int i = 0;i < botsIncluded.Count;i++)
+            for (int i = 0; i < botsIncluded.Count; i++)
             {
-                for(int i2 = 0;i2 < botsFromScript.Count;i2++)
+                for (int i2 = 0; i2 < botsFromScript.Count; i2++)
                 {
-                    if(botsIncluded[i].Equals(botsFromScript[i2]))
+                    if (botsIncluded[i].Equals(botsFromScript[i2]))
                     {
                         botsIncluded.RemoveAt(i);
                         i--;

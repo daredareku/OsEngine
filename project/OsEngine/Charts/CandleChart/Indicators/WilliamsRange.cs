@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -396,7 +396,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             decimal maxhigh = 0;
 
-            for (int i = index - Nperiod + 1; i < index+1; i++)
+            for (int i = index - Nperiod + 1; i < index + 1; i++)
             {
 
                 if (maxhigh < candles[i].High)
@@ -416,7 +416,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             decimal maxlow = decimal.MaxValue;
 
-            for (int i = index - Nperiod + 1; i < index +1; i++)
+            for (int i = index - Nperiod + 1; i < index + 1; i++)
             {
                 if (maxlow > candles[i].Low)
                 {

@@ -1,4 +1,4 @@
-﻿﻿namespace OsEngine.OsTrader.Panels.Attributes
+﻿namespace OsEngine.OsTrader.Panels.Attributes
 {
     /// <summary>
     /// Attribute for applying bot to terminal

@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -17,7 +17,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// MACD. Moving Average Convergence Divergence. Indicator for analysis of convergence and divergence of moving averages, classic indicator.
     /// MACD. Moving Average Convergence Divergence. Индикатор для анализа схождения-расхождения скользящих средних, классический
     /// </summary>
-    public class MacdLine: IIndicator
+    public class MacdLine : IIndicator
     {
         /// <summary>
         /// constructor
@@ -42,7 +42,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 _maShort.Save();
                 _maLong.Save();
                 _maSignal.Save();
-            } 
+            }
             else
             {
                 _maShort = new MovingAverage(uniqName + "ma1", false);
@@ -67,9 +67,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
             ColorUp = Color.DodgerBlue;
             ColorDown = Color.DarkRed;
             PaintOn = true;
-            _maShort = new MovingAverage(false) {Lenght = 12,TypeCalculationAverage = MovingAverageTypeCalculation.Exponential};
+            _maShort = new MovingAverage(false) { Lenght = 12, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
             _maLong = new MovingAverage(false) { Lenght = 26, TypeCalculationAverage = MovingAverageTypeCalculation.Exponential };
-            _maSignal = new MovingAverage(false){Lenght = 9,TypeCalculationAverage = MovingAverageTypeCalculation.Simple};
+            _maSignal = new MovingAverage(false) { Lenght = 9, TypeCalculationAverage = MovingAverageTypeCalculation.Simple };
             CanDelete = canDelete;
         }
 
@@ -345,7 +345,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// короткая машка
         /// </summary>
         private MovingAverage _maShort;
-        
+
         /// <summary>
         /// long ma
         /// длинная машка
@@ -480,7 +480,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 return 0;
             }
 
-            return Math.Round(_maShort.Values[index] - _maLong.Values[index],7);
+            return Math.Round(_maShort.Values[index] - _maLong.Values[index], 7);
         }
     }
 }

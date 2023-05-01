@@ -3,11 +3,11 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Logging;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Threading;
-using OsEngine.Logging;
 
 namespace OsEngine.Charts.ColorKeeper
 {
@@ -16,7 +16,7 @@ namespace OsEngine.Charts.ColorKeeper
     /// </summary>
     public class ChartMasterColorKeeper
     {
-        
+
         /// <summary>
         /// имя
         /// </summary>
@@ -33,7 +33,7 @@ namespace OsEngine.Charts.ColorKeeper
         /// конструктор
         /// </summary>
         /// <param name="name">имя панели, которой принадлежит</param>
-        public ChartMasterColorKeeper(string name) 
+        public ChartMasterColorKeeper(string name)
         {
             _name = name;
             _pointType = PointType.Cross;
@@ -89,14 +89,14 @@ namespace OsEngine.Charts.ColorKeeper
             }
             catch (Exception error)
             {
-                SendNewMessage(error.ToString(),LogMessageType.Error);
+                SendNewMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
         /// <summary>
         /// сохранить в файл
         /// </summary>
-        public void Save() 
+        public void Save()
         {
             try
             {
@@ -124,7 +124,7 @@ namespace OsEngine.Charts.ColorKeeper
             }
             catch (Exception error)
             {
-                SendNewMessage(error.ToString(),LogMessageType.Error);
+                SendNewMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
@@ -142,7 +142,7 @@ namespace OsEngine.Charts.ColorKeeper
             }
             catch (Exception error)
             {
-                SendNewMessage(error.ToString(),LogMessageType.Error);
+                SendNewMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
@@ -201,7 +201,7 @@ namespace OsEngine.Charts.ColorKeeper
             }
         }
 
- // цвета
+        // цвета
 
         public Color ColorUpBodyCandle;
 
@@ -219,7 +219,7 @@ namespace OsEngine.Charts.ColorKeeper
 
         public Color ColorText;
 
- // спецификация прорисовки позиций на графике
+        // спецификация прорисовки позиций на графике
 
         /// <summary>
         /// размер для точки обозначающей позицию
@@ -264,7 +264,7 @@ namespace OsEngine.Charts.ColorKeeper
         /// <summary>
         /// исходящее сообщение для лога
         /// </summary>
-        public event Action<string,LogMessageType> LogMessageEvent;
+        public event Action<string, LogMessageType> LogMessageEvent;
 
     }
 

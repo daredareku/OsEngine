@@ -3,13 +3,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -133,7 +132,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// длинна периода для рассчёта индикатора
         /// </summary>
         public int Lenght { get; set; }
-        
+
         /// <summary>
         /// atr channel multiplier
         /// множитель для построения канала
@@ -261,13 +260,13 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 LPrice = 0;
                 currentSide = Side.None;
             }
-            
-            
+
+
             if (_myCandles == null)
             {
                 return;
             }
-            
+
             if (atr != null)
             {
                 atr.Lenght = Lenght;
@@ -341,7 +340,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             if (Values == null)
             {
                 Values = new List<decimal>();
@@ -363,7 +362,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             Values = new List<decimal>();
 
             for (int i = 0; i < candles.Count; i++)
@@ -382,7 +381,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            
+
             Values[Values.Count - 1] = GetValue(candles, candles.Count - 1);
         }
 
@@ -399,11 +398,11 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="candles">candles/свечи</param>
         /// <param name="index">index/индекс</param>
         /// <returns>index value/значение индикатора по индексу</returns>
-        private decimal GetValue(List<Candle> candles,int index)
+        private decimal GetValue(List<Candle> candles, int index)
         {
-            if(index < 3)
+            if (index < 3)
             {
-               return candles[index].Close;
+                return candles[index].Close;
             }
             decimal currentCandleClose = candles[index - 1].Close;
             decimal currentHigh = candles[index - 1].High;
@@ -417,14 +416,14 @@ namespace OsEngine.Charts.CandleChart.Indicators
             }
             decimal previousValue = Values[Math.Max(0, index - 1)];
 
-            decimal wAtr = atr.Values[index-1];
+            decimal wAtr = atr.Values[index - 1];
 
             if (wAtr == 0m)
             {
                 return currentCandleClose;
             }
             decimal reverse;
-            
+
             if (currentSide != Side.Buy)
             {
                 if (currentLow < LPrice)
@@ -438,7 +437,8 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     currentSide = Side.Buy;
                     HPrice = currentCandleClose;
                 }
-            } else if (currentSide != Side.Sell)
+            }
+            else if (currentSide != Side.Sell)
             {
                 if (currentHigh > HPrice)
                 {
@@ -450,12 +450,13 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     currentSide = Side.Sell;
                     LPrice = currentCandleClose;
                 }
-            } else
+            }
+            else
             {
                 currentSide = Side.None;
                 reverse = previousValue;
             }
-            
+
 
             return reverse;
         }

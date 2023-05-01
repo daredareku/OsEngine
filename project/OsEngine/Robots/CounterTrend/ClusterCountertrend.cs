@@ -3,13 +3,12 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
-using System.Windows;
 using OsEngine.Entity;
 using OsEngine.Language;
-using OsEngine.Market;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace OsEngine.Robots.CounterTrend
 {
@@ -30,7 +29,7 @@ namespace OsEngine.Robots.CounterTrend
             TabCreate(BotTabType.Cluster);
             _tabCluster = TabsCluster[0];
 
-            Regime = CreateParameter("Regime", "Off", new[] { "Off", "On"});
+            Regime = CreateParameter("Regime", "Off", new[] { "Off", "On" });
             Volume = CreateParameter("Volume", 1, 1.0m, 50, 1);
             BackLook = CreateParameter("Back Look", 1, 1, 10, 1);
 
@@ -111,7 +110,7 @@ namespace OsEngine.Robots.CounterTrend
 
                 if (myPosLong.Count != 0 && myPosLong[0].State == PositionStateType.Open)
                 {
-                    _tabToTrade.CloseAtMarket(myPosLong[0],myPosLong[0].OpenVolume);
+                    _tabToTrade.CloseAtMarket(myPosLong[0], myPosLong[0].OpenVolume);
                 }
             }
 

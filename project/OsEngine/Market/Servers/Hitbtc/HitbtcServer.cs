@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Hitbtc
 {
-    public class HitbtcServer:AServer
+    public class HitbtcServer : AServer
     {
         public HitbtcServer()
         {
@@ -252,7 +252,7 @@ namespace OsEngine.Market.Servers.Hitbtc
             OrderCoupler needCoupler;
 
             needCoupler = _couplers.Find(c => c.OrderNumberMarket == result.clientOrderId);
-            
+
             if (needCoupler == null)
             {
                 return;
@@ -286,7 +286,7 @@ namespace OsEngine.Market.Servers.Hitbtc
             Order order = new Order();
             order.NumberUser = needCoupler.OsOrderNumberUser;
             order.NumberMarket = result.clientOrderId;
-            order.PortfolioNumber = result.symbol.Substring(result.symbol.Length-3);
+            order.PortfolioNumber = result.symbol.Substring(result.symbol.Length - 3);
             order.Price =
                 result.price.ToDecimal();
             order.Volume =
@@ -367,7 +367,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                 }
                 catch (Exception e)
                 {
-                    SendLogMessage(e.Message,LogMessageType.Error);
+                    SendLogMessage(e.Message, LogMessageType.Error);
                 }
 
             }
@@ -410,11 +410,11 @@ namespace OsEngine.Market.Servers.Hitbtc
                     foreach (var bid in hitDepth.@params.bid)
                     {
                         bids.Add(new MarketDepthLevel()
-                            {
-                                Bid = bid.size.ToDecimal(),
-                                Price = bid.price.ToDecimal()
-                            });
-                    
+                        {
+                            Bid = bid.size.ToDecimal(),
+                            Price = bid.price.ToDecimal()
+                        });
+
                     }
 
                     // ask
@@ -569,7 +569,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                 {
                     MarketDepthEvent(needDepth.GetCopy());
                 }
-                
+
             }
             catch (Exception error)
             {
@@ -603,21 +603,21 @@ namespace OsEngine.Market.Servers.Hitbtc
                         reser = balance.reserved.ToDecimal();
 
                     var allPos = needPortfolio.GetPositionOnBoard();
-                    
+
                     PositionOnBoard needPos = null;
-                    if(allPos!=null)
-                    needPos = allPos.Find(pos => pos.SecurityNameCode == balance.currency);
+                    if (allPos != null)
+                        needPos = allPos.Find(pos => pos.SecurityNameCode == balance.currency);
 
                     if (needPos == null)
                     {
                         continue;
                     }
 
-                    
+
                     needPos.ValueCurrent = avail;
 
                     needPos.ValueBlocked = reser;
-                    
+
                 }
 
                 PortfolioEvent?.Invoke(_portfolios);
@@ -631,14 +631,14 @@ namespace OsEngine.Market.Servers.Hitbtc
                 {
                     return;
                 }
-                
+
                 if (_portfolios == null)
                 {
                     _portfolios = new List<Portfolio>();
                 }
 
                 var cryptoPortfolio = new Portfolio();
-                
+
                 cryptoPortfolio.Number = balance.Name;
 
                 var positionsOnBoard = new List<PositionOnBoard>();
@@ -654,10 +654,10 @@ namespace OsEngine.Market.Servers.Hitbtc
                     {
                         needPos = new PositionOnBoard();
                         needPos.SecurityNameCode = portfolio.currency;
-                        
+
                         needPos.ValueCurrent = avail;
                         needPos.ValueBlocked = reser;
-                        
+
                         if (needPos.ValueCurrent != 0 || needPos.ValueBlocked != 0)
                         {
                             positionsOnBoard.Add(needPos);
@@ -684,19 +684,19 @@ namespace OsEngine.Market.Servers.Hitbtc
                 _portfolios.Add(cryptoPortfolio);
 
                 PortfolioEvent?.Invoke(_portfolios);
-                
+
             }
             catch (Exception e)
             {
                 if (LogMessageEvent != null)
                 {
-                    SendLogMessage(e.ToString(),LogMessageType.Error);
+                    SendLogMessage(e.ToString(), LogMessageType.Error);
                 }
             }
         }
 
         private List<Security> _securities;
-        
+
 
 
         private void _client_NewPairs(List<Symbols> symbols)

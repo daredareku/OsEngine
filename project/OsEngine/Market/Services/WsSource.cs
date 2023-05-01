@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SuperSocket.ClientEngine;
+using System;
 using System.Collections.Generic;
-using SuperSocket.ClientEngine;
 using WebSocket4Net;
 
 namespace OsEngine.Market.Services

@@ -3,9 +3,9 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Language;
 using System.Collections.Generic;
 using System.Windows;
-using OsEngine.Language;
 
 namespace OsEngine.Journal
 {
@@ -37,14 +37,14 @@ namespace OsEngine.Journal
         {
             string textInTextBox = TextBoxNewGroupName.Text;
 
-            if(string.IsNullOrEmpty(textInTextBox))
+            if (string.IsNullOrEmpty(textInTextBox))
             {
                 return;
             }
 
-            for(int i = 0;i < _oldGroupNames.Count;i++)
+            for (int i = 0; i < _oldGroupNames.Count; i++)
             {
-                if(_oldGroupNames[i].Equals(textInTextBox))
+                if (_oldGroupNames[i].Equals(textInTextBox))
                 {
                     return;
                 }

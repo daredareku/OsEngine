@@ -3,11 +3,6 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Forms.Integration;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
@@ -17,35 +12,40 @@ using OsEngine.Market.Servers.Binance.Futures;
 using OsEngine.Market.Servers.Binance.Spot;
 using OsEngine.Market.Servers.Bitfinex;
 using OsEngine.Market.Servers.BitMax;
+using OsEngine.Market.Servers.BitMaxFutures;
 using OsEngine.Market.Servers.BitMex;
 using OsEngine.Market.Servers.BitStamp;
+using OsEngine.Market.Servers.Bybit;
 using OsEngine.Market.Servers.ExMo;
 using OsEngine.Market.Servers.Finam;
 using OsEngine.Market.Servers.GateIo;
+using OsEngine.Market.Servers.GateIo.Futures;
+using OsEngine.Market.Servers.Hitbtc;
+using OsEngine.Market.Servers.Huobi.Futures;
+using OsEngine.Market.Servers.Huobi.FuturesSwap;
+using OsEngine.Market.Servers.Huobi.Spot;
 using OsEngine.Market.Servers.InteractiveBrokers;
 using OsEngine.Market.Servers.Kraken;
 using OsEngine.Market.Servers.Lmax;
+using OsEngine.Market.Servers.MFD;
+using OsEngine.Market.Servers.MOEX;
 using OsEngine.Market.Servers.NinjaTrader;
+using OsEngine.Market.Servers.OKX;
 using OsEngine.Market.Servers.Optimizer;
 using OsEngine.Market.Servers.Plaza;
 using OsEngine.Market.Servers.Quik;
 using OsEngine.Market.Servers.QuikLua;
 using OsEngine.Market.Servers.SmartCom;
 using OsEngine.Market.Servers.Tester;
+using OsEngine.Market.Servers.Tinkoff;
 using OsEngine.Market.Servers.Transaq;
 using OsEngine.Market.Servers.ZB;
-using OsEngine.Market.Servers.Hitbtc;
-using OsEngine.Market.Servers.Huobi.Futures;
-using OsEngine.Market.Servers.Huobi.Spot;
-using OsEngine.Market.Servers.Huobi.FuturesSwap;
-using OsEngine.Market.Servers.MFD;
-using OsEngine.Market.Servers.MOEX;
-using OsEngine.Market.Servers.Tinkoff;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms.Integration;
 using MessageBox = System.Windows.MessageBox;
-using OsEngine.Market.Servers.GateIo.Futures;
-using OsEngine.Market.Servers.Bybit;
-using OsEngine.Market.Servers.OKX;
-using OsEngine.Market.Servers.BitMaxFutures;
 
 namespace OsEngine.Market
 {
@@ -56,8 +56,8 @@ namespace OsEngine.Market
     public class ServerMaster
     {
 
-// service
-// сервис
+        // service
+        // сервис
 
         /// <summary>
         /// array of deployed servers
@@ -117,9 +117,9 @@ namespace OsEngine.Market
 
                 for (int i = 0; i < popularity.Count; i++)
                 {
-                    for(int i2 = 0;i2 < serverTypes.Count;i2++)
+                    for (int i2 = 0; i2 < serverTypes.Count; i2++)
                     {
-                        if(serverTypes[i2] == popularity[i].ServerType)
+                        if (serverTypes[i2] == popularity[i].ServerType)
                         {
                             serverTypes.RemoveAt(i2);
                             i2--;
@@ -144,14 +144,14 @@ namespace OsEngine.Market
 
                     for (int i2 = 0; i2 < serverTypes.Count; i2++)
                     {
-                        if(serverTypes[i2].ToString() == popularity[i].ServerType.ToString())
+                        if (serverTypes[i2].ToString() == popularity[i].ServerType.ToString())
                         {
                             isInArray = true;
                             break;
                         }
                     }
 
-                    if(isInArray)
+                    if (isInArray)
                     {
                         continue;
                     }
@@ -161,7 +161,7 @@ namespace OsEngine.Market
 
                 for (int i = 0; i < serverTypes.Count; i++)
                 {
-                    if(serverTypes[i].ToString() == "None")
+                    if (serverTypes[i].ToString() == "None")
                     {
                         serverTypes.RemoveAt(i);
                         break;
@@ -240,7 +240,7 @@ namespace OsEngine.Market
             }
             catch (Exception error)
             {
-                SendNewLogMessage(error.ToString(),LogMessageType.Error);
+                SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
         }
 
@@ -451,9 +451,9 @@ namespace OsEngine.Market
 
             bool isInArray = false;
 
-            for(int i = 0;i < servers.Count;i++)
+            for (int i = 0; i < servers.Count; i++)
             {
-                if(servers[i].ServerType == type)
+                if (servers[i].ServerType == type)
                 {
                     servers[i].CountOfCreation += 1;
                     isInArray = true;
@@ -475,19 +475,19 @@ namespace OsEngine.Market
                 {
                     List<ServerType> alreadySaveServers = new List<ServerType>();
 
-                    for(int i = 0;i < servers.Count;i++)
+                    for (int i = 0; i < servers.Count; i++)
                     {
                         bool isSaved = false;
-                        for(int i2 = 0; i2 < alreadySaveServers.Count;i2++)
+                        for (int i2 = 0; i2 < alreadySaveServers.Count; i2++)
                         {
-                            if(alreadySaveServers[i2] == servers[i].ServerType)
+                            if (alreadySaveServers[i2] == servers[i].ServerType)
                             {
                                 isSaved = true;
                                 break;
                             }
                         }
 
-                        if(isSaved)
+                        if (isSaved)
                         {
                             continue;
                         }
@@ -518,11 +518,11 @@ namespace OsEngine.Market
             {
                 using (StreamReader reader = new StreamReader(@"Engine\" + @"MostPopularServers.txt"))
                 {
-                    while(reader.EndOfStream == false)
+                    while (reader.EndOfStream == false)
                     {
                         string res = reader.ReadLine();
 
-                        if(res.Split('&').Length <= 1)
+                        if (res.Split('&').Length <= 1)
                         {
                             continue;
                         }
@@ -545,16 +545,16 @@ namespace OsEngine.Market
                 // ignore
             }
 
-            if(servers.Count > 1)
+            if (servers.Count > 1)
             {
 
-                for(int i = 0;i < servers.Count;i++)
+                for (int i = 0; i < servers.Count; i++)
                 {
                     ServerPop curServ = servers[i];
 
-                    for(int i2 = i;i2 < servers.Count;i2++)
+                    for (int i2 = i; i2 < servers.Count; i2++)
                     {
-                        if(servers[i2].CountOfCreation < curServ.CountOfCreation)
+                        if (servers[i2].CountOfCreation < curServ.CountOfCreation)
                         {
                             servers[i] = servers[i2];
                             servers[i2] = curServ;
@@ -861,12 +861,12 @@ namespace OsEngine.Market
                 return serverPermission;
             }
 
-            
+
 
             return null;
         }
 
-        
+
         // создание серверов автоматически creating servers automatically 
 
         /// <summary>
@@ -1018,7 +1018,7 @@ namespace OsEngine.Market
                 }
             }
         }
-        
+
         /// <summary>
         /// try running this server
         /// Попробовать запустить данный сервер
@@ -1037,7 +1037,7 @@ namespace OsEngine.Market
 
             if (GetServers() == null || GetServers().Find(server1 => server1.ServerType == type) == null)
             { // if we don't have our server, create a new one / если у нас нашего сервера нет - создаём его
-                CreateServer(type,true);
+                CreateServer(type, true);
             }
 
             List<IServer> servers = GetServers();
@@ -1060,8 +1060,8 @@ namespace OsEngine.Market
             }
         }
 
-// access to the portfolio and its drawing
-// доступ к портфелю и его прорисовка
+        // access to the portfolio and its drawing
+        // доступ к портфелю и его прорисовка
 
         /// <summary>
         /// start to draw class controls
@@ -1069,7 +1069,7 @@ namespace OsEngine.Market
         /// </summary>
         public static void StartPaint()
         {
-             _painter.StartPaint();
+            _painter.StartPaint();
         }
 
         /// <summary>
@@ -1105,14 +1105,14 @@ namespace OsEngine.Market
             _painter.SetHostTable(hostPortfolio, hostOrders);
         }
 
-// log messages
-// сообщения в лог
+        // log messages
+        // сообщения в лог
 
         public static void ActivateLogging()
         {
             if (Log == null)
             {
-                Log = new Log("ServerMaster",StartProgram.IsOsTrader);
+                Log = new Log("ServerMaster", StartProgram.IsOsTrader);
                 Log.ListenServerMaster();
             }
         }

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Tester;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Tester;
 
 namespace OsEngine.Market.Servers.Optimizer
 {
@@ -26,7 +26,7 @@ namespace OsEngine.Market.Servers.Optimizer
         {
             Name = name;
 
-            _logMaster = new Log("OptimizerServer",StartProgram.IsOsOptimizer);
+            _logMaster = new Log("OptimizerServer", StartProgram.IsOsOptimizer);
             _logMaster.Listen(this)
                 ;
             TypeTesterData = TesterDataType.Candle;
@@ -37,7 +37,7 @@ namespace OsEngine.Market.Servers.Optimizer
                 _needToReloadSecurities = true;
             }
 
-            if(neadToCreateThread == true)
+            if (neadToCreateThread == true)
             {
                 _worker = new Thread(WorkThreadArea);
                 _worker.CurrentCulture = new CultureInfo("ru-RU");
@@ -99,7 +99,7 @@ namespace OsEngine.Market.Servers.Optimizer
                 Thread.Sleep(50);
                 try
                 {
-                    if(_isDeleted == true)
+                    if (_isDeleted == true)
                     {
                         return;
                     }
@@ -324,7 +324,7 @@ namespace OsEngine.Market.Servers.Optimizer
         /// </summary>
         public void ShowDialog()
         {
-            OptimizerDataStorageUi ui = new OptimizerDataStorageUi(this,_logMaster);
+            OptimizerDataStorageUi ui = new OptimizerDataStorageUi(this, _logMaster);
             ui.ShowDialog();
         }
 
@@ -355,11 +355,11 @@ namespace OsEngine.Market.Servers.Optimizer
             }
         }
 
-// Download data on securities that are in storage
-// Загрузка данных по тем бумагам которые есть в хранилище
+        // Download data on securities that are in storage
+        // Загрузка данных по тем бумагам которые есть в хранилище
 
         /// <summary>
-		/// path to data folder. He is the name of the active set
+        /// path to data folder. He is the name of the active set
         /// путь к папке с данными. Он же название активного сета
         /// </summary>
         private string _activSet;
@@ -410,10 +410,10 @@ namespace OsEngine.Market.Servers.Optimizer
 		/// securities available for downloading
         /// бумаги доступные для скачивания
         /// </summary>
-        public List<Security> Securities; 
+        public List<Security> Securities;
 
         /// <summary>
-		/// event: changed list of available securities
+        /// event: changed list of available securities
         /// событие: изменился список доступных бумаг
         /// </summary>
         public event Action<List<Security>> SecuritiesChangeEvent;
@@ -505,7 +505,7 @@ namespace OsEngine.Market.Servers.Optimizer
             {
                 string name = directories[i].Split('\\')[3];
 
-                if (name == "MarketDepth" && 
+                if (name == "MarketDepth" &&
                     (_typeTesterData == TesterDataType.MarketDepthAllCandleState ||
                     _typeTesterData == TesterDataType.MarketDepthOnlyReadyCandle))
                 {
@@ -517,7 +517,7 @@ namespace OsEngine.Market.Servers.Optimizer
                 {
                     LoadTickFromFolder(directories[i]);
                 }
-                else if(_typeTesterData == TesterDataType.Candle)
+                else if (_typeTesterData == TesterDataType.Candle)
                 {
                     LoadCandleFromFolder(directories[i]);
                 }
@@ -1457,7 +1457,7 @@ namespace OsEngine.Market.Servers.Optimizer
 
                 if (secuAll != null && secuAll.Count != 0)
                 {
-                    for(int i2 = 0;i2 < secuAll.Count;i2++)
+                    for (int i2 = 0; i2 < secuAll.Count; i2++)
                     {
                         Security secu = secuAll[i2];
 
@@ -1643,11 +1643,11 @@ namespace OsEngine.Market.Servers.Optimizer
             }
         }
 
-// download data from files
-// загрузка данных из файлов
+        // download data from files
+        // загрузка данных из файлов
 
         /// <summary>
-		/// all data storages
+        /// all data storages
         /// все хранилища данных
         /// </summary>
         private List<DataStorage> _storages = new List<DataStorage>();
@@ -1915,10 +1915,10 @@ DateTime timeEnd)
             return storage;
         }
 
-// logging
-// логирование
+        // logging
+        // логирование
         /// <summary>
-		/// save a new log message
+        /// save a new log message
         /// сохранить новую запись в лог
         /// </summary>
         private void SendLogMessage(string message, LogMessageType type)
@@ -1977,10 +1977,10 @@ DateTime timeEnd)
 		/// depths of this security
         /// стаканы этой бумаги
         /// </summary>
-        public List<MarketDepth> MaketDepths; 
+        public List<MarketDepth> MaketDepths;
 
         /// <summary>
-		/// candles timeframe
+        /// candles timeframe
         /// таймФрейм свечек
         /// </summary>
         public TimeFrame TimeFrame;
@@ -2001,13 +2001,13 @@ DateTime timeEnd)
         {
             Security = null;
 
-            if(Candles != null)
+            if (Candles != null)
             {
                 Candles.Clear();
                 Candles = null;
             }
 
-            if(Trades != null)
+            if (Trades != null)
             {
                 Trades.Clear();
                 Trades = null;

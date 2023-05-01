@@ -5,11 +5,11 @@ using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
 using OsEngine.Market.Servers.OKX.Entity;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading;
-using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.OKX
@@ -235,7 +235,7 @@ namespace OsEngine.Market.Servers.OKX
                 }
                 catch (Exception error)
                 {
-                    SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                    SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
                     Thread.Sleep(1000);
                 }
             }
@@ -487,7 +487,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
         }
 
@@ -580,7 +580,7 @@ namespace OsEngine.Market.Servers.OKX
             }
             catch (Exception error)
             {
-                SendLogMessage($"{error.Message} { error.StackTrace}", LogMessageType.Error);
+                SendLogMessage($"{error.Message} {error.StackTrace}", LogMessageType.Error);
             }
         }
 

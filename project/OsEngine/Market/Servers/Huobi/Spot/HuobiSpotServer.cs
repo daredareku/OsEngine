@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Language;
@@ -16,6 +9,13 @@ using OsEngine.Market.Servers.Huobi.Request;
 using OsEngine.Market.Servers.Huobi.Response;
 using OsEngine.Market.Services;
 using RestSharp;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OsEngine.Market.Servers.Huobi.Spot
 {
@@ -176,7 +176,7 @@ namespace OsEngine.Market.Servers.Huobi.Spot
                 {
                     continue;
                 }
-                
+
                 if (_lastTimeUpdateSocket.AddSeconds(60) < DateTime.Now)
                 {
                     SendLogMessage("The websocket is disabled. Restart", LogMessageType.Error);
@@ -755,9 +755,9 @@ namespace OsEngine.Market.Servers.Huobi.Spot
 
         public override void GetOrdersState(List<Order> orders)
         {
-            
+
         }
-        
+
         private readonly List<GetCandlestickResponse> _allCandleSeries = new List<GetCandlestickResponse>();
 
         public override List<Candle> GetCandleDataToSecurity(Security security, TimeFrameBuilder timeFrameBuilder, DateTime startTime, DateTime endTime,

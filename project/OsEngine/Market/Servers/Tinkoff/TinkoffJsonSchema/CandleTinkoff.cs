@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.Tinkoff.TinkoffJsonSchema
 {
     public class CandlesResponse
     {
-       public List<CandleTinkoff> candles;
+        public List<CandleTinkoff> candles;
     }
 
     public class CandleTinkoff

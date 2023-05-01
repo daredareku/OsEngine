@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.NinjaTrader
 {
@@ -10,7 +10,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 	/// Ninja server
     /// сервер Ninja
     /// </summary>
-    public class NinjaTraderServer: AServer
+    public class NinjaTraderServer : AServer
     {
         public NinjaTraderServer()
         {
@@ -20,7 +20,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
             CreateParameterPassword("Port", "11000");
         }
     }
-    
+
     public class NinjaTraderServerRealization : IServerRealization
     {
         public NinjaTraderServerRealization()
@@ -36,8 +36,8 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
         public DateTime ServerTime { get; set; }
 
- // requests
- // запросы
+        // requests
+        // запросы
 
         private NinjaTraderClient _client;
 
@@ -87,7 +87,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
         public void GetPortfolios()
         {
-           
+
             _client.GetPortfolios();
         }
 
@@ -128,10 +128,10 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
         public void GetOrdersState(List<Order> orders)
         {
-       
+
         }
-		
-		// parsing incoming data
+
+        // parsing incoming data
         // разбор входящих данных
 
         private void ClientOnLogMessageEvent(string message, LogMessageType type)
@@ -205,11 +205,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
             }
         }
 
-		// outgoing events
+        // outgoing events
         // исходящие события
 
         /// <summary>
-		/// called when order has changed
+        /// called when order has changed
         /// вызывается когда изменился ордер
         /// </summary>
         public event Action<Order> MyOrderEvent;
@@ -256,11 +256,11 @@ namespace OsEngine.Market.Servers.NinjaTrader
         /// </summary>
         public event Action DisconnectEvent;
 
-		// log messages
+        // log messages
         // сообщения для лога
 
         /// <summary>
-		/// add a new log message
+        /// add a new log message
         /// добавить в лог новое сообщение
         /// </summary>
         private void SendLogMessage(string message, LogMessageType type)
@@ -273,7 +273,7 @@ namespace OsEngine.Market.Servers.NinjaTrader
 
         public void ResearchTradesToOrders(List<Order> orders)
         {
-           
+
         }
 
         /// <summary>

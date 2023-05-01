@@ -55,7 +55,7 @@ namespace Kraken.WebSockets.Messages
             return new BookUpdateMessage
             {
                 ChannelId = Convert.ToInt64(bookUpdateMessage.First),
-                Asks = asks!= null ? asks["a"].OfType<JArray>().Select(level => PriceLevel.CreateFromJArray(level)).ToArray() : null,
+                Asks = asks != null ? asks["a"].OfType<JArray>().Select(level => PriceLevel.CreateFromJArray(level)).ToArray() : null,
                 Bids = bids != null ? bids["b"].OfType<JArray>().Select(level => PriceLevel.CreateFromJArray(level)).ToArray() : null,
             };
         }

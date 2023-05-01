@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Bollinger Bands trading bargaining robot with pull-up Trailing-Stop through Bollinger Bands
@@ -23,7 +23,7 @@ public class BollingerTrailing : BotPanel
         IndLenght = CreateParameter("IndLength", 10, 10, 80, 3);
         BollingerDeviation = CreateParameter("Bollinger Deviation", 2, 0.5m, 4, 0.1m);
 
-        _bollinger = IndicatorsFactory.CreateIndicatorByName("Bollinger",name + "Bollinger", false);
+        _bollinger = IndicatorsFactory.CreateIndicatorByName("Bollinger", name + "Bollinger", false);
 
         _bollinger.ParametersDigit[0].Value = IndLenght.ValueInt;
         _bollinger.ParametersDigit[1].Value = BollingerDeviation.ValueDecimal;
@@ -124,7 +124,7 @@ public class BollingerTrailing : BotPanel
         }
 
         _lastPrice = candles[candles.Count - 1].Close;
-        _lastBbUp = _bollinger.DataSeries[0].Values[_bollinger.DataSeries[0].Values.Count-2];
+        _lastBbUp = _bollinger.DataSeries[0].Values[_bollinger.DataSeries[0].Values.Count - 2];
         _lastBbDown = _bollinger.DataSeries[1].Values[_bollinger.DataSeries[1].Values.Count - 2];
 
         if (_bollinger.DataSeries[0].Values.Count < ((IndicatorParameterInt)_bollinger.Parameters[0]).ValueInt + 2)

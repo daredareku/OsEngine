@@ -3,19 +3,16 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
-    public class PivotPoints: IIndicator
+    public class PivotPoints : IIndicator
     {
         /// <summary>
         /// constructor with parameters. Indicator will be saved
@@ -451,10 +448,10 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     count++;
 
                     if (count >= 2)
-                       Reload(newCandles, index);
+                        Reload(newCandles, index);
                 }
-                
-                
+
+
                 ValuesR1.Add(_r1);
                 ValuesR2.Add(_r2);
                 ValuesR3.Add(_r3);
@@ -496,9 +493,9 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             decimal C = 0;
 
-            
 
-            for (int i = index[index.Count-2]; i < index[index.Count - 1]; i++)
+
+            for (int i = index[index.Count - 2]; i < index[index.Count - 1]; i++)
             {
                 if (H < newCandles[i].High)
                     H = newCandles[i].High;

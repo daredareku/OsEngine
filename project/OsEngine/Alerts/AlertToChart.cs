@@ -3,17 +3,17 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Language;
-using OsEngine.Properties;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.Alerts
 {
@@ -21,7 +21,7 @@ namespace OsEngine.Alerts
     /// Alert
     /// Алерт
     /// </summary>
-    public class AlertToChart:IIAlert
+    public class AlertToChart : IIAlert
     {
         /// <summary>
         /// constructor
@@ -68,9 +68,9 @@ namespace OsEngine.Alerts
                 {
                     Enum.TryParse(reader.ReadLine(), true, out Type);
 
-                    string [] savesLine = reader.ReadLine().Split('%');
+                    string[] savesLine = reader.ReadLine().Split('%');
 
-                    Lines = new ChartAlertLine[savesLine.Length-1];
+                    Lines = new ChartAlertLine[savesLine.Length - 1];
 
                     for (int i = 0; i < savesLine.Length - 1; i++)
                     {
@@ -93,9 +93,9 @@ namespace OsEngine.Alerts
                     VolumeReaction = reader.ReadLine().ToDecimal();
                     Slippage = reader.ReadLine().ToDecimal();
                     NumberClosePosition = Convert.ToInt32(reader.ReadLine());
-                    Enum.TryParse(reader.ReadLine(),true,out OrderPriceType);
+                    Enum.TryParse(reader.ReadLine(), true, out OrderPriceType);
                     Enum.TryParse(reader.ReadLine(), true, out SlippageType);
-                   
+
                     reader.Close();
                 }
             }
@@ -387,7 +387,7 @@ namespace OsEngine.Alerts
                      redLineDown < lastPoint) ||
                     (candles[candles.Count - 1].Close < lastPoint && candles[candles.Count - 1].High > lastPoint) ||
                     (candles[candles.Count - 1].Close > lastPoint && candles[candles.Count - 1].High < lastPoint) ||
-                    (candles[candles.Count - 1].Close > lastPoint && candles[candles.Count - 2].Close < lastPoint)||
+                    (candles[candles.Count - 1].Close > lastPoint && candles[candles.Count - 2].Close < lastPoint) ||
                     (candles[candles.Count - 1].Close < lastPoint && candles[candles.Count - 2].Close > lastPoint))
                 {
                     // if the closing price is in zone of triggering of allert
@@ -402,17 +402,17 @@ namespace OsEngine.Alerts
             {
                 decimal realSlippage = 0;
 
-                if(SlippageType == AlertSlippageType.Absolute)
+                if (SlippageType == AlertSlippageType.Absolute)
                 {
                     realSlippage = Slippage;
                 }
-                else if(SlippageType == AlertSlippageType.PriceStep)
+                else if (SlippageType == AlertSlippageType.PriceStep)
                 {
                     realSlippage = Slippage * sec.PriceStep;
                 }
                 else if (SlippageType == AlertSlippageType.Persent)
                 {
-                    realSlippage = (candles[candles.Count - 1].Close/100) * Slippage;
+                    realSlippage = (candles[candles.Count - 1].Close / 100) * Slippage;
                 }
 
                 IsOn = false;
@@ -466,7 +466,7 @@ namespace OsEngine.Alerts
         /// </summary>
         private void SetMessage()
         {
-            if(_gridView == null)
+            if (_gridView == null)
             {
                 return;
             }

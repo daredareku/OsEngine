@@ -3,11 +3,11 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
 using OsEngine.Entity;
+using OsEngine.Indicators;
 using OsEngine.OsTrader.Panels;
 using OsEngine.OsTrader.Panels.Tab;
-using OsEngine.Indicators;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.Screeners
 {
@@ -100,8 +100,8 @@ namespace OsEngine.Robots.Screeners
             // 1 Если поза есть, то по трейлинг стопу закрываем
 
             // 2 Позы нет. Открывать лонг, если последние N свечей мы были над скользящей средней
-            
-            if(Regime.ValueString == "Off")
+
+            if (Regime.ValueString == "Off")
             {
                 return;
             }
@@ -111,30 +111,30 @@ namespace OsEngine.Robots.Screeners
                 return;
             }
 
-            if(candles.Count - 1 - CandlesLookBack.ValueInt - 1 <= 0)
+            if (candles.Count - 1 - CandlesLookBack.ValueInt - 1 <= 0)
             {
                 return;
             }
 
             int allPosesInAllTabs = this.PositionsCount;
 
-            if(allPosesInAllTabs >= MaxPoses.ValueInt)
+            if (allPosesInAllTabs >= MaxPoses.ValueInt)
             {
                 return;
             }
 
             List<Position> positions = tab.PositionsOpenAll;
 
-            if(positions.Count == 0)
+            if (positions.Count == 0)
             { // логика открытия
 
                 Aindicator sma = (Aindicator)tab.Indicators[0];
 
-                for(int i = candles.Count-1; i >= 0 && i > candles.Count -1 - CandlesLookBack.ValueInt;i--)
+                for (int i = candles.Count - 1; i >= 0 && i > candles.Count - 1 - CandlesLookBack.ValueInt; i--)
                 {
                     decimal curSma = sma.DataSeries[0].Values[i];
 
-                    if(curSma == 0)
+                    if (curSma == 0)
                     {
                         return;
                     }
@@ -145,7 +145,7 @@ namespace OsEngine.Robots.Screeners
                     }
                 }
 
-                if(candles[candles.Count - 1 - CandlesLookBack.ValueInt - 1].Close > sma.DataSeries[0].Values[candles.Count - 1 - CandlesLookBack.ValueInt - 1])
+                if (candles[candles.Count - 1 - CandlesLookBack.ValueInt - 1].Close > sma.DataSeries[0].Values[candles.Count - 1 - CandlesLookBack.ValueInt - 1])
                 {
                     return;
                 }
@@ -156,13 +156,13 @@ namespace OsEngine.Robots.Screeners
             {
                 Position pos = positions[0];
 
-                if(pos.State != PositionStateType.Open)
+                if (pos.State != PositionStateType.Open)
                 {
                     return;
                 }
 
                 decimal close = candles[candles.Count - 1].Low;
-                decimal priceActivation = close - close * TrailStop.ValueDecimal/100;
+                decimal priceActivation = close - close * TrailStop.ValueDecimal / 100;
                 decimal priceOrder = priceActivation - tab.Securiti.PriceStep * Slippage.ValueInt;
 
                 tab.CloseAtTrailingStop(pos, priceActivation, priceOrder);

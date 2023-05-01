@@ -1,4 +1,5 @@
 ﻿using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
 using OsEngine.Market.Servers.Transaq.TransaqEntity;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -9,10 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
-using OsEngine.Market.Servers.Entity;
 using Order = OsEngine.Market.Servers.Transaq.TransaqEntity.Order;
 
 

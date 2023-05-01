@@ -2,12 +2,12 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -15,14 +15,14 @@ namespace OsEngine.Charts.CandleChart.Indicators
     /// <summary>
     /// DonchianChannel. Индикатор Канал Дончиана
     /// </summary>
-    public class DonchianChannel: IIndicator
+    public class DonchianChannel : IIndicator
     {
         /// <summary>
         /// конструктор с параметром. Индикатор будет сохраняться
         /// </summary>
         /// <param name="uniqName">уникальное имя индикатора</param>
         /// <param name="canDelete">можно ли пользователю удалить индикатор с графика вручную</param>
-        public DonchianChannel(string uniqName,bool canDelete)
+        public DonchianChannel(string uniqName, bool canDelete)
         {
             Name = uniqName;
 
@@ -308,15 +308,15 @@ namespace OsEngine.Charts.CandleChart.Indicators
 
             List<decimal> indicatorValues = new List<decimal>();
 
-            if (lastCandleIndex-Lenght < 0)
+            if (lastCandleIndex - Lenght < 0)
             {
                 indicatorValues.Add(0);
                 indicatorValues.Add(0);
                 indicatorValues.Add(0);
                 return indicatorValues;
             }
-            
-            for(int i=Lenght; i>=0; i--)
+
+            for (int i = Lenght; i >= 0; i--)
             {
                 int candleIndex = lastCandleIndex - i;
 
@@ -348,7 +348,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             {
                 return;
             }
-            List<decimal> values = GetIndicatorValues(candles, candles.Count-1);
+            List<decimal> values = GetIndicatorValues(candles, candles.Count - 1);
             ValuesUp.Add(values[0]);
             ValuesDown.Add(values[1]);
             ValuesAvg.Add(values[2]);

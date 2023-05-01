@@ -238,7 +238,8 @@ namespace OsEngine.Market.Servers.Transaq
         /// </summary>
         private void NeedChangePassword()
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate {
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
                 string message = OsLocalization.Market.Message94;
 
                 ChangeTransaqPassword changeTransaqPasswordWindow = new ChangeTransaqPassword(message, this);
@@ -372,7 +373,7 @@ namespace OsEngine.Market.Servers.Transaq
 
         public void GetOrdersState(List<Order> orders)
         {
-          
+
         }
 
         private List<Portfolio> _portfolios;
@@ -459,7 +460,7 @@ namespace OsEngine.Market.Servers.Transaq
                         }
                     }
 
-                    if(string.IsNullOrEmpty(client.Union) && !string.IsNullOrEmpty(client.Forts_acc))
+                    if (string.IsNullOrEmpty(client.Union) && !string.IsNullOrEmpty(client.Forts_acc))
                     {
                         command = $"<command id=\"get_client_limits\" client=\"{client.Id}\"/>";
                         string res = _client.ConnectorSendCommand(command);
@@ -492,7 +493,7 @@ namespace OsEngine.Market.Servers.Transaq
                 s => s.Name == order.SecurityNameCode &&
                 s.NameClass == order.SecurityClassCode);
 
-            if(needSec == null)
+            if (needSec == null)
             {
                 needSec = _securities.Find(
                 s => s.Name == order.SecurityNameCode);
@@ -524,7 +525,7 @@ namespace OsEngine.Market.Servers.Transaq
             {
                 cmd += "<usecredit> true </usecredit>";
             }
-            
+
             cmd += "</command>";
 
             // sending command / отправка команды
@@ -1029,7 +1030,7 @@ namespace OsEngine.Market.Servers.Transaq
             {
                 _portfolios = new List<Portfolio>();
             }
-            
+
             var unitedPortfolio = ParsePortfolio(portfolio);
 
             var needPortfolio = _portfolios.Find(p => p.Number == unitedPortfolio.Number);
@@ -1039,7 +1040,7 @@ namespace OsEngine.Market.Servers.Transaq
                 _portfolios.Remove(needPortfolio);
             }
             _portfolios.Add(unitedPortfolio);
-            
+
             PortfolioEvent?.Invoke(_portfolios);
         }
 
@@ -1081,7 +1082,7 @@ namespace OsEngine.Market.Servers.Transaq
 
             foreach (var security in allSecurity)
             {
-                var node = (XmlNode) security;
+                var node = (XmlNode)security;
 
                 var pos = new PositionOnBoard();
 

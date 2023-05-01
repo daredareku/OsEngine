@@ -3,36 +3,35 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
 using OsEngine.Logging;
 using OsEngine.Market;
 using OsEngine.Market.Servers;
-using OsEngine.Market.Servers.Binance;
 using OsEngine.Market.Servers.Binance.Futures;
 using OsEngine.Market.Servers.Binance.Spot;
 using OsEngine.Market.Servers.Bitfinex;
 using OsEngine.Market.Servers.BitMax;
+using OsEngine.Market.Servers.BitMaxFutures;
 using OsEngine.Market.Servers.BitMex;
+using OsEngine.Market.Servers.Bybit;
 using OsEngine.Market.Servers.GateIo;
-using OsEngine.Market.Servers.Kraken;
-using OsEngine.Market.Servers.QuikLua;
-using OsEngine.Market.Servers.SmartCom;
-using OsEngine.Market.Servers.Tester;
-using OsEngine.Market.Servers.Transaq;
-using OsEngine.Market.Servers.ZB;
+using OsEngine.Market.Servers.GateIo.Futures;
 using OsEngine.Market.Servers.Hitbtc;
 using OsEngine.Market.Servers.Huobi.Futures;
 using OsEngine.Market.Servers.Huobi.FuturesSwap;
 using OsEngine.Market.Servers.Huobi.Spot;
-using OsEngine.Market.Servers.Tinkoff;
-using OsEngine.Market.Servers.GateIo.Futures;
-using OsEngine.Market.Servers.Bybit;
 using OsEngine.Market.Servers.InteractiveBrokers;
+using OsEngine.Market.Servers.Kraken;
 using OsEngine.Market.Servers.OKX;
-using OsEngine.Market.Servers.BitMaxFutures;
+using OsEngine.Market.Servers.QuikLua;
+using OsEngine.Market.Servers.SmartCom;
+using OsEngine.Market.Servers.Tester;
+using OsEngine.Market.Servers.Tinkoff;
+using OsEngine.Market.Servers.Transaq;
+using OsEngine.Market.Servers.ZB;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace OsEngine.Entity
 {
@@ -60,7 +59,7 @@ namespace OsEngine.Entity
 
             _startProgram = startProgram;
 
-            if(startProgram != StartProgram.IsOsOptimizer)
+            if (startProgram != StartProgram.IsOsOptimizer)
             {
                 Task task = new Task(CandleStarterThread);
                 task.Start();
@@ -128,7 +127,7 @@ namespace OsEngine.Entity
 
                 for (int i = 0; i < _activSeriesBasedOnTrades.Count; i++)
                 {
-                    if(_activSeriesBasedOnTrades[i] == null ||
+                    if (_activSeriesBasedOnTrades[i] == null ||
                         _activSeriesBasedOnTrades[i].Security == null)
                     {
                         continue;
@@ -187,17 +186,17 @@ namespace OsEngine.Entity
 
         public CandleSeries GetSeries(TimeFrameBuilder timeFrameBuilder, Security security)
         {
-            for(int i = 0; _activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count;i++)
+            for (int i = 0; _activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count; i++)
             {
                 CandleSeries curSeries = _activSeriesBasedOnTrades[i];
 
-                if(curSeries.Security.Name != security.Name ||
+                if (curSeries.Security.Name != security.Name ||
                     curSeries.Security.NameClass != security.NameClass)
                 {
                     continue;
                 }
 
-                if(curSeries.TimeFrameBuilder.Specification.Equals(timeFrameBuilder.Specification) == false)
+                if (curSeries.TimeFrameBuilder.Specification.Equals(timeFrameBuilder.Specification) == false)
                 {
                     continue;
                 }
@@ -295,7 +294,7 @@ namespace OsEngine.Entity
                 while (true)
                 {
 
-                   await Task.Delay(20);
+                    await Task.Delay(20);
 
                     if (_isDisposed == true)
                     {
@@ -320,8 +319,8 @@ namespace OsEngine.Entity
                         {
                             if (series.CandleMarketDataType == CandleMarketDataType.MarketDepth)
                             {
-                                if(_activSeriesBasedOnMd != null)
-                                _activSeriesBasedOnMd.Add(series);
+                                if (_activSeriesBasedOnMd != null)
+                                    _activSeriesBasedOnMd.Add(series);
                             }
                             else if (series.CandleMarketDataType == CandleMarketDataType.Tick)
                             {
@@ -359,7 +358,7 @@ namespace OsEngine.Entity
                         }
                         else if (serverType == ServerType.SmartCom)
                         {
-                            SmartComServer smart = (SmartComServer) _server;
+                            SmartComServer smart = (SmartComServer)_server;
 
                             if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
                                 series.TimeFrameSpan.TotalMinutes < 1)
@@ -415,7 +414,7 @@ namespace OsEngine.Entity
                         else if (serverType == ServerType.QuikLua)
                         {
                             QuikLuaServer luaServ = (QuikLuaServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
                                 series.TimeFrameSpan.TotalMinutes < 1)
                             {
                                 List<Trade> allTrades = luaServ.GetQuikLuaTickHistory(series.Security);
@@ -440,7 +439,7 @@ namespace OsEngine.Entity
                         else if (serverType == ServerType.BitMex)
                         {
                             BitMexServer bitMex = (BitMexServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
                                 series.TimeFrameSpan.TotalMinutes < 1)
                             {
                                 List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
@@ -483,7 +482,7 @@ namespace OsEngine.Entity
                         else if (serverType == ServerType.Binance)
                         {
                             BinanceServer binance = (BinanceServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
                                 series.TimeFrameSpan.TotalMinutes < 1)
                             {
                                 List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
@@ -568,7 +567,7 @@ namespace OsEngine.Entity
                         else if (serverType == ServerType.Bitfinex)
                         {
                             BitfinexServer bitfinex = (BitfinexServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
                                 series.TimeFrameSpan.TotalMinutes < 1)
                             {
                                 List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
@@ -864,7 +863,7 @@ namespace OsEngine.Entity
         {
             try
             {
-                if(series == null 
+                if (series == null
                     || series.UID == null)
                 {
                     return;
@@ -873,11 +872,11 @@ namespace OsEngine.Entity
                 series.СandleUpdeteEvent -= series_СandleUpdeteEvent;
                 series.СandleFinishedEvent -= series_СandleFinishedEvent;
 
-                for(int i = 0; _activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count;i++)
+                for (int i = 0; _activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count; i++)
                 {
                     CandleSeries curSeries = _activSeriesBasedOnTrades[i];
 
-                    if(curSeries == null ||
+                    if (curSeries == null ||
                         curSeries.UID == null)
                     {
                         return;
@@ -885,11 +884,11 @@ namespace OsEngine.Entity
 
                     if (curSeries.UID == series.UID)
                     {
-                        if(_activSeriesBasedOnTrades != null)
+                        if (_activSeriesBasedOnTrades != null)
                         {
                             _activSeriesBasedOnTrades.RemoveAt(i);
                         }
-                        
+
                         break;
                     }
                 }
@@ -976,7 +975,7 @@ namespace OsEngine.Entity
                 }
             }
 
-            if (_candleSeriesNeadToStart != null 
+            if (_candleSeriesNeadToStart != null
                && _candleSeriesNeadToStart.Count != 0)
             {
                 _candleSeriesNeadToStart.Clear();
@@ -1060,7 +1059,7 @@ namespace OsEngine.Entity
             set
             {
                 _typeTesterData = value;
-                for (int i = 0;_activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count; i++)
+                for (int i = 0; _activSeriesBasedOnTrades != null && i < _activSeriesBasedOnTrades.Count; i++)
                 {
                     _activSeriesBasedOnTrades[i].TypeTesterData = value;
                 }
@@ -1070,7 +1069,7 @@ namespace OsEngine.Entity
                     _activSeriesBasedOnMd[i].TypeTesterData = value;
                 }
             }
-            
+
         }
 
         public int ActiveSeriesCount
@@ -1110,7 +1109,7 @@ namespace OsEngine.Entity
         {
             if (CandleUpdateEvent != null)
             {
-                CandleUpdateEvent( series);
+                CandleUpdateEvent(series);
             }
         }
 
@@ -1130,7 +1129,7 @@ namespace OsEngine.Entity
         // Send messages to the top
         // Отправка сообщений на верх
 
-        private void SendLogMessage(string message,LogMessageType type)
+        private void SendLogMessage(string message, LogMessageType type)
         {
             if (LogMessageEvent != null)
             {

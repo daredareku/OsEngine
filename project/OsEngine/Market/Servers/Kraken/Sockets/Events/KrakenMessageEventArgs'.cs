@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.Contracts;
-using Kraken.WebSockets.Messages;
+﻿using Kraken.WebSockets.Messages;
+using System.Diagnostics.Contracts;
 
 namespace Kraken.WebSockets.Events
 {
@@ -9,7 +9,7 @@ namespace Kraken.WebSockets.Events
 
         public KrakenMessageEventArgs(TMessage message)
         {
-            Contract.Requires( message != null);
+            Contract.Requires(message != null);
 
             Message = message;
         }

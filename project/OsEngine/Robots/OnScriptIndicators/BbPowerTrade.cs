@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trend strategy based on two indicators BullsPower and BearsPower
@@ -29,7 +29,7 @@ public class BbPowerTrade : BotPanel
         _bearsP.ParametersDigit[0].Value = BearsPowerPeriod.ValueInt;
         _bearsP.Save();
 
-        _bullsP = IndicatorsFactory.CreateIndicatorByName("BullsPower",name + "BullsPower", false);
+        _bullsP = IndicatorsFactory.CreateIndicatorByName("BullsPower", name + "BullsPower", false);
         _bullsP = (Aindicator)_tab.CreateCandleIndicator(_bullsP, "BullsArea");
         _bullsP.ParametersDigit[0].Value = BullsPowerPeriod.ValueInt;
         _bullsP.Save();
@@ -114,8 +114,8 @@ public class BbPowerTrade : BotPanel
             return;
         }
 
-        if (_bearsP.DataSeries[0].Values == null 
-            || _bullsP.DataSeries[0].Values == null 
+        if (_bearsP.DataSeries[0].Values == null
+            || _bullsP.DataSeries[0].Values == null
             || _bullsP.DataSeries[0].Values.Count < _bullsP.ParametersDigit[0].Value + 2)
         {
             return;

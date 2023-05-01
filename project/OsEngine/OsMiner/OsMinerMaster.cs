@@ -3,17 +3,16 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Language;
+using OsEngine.Logging;
+using OsEngine.OsMiner.Patterns;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using System.Drawing;
-using OsEngine.Language;
-using OsEngine.Market;
-using OsEngine.OsMiner.Patterns;
 
 
 namespace OsEngine.OsMiner
@@ -34,7 +33,7 @@ namespace OsEngine.OsMiner
         /// <param name="hostChart">chart drawing host/хост для прорисовки чарта</param>
         /// <param name="rectChart">frames for charts/обрамления для чарта</param>
         public OsMinerMaster(
-            WindowsFormsHost hostLog, 
+            WindowsFormsHost hostLog,
             WindowsFormsHost hostSets,
             WindowsFormsHost hostPatternsInSet,
             WindowsFormsHost hostChart,
@@ -80,7 +79,7 @@ namespace OsEngine.OsMiner
 
             if (Sets.Find(s => s.Name == set.Name) != null)
             {
-                SendNewLogMessage(OsLocalization.Miner.Message1,LogMessageType.Error);
+                SendNewLogMessage(OsLocalization.Miner.Message1, LogMessageType.Error);
                 return;
             }
 
@@ -181,6 +180,7 @@ namespace OsEngine.OsMiner
         {
             if (!File.Exists(@"Engine\" + @"OsMinerMasterSettings.txt"))
             {
+                Console.WriteLine("No such file OsMiner Settings.txt!");
                 return;
             }
             try
@@ -193,7 +193,7 @@ namespace OsEngine.OsMiner
                     {
                         string[] save = readLine.Split('#');
 
-                        for (int i = 0; i < save.Length-1; i++)
+                        for (int i = 0; i < save.Length - 1; i++)
                         {
                             if (save[i] == "")
                             {
@@ -288,7 +288,7 @@ namespace OsEngine.OsMiner
             return names;
         }
 
-// drawing a table with sets/прорисовка таблицы с сетами
+        // drawing a table with sets/прорисовка таблицы с сетами
 
         /// <summary>
         /// table with sets of patterns
@@ -393,7 +393,7 @@ namespace OsEngine.OsMiner
         /// </summary>
         void OsMinerMasterAdd_Click(object sender, EventArgs e)
         {
-             CreateSet();
+            CreateSet();
         }
 
         /// <summary>
@@ -413,7 +413,7 @@ namespace OsEngine.OsMiner
                 return;
             }
 
-            if(ActivSetNum == activPattern)
+            if (ActivSetNum == activPattern)
             {
                 return;
             }
@@ -446,7 +446,7 @@ namespace OsEngine.OsMiner
             }
         }
 
-// drawing a table with set patterns/прорисовка таблицы с паттернами сета
+        // drawing a table with set patterns/прорисовка таблицы с паттернами сета
 
         /// <summary>
         /// active pattern set number
@@ -513,7 +513,7 @@ namespace OsEngine.OsMiner
             Sets[ActivSetNum].Paint(_hostPatternsInSet, _hostChart, _rectChart);
         }
 
-// messages for log/сообщения для лога
+        // messages for log/сообщения для лога
 
         /// <summary>
         /// send a new message to the top

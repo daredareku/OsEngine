@@ -3,21 +3,21 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Market.Servers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.Market.Servers;
 using System.Windows.Forms.Integration;
 
 namespace OsEngine.Market
 {
     public class ServerMasterPainter
     {
-        public ServerMasterPainter(WindowsFormsHost hostServers, 
-            WindowsFormsHost hostLog, 
+        public ServerMasterPainter(WindowsFormsHost hostServers,
+            WindowsFormsHost hostLog,
             System.Windows.Controls.CheckBox boxCreateServerАutomatically)
         {
             _boxCreateServerАutomatically = boxCreateServerАutomatically;
@@ -71,7 +71,7 @@ namespace OsEngine.Market
 
         private void ClearControls()
         {
-            if(_gridSources == null)
+            if (_gridSources == null)
             {
                 return;
             }
@@ -82,25 +82,25 @@ namespace OsEngine.Market
                 return;
             }
 
-            if(_boxCreateServerАutomatically != null)
+            if (_boxCreateServerАutomatically != null)
             {
                 _boxCreateServerАutomatically.Click -= CheckBoxServerAutoOpen_Click;
                 _boxCreateServerАutomatically = null;
             }
 
-            if(_hostServers != null)
+            if (_hostServers != null)
             {
                 _hostServers.Child = null;
                 _hostServers = null;
             }
 
-            if(_hostLog != null)
+            if (_hostLog != null)
             {
                 _hostLog.Child = null;
                 _hostLog = null;
             }
-            
-            if(_gridSources != null)
+
+            if (_gridSources != null)
             {
                 _gridSources.DoubleClick -= _gridSources_DoubleClick;
                 _gridSources.Rows.Clear();
@@ -272,7 +272,7 @@ namespace OsEngine.Market
 
         private void ServerMasterOnServerCreateEvent(IServer newServer)
         {
-            if(newServer.ServerType == ServerType.Optimizer)
+            if (newServer.ServerType == ServerType.Optimizer)
             {
                 return;
             }

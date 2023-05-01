@@ -2,17 +2,16 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Logging;
+using OsEngine.Market.Servers.Entity;
+using SmartCOM4Lib;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using System.Windows.Documents;
-using OsEngine.Entity;
-using OsEngine.Logging;
-using OsEngine.Market.Servers.Entity;
-using SmartCOM4Lib;
 
 namespace OsEngine.Market.Servers.SmartCom
 {
@@ -52,7 +51,7 @@ namespace OsEngine.Market.Servers.SmartCom
             ordersExecutor.Name = "SmartComExecutorOrdersThread";
             ordersExecutor.Start();
 
-            _logMaster = new Log("SmartComServer",StartProgram.IsOsTrader);
+            _logMaster = new Log("SmartComServer", StartProgram.IsOsTrader);
             _logMaster.Listen(this);
 
             _serverStatusNead = ServerConnectStatus.Disconnect;
@@ -82,7 +81,7 @@ namespace OsEngine.Market.Servers.SmartCom
             return null;
         }
 
-        public List<Trade> GetTickDataToSecurity(string securityName, string securityClass, DateTime startTime, 
+        public List<Trade> GetTickDataToSecurity(string securityName, string securityClass, DateTime startTime,
             DateTime endTime, DateTime actualTime, bool neadToUpdete)
         {
             return null;
@@ -436,7 +435,7 @@ namespace OsEngine.Market.Servers.SmartCom
         {
             if (_candleManager == null)
             {
-                _candleManager = new CandleManager(this,StartProgram.IsOsTrader);
+                _candleManager = new CandleManager(this, StartProgram.IsOsTrader);
                 _candleManager.CandleUpdateEvent += _candleManager_CandleUpdateEvent;
                 _candleManager.LogMessageEvent += SendLogMessage;
             }
@@ -770,7 +769,7 @@ namespace OsEngine.Market.Servers.SmartCom
 
         // портфели
 
-        
+
 
         /// <summary>
         /// все счета в системе
@@ -1495,7 +1494,7 @@ namespace OsEngine.Market.Servers.SmartCom
                     asks.Add(new MarketDepthLevel());
                     bids.Add(new MarketDepthLevel());
                 }
-                myDepth.Bids =  bids;
+                myDepth.Bids = bids;
                 myDepth.Asks = asks;
             }
 
@@ -1509,7 +1508,7 @@ namespace OsEngine.Market.Servers.SmartCom
                 {
                     Bid = bids[0].Price,
                     Ask = asks[0].Price,
-                    Security = GetSecurityForName(symbol,"")
+                    Security = GetSecurityForName(symbol, "")
                 });
             }
 

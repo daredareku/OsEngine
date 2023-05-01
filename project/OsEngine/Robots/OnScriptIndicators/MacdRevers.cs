@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trend strategy at the intersection of the MACD indicator
@@ -16,7 +16,7 @@ public class MacdRevers : BotPanel
         TabCreate(BotTabType.Simple);
         _tab = TabsSimple[0];
 
-        _macd = IndicatorsFactory.CreateIndicatorByName("MACD",name + "MacdArea", false);
+        _macd = IndicatorsFactory.CreateIndicatorByName("MACD", name + "MacdArea", false);
         _macd = (Aindicator)_tab.CreateCandleIndicator(_macd, "MacdArea");
         _macd.Save();
 
@@ -26,7 +26,7 @@ public class MacdRevers : BotPanel
 
         _tab.CandleFinishedEvent += Strateg_CandleFinishedEvent;
 
-        
+
     }
 
     /// <summary>

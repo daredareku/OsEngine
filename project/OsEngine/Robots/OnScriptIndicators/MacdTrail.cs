@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
+using System.Collections.Generic;
 
 /// <summary>
 /// Trend strategy based on the Macd indicator and trail stop
@@ -21,7 +21,7 @@ public class MacdTrail : BotPanel
         Slippage = CreateParameter("Slippage", 0, 0, 20, 1);
         TrailStop = CreateParameter("Trail Stop Percent", 0.7m, 0.3m, 3, 0.1m);
 
-        _macd = IndicatorsFactory.CreateIndicatorByName("MacdLine",name + "MACD", false);
+        _macd = IndicatorsFactory.CreateIndicatorByName("MacdLine", name + "MACD", false);
         _macd = (Aindicator)_tab.CreateCandleIndicator(_macd, "MacdArea");
         _macd.Save();
 

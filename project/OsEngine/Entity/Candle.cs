@@ -288,7 +288,7 @@ namespace OsEngine.Entity
         /// <param name="In">status line/строка состояния</param>
         public void SetCandleFromString(string In)
         {
-//20131001,100000,97.8000000,97.9900000,97.7500000,97.9000000,1
+            //20131001,100000,97.8000000,97.9900000,97.7500000,97.9000000,1
             //<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>
             string[] sIn = In.Split(',');
 
@@ -401,7 +401,7 @@ namespace OsEngine.Entity
 
                 result += " Body(%): ";
                 result += (Math.Floor(BodyPercent * 100m) / 100m).ToStringWithNoEndZero();
-				
+
                 return result;
             }
         }

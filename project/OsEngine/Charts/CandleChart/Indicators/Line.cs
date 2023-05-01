@@ -3,12 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 
 namespace OsEngine.Charts.CandleChart.Indicators
@@ -32,7 +32,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             TypeIndicator = IndicatorChartPaintType.Line;
             ColorBase = Color.DodgerBlue;
             PaintOn = true;
-            CanDelete = canDelete; 
+            CanDelete = canDelete;
             Load();
         }
 
@@ -49,7 +49,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             TypeIndicator = IndicatorChartPaintType.Line;
             ColorBase = Color.DodgerBlue;
             PaintOn = true;
-            CanDelete = canDelete; 
+            CanDelete = canDelete;
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// indicator value
         /// значение индикатора
         /// </summary>
-        public List<decimal> Values 
+        public List<decimal> Values
         { get; set; }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// <param name="candles">candles/свечи</param>
         public void Process(List<Candle> candles)
         {
-        
+
         }
 
         /// <summary>

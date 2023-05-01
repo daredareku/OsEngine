@@ -5,22 +5,22 @@
 
 using OsEngine.Entity;
 using OsEngine.Language;
+using OsEngine.Layout;
+using OsEngine.Logging;
 using OsEngine.Market.Servers.Tester;
+using OsEngine.OsOptimizer.OptEntity;
 using OsEngine.OsTrader.Panels;
+using OsEngine.Robots;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using OsEngine.Logging;
-using OsEngine.Robots;
 using MessageBox = System.Windows.MessageBox;
 using ProgressBar = System.Windows.Controls.ProgressBar;
-using OsEngine.OsOptimizer.OptEntity;
-using System.Threading;
-using OsEngine.Layout;
-using System.IO;
 
 namespace OsEngine.OsOptimizer
 {
@@ -383,7 +383,7 @@ namespace OsEngine.OsOptimizer
                 return;
             }
 
-            if(_testIsEnd)
+            if (_testIsEnd)
             {
                 ProgressBarPrime.Maximum = 100;
                 ProgressBarPrime.Value = 100;
@@ -842,7 +842,7 @@ namespace OsEngine.OsOptimizer
         {
             if (_gridTableTabsSimple.InvokeRequired)
             {
-                _gridTableTabsIndex.Invoke(new Action<BotPanel, List<string>, List<string>>(PaintBotParams),bot,names,timeFrame);
+                _gridTableTabsIndex.Invoke(new Action<BotPanel, List<string>, List<string>>(PaintBotParams), bot, names, timeFrame);
                 return;
             }
 
@@ -1229,7 +1229,7 @@ namespace OsEngine.OsOptimizer
             _master.ReloadFazes();
             PaintTableOptimizeFazes();
 
-            if(_master.Fazes == null ||
+            if (_master.Fazes == null ||
                 _master.Fazes.Count == 0)
             {
                 return;

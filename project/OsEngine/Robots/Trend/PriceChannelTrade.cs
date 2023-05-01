@@ -3,14 +3,13 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Charts.CandleChart.Indicators;
+using OsEngine.Entity;
+using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OsEngine.Charts.CandleChart.Indicators;
-using OsEngine.Entity;
-using OsEngine.Market;
-using OsEngine.OsTrader.Panels;
-using OsEngine.OsTrader.Panels.Tab;
 
 namespace OsEngine.Robots.Trend
 {
@@ -234,7 +233,7 @@ namespace OsEngine.Robots.Trend
         /// </summary>
         private void LogicClosePosition(List<Candle> candles, Position position)
         {
-            if(position.State != PositionStateType.Open)
+            if (position.State != PositionStateType.Open)
             {
                 return;
             }
@@ -245,7 +244,7 @@ namespace OsEngine.Robots.Trend
                 {
                     _tab.CloseAtLimit(position, _lastPriceC - Slipage, position.OpenVolume);
 
-                    if (Regime != BotTradeRegime.OnlyLong 
+                    if (Regime != BotTradeRegime.OnlyLong
                         && Regime != BotTradeRegime.OnlyClosePosition
                         && _tab.PositionsOpenAll.Count < 3)
                     {
@@ -260,7 +259,7 @@ namespace OsEngine.Robots.Trend
                 {
                     _tab.CloseAtLimit(position, _lastPriceC + Slipage, position.OpenVolume);
 
-                    if (Regime != BotTradeRegime.OnlyShort && Regime 
+                    if (Regime != BotTradeRegime.OnlyShort && Regime
                         != BotTradeRegime.OnlyClosePosition
                         && _tab.PositionsOpenAll.Count < 3)
                     {

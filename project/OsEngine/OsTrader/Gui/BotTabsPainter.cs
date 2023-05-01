@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.Integration;
-using System.Windows.Forms;
-using OsEngine.Entity;
-using OsEngine.OsTrader.Panels;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
+using OsEngine.OsTrader.Panels;
+using System;
 using System.Threading;
-using System.Windows;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.OsTrader.Gui
 {
@@ -21,7 +17,7 @@ namespace OsEngine.OsTrader.Gui
             _host = host;
 
             CreateTable(master._startProgram);
-            RePaintTable(); 
+            RePaintTable();
             _master.BotCreateEvent += _master_NewBotCreateEvent;
             _master.BotDeleteEvent += _master_BotDeleteEvent;
 
@@ -106,7 +102,7 @@ namespace OsEngine.OsTrader.Gui
             column07.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             newGrid.Columns.Add(column07);
 
-            if(startProgram != StartProgram.IsOsTrader)
+            if (startProgram != StartProgram.IsOsTrader)
             {
                 column07.ReadOnly = true;
             }
@@ -145,11 +141,11 @@ namespace OsEngine.OsTrader.Gui
             _grid.ClearSelection();
         }
 
-		private int prevActiveRow;
+        private int prevActiveRow;
 
         private void _grid_Click(object sender, EventArgs e)
         {
-            if(_grid.SelectedCells.Count == 0)
+            if (_grid.SelectedCells.Count == 0)
             {
                 return;
             }
@@ -180,7 +176,7 @@ colum10.HeaderText = "Action";
 
             BotPanel bot = null;
 
-            if(rowIndex < botsCount)
+            if (rowIndex < botsCount)
             {
                 bot = _master.PanelsArray[rowIndex];
             }
@@ -211,7 +207,7 @@ colum10.HeaderText = "Action";
             { // вызываем добавление нового бота
                 _master.CreateNewBot();
             }
-						
+
             _grid.Rows[prevActiveRow].DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(154, 156, 158);
             _grid.Rows[rowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
             prevActiveRow = rowIndex;
@@ -224,7 +220,7 @@ colum10.HeaderText = "Action";
 
         private void _grid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if(_lastTimeClick.AddMilliseconds(500) > DateTime.Now)
+            if (_lastTimeClick.AddMilliseconds(500) > DateTime.Now)
             {
                 return;
             }
@@ -247,7 +243,7 @@ colum10.HeaderText = "Action";
                 await Task.Delay(200);
                 ChangeOnOff();
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 System.Windows.MessageBox.Show(error.ToString());
             }
@@ -330,7 +326,7 @@ colum10.HeaderText = "Action";
 
         private void OnOffAll(bool value)
         {
-            for(int i = 0;i < _master.PanelsArray.Count;i++)
+            for (int i = 0; i < _master.PanelsArray.Count; i++)
             {
                 BotPanel bot = _master.PanelsArray[i];
                 bot.OnOffEventsInTabs = value;
@@ -360,7 +356,7 @@ colum10.HeaderText = "Action";
 
             for (int i = 0; _master.PanelsArray != null && i < _master.PanelsArray.Count; i++)
             {
-                _grid.Rows.Add(GetRow(_master.PanelsArray[i],i+1));
+                _grid.Rows.Add(GetRow(_master.PanelsArray[i], i + 1));
             }
 
             _grid.Rows.Add(GetNullRow());
@@ -397,7 +393,7 @@ colum10.HeaderText = "Action";
             row.Cells[2].Value = bot.GetType().Name;
 
             row.Cells.Add(new DataGridViewTextBoxCell());
-            if(bot.TabsSimple.Count != 0 &&
+            if (bot.TabsSimple.Count != 0 &&
                 bot.TabsSimple[0].Securiti != null)
             {
                 row.Cells[3].Value = bot.TabsSimple[0].Securiti.Name;
@@ -413,7 +409,7 @@ colum10.HeaderText = "Action";
             row.Cells[6].Value = bot.OnOffEmulatorsInTabs;
 
             row.Cells.Add(new DataGridViewButtonCell());
-            row.Cells[7].Value =  OsLocalization.Trader.Label172;//"Chart";
+            row.Cells[7].Value = OsLocalization.Trader.Label172;//"Chart";
 
             row.Cells.Add(new DataGridViewButtonCell());
             row.Cells[8].Value = OsLocalization.Trader.Label45;//"Parameters";
@@ -494,7 +490,7 @@ colum9.HeaderText = "Journal";
 
         private void UpdaterThreadArea()
         {
-            while(true)
+            while (true)
             {
                 Thread.Sleep(2000);
 
@@ -514,13 +510,13 @@ colum9.HeaderText = "Journal";
 
         private void UpdateTable()
         {
-            if(_grid.InvokeRequired)
+            if (_grid.InvokeRequired)
             {
                 _grid.Invoke(new Action(UpdateTable));
                 return;
             }
 
-            if (_master.PanelsArray == null)return;
+            if (_master.PanelsArray == null) return;
             try
             {
                 for (int i = 0; i < _master.PanelsArray.Count; i++)
@@ -537,9 +533,9 @@ colum9.HeaderText = "Journal";
                     if (bot.TabsSimple.Count != 0 &&
                         bot.TabsSimple[0].Securiti != null)
                     {
-                        if(row.Cells[3].Value == null 
+                        if (row.Cells[3].Value == null
                             ||
-                            (row.Cells[3].Value != null 
+                            (row.Cells[3].Value != null
                             && row.Cells[3].Value.ToString() != bot.TabsSimple[0].Securiti.Name))
                         {
                             row.Cells[3].Value = bot.TabsSimple[0].Securiti.Name;

@@ -4,18 +4,18 @@
 */
 
 using OsEngine.Entity;
+using OsEngine.Language;
 using OsEngine.Logging;
+using OsEngine.Market;
+using OsEngine.Market.Connectors;
 using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Tester;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using OsEngine.Language;
-using MessageBox = System.Windows.MessageBox;
-using OsEngine.Market;
-using OsEngine.Market.Connectors;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace OsEngine.OsTrader.Panels.Tab
 {

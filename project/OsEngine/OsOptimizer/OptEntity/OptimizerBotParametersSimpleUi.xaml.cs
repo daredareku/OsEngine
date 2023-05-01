@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using OsEngine.Entity;
+using System.Collections.Generic;
 using System.Windows;
-using OsEngine.Entity;
-using System.Windows.Forms.Integration;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace OsEngine.OsOptimizer.OptEntity
 {
@@ -64,7 +64,7 @@ namespace OsEngine.OsOptimizer.OptEntity
 
             for (int i = 0; i < parameters.Count; i++)
             {
-                if(parameters[i].Type == StrategyParameterType.Button ||
+                if (parameters[i].Type == StrategyParameterType.Button ||
                     parameters[i].Type == StrategyParameterType.Label)
                 {
                     continue;

@@ -3,16 +3,14 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using OsEngine.Charts.CandleChart.Indicators;
 using OsEngine.Entity;
 using OsEngine.Indicators;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.OsMiner.Patterns
 {
-    public class PatternVolume:IPattern
+    public class PatternVolume : IPattern
     {
         /// <summary>
         /// volume search pattern
@@ -186,7 +184,7 @@ namespace OsEngine.OsMiner.Patterns
             // delimiters on previous levels: # *? %
             // разделители на предыдущих уровнях: # * ? %
 
-            string saveStr = PatternType.Volume+ "^";
+            string saveStr = PatternType.Volume + "^";
 
             saveStr += Length + "^";
 

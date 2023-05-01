@@ -56,7 +56,7 @@ namespace OsEngine.Entity
     {
         public StrategyParameterLabel(string name, string label, string value, int rowHeight, int textHeight, System.Drawing.Color color, string tabName = null)
         {
-            if(name.HaveExcessInString())
+            if (name.HaveExcessInString())
             {
                 throw new Exception("название параметра у робота содержит спец-символ. Это вызовет ошибки. Уберите его");
             }
@@ -404,9 +404,9 @@ namespace OsEngine.Entity
 
         public string TabName
         {
-            get;set;
+            get; set;
         }
-        
+
         /// <summary>
         /// parameter type
         /// тип параметра
@@ -721,7 +721,7 @@ namespace OsEngine.Entity
             string save = _name + "#";
             save += _valueString + "#";
 
-            for(int i = 0;i < _setStringValues.Count;i++)
+            for (int i = 0; i < _setStringValues.Count; i++)
             {
                 save += _setStringValues[i] + "#";
             }
@@ -742,7 +742,7 @@ namespace OsEngine.Entity
 
             for (int i = 2; i < save.Length; i++)
             {
-                if(string.IsNullOrEmpty(save[i]))
+                if (string.IsNullOrEmpty(save[i]))
                 {
                     continue;
                 }
@@ -1110,7 +1110,7 @@ namespace OsEngine.Entity
             {
                 _checkState = CheckState.Unchecked;
             }
-            
+
             TabName = tabName;
         }
 
@@ -1139,7 +1139,7 @@ namespace OsEngine.Entity
             }
             else
             {
-                save += "false" + "#"; 
+                save += "false" + "#";
             }
 
             return save;

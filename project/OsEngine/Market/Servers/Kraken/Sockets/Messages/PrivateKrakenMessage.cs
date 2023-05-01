@@ -22,7 +22,7 @@ namespace Kraken.WebSockets.Messages
         /// <param name="eventType">Type of the event.</param>
         /// <param name="token">The token.</param>
         /// <exception cref="ArgumentNullException">If token is null</exception>
-        protected PrivateKrakenMessage(string eventType, string token) 
+        protected PrivateKrakenMessage(string eventType, string token)
             : base(eventType)
         {
             Token = token ?? throw new ArgumentNullException(nameof(token));

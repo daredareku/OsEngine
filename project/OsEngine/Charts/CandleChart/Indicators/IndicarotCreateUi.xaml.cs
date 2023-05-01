@@ -3,13 +3,12 @@
  *Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using OsEngine.Entity;
 using OsEngine.Indicators;
 using OsEngine.Language;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {

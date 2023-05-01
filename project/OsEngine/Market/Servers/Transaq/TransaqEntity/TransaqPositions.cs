@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Collections.Generic;
 namespace OsEngine.Market.Servers.Transaq.TransaqEntity
 {
     [XmlRoot(ElementName = "markets")]

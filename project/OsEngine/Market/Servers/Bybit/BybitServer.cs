@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
@@ -10,14 +11,13 @@ using OsEngine.Market.Services;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using Newtonsoft.Json;
 
 namespace OsEngine.Market.Servers.Bybit
 {
@@ -515,7 +515,7 @@ namespace OsEngine.Market.Servers.Bybit
             {
                 //ignore
             }
-            
+
         } // both futures
 
         List<Portfolio> _portfolios;

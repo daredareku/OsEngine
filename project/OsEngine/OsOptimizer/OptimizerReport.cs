@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Journal.Internal;
 using OsEngine.OsTrader.Panels;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.OsOptimizer
 {
@@ -26,7 +26,7 @@ namespace OsEngine.OsOptimizer
 
             result += Faze.GetSaveString() + "^";
 
-            for(int i = 0;i < Reports.Count;i++)
+            for (int i = 0; i < Reports.Count; i++)
             {
                 result += Reports[i].GetSaveString() + "^";
             }
@@ -40,8 +40,8 @@ namespace OsEngine.OsOptimizer
 
             Faze = new OptimizerFaze();
             Faze.LoadFromString(str[0]);
-            
-            for(int i = 1;i < str.Length -1;i++)
+
+            for (int i = 1; i < str.Length - 1; i++)
             {
                 OptimizerReport newReport = new OptimizerReport();
                 newReport.LoadFromString(str[i]);
@@ -59,7 +59,7 @@ namespace OsEngine.OsOptimizer
         {
             for (int i = 0; i < paramaters.Count; i++)
             {
-                StrategyParameters.Add(paramaters[i].Type + "$" + paramaters[i].GetStringToSave() + "$"+  paramaters[i].Name);
+                StrategyParameters.Add(paramaters[i].Type + "$" + paramaters[i].GetStringToSave() + "$" + paramaters[i].Name);
             }
         }
 
@@ -153,7 +153,7 @@ namespace OsEngine.OsOptimizer
                 }
                 else if (type == StrategyParameterType.Label)
                 {
-                    param = new StrategyParameterLabel(name,"","",0,0,System.Drawing.Color.White);
+                    param = new StrategyParameterLabel(name, "", "", 0, 0, System.Drawing.Color.White);
                     param.LoadParamFromString(StrategyParameters[i].Split('$')[1].Split('#'));
                 }
 
@@ -196,14 +196,14 @@ namespace OsEngine.OsOptimizer
                 tab.TotalProfitPersent = PositionStaticticGenerator.GetAllProfitPersent(posesArray);
                 tab.MaxDrowDawn = PositionStaticticGenerator.GetMaxDownPersent(posesArray);
 
-                tab.AverageProfit = tab.TotalProfit / (posesArray.Length+1);
-                
+                tab.AverageProfit = tab.TotalProfit / (posesArray.Length + 1);
+
                 tab.AverageProfitPercent = PositionStaticticGenerator.GetMidleProfitInPersent(posesArray);
 
                 tab.ProfitFactor = PositionStaticticGenerator.GetProfitFactor(posesArray);
                 tab.Recovery = PositionStaticticGenerator.GetRecovery(posesArray);
                 tab.PayOffRatio = PositionStaticticGenerator.GetPayOffRatio(posesArray);
-                tab.SharpRatio = PositionStaticticGenerator.GetSharpRatio(posesArray,7);
+                tab.SharpRatio = PositionStaticticGenerator.GetSharpRatio(posesArray, 7);
                 tab.TabType = bot.TabsSimple[i].GetType().Name;
             }
 
@@ -273,7 +273,7 @@ namespace OsEngine.OsOptimizer
 
             // Сохраняем основное
             result += BotName + "@";
-            result +=  PositionsCount + "@";
+            result += PositionsCount + "@";
             result += TotalProfit + "@";
             result += MaxDrowDawn + "@";
             result += AverageProfit + "@";
@@ -287,7 +287,7 @@ namespace OsEngine.OsOptimizer
             // сохраняем параметры в строковом представлении
             string param = "";
 
-            for(int i = 0;i < StrategyParameters.Count;i++)
+            for (int i = 0; i < StrategyParameters.Count; i++)
             {
                 param += StrategyParameters[i] + "&";
             }
@@ -323,16 +323,16 @@ namespace OsEngine.OsOptimizer
             TotalProfitPersent = Convert.ToDecimal(str[9]);
             SharpRatio = Convert.ToDecimal(str[10]);
 
-            string [] param = str[11].Split('&');
+            string[] param = str[11].Split('&');
 
-            for(int i = 0;i < param.Length-1;i++)
+            for (int i = 0; i < param.Length - 1; i++)
             {
                 StrategyParameters.Add(param[i]);
             }
 
-            string [] reportTabs = str[12].Split('&');
+            string[] reportTabs = str[12].Split('&');
 
-            for(int i = 0;i < reportTabs.Length-1;i++)
+            for (int i = 0; i < reportTabs.Length - 1; i++)
             {
                 OptimizerReportTab faze = new OptimizerReportTab();
                 faze.LoadFromSaveString(reportTabs[i]);
@@ -403,7 +403,7 @@ namespace OsEngine.OsOptimizer
             Recovery = save[9].ToDecimal();
             TotalProfitPersent = save[10].ToDecimal();
 
-            if(save.Length == 11)
+            if (save.Length == 11)
             {
                 return;
             }

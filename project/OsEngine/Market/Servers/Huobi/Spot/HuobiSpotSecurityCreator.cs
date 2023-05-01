@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OsEngine.Entity;
 using OsEngine.Market.Servers.Huobi.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Market.Servers.Huobi.Spot
 {
     public class HuobiSpotSecurityCreator
     {
-        private  List<Security> _securities;
+        private List<Security> _securities;
 
         public List<Security> Create(string data)
         {
@@ -35,7 +35,7 @@ namespace OsEngine.Market.Servers.Huobi.Spot
 
                     _securities.Add(security);
                 }
-                catch 
+                catch
                 {
                     throw new Exception("Ошибка создания инструмента");
                 }

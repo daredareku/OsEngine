@@ -5,7 +5,6 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
 
 namespace OsEngine.Entity
 {
@@ -128,7 +127,7 @@ namespace OsEngine.Entity
                     _toolTip = "Pos. num: " + NumberPosition + "\r\n";
                 }
 
-                if(!NumberTrade.StartsWith("emu"))
+                if (!NumberTrade.StartsWith("emu"))
                 {
                     _toolTip += "Ord. num: " + NumberOrderParent + "\r\n";
                     _toolTip += "Trade num: " + NumberTrade + "\r\n";

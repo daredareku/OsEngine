@@ -3,8 +3,8 @@
  * Ваши права на использование кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
-using System;
 using OsEngine.Logging;
+using System;
 
 namespace OsEngine.OsTrader.Panels.Tab
 {
@@ -45,7 +45,7 @@ namespace OsEngine.OsTrader.Panels.Tab
         int TabNum { get; set; }
 
         DateTime LastTimeCandleUpdate { get; set; }
-        
+
         event Action<string, LogMessageType> LogMessageEvent;
     }
 }

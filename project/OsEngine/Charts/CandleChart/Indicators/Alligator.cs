@@ -3,13 +3,13 @@
  *Ваши права на использования кода регулируются данной лицензией http://o-s-a.net/doc/license_simple_engine.pdf
 */
 
+using OsEngine.Entity;
+using OsEngine.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using OsEngine.Entity;
-using OsEngine.Indicators;
 
 namespace OsEngine.Charts.CandleChart.Indicators
 {
@@ -41,7 +41,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
             LenghtDown = 13;
             ShiftDown = 8;
             ColorDown = Color.DodgerBlue;
-            
+
             PaintOn = true;
             TypeCalculationAverage = MovingAverageTypeCalculation.Smoofed;
             CanDelete = canDelete;
@@ -183,7 +183,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
         /// fast line. Lips
         /// быстрая линия. Губы
         /// </summary>
-        public List<decimal> ValuesUp 
+        public List<decimal> ValuesUp
         { get; set; }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                     writer.WriteLine(LenghtDown);
                     writer.WriteLine(ShiftDown);
                     writer.WriteLine(ColorDown.ToArgb());
-                    
+
                     writer.WriteLine(PaintOn);
                     writer.WriteLine(TypeCalculationAverage);
                     writer.Close();

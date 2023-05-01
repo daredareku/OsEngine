@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
+﻿using Kraken.WebSockets;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
-using Kraken.WebSockets;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -22,7 +19,7 @@ namespace OsEngine.Market.Servers.Kraken
 
             CreateParameterString(OsLocalization.Market.ServerParamPublicKey, "");
             CreateParameterPassword(OsLocalization.Market.ServerParamSecretKey, "");
-            CreateParameterEnum("Leverage type", "None", new List<string> (){"None","Two","Three","Four","Five"});
+            CreateParameterEnum("Leverage type", "None", new List<string>() { "None", "Two", "Three", "Four", "Five" });
 
         }
 
@@ -174,7 +171,7 @@ namespace OsEngine.Market.Servers.Kraken
 
         private void KrakenApi_MyTradeUpdateEvent(MyTrade myTrade)
         {
-            if(MyTradeEvent != null)
+            if (MyTradeEvent != null)
             {
                 MyTradeEvent(myTrade);
             }
@@ -182,7 +179,7 @@ namespace OsEngine.Market.Servers.Kraken
 
         private void KrakenApi_MarketDepthUpdateEvent(MarketDepth md)
         {
-            if(MarketDepthEvent != null)
+            if (MarketDepthEvent != null)
             {
                 MarketDepthEvent(md);
             }
@@ -190,7 +187,7 @@ namespace OsEngine.Market.Servers.Kraken
 
         private void KrakenApi_TradeUpdateEvent(OsEngine.Entity.Trade trade)
         {
-            if(NewTradesEvent != null)
+            if (NewTradesEvent != null)
             {
                 NewTradesEvent(trade);
             }
@@ -247,7 +244,7 @@ namespace OsEngine.Market.Servers.Kraken
         /// </summary>
         public void Subscrible(Security security)
         {
-            _clientSocketPublicData.Subscrible(security.NameFull,security.Name);
+            _clientSocketPublicData.Subscrible(security.NameFull, security.Name);
         }
 
         /// <summary>
@@ -265,7 +262,7 @@ namespace OsEngine.Market.Servers.Kraken
             {
                 List<Candle> newCandles = _clientRest.GetCandles(security.Name, timeFrameBuilder.TimeFrameTimeSpan, curStartTime);
 
-                if(newCandles == null ||
+                if (newCandles == null ||
                     newCandles.Count == 0)
                 {
                     break;
@@ -275,7 +272,7 @@ namespace OsEngine.Market.Servers.Kraken
 
                 candles = candles.Merge(newCandles);
 
-                if(newCandles.Count == 1)
+                if (newCandles.Count == 1)
                 {
                     break;
                 }
@@ -403,7 +400,7 @@ namespace OsEngine.Market.Servers.Kraken
 
                 List<PositionOnBoard> poses = portfs.GetPositionOnBoard();
 
-                if(poses != null)
+                if (poses != null)
                 {
                     foreach (var one in poses)
                     {
@@ -444,7 +441,7 @@ namespace OsEngine.Market.Servers.Kraken
             }
 
             _securities.Add(pair);
-            
+
             if (SecurityEvent != null)
             {
                 SecurityEvent(_securities);
@@ -537,7 +534,7 @@ namespace OsEngine.Market.Servers.Kraken
         /// </summary>
         public event Action<string, LogMessageType> LogMessageEvent;
 
-        
+
     }
 
     public enum KrakenLeverageType

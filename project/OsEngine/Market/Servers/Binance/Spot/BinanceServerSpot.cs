@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
 using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Binance.Spot.BinanceSpotEntity;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Binance.Spot
 {
@@ -429,9 +429,9 @@ namespace OsEngine.Market.Servers.Binance.Spot
 
                     MarketDepth needDepth = null;
 
-                    for(int i = 0;i < _depths.Count;i++)
+                    for (int i = 0; i < _depths.Count; i++)
                     {
-                        if(_depths[i].SecurityNameCode == secName)
+                        if (_depths[i].SecurityNameCode == secName)
                         {
                             needDepth = _depths[i];
                             break;
@@ -696,7 +696,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
 
                 security.PriceLimitLow = sec.filters[0].minPrice.ToDecimal();
                 security.PriceLimitHigh = sec.filters[0].maxPrice.ToDecimal();
-                
+
 
                 if (security.PriceStep < 1)
                 {
@@ -715,7 +715,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                     decimal minQty = sec.filters[1].minQty.ToDecimal();
                     security.MinTradeAmount = minQty;
                     string qtyInStr = minQty.ToStringWithNoEndZero().Replace(",", ".");
-                    if(qtyInStr.Split('.').Length > 1)
+                    if (qtyInStr.Split('.').Length > 1)
                     {
                         security.DecimalsVolume = qtyInStr.Split('.')[1].Length;
                     }

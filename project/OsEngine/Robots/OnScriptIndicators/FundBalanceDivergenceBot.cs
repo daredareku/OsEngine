@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Indicators;
-using OsEngine.OsTrader.Panels.Tab;
 using OsEngine.OsTrader.Panels;
+using OsEngine.OsTrader.Panels.Tab;
 using System;
+using System.Collections.Generic;
 
 namespace OsEngine.Robots.OnScriptIndicators
 {
@@ -84,7 +84,7 @@ namespace OsEngine.Robots.OnScriptIndicators
                 return;
             }
 
-            if(FBD.DataSeries[0].Last == 0)
+            if (FBD.DataSeries[0].Last == 0)
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void LogicOpenPosition(List<Candle> candles, List<Position> position)
         {
-            if(candles[candles.Count-1].TimeStart.Month != 3 &&
+            if (candles[candles.Count - 1].TimeStart.Month != 3 &&
                 candles[candles.Count - 1].TimeStart.Month != 6 &&
                 candles[candles.Count - 1].TimeStart.Month != 9 &&
                 candles[candles.Count - 1].TimeStart.Month != 12)
@@ -115,14 +115,14 @@ namespace OsEngine.Robots.OnScriptIndicators
                 return;
             }
 
-            if(candles[candles.Count-1].TimeStart.Day < 30 - DaysBeforeEndQuarterToInter.ValueInt)
+            if (candles[candles.Count - 1].TimeStart.Day < 30 - DaysBeforeEndQuarterToInter.ValueInt)
             {
                 return;
             }
 
-            if(FBD.DataSeries[0].Last > IndicatorDivergence.ValueDecimal)
+            if (FBD.DataSeries[0].Last > IndicatorDivergence.ValueDecimal)
             {
-                decimal volume = _tab.Portfolio.ValueCurrent /  candles[candles.Count - 1].Close;
+                decimal volume = _tab.Portfolio.ValueCurrent / candles[candles.Count - 1].Close;
                 _tab.SellAtMarket(volume, candles[candles.Count - 1].TimeStart.AddDays(DaysInPosition.ValueInt).ToString());
             }
             if (FBD.DataSeries[0].Last < -IndicatorDivergence.ValueDecimal)
@@ -135,14 +135,14 @@ namespace OsEngine.Robots.OnScriptIndicators
 
         private void LogicClosePosition(List<Candle> candles, Position position)
         {
-            if(position.State != PositionStateType.Open)
+            if (position.State != PositionStateType.Open)
             {
                 return;
             }
 
             System.DateTime timeExit = Convert.ToDateTime(position.SignalTypeOpen);
 
-            if(timeExit < candles[candles.Count-1].TimeStart)
+            if (timeExit < candles[candles.Count - 1].TimeStart)
             {
                 _tab.CloseAtMarket(position, position.OpenVolume);
             }

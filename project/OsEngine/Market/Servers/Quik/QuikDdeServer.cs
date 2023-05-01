@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Threading;
-using OsEngine.Entity;
+﻿using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using System.Threading;
 
 namespace OsEngine.Market.Servers.Quik
 {
@@ -15,7 +14,7 @@ namespace OsEngine.Market.Servers.Quik
     /// QUIK DDE server
     /// сервер Квик ДДЕ
     /// </summary>
-    public class QuikServer:AServer
+    public class QuikServer : AServer
     {
         public QuikServer()
         {
@@ -23,7 +22,7 @@ namespace OsEngine.Market.Servers.Quik
             ServerRealization = realization;
 
             CreateParameterPath(OsLocalization.Market.Message82);
-            CreateParameterEnum("Number separator", "Dot", new List<string>(){"Dot","Comma"});
+            CreateParameterEnum("Number separator", "Dot", new List<string>() { "Dot", "Comma" });
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace OsEngine.Market.Servers.Quik
     public class QuikDdeServerRealization : IServerRealization
     {
 
-// service/сервис
+        // service/сервис
         public QuikDdeServerRealization()
         {
             Thread statusWatcher = new Thread(StatusWatcherArea);
@@ -164,7 +163,7 @@ namespace OsEngine.Market.Servers.Quik
             {
                 _lastStartServerTime = DateTime.Now;
 
-                
+
 
                 if (string.IsNullOrWhiteSpace(((ServerParameterPath)ServerParameters[0]).Value))
                 {
@@ -339,7 +338,7 @@ namespace OsEngine.Market.Servers.Quik
         /// server status
         /// статус сервера
         /// </summary>
-        public ServerConnectStatus ServerStatus 
+        public ServerConnectStatus ServerStatus
         { get { return _status; } set { _status = value; } }
 
         /// <summary>
@@ -426,7 +425,7 @@ namespace OsEngine.Market.Servers.Quik
             }
         }
 
-// trades / трейды
+        // trades / трейды
         /// <summary>
         /// got new trades from DDE server
         /// пришли новые сделки из ДДЕ сервера
@@ -455,7 +454,7 @@ namespace OsEngine.Market.Servers.Quik
             }
         }
 
-// securities / бумаги
+        // securities / бумаги
 
         /// <summary>
         /// securities
@@ -520,7 +519,7 @@ namespace OsEngine.Market.Servers.Quik
             }
         }
 
-// depth / стакан
+        // depth / стакан
 
         /// <summary>
         /// got new depth
@@ -565,7 +564,7 @@ namespace OsEngine.Market.Servers.Quik
         /// </summary>
         public void GetSecurities()
         {
-     
+
         }
 
         /// <summary>
@@ -574,7 +573,7 @@ namespace OsEngine.Market.Servers.Quik
         /// </summary>
         public void GetPortfolios()
         {
-         
+
         }
 
         /// <summary>
@@ -679,7 +678,7 @@ namespace OsEngine.Market.Servers.Quik
         /// </summary>
         public void GetOrdersState(List<Order> orders)
         {
-           
+
         }
 
         /// <summary>
@@ -704,7 +703,7 @@ namespace OsEngine.Market.Servers.Quik
 
             string price = order.Price.ToString();
 
-            if (((ServerParameterEnum) ServerParameters[1]).Value == "Dot")
+            if (((ServerParameterEnum)ServerParameters[1]).Value == "Dot")
             {
                 price = price.Replace(",", ".");
             }
@@ -836,8 +835,8 @@ namespace OsEngine.Market.Servers.Quik
             return command;
         }
 
-// processing data from auxiliary classes
-// обработка данных из вспомогательных классов
+        // processing data from auxiliary classes
+        // обработка данных из вспомогательных классов
 
         /// <summary>
         /// DDE server
@@ -947,7 +946,7 @@ namespace OsEngine.Market.Servers.Quik
                         return;
                     }
                     order.State = OrderStateType.Activ;
-                    if (MyOrderEvent  != null)
+                    if (MyOrderEvent != null)
                     {
                         MyOrderEvent(order);
                     }
@@ -1105,8 +1104,8 @@ namespace OsEngine.Market.Servers.Quik
             return _allOrders.Find(ord => ord.NumberUser.ToString() == userId);
         }
 
-// outgoing events
-// исходящие события
+        // outgoing events
+        // исходящие события
 
         /// <summary>
         /// called when order has changed
@@ -1156,7 +1155,7 @@ namespace OsEngine.Market.Servers.Quik
         /// </summary>
         public event Action DisconnectEvent;
 
-// logging / логирование
+        // logging / логирование
 
         /// <summary>
         /// add a new log message
